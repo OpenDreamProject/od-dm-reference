@@ -1,1 +1,23 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+
+{% block content %}
+
+<div class="flex flex-apart">
+    <h1 class="title">
+        {{ macros::render_page_parent_type(page=section, skip_level=1) }} {{ section.title }}
+    </h1>
+    <div class="flex flex-center flex-grow flex-end">
+        <div class="flex flex-row">
+            <i class="navigation-button fa-solid fa-bars fa-2xl" id="navigation-button"></i>
+        </div>
+    </div>
+</div>
 {{ section.content | safe }}
+
+{% if section.backlinks | length %}
+<h4>See also:</h4>
+{% endif %}
+{{ macros::render_backlinks(page=section) }}
+
+{% endblock content %}

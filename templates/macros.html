@@ -1,0 +1,85 @@
+{% macro render_subsection(currentPage, subsection, depth) %}
+    <li {% if current_path == subsection.path %}class="active"{% endif %}>
+        <a href="{{ subsection.permalink | safe }}">
+            {{ subsection.title }}
+        </a>
+        {% if subsection.subsections %}
+        <ul>
+            {% for lowerSubPath in subsection.subsections | sort %}
+                {% set lowerSubsection = get_section(path=lowerSubPath) %}
+                {{ self::render_subsection(currentPage = currentPage, subsection=lowerSubsection, depth=depth+1) }}
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% set myParent = currentPage.ancestors | last %}
+        {% set myParentSection = get_section(path=myParent) %}
+        {% if subsection.pages %}
+            <ul>
+                {% for page in subsection.pages %}
+
+                    {% set parent = page.ancestors | last %}
+                    {% set parentSection = get_section(path=parent) %}
+                    {% if current_path == page.path %}
+                        {% set class = "active" %}
+                    {% elif depth > 1 and current_path != subsection.path and myParentSection.path != parentSection.path %}
+                        {% set class = "hidden" %}
+                    {% else %}
+                        {% set class = "" %}
+                    {% endif %}
+
+                    <li class={{class}}>
+                        <a href="{{ page.permalink | safe }}">
+                            {{ page.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </li>
+{% endmacro render_subsection %}
+
+{% macro render_breadcrumbs(currentPage) %}
+    {% set ancestorLength = currentPage.ancestors | length %}
+    {% for i in range(start=2, end=ancestorLength) %}
+        {% set ancestorSection = get_section(path=currentPage.ancestors[i]) %}
+        <a href="{{ ancestorSection.permalink | safe }}">
+        {{ ancestorSection.title }}
+        </a>
+        {% if i != ancestorLength - 1 %}
+        ->
+        {% endif %}
+    {% endfor %}
+{% endmacro render_breadcrumbs %}
+
+{% macro render_parent_type(page) %}
+    {% if page.extra.parent_type %}
+        {% set lookup = "objects" ~ page.extra.parent_type ~ "/_index.md" %}
+        {% set url = get_section(path=lookup) %}
+        {{ self::render_parent_type(page=url) }}
+        <a href="{{ url.permalink | safe}}">{{url.title}}</a>
+        <i class="fa-solid fa-arrow-left"></i>
+    {% endif %}
+{% endmacro render_parent_type %}
+
+{% macro render_page_parent_type(page, skip_level) %}
+    {% if page.extra.parent_type %}
+        {{ self::render_parent_type(page=page) }}
+    {% else %}
+        {% if skip_level %}
+            {% set parent = page.ancestors | nth((page.ancestors | length) - skip_level) %}
+        {% else %}
+            {% set parent = page.ancestors | last %}
+        {% endif %}
+        {% set parentSection = get_section(path=parent) %}
+        {{ self::render_parent_type(page=parentSection) }}
+        <a href="{{parentSection.permalink | safe}}">{{parentSection.title}}</a>
+    {% endif %}
+{% endmacro render_page_parent_type %}
+
+{% macro render_backlinks(page) %}
+    <ul>
+    {% for backlink in page.backlinks %}
+        <li><a href="{{backlink.permalink}}">{{backlink.title}}</a></li>
+    {% endfor %}
+    </ul>
+{% endmacro render_backlinks %}
