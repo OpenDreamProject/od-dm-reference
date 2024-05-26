@@ -7,7 +7,7 @@
   "version": "1.0.0",
   "devDependencies": {},
   "scripts": {
-    "build": "NODE_ENV=production npx tailwindcss -i styles/index.css -o static/index.css",
+    "build": "NODE_ENV=production npx tailwindcss -i styles/index.css -o static/index.css; zola build",
     "watch": "npx tailwindcss -i styles/index.css -o static/index.css; zola serve"
   },
   "author": "",
