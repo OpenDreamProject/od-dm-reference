@@ -1,12 +1,5 @@
 # The URL the site will be built for
-base_url = "https://ref.opendre.am"
-
-# Whether to automatically compile all Sass files in the sass directory
-compile_sass = true
-
-# Whether to build a search index to be used later on by a JavaScript library
-build_search_index = true
-
+base_url = "https://harryob.github.io/od-dm-reference"
 
 [markdown]
 # Whether to do syntax highlighting
