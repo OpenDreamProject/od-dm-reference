@@ -20,31 +20,45 @@
 </head>
 
 <body>
-    <div class="flex">
+    <div class="flex gap-10 mx-auto px-3">
 
-        <div class="left-bar" id="left-bar">
+        <div class="left-bar hidden md:block" id="left-bar">
+            <div class="flex flex-row">
+            <img src="{{ get_url(path='favicon.svg') | safe }}" width=24px><input data-stork="ref-search" class="flex-grow m-2 pr-2" />
+            </div>
+            <div data-stork="ref-search-output" class="results"></div>
             <nav role="navigation">
                 <ul>
-                    {% block menu %}
-                    {% set index = get_section(path="_index.md") %}
-                    {% for subsectionPath in index.subsections | sort %}
-                        {% set subsection = get_section(path=subsectionPath) %}
-                        {% if page %}
-                            {% set pageOrSubsection = page %}
-                        {% elif subsection %}
-                            {% set pageOrSubsection = subsection %}
-                        {% endif %}
-                        {{ macros::render_subsection(currentPage=pageOrSubsection, subsection=subsection, depth=0) }}
-                    {% endfor %}
-                    {% endblock menu %}
+                    {%- block menu -%}
+                    {%- set index = get_section(path="_index.md") -%}
+                    {%- for subsectionPath in index.subsections | sort -%}
+                        {%- set subsection = get_section(path=subsectionPath) -%}
+                        {%- if page -%}
+                            {% set pageOrSubsection = page -%}
+                        {% elif section -%}
+                            {% set pageOrSubsection = section -%}
+                        {% endif -%}
+                        {{ macros::render_subsection(currentPage=pageOrSubsection, subsection=subsection, depth=0) -}}
+                    {%- endfor -%}
+                    {%- endblock menu -%}
                 </ul>
             </nav>
         </div>
 
+        <i class="navigation-button fa-solid fa-bars fa-2xl" id="navigation-button"></i>
+
         <section class="section">
-            <div class="container">{% block content %} {% endblock %}</div>
+            <div class="container mt-5">{% block content %} {% endblock %}</div>
         </section>
     </div>
+
+    <script src="https://files.stork-search.net/releases/v1.6.0/stork.js"></script>
+    <script>
+        const transformResult = (string) => {
+            return `${document.location.origin}/${string}`
+        }
+        stork.register("ref-search", `${document.location.origin}/search.st`, {showProgress: false, transformResultUrl: transformResult});
+    </script>
 </body>
 
 </html>

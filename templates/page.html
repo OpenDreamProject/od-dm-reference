@@ -3,20 +3,16 @@
 
 {% block content %}
 
-<div class="flex flex-apart">
-<div>
-<h1 class="title">
+<div class="flex flex-col gap-5">
+
+<h1 class="title text-3xl">
     {{ macros::render_page_parent_type(page=page, skip_level=0) }} | {{ page.title }}
 </h1>
-</div>
-<div class="flex flex-center flex-grow flex-end">
-    <div class="flex flex-row">
-        <i class="navigation-button fa-solid fa-bars fa-2xl" id="navigation-button"></i>
-    </div>
-</div>
-
-</div>
-
 
 {{ page.content | safe }}
+
+{{ macros::render_backlinks(page=page) }}
+
+</div>
+
 {% endblock content %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+
+{% block content %}
+
+<div class="flex flex-col gap-5">
+
+<h1 class="title text-3xl">{{ macros::render_page_parent_type(page=section, skip_level=0) }} {{ section.title }}</h1>
+
+<div>
+{% for page in section.pages %}
+    {% if not page.extra.override %}
+        <h3 class="text-xl">Vars:</h3>
+        {% break %}
+    {% endif %}
+{% endfor %}
+{% for page in section.pages %}
+    {% if not page.extra.override %}
+        <div><a href="{{page.permalink | safe}}">/var/{{ page.title }}</a></div>
+    {% endif %}
+{% endfor %}
+</div>
+
+<div>
+{{ macros::render_inherited_vars_page(page=section) }}
+</div>
+
+</div>
+
+{% endblock content %}

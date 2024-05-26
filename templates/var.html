@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+
+{% block content %}
+
+<div class="flex flex-col gap-5">
+
+<h1 class="title text-3xl">
+    {% if page.extra.override %}
+        {% set overrideText = "" %}
+    {% else %}
+        {% set overrideText = "/var" %}
+    {% endif %}
+    {{ macros::render_page_parent_type(page=page, skip_level=1) }}{{overrideText}}/{{ page.title }}
+</h1>
+
+<div>
+{% if page.extra.default_value %}
+<div>Default Value:</div>
+<div class="pl-5">{{ page.extra.default_value }}</div>
+{% endif %}
+</div>
+
+<div>
+{% if page.extra.permitted_values %}
+<div>Permitted Values:</div>
+<div class="pl-5">{{ page.extra.permitted_values }}</div>
+{% endif %}
+</div>
+
+<div>
+{% if page.extra.type %}
+<div>Type:</div> 
+<div class="pl-5">{{ macros::render_single_type(type=page.extra.type) }}</div>
+{% endif %}
+</div>
+
+{{ page.content | safe }}
+
+{{ macros::render_backlinks(page=page) }}
+
+</div>
+
+{% endblock content %}

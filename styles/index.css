@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    background-color: #1b1b1b;
+    color: #fdfeff;
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+
+    word-break: break-word;
+}
+
+.left-bar {
+    padding-right: 10px;
+    background-color: #1b1b1b;
+    height: 100vh;
+    border-right: 1px solid #fdfeff;
+    overflow-y: scroll;
+    min-width: max-content;
+
+    position: absolute;
+}
+
+@media (min-width: 768px) {
+    .left-bar {
+        position: static;
+    }
+}
+
+.animate-in {
+    animation-name: slide-in;
+    animation-duration: 0.3s;
+}
+
+.animate-out {
+    animation-name: slide-out;
+    animation-duration: 0.3s;
+}
+
+i.navigation-button {
+    cursor: pointer;
+    position: absolute;
+    top: 4%;
+    right: 3%;
+
+}
+
+@media (min-width: 768px) {
+    i.navigation-button {
+        display: none;
+    }
+}
+
+@keyframes slide-in {
+    from {left: -100%} to {left: 0%}
+}
+
+@keyframes slide-out {
+    from {left: 0%} to {left: -100%}
+}
+
+.hidden {
+    display: none;
+}
+
+a {
+    color: #7a698f;
+}
+
+
+ul li.active > a {
+    color: #E67A82;
+}
+
+.stork-output-visible {
+    position: absolute;
+    background: #1b1b1b;
+    padding: 5px;
+    border: 1px solid #fdfeff;
+    max-width: 100%;
+}
+
+@media (min-width: 768px) {
+    .stork-output-visible {
+        max-width: 50%;
+    }
+}
+
+.stork-excerpt {
+    border: 1px solid #fdfeff;
+    padding-left: 10px;
+}
+
+.stork-result {
+    text-decoration: none;
+    padding-left: 5px;
+}
+
+
+.container, .section {
+    width: 100%;
+}
+
+.section {
+    height: 100vh;
+    overflow: auto;
+}
+
+pre {
+    padding: 10px;
+    white-space: pre-wrap;
+}
+
+input {
+    color: #1b1b1b;
+}
+
+code, pre {
+    font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.code-title {
+    font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.code-nav {
+    font-size: 14px;
+    font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.text-title {
+    font-size: 16px;
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.text-title a {
+    padding-left: 4px;
+}
+
+:not(pre) > code {
+    background-color: #343434;
+    border-radius: 0.25rem;
+    padding: 3px;
+}
+
+/* Override Tailwind being awful and annoying */
+h1, h2, h3, h4, h5, h6 {
+    font-size: revert;
+    font-weight: revert;
+}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+
+{% block content %}
+
+<div class="flex flex-col gap-5">
+<h1 class="title text-3xl">{{ macros::render_page_parent_type(page=section, skip_level=0) }} {{ section.title }}</h1>
+
+{% for page in section.pages %}
+    <div class="border border-white border-dashed p-5">
+    {{ macros::render_proc(page=page, list=true) }}
+    </div>
+{% endfor %}
+
+<div>
+{{ macros::render_inherited_procs_page(page=section) }}
+</div>
+
+</div>
+
+{% endblock content %}

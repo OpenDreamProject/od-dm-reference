@@ -1,5 +1,45 @@
 {% macro render_subsection(currentPage, subsection, depth) %}
-    <li {% if current_path == subsection.path %}class="active"{% endif %}>
+    {% if currentPage.ancestors | length %}
+        {%- set myParent = currentPage.ancestors | last -%}
+    {% else %}
+        {% set myParent = subsection.ancestors | last %}
+    {% endif %}
+
+    {%- set myParentSection = get_section(path=myParent) -%}
+
+    {% set subsectionParentUrl = subsection.ancestors | last%}
+    {% set subsectionParent = get_section(path=subsectionParentUrl) %}
+
+    {% set renderAll = false %}
+    {% for page in currentPage.ancestors %}
+        {% set iteratorSection = get_section(path=page) %}
+            {% if iteratorSection.path == subsection.path or iteratorSection.path == subsectionParent.path %}
+                {% set_global renderAll = true %}
+                {% break %}
+            {% endif %}
+    {% endfor %}
+
+    {% if current_path == subsection.path %}
+        {% set class = "active" %}
+    {% elif depth > 2 
+        and current_path != subsection.path
+        and current_path != myParentSection.path
+        and current_path != subsectionParent.path
+        and not renderAll %}
+        {% set class = "hidden" %}
+    {% else %} 
+        {% set class = "" %}
+    {% endif %}
+
+    {% set firstChar = subsection.title | split(pat="") | nth(n = 1) -%}
+    {% if firstChar == "/" -%}
+        {% set class = class ~ " code-nav" %}
+    {% else %}
+        {% set class = class ~ " text-title" %}
+    {% endif %}
+
+    <li class="{{class}}" data-expand-tag="{{subsection.path}}" style="padding-left: 20px">
+        <i class="fa-solid fa-caret-right"></i>
         <a href="{{ subsection.permalink | safe }}">
             {{ subsection.title }}
         </a>
@@ -10,33 +50,46 @@
                 {{ self::render_subsection(currentPage = currentPage, subsection=lowerSubsection, depth=depth+1) }}
             {% endfor %}
         </ul>
-        {% endif %}
-        {% set myParent = currentPage.ancestors | last %}
-        {% set myParentSection = get_section(path=myParent) %}
-        {% if subsection.pages %}
+        {%- endif -%}
+
+        {%- if subsection.pages -%}
             <ul>
                 {% for page in subsection.pages %}
-
-                    {% set parent = page.ancestors | last %}
-                    {% set parentSection = get_section(path=parent) %}
-                    {% if current_path == page.path %}
-                        {% set class = "active" %}
-                    {% elif depth > 1 and current_path != subsection.path and myParentSection.path != parentSection.path %}
-                        {% set class = "hidden" %}
-                    {% else %}
-                        {% set class = "" %}
-                    {% endif %}
-
-                    <li class={{class}}>
-                        <a href="{{ page.permalink | safe }}">
-                            {{ page.title }}
-                        </a>
-                    </li>
+                    {{ self::render_subsection_pages(page=page, currentPage=currentPage, subsection=subsection, depth=depth, currentParent=myParentSection) }}
                 {% endfor %}
             </ul>
         {% endif %}
     </li>
 {% endmacro render_subsection %}
+
+{% macro render_subsection_pages(page, currentPage, subsection, depth, currentParent) %}
+    {% set renderAll = false %}
+    {% for page in currentPage.ancestors %}
+        {% set iteratorSection = get_section(path=page) %}
+            {% if iteratorSection.path == subsection.path %}
+                {% set_global renderAll = true %}
+                {% break %}
+            {% endif %}
+    {% endfor %}
+
+    {% if current_path == page.path %}
+        {% set class = "active" %}
+    {% elif depth > 1
+        and current_path != subsection.path
+        and currentParent.path != subsection.path
+        and not renderAll %}
+        {% set class = "hidden" %}
+    {% else %}
+        {% set class = "" %}
+    {% endif %}
+
+    <li class="text-title {{class}}">
+        <i class="fa-solid fa-minus" style="padding-left: 20px"></i>
+        <a href="{{ page.permalink | safe }}">
+            {{ page.title }}
+        </a>
+    </li>
+{% endmacro %}
 
 {% macro render_breadcrumbs(currentPage) %}
     {% set ancestorLength = currentPage.ancestors | length %}
@@ -51,35 +104,194 @@
     {% endfor %}
 {% endmacro render_breadcrumbs %}
 
-{% macro render_parent_type(page) %}
+{% macro render_parent_type(page, recursive=true) %}
     {% if page.extra.parent_type %}
         {% set lookup = "objects" ~ page.extra.parent_type ~ "/_index.md" %}
         {% set url = get_section(path=lookup) %}
-        {{ self::render_parent_type(page=url) }}
-        <a href="{{ url.permalink | safe}}">{{url.title}}</a>
+        {% if recursive %}
+            {{ self::render_parent_type(page=url) }}
+        {% endif %}
+        <a href="{{ url.permalink | safe}}" class="code-title">{{url.title}}</a>
         <i class="fa-solid fa-arrow-left"></i>
     {% endif %}
 {% endmacro render_parent_type %}
 
-{% macro render_page_parent_type(page, skip_level) %}
+{% macro render_page_parent_type(page, skip_level, recursive=true) %}
     {% if page.extra.parent_type %}
-        {{ self::render_parent_type(page=page) }}
+        {{ self::render_parent_type(page=page, recursive=recursive) }}
     {% else %}
         {% if skip_level %}
-            {% set parent = page.ancestors | nth((page.ancestors | length) - skip_level) %}
+            {% set num = page.ancestors | length %}
+            {% set sub = num - skip_level %}
+            {% set parent = page.ancestors | nth(n=sub - 1) %}
         {% else %}
             {% set parent = page.ancestors | last %}
         {% endif %}
         {% set parentSection = get_section(path=parent) %}
-        {{ self::render_parent_type(page=parentSection) }}
-        <a href="{{parentSection.permalink | safe}}">{{parentSection.title}}</a>
+        {% if recursive %}
+            {{ self::render_parent_type(page=parentSection) }}
+        {% endif %}
+        <a href="{{parentSection.permalink | safe}}" class="code-title">{{parentSection.title}}</a>
+        {%- endif -%}
+{%- endmacro render_page_parent_type %}
+
+{% macro render_single_type(type) -%}
+    {% set firstChar = type | split(pat="") | nth(n = 1) -%}
+    {% if firstChar == "/" -%}
+        {% set lookup = "objects" ~ type ~ "/_index.md" -%}
+        {% set url = get_section(path=lookup) -%}
+        <a href="{{ url.permalink | safe}}" class="code-title">{{url.title}}</a>
+    {%- else -%}
+        {{type}}
+    {%- endif %}
+{%- endmacro render_single_type %}
+
+{% macro render_proc_args_long(page) %}
+    {% if page.extra.args %}
+        <div>Args:</div>
+        <ul>
+        {% for arg in page.extra.args %}
+            <li class="pl-5">{{arg.name}} ({{ self::render_single_type(type=arg.type)}}): {{arg.description}}</li>
+        {% endfor %}
+        </ul>
     {% endif %}
-{% endmacro render_page_parent_type %}
+{% endmacro render_proc_args_long %}
+
+{% macro render_inherited_procs(parent_type) %}
+    {% set lookup = "objects" ~ parent_type ~ "/_index.md" %}
+    {% set url = get_section(path=lookup) %}
+    {% for possibleProcPageUrl in url.subsections %}
+        {% set possibleProcPage = get_section(path=possibleProcPageUrl) %}
+        {% if possibleProcPage.title == "proc" %}
+            {% if possibleProcPage.pages | length > 0 %}
+            {{ self::render_page_parent_type(page=possibleProcPage, skip_level=0, recursive=false) }}
+            <div class="pl-3 flex flex-row gap-5">
+            <div>
+            <i class="fa-solid fa-arrow-turn-up fa-rotate-90"></i>
+            </div>
+            <div class="flex flex-col">
+            {% endif %}
+            {% for newProc in possibleProcPage.pages %}
+                <div class="code-title"><a href="{{newProc.permalink | safe}}">/proc/{{ newProc.title }}</a>({{ self::render_proc_args_short(page=newProc) }})</div>
+            {% endfor %}
+            {% if possibleProcPage.pages | length > 0 %}
+            </div>
+            </div>
+            <br>
+            {% endif %}
+            {% break %}
+        {% endif %}
+    {% endfor %}
+    {% if url.extra.parent_type %}
+        {{ self::render_inherited_procs(parent_type=url.extra.parent_type) }}
+    {% endif %}
+{% endmacro render_inherited_procs %}
+
+{% macro render_inherited_procs_page(page) %}
+    {% set parent = page.ancestors | last %}
+    {% set parentSection = get_section(path=parent) %}
+    {% if parentSection.extra.parent_type %}
+        <h3 class="text-xl">Inherited Procs:</h3>
+        {{ self::render_inherited_procs(parent_type=parentSection.extra.parent_type) }}
+    {% endif %}
+{% endmacro render_inherited_procs_page %}
+
+{% macro render_inherited_vars(parent_type) %}
+    {% set lookup = "objects" ~ parent_type ~ "/_index.md" %}
+    {% set url = get_section(path=lookup) %}
+    {% for possibleVarPageUrl in url.subsections %}
+        {% set possibleVarPage = get_section(path=possibleVarPageUrl) %}
+        {% if possibleVarPage.title == "var" %}
+            {% if possibleVarPage.pages | length > 0 %}
+            {{ self::render_page_parent_type(page=possibleVarPage, skip_level=0, recursive=false) }}
+            <div class="pl-3 flex flex-row gap-5">
+            <div>
+            <i class="fa-solid fa-arrow-turn-up fa-rotate-90"></i>
+            </div>
+            <div class="flex flex-col">
+            {% endif %}
+            {% for newVar in possibleVarPage.pages %}
+                <div><a href="{{newVar.permalink | safe}}">/var/{{ newVar.title }}</a></div>
+            {% endfor %}
+            {% if possibleVarPage.pages | length > 0 %}
+            </div>
+            </div>
+            <br>
+            {% endif %}
+            {% break %}
+        {% endif %}
+    {% endfor %}
+    {% if url.extra.parent_type %}
+        {{ self::render_inherited_vars(parent_type=url.extra.parent_type) }}
+    {% endif %}
+{% endmacro render_inherited_procs %}
+
+{% macro render_inherited_vars_page(page) %}
+    {% set parent = page.ancestors | last %}
+    {% set parentSection = get_section(path=parent) %}
+    {% if parentSection.extra.parent_type %}
+        <h3 class="text-xl">Inherited Vars:</h3>
+        {{ self::render_inherited_vars(parent_type=parentSection.extra.parent_type) }}
+    {% endif %}
+{% endmacro render_inherited_vars_page %}
+
+{% macro render_proc_args_short(page) %}
+    {%- if page.extra.args %}
+        {%- for arg in page.extra.args %}
+            {{- self::render_single_type(type=arg.type)}}/{{arg.name}}
+            {%- if not loop.last -%}
+            ,
+            {% endif %}
+        {%- endfor %}
+    {%- endif %}
+{%- endmacro render_proc_args_short %}
 
 {% macro render_backlinks(page) %}
+    {% if section.backlinks | length %}
+    <h4>See also:</h4>
     <ul>
     {% for backlink in page.backlinks %}
         <li><a href="{{backlink.permalink}}">{{backlink.title}}</a></li>
     {% endfor %}
     </ul>
+    {% endif %}
 {% endmacro render_backlinks %}
+
+{% macro render_proc(page, list=false) %}
+    <div class="flex flex-col gap-5">
+
+    <h1 class="title text-3xl">
+        <div class="code-title">
+        {% if page.extra.override %}
+            {% set overrideText = "" %}
+        {% else %}
+            {% set overrideText = "/proc" %}
+        {% endif %}
+        {%- if not list -%}
+        {{- macros::render_page_parent_type(page=page, skip_level=1) -}}
+        {%- endif -%}
+        {%- if list -%}
+            <a href="{{page.permalink | safe}}">
+        {%- endif -%}
+        {{overrideText}}/{{ page.title }}
+        {%- if list -%}
+            </a>
+        {%- endif -%}
+        ({{ macros::render_proc_args_short(page=page) }})
+        </div>
+
+    </h1>
+
+    <div>
+    {{ macros::render_proc_args_long(page=page) }}
+    </div>
+
+    <div>
+    Returns: 
+    <div class="pl-5">{{page.extra.return_val | default(value="null") }}</div> 
+    </div>
+
+    {{ page.content | safe }}
+
+    </div>
+{% endmacro %}

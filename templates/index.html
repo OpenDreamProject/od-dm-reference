@@ -1,4 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<div class="flex flex-col gap-3">
+
+<h1 class="title text-3xl">
+    <div class="flex flex-row gap-2"><img src="{{ get_url(path='favicon.svg') | safe }}" width=24px>{{ section.title }}</div>
+</h1>
+
+{{ section.content | safe}}
+</div>
+
 {% endblock content %}

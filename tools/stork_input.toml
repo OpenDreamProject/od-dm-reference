@@ -1,0 +1,338 @@
+[input]
+base_directory = "content"
+url_prefix = "https://ref.opendre.am/"
+[[input.files]]
+path = "_index.md"
+title = "DreamMaker"
+url = "_index"
+
+[[input.files]]
+path = "skins/_index.md"
+title = "Skins"
+url = "skins"
+
+[[input.files]]
+path = "objects/_index.md"
+title = "Objects"
+url = "objects"
+
+[[input.files]]
+path = "language/_index.md"
+title = "DreamMaker"
+url = "language"
+
+[[input.files]]
+path = "objects/database/_index.md"
+title = "/database"
+url = "objects/database"
+
+[[input.files]]
+path = "objects/obj/var.md"
+title = "var"
+url = "objects/obj/var"
+
+[[input.files]]
+path = "objects/obj/proc.md"
+title = "proc"
+url = "objects/obj/proc"
+
+[[input.files]]
+path = "objects/obj/_index.md"
+title = "/obj"
+url = "objects/obj"
+
+[[input.files]]
+path = "objects/area/var.md"
+title = "vars"
+url = "objects/area/var"
+
+[[input.files]]
+path = "objects/area/proc.md"
+title = "proc"
+url = "objects/area/proc"
+
+[[input.files]]
+path = "objects/area/_index.md"
+title = "/area"
+url = "objects/area"
+
+[[input.files]]
+path = "objects/atom/var.md"
+title = "var"
+url = "objects/atom/var"
+
+[[input.files]]
+path = "objects/atom/_index.md"
+title = "/atom"
+url = "objects/atom"
+
+[[input.files]]
+path = "objects/datum/var.md"
+title = "var"
+url = "objects/datum/var"
+
+[[input.files]]
+path = "objects/datum/_index.md"
+title = "/datum"
+url = "objects/datum"
+
+[[input.files]]
+path = "objects/world/var.md"
+title = "var"
+url = "objects/world/var"
+
+[[input.files]]
+path = "objects/world/proc.md"
+title = "proc"
+url = "objects/world/proc"
+
+[[input.files]]
+path = "objects/world/_index.md"
+title = "/world"
+url = "objects/world"
+
+[[input.files]]
+path = "objects/turf/var.md"
+title = "var"
+url = "objects/turf/var"
+
+[[input.files]]
+path = "objects/turf/proc.md"
+title = "proc"
+url = "objects/turf/proc"
+
+[[input.files]]
+path = "objects/turf/_index.md"
+title = "/turf"
+url = "objects/turf"
+
+[[input.files]]
+path = "objects/regex/var.md"
+title = "var"
+url = "objects/regex/var"
+
+[[input.files]]
+path = "objects/regex/proc.md"
+title = "proc"
+url = "objects/regex/proc"
+
+[[input.files]]
+path = "objects/regex/_index.md"
+title = "/regex"
+url = "objects/regex"
+
+[[input.files]]
+path = "objects/image/var.md"
+title = "var"
+url = "objects/image/var"
+
+[[input.files]]
+path = "objects/image/_index.md"
+title = "/image"
+url = "objects/image"
+
+[[input.files]]
+path = "objects/savefile/var.md"
+title = "var"
+url = "objects/savefile/var"
+
+[[input.files]]
+path = "objects/savefile/proc.md"
+title = "proc"
+url = "objects/savefile/proc"
+
+[[input.files]]
+path = "objects/savefile/_index.md"
+title = "/savefile"
+url = "objects/savefile"
+
+[[input.files]]
+path = "objects/list/var.md"
+title = "var"
+url = "objects/list/var"
+
+[[input.files]]
+path = "objects/list/proc.md"
+title = "proc"
+url = "objects/list/proc"
+
+[[input.files]]
+path = "objects/list/_index.md"
+title = "/list"
+url = "objects/list"
+
+[[input.files]]
+path = "objects/mutable_appearance/var.md"
+title = "var"
+url = "objects/mutable_appearance/var"
+
+[[input.files]]
+path = "objects/mutable_appearance/_index.md"
+title = "/mutable_appearance"
+url = "objects/mutable_appearance"
+
+[[input.files]]
+path = "objects/icon/proc.md"
+title = "proc"
+url = "objects/icon/proc"
+
+[[input.files]]
+path = "objects/icon/_index.md"
+title = "/icon"
+url = "objects/icon"
+
+[[input.files]]
+path = "objects/sound/var.md"
+title = "var"
+url = "objects/sound/var"
+
+[[input.files]]
+path = "objects/sound/_index.md"
+title = "/sound"
+url = "objects/sound"
+
+[[input.files]]
+path = "objects/mob/var.md"
+title = "var"
+url = "objects/mob/var"
+
+[[input.files]]
+path = "objects/mob/proc.md"
+title = "proc"
+url = "objects/mob/proc"
+
+[[input.files]]
+path = "objects/mob/_index.md"
+title = "/mob"
+url = "objects/mob"
+
+[[input.files]]
+path = "objects/exception/_index.md"
+title = "/exception"
+url = "objects/exception"
+
+[[input.files]]
+path = "objects/client/var.md"
+title = "vars"
+url = "objects/client/var"
+
+[[input.files]]
+path = "objects/client/proc.md"
+title = "proc"
+url = "objects/client/proc"
+
+[[input.files]]
+path = "objects/client/_index.md"
+title = "/client"
+url = "objects/client"
+
+[[input.files]]
+path = "objects/matrix/proc.md"
+title = "proc"
+url = "objects/matrix/proc"
+
+[[input.files]]
+path = "objects/matrix/_index.md"
+title = "/matrix"
+url = "objects/matrix"
+
+[[input.files]]
+path = "objects/database/proc/_index.md"
+title = "proc (database proc)"
+url = "objects/database/proc"
+
+[[input.files]]
+path = "objects/database/proc/execute.md"
+title = "Execute (database proc)"
+url = "objects/database/proc/execute"
+
+[[input.files]]
+path = "objects/database/query/proc.md"
+title = "proc"
+url = "objects/database/query/proc"
+
+[[input.files]]
+path = "objects/database/query/_index.md"
+title = "/database/query"
+url = "objects/database/query"
+
+[[input.files]]
+path = "objects/atom/proc/click.md"
+title = "Click (atom proc)"
+url = "objects/atom/proc/click"
+
+[[input.files]]
+path = "objects/atom/proc/cross.md"
+title = "Cross (atom proc)"
+url = "objects/atom/proc/cross"
+
+[[input.files]]
+path = "objects/atom/proc/_index.md"
+title = "proc (atom proc)"
+url = "objects/atom/proc"
+
+[[input.files]]
+path = "objects/atom/movable/var.md"
+title = "var"
+url = "objects/atom/movable/var"
+
+[[input.files]]
+path = "objects/atom/movable/_index.md"
+title = "/atom/movable"
+url = "objects/atom/movable"
+
+[[input.files]]
+path = "objects/atom/movable/proc/bump.md"
+title = "Bump (movable proc)"
+url = "objects/atom/movable/proc/bump"
+
+[[input.files]]
+path = "objects/atom/movable/proc/move.md"
+title = "Move (movable proc)"
+url = "objects/atom/movable/proc/move"
+
+[[input.files]]
+path = "objects/atom/movable/proc/_index.md"
+title = "proc (movable proc)"
+url = "objects/atom/movable/proc"
+
+[[input.files]]
+path = "objects/datum/proc/new.md"
+title = "New (datum proc)"
+url = "objects/datum/proc/new"
+
+[[input.files]]
+path = "objects/datum/proc/topic.md"
+title = "Topic (datum proc)"
+url = "objects/datum/proc/topic"
+
+[[input.files]]
+path = "objects/datum/proc/read.md"
+title = "Read (datum proc)"
+url = "objects/datum/proc/read"
+
+[[input.files]]
+path = "objects/datum/proc/write.md"
+title = "Write (datum proc)"
+url = "objects/datum/proc/write"
+
+[[input.files]]
+path = "objects/datum/proc/del.md"
+title = "Del (datum proc)"
+url = "objects/datum/proc/del"
+
+[[input.files]]
+path = "objects/datum/proc/_index.md"
+title = "proc (datum proc)"
+url = "objects/datum/proc"
+
+[[input.files]]
+path = "language/text/_index.md"
+title = "Text"
+url = "language/text"
+
+[[input.files]]
+path = "language/preprocessor/_index.md"
+title = "Preprocessor"
+url = "language/preprocessor"
+

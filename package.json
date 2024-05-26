@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.13",
+    "tailwindcss": "^3.4.3"
+  },
+  "name": "od-dm-reference",
+  "version": "1.0.0",
+  "devDependencies": {},
+  "scripts": {
+    "build": "NODE_ENV=production npx tailwindcss -i styles/index.css -o static/index.css",
+    "watch": "npx tailwindcss -i styles/index.css -o static/index.css; zola serve"
+  },
+  "author": "",
+  "license": "MIT",
+  "description": ""
+}
