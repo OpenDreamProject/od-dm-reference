@@ -39,9 +39,9 @@
 </head>
 
 <body>
-    <div class="flex gap-10 px-3 supports-[height:100cqh]:h-[100cqh] supports-[height:100svh]:h-[100svh]">
+    <div class="flex gap-10 px-3 supports-[height:100cqh]:min-h-[100cqh] supports-[height:100svh]:min-h-[100svh]">
 
-        <div class="left-bar hidden md:block min-h-screen supports-[height:100cqh]:h-[100cqh] supports-[height:100svh]:h-[100svh]" id="left-bar">
+        <div class="left-bar hidden md:block min-h-screen supports-[height:100cqh]:min-h-[100cqh] supports-[height:100svh]:min-h-[100svh]" id="left-bar">
             <div class="flex flex-row">
             <img src="{{ get_url(path='favicon.svg') | safe }}" width=24px><input data-stork="ref-search" class="flex-grow m-2 pr-2" type="text" />
             </div>
