@@ -17,7 +17,6 @@ body {
 
 .left-bar {
     background-color: #1b1b1b;
-    height: 100vh;
     border-right: 1px solid #fdfeff;
     overflow-y: scroll;
     min-width: max-content;
@@ -108,7 +107,6 @@ input[type="text"] {
 }
 
 .section {
-    height: 100vh;
     overflow: auto;
 }
 

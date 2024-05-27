@@ -39,9 +39,9 @@
 </head>
 
 <body>
-    <div class="flex gap-10 px-3">
+    <div class="flex gap-10 px-3 min-h-screen max-h-screen">
 
-        <div class="left-bar hidden md:block" id="left-bar">
+        <div class="left-bar hidden md:block min-h-screen max-h-screen" id="left-bar">
             <div class="flex flex-row">
             <img src="{{ get_url(path='favicon.svg') | safe }}" width=24px><input data-stork="ref-search" class="flex-grow m-2 pr-2" type="text" />
             </div>
