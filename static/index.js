@@ -12,8 +12,26 @@ const handleClick = () => {
     
 }
 
+const handleNavClick = (event) => {
+    event.target.classList.toggle("fa-rotate-90")
+    const items = event.target.parentNode.children
+    for(const item of items) {
+        if(item.localName == "ul") {
+            for(const child of item.children) {
+                child.classList.toggle("hidden")
+            }
+        }
+    }
+}
+
 const main = () => {
     document.getElementById("navigation-button").addEventListener("click", handleClick)
+
+    const toggles = document.getElementsByClassName("nav-toggle")
+    for(const item of toggles) {
+        item.addEventListener("click", handleNavClick);
+    }
+
 }
 
 window.onload = main;
