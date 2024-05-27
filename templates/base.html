@@ -75,10 +75,7 @@
 
     <script src="https://files.stork-search.net/releases/v1.6.0/stork.js"></script>
     <script>
-        const transformResult = (string) => {
-            return `${document.location.origin}/${string}`
-        }
-        stork.register("ref-search", "{{config.base_url | safe}}/search.st", {showProgress: false, transformResultUrl: transformResult});
+        stork.register("ref-search", "{{config.base_url | safe}}/search.st", {showProgress: false});
     </script>
 </body>
 

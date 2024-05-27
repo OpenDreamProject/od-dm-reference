@@ -180,10 +180,7 @@
         {% if possibleProcPage.title == "proc" %}
             {% if possibleProcPage.pages | length > 0 %}
             {{ self::render_page_parent_type(page=possibleProcPage, skip_level=0, recursive=false) }}
-            <div class="pl-3 flex flex-row gap-5">
-            <div>
-            <i class="fa-solid fa-arrow-turn-up fa-rotate-90"></i>
-            </div>
+            <div class="pl-10 flex flex-row gap-5">
             <div class="flex flex-col">
             {% endif %}
             {% for newProc in possibleProcPage.pages %}
