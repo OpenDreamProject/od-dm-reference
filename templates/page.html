@@ -3,7 +3,7 @@
 
 {% block header %}
 <h1 class="title text-3xl">
-    {{ macros::render_page_parent_type(page=page, skip_level=0) }} | {{ page.title }}
+    {{ macros::render_page_parent_type(page=page, skip_level=0) }} {{ page.title }}
 </h1>
 {% endblock header %}
 

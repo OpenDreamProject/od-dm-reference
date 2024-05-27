@@ -78,7 +78,7 @@
         const transformResult = (string) => {
             return `${document.location.origin}/${string}`
         }
-        stork.register("ref-search", `${document.location.origin}/search.st`, {showProgress: false, transformResultUrl: transformResult});
+        stork.register("ref-search", "{{config.base_url | safe}}/search.st", {showProgress: false, transformResultUrl: transformResult});
     </script>
 </body>
 
