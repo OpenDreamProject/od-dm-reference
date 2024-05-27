@@ -6,6 +6,10 @@
 {% set pageOrSubsection = section -%}
 {% endif -%}
 
+{%- set title = "OpenDream DM Reference" -%}
+{%- if pageOrSubsection.path != "/" -%}
+{%- endif -%}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +20,14 @@
     <script src="{{ get_url(path='index.js') | safe }}"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
+
+    <meta property="og:title" content="{{pageOrSubsection.title}}" />
+    <meta property="og:site_name" content="OpenDream DM Reference" />
+    <meta property="og:url" content="{{pageOrSubsection.permalink | safe}}" />
+    <meta property="og:image" content="{{ get_url(path='favicon.png') | safe }}">
+    <meta property="og:description" content="{{ pageOrSubsection.content | striptags | truncate(length=38) }}">
+
+
     <link rel="stylesheet" href="{{ get_url(path='index.css') | safe }}">
 
     <link rel="icon" href="{{ get_url(path='favicon.svg') | safe }}">
