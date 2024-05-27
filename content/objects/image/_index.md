@@ -1,4 +1,6 @@
 +++
 title = "/image"
-weight = 1
+
+[extra]
+parent_type = "/datum"
 +++

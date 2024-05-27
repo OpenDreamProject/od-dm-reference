@@ -1,4 +1,6 @@
 +++
 title = "/area"
-weight = 100
+
+[extra]
+parent_type = "/atom"
 +++

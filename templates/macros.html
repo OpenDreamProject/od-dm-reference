@@ -1,89 +1,89 @@
 {% macro render_subsection(currentPage, subsection, depth) %}
-    {% if currentPage.ancestors | length %}
+    {%- if currentPage.ancestors | length %}
         {%- set myParent = currentPage.ancestors | last -%}
-    {% else %}
-        {% set myParent = subsection.ancestors | last %}
-    {% endif %}
+    {%- else %}
+        {%- set myParent = subsection.ancestors | last %}
+    {%- endif %}
 
     {%- set myParentSection = get_section(path=myParent) -%}
 
-    {% set subsectionParentUrl = subsection.ancestors | last%}
-    {% set subsectionParent = get_section(path=subsectionParentUrl) %}
+    {%- set subsectionParentUrl = subsection.ancestors | last %}
+    {%- set subsectionParent = get_section(path=subsectionParentUrl) %}
 
-    {% set renderAll = false %}
-    {% for page in currentPage.ancestors %}
-        {% set iteratorSection = get_section(path=page) %}
-            {% if iteratorSection.path == subsection.path or iteratorSection.path == subsectionParent.path %}
-                {% set_global renderAll = true %}
-                {% break %}
-            {% endif %}
-    {% endfor %}
+    {%- set renderAll = false %}
+    {%- for page in currentPage.ancestors %}
+        {%- set iteratorSection = get_section(path=page) %}
+            {%- if iteratorSection.path == subsection.path or iteratorSection.path == subsectionParent.path %}
+                {%- set_global renderAll = true %}
+                {%- break %}
+            {%- endif %}
+    {%- endfor %}
 
-    {% if current_path == subsection.path %}
-        {% set class = "active" %}
-    {% elif depth > 1 
+    {%- if current_path == subsection.path %}
+        {%- set class = "active" %}
+    {%- elif depth > 1 
         and current_path != subsection.path
         and current_path != myParentSection.path
         and current_path != subsectionParent.path
         and not renderAll %}
-        {% set class = "hidden" %}
-    {% else %} 
-        {% set class = "" %}
-    {% endif %}
+        {%- set class = "hidden" %}
+    {%- else %} 
+        {%- set class = "" %}
+    {%- endif %}
 
-    {% set linkClass = "" %}
-    {% set firstChar = subsection.title | split(pat="") | nth(n = 1) -%}
-    {% if firstChar == "/" -%}
-        {% set class = class ~ " code-nav" %}
-        {% set linkClass = "type" %}
-    {% else %}
-        {% set class = class ~ " text-title" %}
-    {% endif %}
+    {%- set linkClass = "" %}
+    {%- set firstChar = subsection.title | split(pat="") | nth(n = 1) -%}
+    {%- if firstChar == "/" -%}
+        {%- set class = class ~ " code-nav" %}
+        {%- set linkClass = "type" %}
+    {%- else %}
+        {%- set class = class ~ " text-title" %}
+    {%- endif -%}
 
     <li class="{{class}}" data-expand-tag="{{subsection.path}}" style="padding-left: 20px">
         <i class="fa-solid fa-caret-right"></i>
         <a href="{{ subsection.permalink | safe }}" class="{{linkClass}}">
             {{ subsection.title }}
         </a>
-        {% if subsection.subsections %}
+        {%- if subsection.subsections -%}
         <ul>
-            {% for lowerSubPath in subsection.subsections | sort %}
+            {%- for lowerSubPath in subsection.subsections | sort -%}
                 {% set lowerSubsection = get_section(path=lowerSubPath) %}
-                {{ self::render_subsection(currentPage = currentPage, subsection=lowerSubsection, depth=depth+1) }}
-            {% endfor %}
+                {{- self::render_subsection(currentPage = currentPage, subsection=lowerSubsection, depth=depth+1) -}}
+            {%- endfor -%}
         </ul>
         {%- endif -%}
 
         {%- if subsection.pages -%}
             <ul>
-                {% for page in subsection.pages %}
-                    {{ self::render_subsection_pages(page=page, currentPage=currentPage, subsection=subsection, depth=depth, currentParent=myParentSection) }}
-                {% endfor %}
+                {%- for page in subsection.pages -%}
+                    {{- self::render_subsection_pages(page=page, currentPage=currentPage, subsection=subsection, depth=depth, currentParent=myParentSection) -}}
+                {%- endfor -%}
             </ul>
-        {% endif %}
+        {%- endif -%}
     </li>
 {% endmacro render_subsection %}
 
 {% macro render_subsection_pages(page, currentPage, subsection, depth, currentParent) %}
-    {% set renderAll = false %}
-    {% for page in currentPage.ancestors %}
-        {% set iteratorSection = get_section(path=page) %}
-            {% if iteratorSection.path == subsection.path %}
-                {% set_global renderAll = true %}
-                {% break %}
-            {% endif %}
-    {% endfor %}
+    {%- set renderAll = false %}
+    {%- for page in currentPage.ancestors %}
+        {%- set iteratorSection = get_section(path=page) %}
+            {%- if iteratorSection.path == subsection.path %}
+                {%- set_global renderAll = true %}
+                {%- break %}
+            {%- endif %}
+    {%- endfor %}
 
-    {% if current_path == page.path %}
-        {% set class = "active" %}
-    {% elif depth > 0
+    {%- if current_path == page.path %}
+        {%- set class = "active" %}
+    {%- elif depth > 0
         and current_path != subsection.path
         and currentParent.path != subsection.path
         and not renderAll %}
-        {% set class = "hidden" %}
-    {% else %}
-        {% set class = "" %}
-    {% endif %}
+        {%- set class = "hidden" %}
+    {%- else %}
+        {%- set class = "" %}
+    {%- endif -%}
 
     <li class="text-title {{class}}">
         <i class="fa-solid fa-minus" style="padding-left: 20px"></i>
@@ -107,38 +107,38 @@
 {% endmacro render_breadcrumbs %}
 
 {% macro render_parent_type(page, recursive=true) %}
-    {% if page.extra.parent_type %}
-        {% set lookup = "objects" ~ page.extra.parent_type ~ "/_index.md" %}
-        {% set url = get_section(path=lookup) %}
-        {% if recursive %}
-            {{ self::render_parent_type(page=url) }}
-        {% endif %}
+    {%- if page.extra.parent_type %}
+        {%- set lookup = "objects" ~ page.extra.parent_type ~ "/_index.md" %}
+        {%- set url = get_section(path=lookup) %}
+        {%- if recursive %}
+            {{- self::render_parent_type(page=url) }}
+        {%- endif %}
         <a href="{{ url.permalink | safe}}" class="code-title type">{{url.title}}</a>
         <i class="fa-solid fa-arrow-left"></i>
-    {% endif %}
+    {%- endif -%}
 {% endmacro render_parent_type %}
 
 {% macro render_page_parent_type(page, skip_level, recursive=true) %}
-    {% if page.extra.parent_type %}
-        {{ self::render_parent_type(page=page, recursive=recursive) }}
-    {% else %}
-        {% if skip_level %}
-            {% set num = page.ancestors | length %}
-            {% set sub = num - skip_level %}
-            {% set parent = page.ancestors | nth(n=sub - 1) %}
-        {% else %}
-            {% set parent = page.ancestors | last %}
-        {% endif %}
-        {% set parentSection = get_section(path=parent) %}
-        {% if recursive %}
-            {{ self::render_parent_type(page=parentSection) }}
-        {% endif %}
+    {%- if page.extra.parent_type %}
+        {{- self::render_parent_type(page=page, recursive=recursive) }}
+    {%- else %}
+        {%- if skip_level %}
+            {%- set num = page.ancestors | length %}
+            {%- set sub = num - skip_level %}
+            {%- set parent = page.ancestors | nth(n=sub - 1) %}
+        {%- else %}
+            {%- set parent = page.ancestors | last %}
+        {%- endif %}
+        {%- set parentSection = get_section(path=parent) %}
+        {%- if recursive %}
+            {{- self::render_parent_type(page=parentSection) }}
+        {%- endif %}
 
-        {% set class = "" %}
-        {% set firstChar = parentSection.title | split(pat="") | nth(n = 1) -%}
-        {% if firstChar == "/" -%}
-            {% set class = "code-title type" %}
-        {% endif %}
+        {%- set class = "" %}
+        {%- set firstChar = parentSection.title | split(pat="") | nth(n = 1) -%}
+        {%- if firstChar == "/" -%}
+            {%- set class = "code-title type" %}
+        {%- endif %}
 
         <a href="{{parentSection.permalink | safe}}" class="{{class}}">{{parentSection.title}}</a>
         <i class="fa-solid fa-arrow-left"></i>

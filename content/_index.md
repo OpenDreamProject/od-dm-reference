@@ -1,8 +1,8 @@
 +++
-title = "OpenDream DreamMaker Reference"
+title = "OpenDream DM Reference"
 +++
 
-Welcome to the OpenDream DreamMaker reference.
+Welcome to the OpenDream DM Reference.
 
 Deeply WIP, for a taste at how this works, look at [/atom/movable procs](@/objects/atom/movable/proc/_index.md).
 
