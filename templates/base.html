@@ -1,5 +1,11 @@
 {% import "macros.html" as macros %}
 
+{%- if page -%}
+{% set pageOrSubsection = page -%}
+{% elif section -%}
+{% set pageOrSubsection = section -%}
+{% endif -%}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,24 +26,19 @@
 </head>
 
 <body>
-    <div class="flex gap-10 mx-auto px-3">
+    <div class="flex gap-10 px-3">
 
         <div class="left-bar hidden md:block" id="left-bar">
             <div class="flex flex-row">
-            <img src="{{ get_url(path='favicon.svg') | safe }}" width=24px><input data-stork="ref-search" class="flex-grow m-2 pr-2" />
+            <img src="{{ get_url(path='favicon.svg') | safe }}" width=24px><input data-stork="ref-search" class="flex-grow m-2 pr-2" type="text" />
             </div>
             <div data-stork="ref-search-output" class="results"></div>
-            <nav role="navigation">
+            <nav role="navigation" class="pr-2">
                 <ul>
                     {%- block menu -%}
                     {%- set index = get_section(path="_index.md") -%}
                     {%- for subsectionPath in index.subsections | sort -%}
                         {%- set subsection = get_section(path=subsectionPath) -%}
-                        {%- if page -%}
-                            {% set pageOrSubsection = page -%}
-                        {% elif section -%}
-                            {% set pageOrSubsection = section -%}
-                        {% endif -%}
                         {{ macros::render_subsection(currentPage=pageOrSubsection, subsection=subsection, depth=0) -}}
                     {%- endfor -%}
                     {%- endblock menu -%}
@@ -45,10 +46,28 @@
             </nav>
         </div>
 
-        <i class="navigation-button fa-solid fa-bars fa-2xl" id="navigation-button"></i>
-
         <section class="section">
-            <div class="container mt-5">{% block content %} {% endblock %}</div>
+            <div class="mt-5">
+                <div class="flex flex-col gap-5">
+                    <div class="flex flex-col-reverse gap-5 md:flex-row justify-between">
+                        <div>{% block header %} {% endblock %}</div>
+                        <div class="flex flex-row justify-between md:justify-end">
+                            <img src="{{ get_url(path='favicon.svg') | safe }}" width=28px class="md:hidden">
+                            <div class="flex flex-row gap-1">
+                            <div class="p-1">
+                                <a href="{{ config.extra.repo }}/blob/{{ config.extra.branch }}/content/{{ pageOrSubsection.relative_path }}?plain=1">
+                                <i class="fa-brands fa-github fa-2xl"></i></div>
+                                </a>
+                            <div class="p-1 md:hidden">
+                                <i class="fa-solid fa-bars fa-2xl cursor-pointer" id="navigation-button" class="cursor-pointer md:hidden"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                    {% block content %} {% endblock %}
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
 

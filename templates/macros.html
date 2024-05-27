@@ -21,7 +21,7 @@
 
     {% if current_path == subsection.path %}
         {% set class = "active" %}
-    {% elif depth > 2 
+    {% elif depth > 1 
         and current_path != subsection.path
         and current_path != myParentSection.path
         and current_path != subsectionParent.path
@@ -31,16 +31,18 @@
         {% set class = "" %}
     {% endif %}
 
+    {% set linkClass = "" %}
     {% set firstChar = subsection.title | split(pat="") | nth(n = 1) -%}
     {% if firstChar == "/" -%}
         {% set class = class ~ " code-nav" %}
+        {% set linkClass = "type" %}
     {% else %}
         {% set class = class ~ " text-title" %}
     {% endif %}
 
     <li class="{{class}}" data-expand-tag="{{subsection.path}}" style="padding-left: 20px">
         <i class="fa-solid fa-caret-right"></i>
-        <a href="{{ subsection.permalink | safe }}">
+        <a href="{{ subsection.permalink | safe }}" class="{{linkClass}}">
             {{ subsection.title }}
         </a>
         {% if subsection.subsections %}
@@ -74,7 +76,7 @@
 
     {% if current_path == page.path %}
         {% set class = "active" %}
-    {% elif depth > 1
+    {% elif depth > 0
         and current_path != subsection.path
         and currentParent.path != subsection.path
         and not renderAll %}
@@ -111,7 +113,7 @@
         {% if recursive %}
             {{ self::render_parent_type(page=url) }}
         {% endif %}
-        <a href="{{ url.permalink | safe}}" class="code-title">{{url.title}}</a>
+        <a href="{{ url.permalink | safe}}" class="code-title type">{{url.title}}</a>
         <i class="fa-solid fa-arrow-left"></i>
     {% endif %}
 {% endmacro render_parent_type %}
@@ -131,7 +133,15 @@
         {% if recursive %}
             {{ self::render_parent_type(page=parentSection) }}
         {% endif %}
-        <a href="{{parentSection.permalink | safe}}" class="code-title">{{parentSection.title}}</a>
+
+        {% set class = "" %}
+        {% set firstChar = parentSection.title | split(pat="") | nth(n = 1) -%}
+        {% if firstChar == "/" -%}
+            {% set class = "code-title type" %}
+        {% endif %}
+
+        <a href="{{parentSection.permalink | safe}}" class="{{class}}">{{parentSection.title}}</a>
+        <i class="fa-solid fa-arrow-left"></i>
         {%- endif -%}
 {%- endmacro render_page_parent_type %}
 
@@ -140,7 +150,7 @@
     {% if firstChar == "/" -%}
         {% set lookup = "objects" ~ type ~ "/_index.md" -%}
         {% set url = get_section(path=lookup) -%}
-        <a href="{{ url.permalink | safe}}" class="code-title">{{url.title}}</a>
+        <a href="{{ url.permalink | safe}}" class="code-title type">{{url.title}}</a>
     {%- else -%}
         {{type}}
     {%- endif %}
@@ -211,7 +221,7 @@
             <div class="flex flex-col">
             {% endif %}
             {% for newVar in possibleVarPage.pages %}
-                <div><a href="{{newVar.permalink | safe}}">/var/{{ newVar.title }}</a></div>
+                <div class="code-title"><a href="{{newVar.permalink | safe}}">/var/{{ newVar.title }}</a></div>
             {% endfor %}
             {% if possibleVarPage.pages | length > 0 %}
             </div>
@@ -257,30 +267,31 @@
     {% endif %}
 {% endmacro render_backlinks %}
 
+{% macro render_proc_title(page, list=false) %}
+<h1 class="title text-3xl">
+    <div class="code-title">
+    {% if page.extra.override %}
+        {% set overrideText = "" %}
+    {% else %}
+        {% set overrideText = "/proc" %}
+    {% endif %}
+    {%- if not list -%}
+    {{- macros::render_page_parent_type(page=page, skip_level=1) -}}
+    {%- endif -%}
+    {%- if list -%}
+        <a href="{{page.permalink | safe}}">
+    {%- endif -%}
+    {{overrideText}}/{{ page.title }}
+    {%- if list -%}
+        </a>
+    {%- endif -%}
+    ({{ macros::render_proc_args_short(page=page) }})
+    </div>
+</h1>
+{% endmacro render_proc_title %}
+
 {% macro render_proc(page, list=false) %}
     <div class="flex flex-col gap-5">
-
-    <h1 class="title text-3xl">
-        <div class="code-title">
-        {% if page.extra.override %}
-            {% set overrideText = "" %}
-        {% else %}
-            {% set overrideText = "/proc" %}
-        {% endif %}
-        {%- if not list -%}
-        {{- macros::render_page_parent_type(page=page, skip_level=1) -}}
-        {%- endif -%}
-        {%- if list -%}
-            <a href="{{page.permalink | safe}}">
-        {%- endif -%}
-        {{overrideText}}/{{ page.title }}
-        {%- if list -%}
-            </a>
-        {%- endif -%}
-        ({{ macros::render_proc_args_short(page=page) }})
-        </div>
-
-    </h1>
 
     <div>
     {{ macros::render_proc_args_long(page=page) }}

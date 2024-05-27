@@ -16,7 +16,6 @@ body {
 }
 
 .left-bar {
-    padding-right: 10px;
     background-color: #1b1b1b;
     height: 100vh;
     border-right: 1px solid #fdfeff;
@@ -42,20 +41,6 @@ body {
     animation-duration: 0.3s;
 }
 
-i.navigation-button {
-    cursor: pointer;
-    position: absolute;
-    top: 4%;
-    right: 3%;
-
-}
-
-@media (min-width: 768px) {
-    i.navigation-button {
-        display: none;
-    }
-}
-
 @keyframes slide-in {
     from {left: -100%} to {left: 0%}
 }
@@ -72,9 +57,22 @@ a {
     color: #7a698f;
 }
 
+a > i {
+    color: #fdfeff;
+}
+
+.type {
+    color: #70C3AF;
+    text-decoration: dotted;
+}
+
 
 ul li.active > a {
     color: #E67A82;
+}
+
+input[type="text"] {
+    border-radius: 4px;
 }
 
 .stork-output-visible {
@@ -101,6 +99,9 @@ ul li.active > a {
     padding-left: 5px;
 }
 
+.stork-close-button {
+    display: none;
+}
 
 .container, .section {
     width: 100%;

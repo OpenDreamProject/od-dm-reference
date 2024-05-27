@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% import "macros.html" as macros %}
 
+{% block header %}
+{{ macros::render_proc_title(page=page) }}
+{% endblock header %}
+
 {% block content %}
 
 {{ macros::render_proc(page=page) }}

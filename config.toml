@@ -10,3 +10,5 @@ extra_syntaxes_and_themes = ["syntaxes"]
 
 [extra]
 # Put all your custom variables here
+repo = "https://github.com/harryob/od-dm-reference"
+branch = "main"

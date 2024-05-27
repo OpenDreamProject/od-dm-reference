@@ -1,13 +1,22 @@
 {% extends "base.html" %}
 {% import "macros.html" as macros %}
 
+{% block header %}
+
+{% set class = "" %}
+{% set firstChar = section.title | split(pat="") | nth(n = 1) -%}
+{% if firstChar == "/" -%}
+    {% set class = "code-title type" %}
+{% endif %}
+
+<h1 class="title text-3xl">
+    {{ macros::render_page_parent_type(page=section, skip_level=0) }} <span class="{{class}}">{{ section.title }}</span>
+</h1>
+{% endblock header %}
+
 {% block content %}
 
 <div class="flex flex-col gap-5">
-
-<h1 class="title text-3xl">
-    {{ macros::render_page_parent_type(page=section, skip_level=0) }} {{ section.title }}
-</h1>
 
 {{ section.content | safe }}
 
