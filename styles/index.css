@@ -136,7 +136,7 @@ code, pre {
 }
 
 .code-nav {
-    font-size: 14px;
+    font-size: 20px;
     font-family: "JetBrains Mono", monospace;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -144,7 +144,7 @@ code, pre {
 }
 
 .text-title {
-    font-size: 16px;
+    font-size: 24px;
     font-family: "Nunito", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -153,6 +153,16 @@ code, pre {
 
 .text-title a {
     padding-left: 4px;
+}
+
+@media (min-width: 768px) {
+    .text-title {
+        font-size: 16px;
+    }
+
+    .code-nav {
+        font-size: 14px;
+    }
 }
 
 :not(pre) > code {
