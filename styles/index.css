@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -41,11 +41,23 @@ body {
 }
 
 @keyframes slide-in {
-    from {left: -100%} to {left: 0%}
+    from {
+        left: -100%;
+    }
+
+    to {
+        left: 0%;
+    }
 }
 
 @keyframes slide-out {
-    from {left: 0%} to {left: -100%}
+    from {
+        left: 0%;
+    }
+
+    to {
+        left: -100%;
+    }
 }
 
 .hidden {
@@ -56,18 +68,17 @@ a {
     color: #7a698f;
 }
 
-a > i {
+a>i {
     color: #fdfeff;
 }
 
 .type {
-    color: #70C3AF;
+    color: #70c3af;
     text-decoration: dotted;
 }
 
-
-ul li.active > a {
-    color: #E67A82;
+ul li.active>a {
+    color: #e67a82;
 }
 
 input[type="text"] {
@@ -102,7 +113,8 @@ input[type="text"] {
     display: none;
 }
 
-.container, .section {
+.container,
+.section {
     width: 100%;
 }
 
@@ -119,7 +131,8 @@ input {
     color: #1b1b1b;
 }
 
-code, pre {
+code,
+pre {
     font-family: "JetBrains Mono", monospace;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -163,14 +176,32 @@ code, pre {
     }
 }
 
-:not(pre) > code {
+:not(pre)>code {
     background-color: #343434;
     border-radius: 0.25rem;
     padding: 3px;
 }
 
 /* Override Tailwind being awful and annoying */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-size: revert;
     font-weight: revert;
 }
+
+.safe-h-screen {
+    /* equivalent to 100dvh in major browsers */
+    height: calc(100vh - env(safe-area-inset-bottom, 0) - env(safe-area-inset-top, 0));
+}
+
+@supports (-webkit-touch-callout: none) {
+    .min-safe-h-screen {
+        /* for ios safari 15, safe-area-inset-bottom is 0, so a special fix apply here */
+        height: -webkit-fill-available;
+    }
+}
+
