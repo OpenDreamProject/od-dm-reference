@@ -58,7 +58,7 @@
         </span>
         {%- if subsection.subsections -%}
         <ul>
-            {%- for lowerSubPath in subsection.subsections | sort -%}
+            {%- for lowerSubPath in subsection.subsections | sort-%}
                 {% set lowerSubsection = get_section(path=lowerSubPath) %}
                 {{- self::render_subsection(currentPage = currentPage, subsection=lowerSubsection, depth=depth+1) -}}
             {%- endfor -%}
@@ -175,12 +175,14 @@
 
 {% macro render_proc_args_long(page) %}
     {% if page.extra.args %}
-        <div>Args:</div>
-        <ul>
-        {% for arg in page.extra.args %}
-            <li class="pl-5">{{arg.name}} ({{ self::render_single_type(type=arg.type)}}): {{arg.description}}</li>
-        {% endfor %}
-        </ul>
+        <div class="border-l-2 border-gray-500 pl-3">
+            <div class="text-xl">Arguments:</div>
+            <ul>
+            {% for arg in page.extra.args %}
+                <li class="pl-5">{{arg.name}} ({{ self::render_single_type(type=arg.type)}}): {{arg.description}}</li>
+            {% endfor %}
+            </ul>
+        </div>
     {% endif %}
 {% endmacro render_proc_args_long %}
 
@@ -307,13 +309,23 @@
 {% macro render_proc(page, list=false) %}
     <div class="flex flex-col gap-5">
 
-    <div>
     {{ macros::render_proc_args_long(page=page) }}
-    </div>
 
-    <div>
-    Returns: 
-    <div class="pl-5">{{page.extra.return_val | default(value="null") | safe }}</div> 
+    <div class="border-l-2 border-gray-500 pl-3">
+    <div class="text-xl">Returns:</div> 
+    <div class="pl-5">
+        {%- if page.extra.return_val and page.extra.return_val is iterable -%}
+            <div class="flex flex-col">
+            {%- for option in page.extra.return_val -%}
+                <div>{{- option -}}</div>
+            {%- endfor -%}
+            </div>
+        {%- elif page.extra.return_val is defined -%}
+            {{ page.extra.return_val }}
+        {%- else -%}
+            null
+        {%- endif -%}
+    </div> 
     </div>
 
     {{ page.content | safe }}

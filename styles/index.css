@@ -201,6 +201,10 @@ h6 {
     }
 }
 
+.nav-link-inactive {
+    transition: background-color 0.2s;
+}
+
 .nav-link-inactive:hover {
     background-color: #fdfeff23;
     border-radius: 2px;

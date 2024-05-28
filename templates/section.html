@@ -22,6 +22,8 @@
 
 {{ macros::render_backlinks(page=section) }}
 
+{{ section.subsections }}
+
 {%- if not section.content | length -%}
 <div class="border-l-2 border-yellow-600 pl-5">
     <div class="text-xl">Work In Progress 👷</div>

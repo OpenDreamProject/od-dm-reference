@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% import "macros.html" as macros %}
 
+{% block ogtitle %}
+<meta property="og:title" content="{{page.title}} ({{ macros::render_page_parent_type(page=page, skip_level=1, recursive=false) | striptags | trim | safe }} proc)" />
+{% endblock ogtitle %}
+
 {% block header %}
 {{ macros::render_proc_title(page=page) }}
 {% endblock header %}
