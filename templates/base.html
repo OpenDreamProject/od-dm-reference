@@ -43,9 +43,14 @@
 <body>
     <div class="flex gap-10 px-3 safe-h-screen">
 
-        <div class="left-bar hidden md:block safe-h-screen" id="left-bar">
+        <div class="left-bar hidden md:block h-[100%]" id="left-bar">
             <div class="flex flex-row">
-            <img src="{{ get_url(path='favicon.svg') | safe }}" width=24px><input data-stork="ref-search" class="flex-grow m-2 pr-2" type="text" />
+                <div class="flex flex-col justify-center">
+                    <a href="{{ config.base_url | safe }}">
+                        <img src="{{ get_url(path='favicon.svg') | safe }}" width=24px>
+                    </a>
+                </div>
+                <input data-stork="ref-search" class="flex-grow m-2 pr-2" type="text" />
             </div>
             <div data-stork="ref-search-output" class="results"></div>
             <nav role="navigation" class="pr-2">
@@ -70,7 +75,7 @@
                             <img src="{{ get_url(path='favicon.svg') | safe }}" width=28px class="md:hidden">
                             <div class="flex flex-row gap-1">
                             <div class="p-1">
-                                <a href="{{ config.extra.repo }}/blob/{{ config.extra.branch }}/content/{{ pageOrSubsection.relative_path }}?plain=1">
+                                <a href="https://github.com/OpenDreamProject/OpenDream" target="_blank">
                                 <i class="fa-brands fa-github fa-2xl"></i></div>
                                 </a>
                             <div class="p-1 md:hidden">
@@ -81,6 +86,10 @@
                     <div>
                     {% block content %}{% endblock %}
                     </div>
+
+                    <hr>
+                    <div class="flex flex-row justify-center"><a class="text-gray-500" href="{{macros::get_github_link(page=pageOrSubsection)}}"><i class="fa-brands fa-github text-gray-500"></i> Improve this page</a></div>
+
                 </div>
             </div>
         </section>

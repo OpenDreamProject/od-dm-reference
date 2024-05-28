@@ -13,6 +13,10 @@
 
 {{ page.content | safe }}
 
+{%- if page.content | length -%}
+{{ page.content | length }}
+{%- endif -%}
+
 {{ macros::render_backlinks(page=page) }}
 
 </div>
