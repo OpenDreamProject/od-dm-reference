@@ -3,8 +3,8 @@ title = "Move"
 
 [extra]
 return_val = """
-1 on success
-0 on failure.
+1 on success<br>
+0 on failure<br>
 Number of pixels moved for a successful slide.
 """
 
@@ -18,3 +18,7 @@ args = [
 +++
 
 TODO `TODO` TODO
+
+```dm
+var/todo = "todo"
+```

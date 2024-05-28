@@ -19,9 +19,7 @@
             {%- endif %}
     {%- endfor %}
 
-    {%- if current_path == subsection.path %}
-        {%- set class = "active" %}
-    {%- elif depth > 1 
+    {%- if depth > 1 
         and current_path != subsection.path
         and current_path != myParentSection.path
         and current_path != subsectionParent.path
@@ -44,10 +42,15 @@
     {%- if currentPage.ancestors is containing(subsection.relative_path) or current_path == subsection.path or 1 > depth -%}
         {%- set iconClass = "fa-rotate-90" -%}
     {%- endif -%}
+    
+    {%- set spanClass = " nav-link-inactive" -%}
+    {%- if current_path == subsection.path %}
+        {%- set spanClass = " nav-link-active" %}
+    {%- endif -%}
 
     {%- set depthIndent = 20 * depth -%}
     <li class="{{class}}" data-expand-tag="{{subsection.path}}">
-        <span style="padding-left: {{depthIndent}}px" class="flex flex-row nav-link">
+        <span style="padding-left: {{depthIndent}}px" class="flex flex-row{{spanClass}}">
         <span class="px-1"><i class="fa-solid fa-caret-right text-blue-300 {{iconClass}} nav-toggle cursor-pointer"></i></span>
         <a href="{{ subsection.permalink | safe }}" class="{{linkClass}}">
             {{ subsection.title }}
@@ -82,9 +85,7 @@
             {%- endif %}
     {%- endfor %}
 
-    {%- if current_path == page.path %}
-        {%- set class = "active" %}
-    {%- elif depth > 0
+    {%- if depth > 0
         and current_path != subsection.path
         and currentParent.path != subsection.path
         and not renderAll %}
@@ -92,9 +93,15 @@
     {%- else %}
         {%- set class = "" %}
     {%- endif -%}
+
+    {%- set spanClass = " nav-link-inactive" -%}
+    {%- if current_path == page.path %}
+        {%- set spanClass = " nav-link-active" %}
+    {%- endif -%}
+
     {%- set depthIndent = 20 * (depth + 1) -%}
     <li class="text-title {{class}}">
-        <span style="padding-left: {{depthIndent}}px" class="flex flex-row nav-link">
+        <span style="padding-left: {{depthIndent}}px" class="flex flex-row{{spanClass}}">
         <span class="pl-3"><i class="fa-solid fa-minus"></i></span>
         <a href="{{ page.permalink | safe }}">
             {{ page.title }}
@@ -188,7 +195,7 @@
             <div class="pl-10 flex flex-row gap-5">
             <div class="flex flex-col">
             {% endif %}
-            {% for newProc in possibleProcPage.pages %}
+            {% for newProc in possibleProcPage.pages | sort(attribute="title") %}
                 <div class="code-title"><a href="{{newProc.permalink | safe}}">/proc/{{ newProc.title }}</a>({{ self::render_proc_args_short(page=newProc) }})</div>
             {% endfor %}
             {% if possibleProcPage.pages | length > 0 %}
@@ -227,7 +234,7 @@
             </div>
             <div class="flex flex-col">
             {% endif %}
-            {% for newVar in possibleVarPage.pages %}
+            {% for newVar in possibleVarPage.pages | sort(attribute="title") %}
                 <div class="code-title"><a href="{{newVar.permalink | safe}}">/var/{{ newVar.title }}</a></div>
             {% endfor %}
             {% if possibleVarPage.pages | length > 0 %}
@@ -306,7 +313,7 @@
 
     <div>
     Returns: 
-    <div class="pl-5">{{page.extra.return_val | default(value="null") }}</div> 
+    <div class="pl-5">{{page.extra.return_val | default(value="null") | safe }}</div> 
     </div>
 
     {{ page.content | safe }}
