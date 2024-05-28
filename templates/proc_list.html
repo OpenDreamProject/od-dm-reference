@@ -5,6 +5,10 @@
 <h1 class="title text-3xl">{{ macros::render_page_parent_type(page=section, skip_level=0) }} {{ section.title }}</h1>
 {% endblock header %}
 
+{% block ogtitle %}
+<meta property="og:title" content="{{ macros::render_page_parent_type(page=section, skip_level=0, recursive=false) | striptags | trim | safe }} {{pageOrSubsection.title}}" />
+{% endblock ogtitle %}
+
 {% block content %}
 
 <div class="flex flex-col gap-5">

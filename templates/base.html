@@ -21,7 +21,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    {% block ogtitle %}
     <meta property="og:title" content="{{pageOrSubsection.title}}" />
+    {% endblock ogtitle %}
     <meta property="og:site_name" content="OpenDream DM Reference" />
     <meta property="og:url" content="{{pageOrSubsection.permalink | safe}}" />
     <meta property="og:image" content="{{ get_url(path='favicon.png') | safe }}">
