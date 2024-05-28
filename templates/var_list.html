@@ -9,19 +9,14 @@
 
 <div class="flex flex-col gap-5">
 
-<div>
-{% for page in section.pages %}
-    {% if not page.extra.override %}
-        <h3 class="text-xl">Vars:</h3>
-        {% break %}
-    {% endif %}
+{% for page in section.pages | sort(attribute="title") %}
+    <div class="border border-white border-dashed p-5">
+        <div class="flex flex-col gap-3">
+            {{ macros::render_var_title(page=page, list=true) }}
+            {{ macros::render_var(page=page, list=true) }}
+        </div>
+    </div>
 {% endfor %}
-{% for page in section.pages %}
-    {% if not page.extra.override %}
-        <div><a href="{{page.permalink | safe}}">/var/{{ page.title }}</a></div>
-    {% endif %}
-{% endfor %}
-</div>
 
 <div>
 {{ macros::render_inherited_vars_page(page=section) }}

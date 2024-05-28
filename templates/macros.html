@@ -229,20 +229,17 @@
         {% set possibleVarPage = get_section(path=possibleVarPageUrl) %}
         {% if possibleVarPage.title == "var" %}
             {% if possibleVarPage.pages | length > 0 %}
-            {{ self::render_page_parent_type(page=possibleVarPage, skip_level=0, recursive=false) }}
-            <div class="pl-3 flex flex-row gap-5">
-            <div>
-            <i class="fa-solid fa-arrow-turn-up fa-rotate-90"></i>
-            </div>
-            <div class="flex flex-col">
+                {{ self::render_page_parent_type(page=possibleVarPage, skip_level=0, recursive=false) }}
+                <div class="pl-3 flex flex-row gap-5">
+                    <div class="flex flex-col">
             {% endif %}
-            {% for newVar in possibleVarPage.pages | sort(attribute="title") %}
-                <div class="code-title"><a href="{{newVar.permalink | safe}}">/var/{{ newVar.title }}</a></div>
-            {% endfor %}
+                {% for newVar in possibleVarPage.pages | sort(attribute="title") %}
+                        <div class="code-title"><a href="{{newVar.permalink | safe}}">/var/{{ newVar.title }}</a></div>
+                {% endfor %}
             {% if possibleVarPage.pages | length > 0 %}
-            </div>
-            </div>
-            <br>
+                    </div>
+                </div>
+                <br>
             {% endif %}
             {% break %}
         {% endif %}
@@ -314,17 +311,7 @@
     <div class="border-l-2 border-gray-500 pl-3">
     <div class="text-xl">Returns:</div> 
     <div class="pl-5">
-        {%- if page.extra.return_val and page.extra.return_val is iterable -%}
-            <div class="flex flex-col">
-            {%- for option in page.extra.return_val -%}
-                <div>{{- option -}}</div>
-            {%- endfor -%}
-            </div>
-        {%- elif page.extra.return_val is defined -%}
-            {{ page.extra.return_val }}
-        {%- else -%}
-            null
-        {%- endif -%}
+        {{ page.extra.return_val | default(value="null") | linebreaksbr | markdown | safe }}
     </div> 
     </div>
 
@@ -332,6 +319,47 @@
 
     </div>
 {% endmacro %}
+
+{% macro render_var_title(page, list=false) %}
+    <h1 class="title text-3xl code-title">
+        {% if page.extra.override %}
+        {% set overrideText = "" %}
+        {% else %}
+        {% set overrideText = "/var" %}
+        {% endif %}
+        {{ macros::render_page_parent_type(page=page, skip_level=1) }}
+        {% if list -%}
+        <a href="{{ page.permalink | safe}}">
+        {%- endif -%}
+        {{overrideText}}/{{ page.title }}
+        {%- if list -%}
+        </a>
+        {%- endif -%}
+    </h1>
+{% endmacro %}
+
+{% macro render_var(page, list=false) %}
+    <div>
+    {% if page.extra.default_value %}
+    <div>Default Value:</div>
+    <div class="pl-5">{{ page.extra.default_value }}</div>
+    {% endif %}
+    </div>
+    
+    <div>
+    {% if page.extra.permitted_values %}
+    <div>Permitted Values:</div>
+    <div class="pl-5">{{ page.extra.permitted_values }}</div>
+    {% endif %}
+    </div>
+    
+    <div>
+    {% if page.extra.type %}
+    <div>Type:</div> 
+    <div class="pl-5">{{ macros::render_single_type(type=page.extra.type) }}</div>
+    {% endif %}
+    </div>
+{% endmacro render_var %}
 
 {% macro get_github_link(page) %}
 {{ config.extra.repo }}/blob/{{ config.extra.branch }}/content/{{ page.relative_path }}?plain=1
