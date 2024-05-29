@@ -3,8 +3,8 @@ title = "Move"
 
 [extra]
 return_val = """
-1 on success<br>
-0 on failure<br>
+1 on success
+0 on failure
 Number of pixels moved for a successful slide.
 """
 
