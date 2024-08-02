@@ -1,13 +1,15 @@
 +++
 title = "Click"
 
-[extra]
-return_val = "null"
-args = [
-    { name = "location", type = "any", description = "Where this object was clicked." },
-    { name = "control", type = "any", description = "The name of the skin control." },
-    { name = "params", type = "any", description = "TODO: not sure!" },
-    ]
+[[extra.args]]
+name = "location"
+description = "Where this object was clicked."
+[[extra.args]]
+name = "control"
+description = "The name of the skin control."
+[[extra.args]]
+name = "params"
+description = "TODO: not sure!"
 +++
 
 TODO

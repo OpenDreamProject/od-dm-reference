@@ -2,9 +2,10 @@
 title = "Write"
 
 [extra]
-return_val = "null"
-args = []
 
+[[extra.args]]
+name = "F"
+type = "/savefile"
 +++
 
 When the thing's been writen.
