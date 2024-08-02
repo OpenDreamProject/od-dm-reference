@@ -1,5 +1,4 @@
 +++
-
 title = "clamp"
 [extra]
 return_type = "null, num, path, /list"

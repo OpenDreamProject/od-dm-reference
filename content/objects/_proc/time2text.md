@@ -1,5 +1,4 @@
 +++
-
 title = "time2text"
 [extra]
 return_type = "text"

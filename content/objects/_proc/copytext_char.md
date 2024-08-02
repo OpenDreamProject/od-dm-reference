@@ -1,5 +1,4 @@
 +++
-
 title = "copytext_char"
 [extra]
 return_type = "null, text"

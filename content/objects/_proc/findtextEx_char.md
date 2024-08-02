@@ -1,5 +1,4 @@
 +++
-
 title = "findtextEx_char"
 [[extra.args]]
 name = "Haystack"

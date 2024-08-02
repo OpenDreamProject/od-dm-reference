@@ -1,5 +1,4 @@
 +++
-
 title = "rgb"
 [extra]
 return_type = "null, text"

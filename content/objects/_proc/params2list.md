@@ -1,5 +1,4 @@
 +++
-
 title = "params2list"
 [extra]
 return_type = "path, /list"

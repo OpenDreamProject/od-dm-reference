@@ -1,5 +1,4 @@
 +++
-
 title = "fdel"
 [extra]
 return_type = "num"

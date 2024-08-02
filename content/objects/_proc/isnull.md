@@ -1,5 +1,4 @@
 +++
-
 title = "isnull"
 [extra]
 return_type = "num"

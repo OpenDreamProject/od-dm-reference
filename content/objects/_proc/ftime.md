@@ -1,5 +1,4 @@
 +++
-
 title = "ftime"
 [extra]
 return_type = "num"

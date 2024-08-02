@@ -1,5 +1,4 @@
 +++
-
 title = "rand_seed"
 [extra]
 return_type = "null"

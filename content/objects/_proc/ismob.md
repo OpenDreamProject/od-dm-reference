@@ -1,5 +1,4 @@
 +++
-
 title = "ismob"
 [extra]
 return_type = "num"

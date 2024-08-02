@@ -1,5 +1,4 @@
 +++
-
 title = "findlasttext_char"
 [[extra.args]]
 name = "Haystack"

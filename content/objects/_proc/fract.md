@@ -1,5 +1,4 @@
 +++
-
 title = "fract"
 [extra]
 return_type = "num"

@@ -1,5 +1,4 @@
 +++
-
 title = "image"
 [[extra.args]]
 name = "icon"

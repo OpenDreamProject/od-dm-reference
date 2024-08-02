@@ -1,5 +1,4 @@
 +++
-
 title = "stat"
 [[extra.args]]
 name = "Name"

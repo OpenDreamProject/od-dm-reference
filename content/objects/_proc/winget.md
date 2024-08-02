@@ -1,5 +1,4 @@
 +++
-
 title = "winget"
 [[extra.args]]
 name = "player"

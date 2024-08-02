@@ -1,5 +1,4 @@
 +++
-
 title = "findtextEx"
 [extra]
 return_type = "num"

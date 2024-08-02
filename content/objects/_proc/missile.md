@@ -1,5 +1,4 @@
 +++
-
 title = "missile"
 [[extra.args]]
 name = "Type"

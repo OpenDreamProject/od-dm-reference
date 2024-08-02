@@ -1,5 +1,4 @@
 +++
-
 title = "trimtext"
 [extra]
 return_type = "null, text"

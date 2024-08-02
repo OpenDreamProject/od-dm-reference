@@ -1,5 +1,4 @@
 +++
-
 title = "length_char"
 [extra]
 return_type = "num"

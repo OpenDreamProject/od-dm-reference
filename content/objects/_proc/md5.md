@@ -1,5 +1,4 @@
 +++
-
 title = "md5"
 [extra]
 return_type = "null, text"

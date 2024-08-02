@@ -1,5 +1,4 @@
 +++
-
 title = "text2ascii_char"
 [extra]
 return_type = "text"

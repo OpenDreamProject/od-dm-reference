@@ -1,5 +1,4 @@
 +++
-
 title = "cmptext"
 [extra]
 return_type = "num"

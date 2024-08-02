@@ -1,5 +1,4 @@
 +++
-
 title = "file2text"
 [extra]
 return_type = "null, text"

@@ -1,5 +1,4 @@
 +++
-
 title = "isicon"
 [extra]
 return_type = "num"

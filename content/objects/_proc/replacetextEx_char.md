@@ -1,5 +1,4 @@
 +++
-
 title = "replacetextEx_char"
 [extra]
 return_type = "text"

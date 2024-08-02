@@ -1,5 +1,4 @@
 +++
-
 title = "gradient"
 [[extra.args]]
 name = "A"

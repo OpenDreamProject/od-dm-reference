@@ -1,5 +1,4 @@
 +++
-
 title = "isinf"
 [extra]
 return_type = "num"

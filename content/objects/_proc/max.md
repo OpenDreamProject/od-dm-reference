@@ -1,5 +1,4 @@
 +++
-
 title = "max"
 [extra]
 return_type = "null, text, num"

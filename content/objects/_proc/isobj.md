@@ -1,5 +1,4 @@
 +++
-
 title = "isobj"
 [extra]
 return_type = "num"

@@ -1,5 +1,4 @@
 +++
-
 title = "spantext"
 [extra]
 return_type = "num"

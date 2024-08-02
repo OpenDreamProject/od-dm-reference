@@ -1,5 +1,4 @@
 +++
-
 title = "replacetextEx"
 [extra]
 return_type = "null, text"

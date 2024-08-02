@@ -1,5 +1,4 @@
 +++
-
 title = "sha1"
 [extra]
 return_type = "null, text"

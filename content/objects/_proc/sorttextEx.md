@@ -1,5 +1,4 @@
 +++
-
 title = "sorttextEx"
 [extra]
 return_type = "num"

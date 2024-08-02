@@ -1,5 +1,4 @@
 +++
-
 title = "rand"
 [extra]
 return_type = "num"

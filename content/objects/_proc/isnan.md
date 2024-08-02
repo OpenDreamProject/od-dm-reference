@@ -1,5 +1,4 @@
 +++
-
 title = "isnan"
 [extra]
 return_type = "num"

@@ -1,5 +1,4 @@
 +++
-
 title = "isloc"
 [extra]
 return_type = "num"

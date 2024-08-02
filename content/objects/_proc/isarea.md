@@ -1,5 +1,4 @@
 +++
-
 title = "isarea"
 [extra]
 return_type = "num"

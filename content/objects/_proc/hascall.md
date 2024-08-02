@@ -1,5 +1,4 @@
 +++
-
 title = "hascall"
 [extra]
 return_type = "num"

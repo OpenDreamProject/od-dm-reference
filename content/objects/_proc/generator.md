@@ -1,5 +1,4 @@
 +++
-
 title = "generator"
 [[extra.args]]
 name = "type"

@@ -1,5 +1,4 @@
 +++
-
 title = "jointext"
 [extra]
 return_type = "text"

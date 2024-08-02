@@ -1,5 +1,4 @@
 +++
-
 title = "findlasttextEx"
 [extra]
 return_type = "num"

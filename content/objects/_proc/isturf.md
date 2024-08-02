@@ -1,5 +1,4 @@
 +++
-
 title = "isturf"
 [extra]
 return_type = "num"

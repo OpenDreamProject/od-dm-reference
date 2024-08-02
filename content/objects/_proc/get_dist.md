@@ -1,5 +1,4 @@
 +++
-
 title = "get_dist"
 [extra]
 return_type = "num"

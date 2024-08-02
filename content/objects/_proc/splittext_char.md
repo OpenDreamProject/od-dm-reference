@@ -1,5 +1,4 @@
 +++
-
 title = "splittext_char"
 [[extra.args]]
 name = "Text"

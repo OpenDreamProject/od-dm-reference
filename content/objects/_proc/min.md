@@ -1,5 +1,4 @@
 +++
-
 title = "min"
 [extra]
 return_type = "null, text, num"

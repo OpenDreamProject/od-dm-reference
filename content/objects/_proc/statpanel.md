@@ -1,5 +1,4 @@
 +++
-
 title = "statpanel"
 [[extra.args]]
 name = "Panel"

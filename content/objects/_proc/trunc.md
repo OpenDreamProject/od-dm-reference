@@ -1,5 +1,4 @@
 +++
-
 title = "trunc"
 [extra]
 return_type = "num"

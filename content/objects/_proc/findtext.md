@@ -1,5 +1,4 @@
 +++
-
 title = "findtext"
 [extra]
 return_type = "num"

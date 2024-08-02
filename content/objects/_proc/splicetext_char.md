@@ -1,5 +1,4 @@
 +++
-
 title = "splicetext_char"
 [extra]
 return_type = "null, text"

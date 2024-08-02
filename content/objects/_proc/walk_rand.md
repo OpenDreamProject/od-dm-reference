@@ -1,5 +1,4 @@
 +++
-
 title = "walk_rand"
 [[extra.args]]
 name = "Ref"

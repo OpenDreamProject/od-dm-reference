@@ -1,5 +1,4 @@
 +++
-
 title = "splittext"
 [extra]
 return_type = "path, /list"

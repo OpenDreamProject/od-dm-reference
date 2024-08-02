@@ -1,5 +1,4 @@
 +++
-
 title = "ispath"
 [extra]
 return_type = "num"
