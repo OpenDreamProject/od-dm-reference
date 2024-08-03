@@ -2,6 +2,7 @@
 title = "splittext_char"
 [extra]
 is_override = false
+od_unimplemented = true
 [[extra.args]]
 name = "Text"
 [[extra.args]]
