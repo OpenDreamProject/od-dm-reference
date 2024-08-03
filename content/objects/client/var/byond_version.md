@@ -1,5 +1,6 @@
 +++
 title = "byond_version"
 [extra]
-value = "515"
+default_value = "515"
+is_override = false
 +++

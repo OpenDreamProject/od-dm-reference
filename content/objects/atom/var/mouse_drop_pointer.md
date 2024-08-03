@@ -1,5 +1,6 @@
 +++
 title = "mouse_drop_pointer"
 [extra]
-value = ""
+default_value = ""
+is_override = false
 +++

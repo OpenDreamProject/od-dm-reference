@@ -1,5 +1,6 @@
 +++
 title = "area"
 [extra]
-value = "/area"
+default_value = "/area"
+is_override = false
 +++

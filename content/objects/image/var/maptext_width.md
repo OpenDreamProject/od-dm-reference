@@ -1,5 +1,6 @@
 +++
 title = "maptext_width"
 [extra]
-value = "32"
+default_value = "32"
+is_override = false
 +++

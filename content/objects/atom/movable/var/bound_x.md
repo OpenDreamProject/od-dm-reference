@@ -1,5 +1,6 @@
 +++
 title = "bound_x"
 [extra]
-value = ""
+default_value = ""
+is_override = false
 +++

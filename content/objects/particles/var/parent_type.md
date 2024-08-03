@@ -1,5 +1,6 @@
 +++
 title = "parent_type"
 [extra]
-value = "/datum"
+default_value = "/datum"
+is_override = true
 +++

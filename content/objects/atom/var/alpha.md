@@ -3,7 +3,7 @@ title = "alpha"
 
 [extra]
 type = "int"
-default_value = "255: opaque"
+default_value = "255"
 permitted_values = "0: transparent to 255: opaque" 
-value = "255"
+is_override = false
 +++

@@ -1,5 +1,6 @@
 +++
 title = "parent_type"
 [extra]
-value = "/atom"
+default_value = "/atom"
+is_override = true
 +++

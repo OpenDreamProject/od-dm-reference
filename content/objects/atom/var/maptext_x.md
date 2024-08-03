@@ -1,5 +1,6 @@
 +++
 title = "maptext_x"
 [extra]
-value = "32"
+default_value = "32"
+is_override = false
 +++

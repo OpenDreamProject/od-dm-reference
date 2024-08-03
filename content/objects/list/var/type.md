@@ -1,5 +1,6 @@
 +++
 title = "type"
 [extra]
-value = "/list"
+default_value = "/list"
+is_override = false
 +++

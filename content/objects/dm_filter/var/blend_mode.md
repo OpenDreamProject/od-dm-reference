@@ -1,5 +1,6 @@
 +++
 title = "blend_mode"
 [extra]
-value = ""
+default_value = ""
+is_override = false
 +++

@@ -1,5 +1,6 @@
 +++
 title = "glide_size"
 [extra]
-value = "0"
+default_value = "0"
+is_override = false
 +++

@@ -1,5 +1,6 @@
 +++
 title = "color"
 [extra]
-value = "#FFFFFF"
+default_value = "#FFFFFF"
+is_override = false
 +++

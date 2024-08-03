@@ -3,7 +3,7 @@ title = "tag"
 
 [extra]
 type = "string"
-default_value = "null"
+default_value = ""
 permitted_values = "0: transparent to 255: opaque" 
-value = ""
+is_override = false
 +++

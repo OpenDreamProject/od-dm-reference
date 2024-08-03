@@ -1,5 +1,6 @@
 +++
 title = "mouse_pointer_icon"
 [extra]
-value = ""
+default_value = ""
+is_override = false
 +++

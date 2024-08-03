@@ -1,5 +1,6 @@
 +++
 title = "mob"
 [extra]
-value = "/mob"
+default_value = "/mob"
+is_override = false
 +++

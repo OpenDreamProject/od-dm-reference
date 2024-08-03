@@ -1,5 +1,6 @@
 +++
 title = "mouse_over_pointer"
 [extra]
-value = ""
+default_value = ""
+is_override = false
 +++

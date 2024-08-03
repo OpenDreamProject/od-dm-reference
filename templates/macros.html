@@ -322,16 +322,18 @@
 
 {% macro render_var_title(page, list=false) %}
     <h1 class="title text-3xl code-title">
-        {% if page.extra.override %}
+        {% if page.extra.is_override %}
         {% set overrideText = "" %}
         {% else %}
-        {% set overrideText = "/var" %}
+        {% set overrideText = "/var/" %}
         {% endif %}
+        {%- if not list -%}
         {{ macros::render_page_parent_type(page=page, skip_level=1) }}
+        {%- endif -%}
         {% if list -%}
         <a href="{{ page.permalink | safe}}">
         {%- endif -%}
-        {{overrideText}}/{{ page.title }}
+        {{overrideText}}{{ page.title }}{% if page.extra.is_override %} <div class="text-sm text-red-500 border-l-2 border-red-400 pl-2 mt-1">Override</div>{% endif %}
         {%- if list -%}
         </a>
         {%- endif -%}
@@ -342,7 +344,7 @@
     <div>
     {% if page.extra.default_value %}
     <div>Default Value:</div>
-    <div class="pl-5">{{ page.extra.default_value }}</div>
+    <div class="pl-5">{{ macros::render_single_type(type=page.extra.default_value) }}{% if page.extra.default_value_text %} | {{ page.extra.default_value_text }}{% endif %}</div>
     {% endif %}
     </div>
     
