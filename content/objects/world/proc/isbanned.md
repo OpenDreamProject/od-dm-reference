@@ -2,6 +2,7 @@
 title = "IsBanned"
 [extra]
 od_unimplemented = true
+is_override = false
 [[extra.args]]
 name = "key"
 [[extra.args]]

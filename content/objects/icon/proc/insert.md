@@ -1,5 +1,7 @@
 +++
 title = "Insert"
+[extra]
+is_override = false
 [[extra.args]]
 name = "new_icon"
 [[extra.args]]

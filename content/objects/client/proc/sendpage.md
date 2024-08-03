@@ -1,5 +1,7 @@
 +++
 title = "SendPage"
+[extra]
+is_override = false
 [[extra.args]]
 name = "msg"
 [[extra.args]]

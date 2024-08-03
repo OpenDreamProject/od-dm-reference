@@ -8,6 +8,7 @@ Number of pixels moved for a successful slide.
 """
 
 return_type = "num"
+is_override = false
 [[extra.args]]
 name = "NewLoc"
 type = "/atom"

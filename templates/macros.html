@@ -61,7 +61,7 @@
         {%- if subsection.subsections -%}
         <ul>
             {%- for lowerSubPath in subsection.subsections | sort-%}
-                {% set lowerSubsection = get_section(path=lowerSubPath) %}{# TODO: this is the most expensive call to get_section() we have, need to optimize to save 20s #}
+                {% set lowerSubsection = get_section(path=lowerSubPath, metadata_only=true) %}{# TODO: this is the most expensive call to get_section() we have, need to optimize to save 20s #}
                 {{- self::render_subsection(currentPage = currentPage, subsection=lowerSubsection, depth=depth+1) -}}
             {%- endfor -%}
         </ul>
@@ -273,12 +273,14 @@
 
 {% macro render_backlinks(page) %}
     {% if section.backlinks | length %}
+    <div>
     <h4>See also:</h4>
     <ul>
     {% for backlink in page.backlinks %}
         <li><a href="{{backlink.permalink}}">{{backlink.title}}</a></li>
     {% endfor %}
     </ul>
+    </div>
     {% endif %}
 {% endmacro render_backlinks %}
 
@@ -380,6 +382,49 @@
 
     {{ page.content | safe }}
 {% endmacro render_var %}
+
+{% macro render_object_vars_and_procs(page) %}
+{%- for path in page.subsections -%}
+    {%- set pathParts = path | split(pat="/") -%}
+    {%- if pathParts is containing("proc") -%}
+        {{ self::render_proc_list(path=path) }}
+        {%- continue -%}
+    {%- endif -%}
+
+    {%- if pathParts is containing("var") -%}
+        {{ self::render_var_list(path=path) }}
+        {%- continue -%}
+    {%- endif -%}
+{%- endfor -%}
+{% endmacro %}
+
+{% macro render_proc_list(path) %}
+{%- set section = get_section(path=path) -%}
+    {%- for page in section.pages | sort(attribute="title") | filter(attribute="extra.is_override", value=false) -%}
+        {%- if loop.first -%}
+        <div><a href="{{section.permalink | safe}}"><h4 class="code-title">/proc</h4></a>
+        <ul class="pl-10">
+        {%- endif -%}
+        <li class="code-title text-sm"><a href="{{page.permalink | safe}}">/{{ page.title }}</a>({{ self::render_proc_args_short(page=page) }})</li>
+        {%- if loop.last -%}
+        </ul></div>
+        {%- endif -%}
+    {%- endfor -%}
+{% endmacro %}
+
+{% macro render_var_list(path) %}
+{%- set section = get_section(path=path) -%}
+    {% for page in section.pages | sort(attribute="title") | filter(attribute="extra.is_override", value=false) %}
+        {%- if loop.first -%}
+        <div><a href="{{section.permalink | safe}}"><h4 class="code-title">/var</h4></a>
+        <ul class="pl-10">
+        {%- endif -%}
+        <li class="code-title text-sm"><a href="{{page.permalink | safe}}">/{{ page.title }}</a></li>
+        {%- if loop.last -%}
+        </ul></div>
+        {%- endif -%}
+    {% endfor %}
+{% endmacro %}
 
 {% macro get_github_link(page) %}
 {{ config.extra.repo }}/blob/{{ config.extra.branch }}/content/{{ page.relative_path }}?plain=1

@@ -1,6 +1,8 @@
 +++
 title = "Click"
 
+[extra]
+is_override = false
 [[extra.args]]
 name = "location"
 description = "Where this object was clicked."

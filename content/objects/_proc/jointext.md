@@ -2,6 +2,7 @@
 title = "jointext"
 [extra]
 return_type = "text"
+is_override = false
 [[extra.args]]
 name = "List"
 type = "/list"

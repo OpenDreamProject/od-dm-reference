@@ -1,5 +1,7 @@
 +++
 title = "Profile"
+[extra]
+is_override = false
 [[extra.args]]
 name = "command"
 [[extra.args]]

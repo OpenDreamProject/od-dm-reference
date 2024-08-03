@@ -1,6 +1,8 @@
 +++
 title = "Write"
 
+[extra]
+is_override = false
 [[extra.args]]
 name = "F"
 type = "/savefile"
