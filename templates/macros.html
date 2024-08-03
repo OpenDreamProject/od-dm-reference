@@ -381,6 +381,24 @@
     {{ page.content | safe }}
 {% endmacro render_var %}
 
+{% macro render_object_vars_and_procs(page) %}
+{%- for path in page.subsections -%}
+    {%- set pathParts = path | split(pat="/") -%}
+    {%- if pathParts is containing("proc") -%}
+        {{ self::render_proc_list(path=path) }}
+        {%- continue -%}
+    {%- endif -%}
+
+    {%- if partParts is containing("var") -%}
+        {{ self::render_var_list(path=path) }}
+        {%- continue -%}
+    {%- endif -%}
+{%- endfor -%}
+{% endmacro %}
+
+{% macro render_proc_list(path) %}
+{% endmacro %}
+
 {% macro get_github_link(page) %}
 {{ config.extra.repo }}/blob/{{ config.extra.branch }}/content/{{ page.relative_path }}?plain=1
 {% endmacro get_github_link %}

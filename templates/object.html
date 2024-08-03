@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+
+{% block header %}
+
+{%- set class = "" %}
+{%- set firstChar = section.title | split(pat="") | nth(n = 1) -%}
+{%- if firstChar == "/" -%}
+    {%- set class = "code-title type" %}
+{%- endif -%}
+
+<h1 class="title text-3xl">
+    {{ macros::render_page_parent_type(page=section, skip_level=0) }} <span class="{{class}}">{{ section.title }}</span>
+</h1>
+{% endblock header %}
+
+{% block content %}
+
+<div class="flex flex-col gap-5">
+
+{{ section.content | safe }}
+
+{{ macros::render_object_vars_and_procs(page=section) }}
+
+{{ macros::render_backlinks(page=section) }}
+
+{%- if not section.content | length -%}
+<div class="border-l-2 border-yellow-600 pl-5">
+    <div class="text-xl">Work In Progress 👷</div>
+    This page doesn't have any content at the moment. You can contribute to this page <a href="{{macros::get_github_link(page=section)}}"><i class="fa-brands fa-github"></i> here</a>.
+</div>
+{%- endif -%}
+
+</div>
+
+{% endblock content %}
