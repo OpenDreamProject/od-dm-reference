@@ -59,7 +59,7 @@
         {%- if subsection.subsections -%}
         <ul>
             {%- for lowerSubPath in subsection.subsections | sort-%}
-                {% set lowerSubsection = get_section(path=lowerSubPath, metadata_only=true) %}
+                {% set lowerSubsection = get_section(path=lowerSubPath) %}{# TODO: this is the most expensive call to get_section() we have, need to optimize to save 20s #}
                 {{- self::render_subsection(currentPage = currentPage, subsection=lowerSubsection, depth=depth+1) -}}
             {%- endfor -%}
         </ul>
