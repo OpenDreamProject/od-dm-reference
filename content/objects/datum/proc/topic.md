@@ -1,11 +1,9 @@
 +++
 title = "Topic"
 
-[extra]
-
 [[extra.args]]
 name = "href"
-description = "Raw data from the URL." 
+description = "Raw data from the URL."
 [[extra.args]]
 name = "href_list"
 description = "The href, as decoded by params2list()"
