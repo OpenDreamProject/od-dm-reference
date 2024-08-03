@@ -11,9 +11,22 @@ title = "{{subsection.title | safe}}"
 url = "{{subsection.permalink | safe}}"
 {% if subsection.pages -%}
 {%- for page in subsection.pages -%}
+{%- set num = page.ancestors | length %}
+{%- set sub = num - 1 %}
+{%- set parent = page.ancestors | nth(n=sub - 1) %}
+{%- set parentSection = get_section(path=parent) %}
+{%- set directParent = get_section(path=page.ancestors | last) -%}
+{%- if directParent.title == "proc" -%}
+    {%- set title = page.title ~ " (" ~ parentSection.title ~ " Proc)" -%}
+{%- elif directParent.title == "var" -%}
+    {%- set title = page.title ~ " (" ~ parentSection.title ~ " Proc)" -%}
+{%- else -%}
+    {%- set title = page.title | safe -%}
+{%- endif -%}
 [[input.files]]
 path = "{{page.relative_path | safe}}"
-title = "{{page.title | safe}}"
+title = "{{title | safe}}"
+ancestors = {{parentSection.title}}
 url = "{{subsection.permalink | safe}}"
 {% endfor -%}
 {%- endif -%}
@@ -21,6 +34,7 @@ url = "{{subsection.permalink | safe}}"
 [input]
 base_directory = "content"
 url_prefix = "{{config.base_url | safe }}"
+frontmatter_handling = "Omit"
 
 {% set index = get_section(path="_index.md") -%}
 {% for subsection in index.subsections -%}
