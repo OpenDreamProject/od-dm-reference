@@ -2,7 +2,6 @@
 title = "Execute"
 
 [extra]
-return_val = "null"
 args = [
     { name = "db", type = "/database", description = "The database we are executing this query against." },
     ]

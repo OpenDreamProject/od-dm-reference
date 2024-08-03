@@ -179,7 +179,7 @@
             <div class="text-xl">Arguments:</div>
             <ul>
             {% for arg in page.extra.args %}
-                <li class="pl-5">{{arg.name}} ({{ self::render_single_type(type=arg.type)}}): {{arg.description}}</li>
+                <li class="pl-5">{{arg.name}}{% if arg.type %} ({{ self::render_single_type(type=arg.type)}}){% endif %}{% if arg.description %}: {{arg.description}}{% endif %}</li>
             {% endfor %}
             </ul>
         </div>
@@ -261,7 +261,7 @@
 {% macro render_proc_args_short(page) %}
     {%- if page.extra.args %}
         {%- for arg in page.extra.args %}
-            {{- self::render_single_type(type=arg.type)}}/{{arg.name}}
+            {%- if arg.type %}{{- self::render_single_type(type=arg.type)}}/{% endif %}{{arg.name}}
             {%- if not loop.last -%}
             ,
             {% endif %}
