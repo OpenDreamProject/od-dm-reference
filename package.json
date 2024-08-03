@@ -11,7 +11,7 @@
   "scripts": {
     "watch-css": "npx tailwindcss -w -i styles/index.css -o static/index.css",
     "watch-zola": "zola serve",
-    "build": "NODE_ENV=production npx tailwindcss -i styles/index.css -o static/index.css; zola build",
+    "build": "NODE_ENV=production npx tailwindcss -i styles/index.css -o static/index.css; ZOLA_ENV=prod zola build",
     "watch": "npx concurrently 'npm:watch-css' 'npm:watch-zola'"
   },
   "author": "",
