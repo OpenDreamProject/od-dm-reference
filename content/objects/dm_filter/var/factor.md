@@ -1,5 +1,0 @@
-+++
-title = "factor"
-[extra]
-value = ""
-+++

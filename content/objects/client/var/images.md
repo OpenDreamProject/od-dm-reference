@@ -1,5 +1,0 @@
-+++
-title = "images"
-[extra]
-value = ""
-+++

@@ -1,5 +1,0 @@
-+++
-title = "friction"
-[extra]
-value = ""
-+++

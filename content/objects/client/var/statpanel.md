@@ -1,5 +1,0 @@
-+++
-title = "statpanel"
-[extra]
-value = ""
-+++

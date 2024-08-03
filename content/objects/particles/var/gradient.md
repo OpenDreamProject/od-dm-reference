@@ -1,5 +1,0 @@
-+++
-title = "gradient"
-[extra]
-value = ""
-+++

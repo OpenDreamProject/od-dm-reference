@@ -1,5 +1,0 @@
-+++
-title = "maptext"
-[extra]
-value = ""
-+++

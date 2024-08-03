@@ -2,7 +2,8 @@
 title = "Cross"
 
 [extra]
-return_val = """1 to allow movement
+return_val = """
+1 to allow movement
 0 to prevent movement
 """
 
