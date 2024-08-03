@@ -5,14 +5,14 @@
         {%- set myParent = subsection.ancestors | last %}
     {%- endif %}
 
-    {%- set myParentSection = get_section(path=myParent) -%}
+    {%- set myParentSection = get_section(path=myParent, metadata_only=true) -%}
 
     {%- set subsectionParentUrl = subsection.ancestors | last %}
-    {%- set subsectionParent = get_section(path=subsectionParentUrl) %}
+    {%- set subsectionParent = get_section(path=subsectionParentUrl, metadata_only=true) %}
 
     {%- set renderAll = false %}
     {%- for page in currentPage.ancestors %}
-        {%- set iteratorSection = get_section(path=page) %}
+        {%- set iteratorSection = get_section(path=page, metadata_only=true) %}
             {%- if iteratorSection.path == subsectionParent.path %}
                 {%- set_global renderAll = true %}
                 {%- break %}
@@ -59,7 +59,7 @@
         {%- if subsection.subsections -%}
         <ul>
             {%- for lowerSubPath in subsection.subsections | sort-%}
-                {% set lowerSubsection = get_section(path=lowerSubPath) %}
+                {% set lowerSubsection = get_section(path=lowerSubPath, metadata_only=true) %}
                 {{- self::render_subsection(currentPage = currentPage, subsection=lowerSubsection, depth=depth+1) -}}
             {%- endfor -%}
         </ul>
@@ -78,7 +78,7 @@
 {% macro render_subsection_pages(page, currentPage, subsection, depth, currentParent) %}
     {%- set renderAll = false %}
     {%- for page in currentPage.ancestors %}
-        {%- set iteratorSection = get_section(path=page) %}
+        {%- set iteratorSection = get_section(path=page, metadata_only=true) %}
             {%- if iteratorSection.path == subsection.path %}
                 {%- set_global renderAll = true %}
                 {%- break %}
@@ -113,7 +113,7 @@
 {% macro render_breadcrumbs(currentPage) %}
     {% set ancestorLength = currentPage.ancestors | length %}
     {% for i in range(start=2, end=ancestorLength) %}
-        {% set ancestorSection = get_section(path=currentPage.ancestors[i]) %}
+        {% set ancestorSection = get_section(path=currentPage.ancestors[i], metadata_only=true) %}
         <a href="{{ ancestorSection.permalink | safe }}">
         {{ ancestorSection.title }}
         </a>
@@ -126,7 +126,7 @@
 {% macro render_parent_type(page, recursive=true) %}
     {%- if page.extra.parent_type %}
         {%- set lookup = "objects" ~ page.extra.parent_type ~ "/_index.md" %}
-        {%- set url = get_section(path=lookup) %}
+        {%- set url = get_section(path=lookup, metadata_only=true) %}
         {%- if recursive %}
             {{- self::render_parent_type(page=url) }}
         {%- endif %}
@@ -146,7 +146,7 @@
         {%- else %}
             {%- set parent = page.ancestors | last %}
         {%- endif %}
-        {%- set parentSection = get_section(path=parent) %}
+        {%- set parentSection = get_section(path=parent, metadata_only=true) %}
         {%- if recursive %}
             {{- self::render_parent_type(page=parentSection) }}
         {%- endif %}
@@ -166,7 +166,7 @@
     {% set firstChar = type | split(pat="") | nth(n = 1) -%}
     {% if firstChar == "/" -%}
         {% set lookup = "objects" ~ type ~ "/_index.md" -%}
-        {% set url = get_section(path=lookup) -%}
+        {% set url = get_section(path=lookup, metadata_only=true) -%}
         <a href="{{ url.permalink | safe}}" class="code-title type">{{url.title}}</a>
     {%- else -%}
         {{type}}
@@ -188,7 +188,7 @@
 
 {% macro render_inherited_procs(parent_type) %}
     {% set lookup = "objects" ~ parent_type ~ "/_index.md" %}
-    {% set url = get_section(path=lookup) %}
+    {% set url = get_section(path=lookup, metadata_only=true) %}
     {% for possibleProcPageUrl in url.subsections %}
         {% set possibleProcPage = get_section(path=possibleProcPageUrl) %}
         {% if possibleProcPage.title == "proc" %}
@@ -215,7 +215,7 @@
 
 {% macro render_inherited_procs_page(page) %}
     {% set parent = page.ancestors | last %}
-    {% set parentSection = get_section(path=parent) %}
+    {% set parentSection = get_section(path=parent, metadata_only=true) %}
     {% if parentSection.extra.parent_type %}
         <h3 class="text-xl">Inherited Procs:</h3>
         {{ self::render_inherited_procs(parent_type=parentSection.extra.parent_type) }}
@@ -224,7 +224,7 @@
 
 {% macro render_inherited_vars(parent_type) %}
     {% set lookup = "objects" ~ parent_type ~ "/_index.md" %}
-    {% set url = get_section(path=lookup) %}
+    {% set url = get_section(path=lookup, metadata_only=true) %}
     {% for possibleVarPageUrl in url.subsections %}
         {% set possibleVarPage = get_section(path=possibleVarPageUrl) %}
         {% if possibleVarPage.title == "var" %}
@@ -251,7 +251,7 @@
 
 {% macro render_inherited_vars_page(page) %}
     {% set parent = page.ancestors | last %}
-    {% set parentSection = get_section(path=parent) %}
+    {% set parentSection = get_section(path=parent, metadata_only=true) %}
     {% if parentSection.extra.parent_type %}
         <h3 class="text-xl">Inherited Vars:</h3>
         {{ self::render_inherited_vars(parent_type=parentSection.extra.parent_type) }}
