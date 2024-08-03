@@ -348,19 +348,19 @@
     {% endif %}
     </div>
     
-    <div>
     {% if page.extra.permitted_values %}
+    <div>
     <div>Permitted Values:</div>
     <div class="pl-5">{{ page.extra.permitted_values }}</div>
-    {% endif %}
     </div>
+    {% endif %}
     
-    <div>
     {% if page.extra.type %}
+    <div>
     <div>Type:</div> 
     <div class="pl-5">{{ macros::render_single_type(type=page.extra.type) }}</div>
-    {% endif %}
     </div>
+    {% endif %}
 {% endmacro render_var %}
 
 {% macro get_github_link(page) %}
