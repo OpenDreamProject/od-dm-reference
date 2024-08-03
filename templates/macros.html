@@ -327,7 +327,9 @@
         {% else %}
         {% set overrideText = "/var" %}
         {% endif %}
+        {%- if not list -%}
         {{ macros::render_page_parent_type(page=page, skip_level=1) }}
+        {%- endif -%}
         {% if list -%}
         <a href="{{ page.permalink | safe}}">
         {%- endif -%}
