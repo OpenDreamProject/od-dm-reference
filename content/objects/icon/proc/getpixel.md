@@ -1,5 +1,7 @@
 +++
 title = "GetPixel"
+[extra]
+is_override = false
 [[extra.args]]
 name = "x"
 [[extra.args]]

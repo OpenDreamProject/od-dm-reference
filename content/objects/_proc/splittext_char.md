@@ -1,5 +1,7 @@
 +++
 title = "splittext_char"
+[extra]
+is_override = false
 [[extra.args]]
 name = "Text"
 [[extra.args]]

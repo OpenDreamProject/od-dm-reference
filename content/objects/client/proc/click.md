@@ -1,5 +1,7 @@
 +++
 title = "Click"
+[extra]
+is_override = false
 [[extra.args]]
 name = "object"
 type = "/atom"

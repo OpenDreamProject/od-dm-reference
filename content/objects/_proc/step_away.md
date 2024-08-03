@@ -2,6 +2,7 @@
 title = "step_away"
 [extra]
 return_type = "num"
+is_override = false
 [[extra.args]]
 name = "Ref"
 type = "/atom/movable"

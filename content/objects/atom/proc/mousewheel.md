@@ -1,5 +1,7 @@
 +++
 title = "MouseWheel"
+[extra]
+is_override = false
 [[extra.args]]
 name = "delta_x"
 [[extra.args]]

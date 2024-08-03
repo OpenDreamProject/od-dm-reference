@@ -1,5 +1,7 @@
 +++
 title = "New"
+[extra]
+is_override = true
 [[extra.args]]
 name = "a"
 [[extra.args]]
