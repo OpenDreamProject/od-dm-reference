@@ -2,6 +2,7 @@
 title = "replacetextEx_char"
 [extra]
 return_type = "text"
+od_unimplemented = true
 [[extra.args]]
 name = "Haystack"
 [[extra.args]]

@@ -1,6 +1,6 @@
-<div class="border-l-2 border-red-400 pl-5">
-    <div class="text-xl">Unimplemented 🏗️</div>
-
-    In the OpenDream implementation of DreamMaker, this feature is incomplete:
-    <div class="italic pl-3">{{ description }}</div>
-</div>
+{% import "shortcodes.html" as sc %}
+{{ sc::render_callout(color="#f87171", 
+    title="Unimplemented 🏗️", 
+    body="In the OpenDream implementation of DreamMaker, this feature is incomplete:", 
+    contents=description) 
+}}

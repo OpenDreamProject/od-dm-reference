@@ -1,5 +1,7 @@
 +++
 title = "PayCredits"
+[extra]
+od_unimplemented = true
 [[extra.args]]
 name = "player"
 [[extra.args]]

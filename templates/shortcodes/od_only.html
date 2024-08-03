@@ -1,6 +1,8 @@
-<div class="border-l-2 border-pink-300 pl-5">
-    <div class="flex flex-row gap-2"><div class="text-xl">OpenDream Only</div><img src="{{ get_url(path='favicon.svg') | safe }}" width=20px></div>
-
-    This feature only exists in the OpenDream implementation of DreamMaker:
-    <div class="italic pl-3">{{ description }}</div>
-</div>
+{% import "shortcodes.html" as sc %}
+{{ sc::render_callout(color="#f9a8d4",
+    title="OpenDream Only", 
+    body="This feature only exists in the OpenDream implementation of DreamMaker:", 
+    contents=description,
+    icon=get_url(path='favicon.svg') | safe
+    ) 
+}}

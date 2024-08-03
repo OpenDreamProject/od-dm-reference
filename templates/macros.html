@@ -1,3 +1,5 @@
+{% import "shortcodes.html" as sc %}
+
 {% macro render_subsection(currentPage, subsection, depth) %}
     {%- if currentPage.ancestors | length %}
         {%- set myParent = currentPage.ancestors | last -%}
@@ -315,6 +317,13 @@
     </div> 
     </div>
 
+    {% if page.extra.od_unimplemented %}
+    {{ sc::render_callout(color="#f87171", 
+        title="Unimplemented 🏗️", 
+        body="In the OpenDream implementation of DreamMaker, this proc is marked as unimplemented.") 
+    }}
+    {% endif %}
+
     {{ page.content | safe }}
 
     </div>
@@ -341,26 +350,35 @@
 {% endmacro %}
 
 {% macro render_var(page, list=false) %}
-    <div>
     {% if page.extra.default_value %}
-    <div>Default Value:</div>
+    <div class="border-l-2 border-gray-500 pl-3">
+    <div class="text-xl">Default Value:</div>
     <div class="pl-5">{{ macros::render_single_type(type=page.extra.default_value) }}{% if page.extra.default_value_text %} | {{ page.extra.default_value_text }}{% endif %}</div>
-    {% endif %}
     </div>
+    {% endif %}
     
     {% if page.extra.permitted_values %}
-    <div>
-    <div>Permitted Values:</div>
+    <div class="border-l-2 border-gray-500 pl-3">
+    <div class="text-xl">Permitted Values:</div>
     <div class="pl-5">{{ page.extra.permitted_values }}</div>
     </div>
     {% endif %}
     
     {% if page.extra.type %}
-    <div>
-    <div>Type:</div> 
+    <div class="border-l-2 border-gray-500 pl-3">
+    <div class="text-xl">Type:</div> 
     <div class="pl-5">{{ macros::render_single_type(type=page.extra.type) }}</div>
     </div>
     {% endif %}
+
+    {% if page.extra.od_unimplemented %}
+        {{ sc::render_callout(color="#f87171", 
+            title="Unimplemented 🏗️", 
+            body="In the OpenDream implementation of DreamMaker, this variable is marked as unimplemented.") 
+        }}
+    {% endif %}
+
+    {{ page.content | safe }}
 {% endmacro render_var %}
 
 {% macro get_github_link(page) %}

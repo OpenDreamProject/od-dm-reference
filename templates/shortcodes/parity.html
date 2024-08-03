@@ -1,6 +1,6 @@
-<div class="border-l-2 border-yellow-400 pl-5">
-    <div class="text-xl">Parity Issue ⚠️</div>
-
-    In the OpenDream implementation of DreamMaker, this feature differs in implementation:
-    <div class="italic pl-3">{{ description }}</div>
-</div>
+{% import "shortcodes.html" as sc %}
+{{ sc::render_callout(color="#facc15", 
+    title="Parity Issue ⚠️", 
+    body="In the OpenDream implementation of DreamMaker, this feature differs in implementation:", 
+    contents=description) 
+}}
