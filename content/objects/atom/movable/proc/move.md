@@ -2,7 +2,7 @@
 title = "Move"
 
 [extra]
-return_val = """1 on success
+return_type_desc = """1 on success
 0 on failure
 Number of pixels moved for a successful slide.
 """
