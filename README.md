@@ -8,7 +8,7 @@ DreamMaker objects are kept under `content/objects`, with the `_index.html` page
 
 ## Locally previewing the site
 
-All you need is Zola[^1]. The instructions to install Zola are [here](https://www.getzola.org/documentation/getting-started/installation/). You can then run `zola serve` to preview the site as you edit the Markdown files. You will notice that the navigation bar is incomplete - that is to optimize serve times locally - you can read more [here](https://github.com/cmss13-devs/cmss13/issues/6606).
+All you need is Zola[^1]. The instructions to install Zola are [here](https://www.getzola.org/documentation/getting-started/installation/). You can then run `zola serve` to preview the site as you edit the Markdown files. You will notice that the navigation bar is incomplete - that is to optimize serve times locally. You can override this behavior with `ZOLA_ENV=prod zola serve` - but compile times may take up to 30 seconds.
 
 [^1]: As long as you are not altering site CSS.
 
