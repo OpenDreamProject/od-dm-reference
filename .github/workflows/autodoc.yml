@@ -56,4 +56,10 @@ jobs:
           git pull origin main
           git add content
           git commit -m "Automatic DMStandard update" -a || true
-          git push --force
+
+      - name: "Push"
+        uses: ad-m/github-push-action@master
+        with:
+          directory: "ref"
+          github_token: ${{ secrets.ODDT_TOKEN || secrets.GITHUB_TOKEN }}
+          force: true
