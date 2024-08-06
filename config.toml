@@ -6,6 +6,9 @@ highlight_code = true
 # Includes the DreamMaker syntax highlighting
 extra_syntaxes_and_themes = ["syntaxes"]
 
+[slugify]
+paths = "safe"
+
 
 [extra]
 # Used to link to the repository in pages
