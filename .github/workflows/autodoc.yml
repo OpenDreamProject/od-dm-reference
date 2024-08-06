@@ -18,6 +18,8 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: "ref"
+          persist-credentials: false
+          token: ${{ secrets.ODDT_TOKEN || secrets.GITHUB_TOKEN }}
 
       - name: Setup Dotnet
         uses: actions/setup-dotnet@v4
@@ -28,7 +30,6 @@ jobs:
           repository: "OpenDreamProject/OpenDream"
           ref: "561b1bc03bbf264cfae1f3fcb85dbba2c31a198d"
           path: "oddt"
-          token: ${{ secrets.ODDT_TOKEN || secrets.GITHUB_TOKEN }}
 
       - name: Build documentation tool
         run: |
@@ -55,10 +56,4 @@ jobs:
           git pull origin main
           git add content
           git commit -m "Automatic DMStandard update" -a || true
-
-      - name: "Push"
-        uses: ad-m/github-push-action@master
-        with:
-          directory: "ref"
-          github_token: ${{ secrets.ODDT_TOKEN || secrets.GITHUB_TOKEN }}
-          force: true
+          git push --force
