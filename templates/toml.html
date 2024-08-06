@@ -32,7 +32,7 @@ url = "{{subsection.permalink | safe}}"
 [[input.files]]
 path = "{{page.relative_path | safe}}"
 title = "{{title | safe}}"
-url = "{{subsection.permalink | safe}}"
+url = "{{page.permalink | safe}}"
 {% endfor -%}
 {%- endif -%}
 {% endmacro toml_recurse -%}
