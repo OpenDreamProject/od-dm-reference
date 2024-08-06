@@ -1,5 +1,5 @@
 # The URL the site will be built for
-base_url = "https://opendreamproject.github.io/od-dm-reference"
+base_url = "https://ref.opendre.am"
 
 [markdown]
 highlight_code = true
