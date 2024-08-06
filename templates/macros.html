@@ -182,7 +182,7 @@
             <div class="text-xl">Arguments:</div>
             <ul>
             {% for arg in page.extra.args %}
-                <li class="pl-5">{{arg.name}}{% if arg.type %} ({{ self::render_single_type(type=arg.type)}}){% endif %}{% if arg.description %}: {{arg.description}}{% endif %}</li>
+                <li class="pl-5">{{arg.name}}{% if arg.type %} ({{ self::render_single_type(type=arg.type)}}){% endif %}{% if arg.description %}: {{arg.description}}{% endif %}{%- if arg.od_unimplemented -%}<div class="text-sm text-red-400 border-l-2 border-red-400 pl-2 inline ml-2">Unimplemented 🏗️</div>{%- endif -%}</li>
             {% endfor %}
             </ul>
         </div>
