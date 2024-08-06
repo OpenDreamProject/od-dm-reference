@@ -25,9 +25,10 @@ jobs:
       - name: Checkout documentation tool
         uses: actions/checkout@v3
         with:
-          repository: "OpenDream/OpenDreamProject"
+          repository: "OpenDreamProject/OpenDream"
           ref: "561b1bc03bbf264cfae1f3fcb85dbba2c31a198d"
           path: "oddt"
+          token: ${{ secrets.ODDT_TOKEN || secrets.GITHUB_TOKEN }}
 
       - name: Build documentation tool
         run: |
@@ -38,7 +39,7 @@ jobs:
       - name: Get DMStandard
         uses: actions/checkout@v3
         with:
-          repository: "OpenDream/OpenDreamProject"
+          repository: "OpenDreamProject/OpenDream"
           path: od-master
 
       - name: Run Documentation Tool
@@ -56,3 +57,5 @@ jobs:
 
       - name: "Push"
         uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.ODDT_TOKEN || secrets.GITHUB_TOKEN }}
