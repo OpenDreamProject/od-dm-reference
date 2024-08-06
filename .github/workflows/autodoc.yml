@@ -1,0 +1,58 @@
+name: Update from DMStandard
+
+permissions:
+  contents: write
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          path: "ref"
+
+      - name: Setup Dotnet
+        uses: actions/setup-dotnet@v4
+
+      - name: Checkout documentation tool
+        uses: actions/checkout@v3
+        with:
+          repository: "OpenDream/OpenDreamProject"
+          ref: "561b1bc03bbf264cfae1f3fcb85dbba2c31a198d"
+          path: "oddt"
+
+      - name: Build documentation tool
+        run: |
+          cd oddt
+          dotnet build -o ../oddt-bin OpenDreamDocumentationTool
+          cd ..
+
+      - name: Get DMStandard
+        uses: actions/checkout@v3
+        with:
+          repository: "OpenDream/OpenDreamProject"
+          path: od-master
+
+      - name: Run Documentation Tool
+        run: |
+          dotnet oddt-bin/OpenDreamDocumentationTool.dll --documentation=ref --standard=od-master/DMCompiler/DMStandard
+
+      - name: Commit
+        run: |
+          cd ref
+          git config --local user.email "action@github.com"
+          git config --local user.name "Changelogs"
+          git pull origin main
+          git add content
+          git commit -m "Automatic DMStandard update" -a || true
+
+      - name: "Push"
+        uses: ad-m/github-push-action@master
