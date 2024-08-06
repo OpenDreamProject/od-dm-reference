@@ -1,6 +1,7 @@
 +++
 title = "/database"
 template = "object.html"
+weight = 4
 
 [extra]
 parent_type = "/datum"
