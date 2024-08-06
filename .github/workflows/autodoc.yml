@@ -61,3 +61,4 @@ jobs:
         with:
           directory: "ref"
           github_token: ${{ secrets.ODDT_TOKEN || secrets.GITHUB_TOKEN }}
+          force: true
