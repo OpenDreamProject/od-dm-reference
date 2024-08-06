@@ -2,8 +2,8 @@
 title = "replacetextEx_char"
 [extra]
 return_type = "text"
-is_override = false
 od_unimplemented = true
+is_override = false
 [[extra.args]]
 name = "Haystack"
 [[extra.args]]
