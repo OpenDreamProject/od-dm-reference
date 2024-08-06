@@ -38,7 +38,6 @@ url = "{{subsection.permalink | safe}}"
 {% endmacro toml_recurse -%}
 [input]
 base_directory = "content"
-url_prefix = "{{config.base_url | safe }}"
 frontmatter_handling = "Omit"
 
 {% set index = get_section(path="_index.md", metadata_only=true) -%}
