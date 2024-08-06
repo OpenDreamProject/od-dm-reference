@@ -1,3 +1,7 @@
+/*
+This file should be edited in styles/index.css, and *not* static/index.css
+*/
+
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 @tailwind base;
@@ -18,7 +22,8 @@ body {
 .left-bar {
     background-color: #1b1b1b;
     border-right: 1px solid #fdfeff;
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
     min-width: max-content;
 
     position: absolute;

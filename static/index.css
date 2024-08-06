@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 /*
+This file should be edited in styles/index.css, and *not* static/index.css
+*/
+
+/*
 ! tailwindcss v3.4.3 | MIT License | https://tailwindcss.com
 */
 
@@ -560,6 +564,11 @@ video {
   margin: 0.5rem;
 }
 
+.mx-5{
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
+}
+
 .ml-1{
   margin-left: 0.25rem;
 }
@@ -624,10 +633,6 @@ video {
   gap: 0.25rem;
 }
 
-.gap-10{
-  gap: 2.5rem;
-}
-
 .gap-2{
   gap: 0.5rem;
 }
@@ -685,11 +690,6 @@ video {
 .px-1{
   padding-left: 0.25rem;
   padding-right: 0.25rem;
-}
-
-.px-3{
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
 }
 
 .pl-10{
@@ -754,10 +754,6 @@ video {
   color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
-.underline{
-  text-decoration-line: underline;
-}
-
 .filter{
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
@@ -775,7 +771,8 @@ body {
 .left-bar {
   background-color: #1b1b1b;
   border-right: 1px solid #fdfeff;
-  overflow-y: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
   min-width: -moz-max-content;
   min-width: max-content;
   position: absolute;
