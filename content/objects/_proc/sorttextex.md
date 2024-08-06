@@ -1,9 +1,10 @@
 +++
-title = "obounds"
+title = "sorttextEx"
 [extra]
+return_type = "num"
 is_override = false
 [[extra.args]]
-name = "Ref"
+name = "T1"
 [[extra.args]]
-name = "Dist"
+name = "T2"
 +++

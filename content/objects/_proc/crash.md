@@ -1,7 +1,8 @@
 +++
-title = "Flip"
+title = "CRASH"
 [extra]
+return_type = "null"
 is_override = false
 [[extra.args]]
-name = "dir"
+name = "msg"
 +++

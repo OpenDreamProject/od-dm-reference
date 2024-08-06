@@ -1,5 +1,5 @@
 +++
-title = "findtext_char"
+title = "findtextEx_char"
 [extra]
 is_override = false
 [[extra.args]]

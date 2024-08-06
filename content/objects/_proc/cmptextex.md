@@ -1,7 +1,7 @@
 +++
-title = "Flip"
+title = "cmptextEx"
 [extra]
 is_override = false
 [[extra.args]]
-name = "dir"
+name = "T1"
 +++
