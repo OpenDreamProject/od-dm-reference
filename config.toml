@@ -1,5 +1,5 @@
 # The URL the site will be built for
-base_url = "https://harryob.github.io/od-dm-reference"
+base_url = "https://opendreamproject.github.io/od-dm-reference"
 
 [markdown]
 highlight_code = true
@@ -9,5 +9,5 @@ extra_syntaxes_and_themes = ["syntaxes"]
 
 [extra]
 # Used to link to the repository in pages
-repo = "https://github.com/harryob/od-dm-reference"
+repo = "https://github.com/OpenDreamProject/od-dm-reference"
 branch = "main"
