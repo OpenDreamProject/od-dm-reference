@@ -53,6 +53,10 @@ And these frontmatter fields are automatically populated, and should not be chan
   - Override status (`is_override`)
   - Unimplemented status (`od_unimplemented`)
 
+### Not Autodocced
+
+"Procs" that are implemented as defines in DMStandard are not automatically populated. For example, ASSERT and REGEX_QUOTE. Furthermore, many procs are not present in DMStandard, such as istype() and prob() - these can be found [here](https://github.com/OpenDreamProject/OpenDream/blob/master/DMCompiler/Compiler/DM/DMParser.cs#L2460) in the OpenDream source code.
+
 ## [extra] Documentation
 
 Zola allows us to put arbitrary TOML under the [extra] section, which we do for the various page types. This includes the fields that editors can set, not the ones pulled from DMStandard (above).
