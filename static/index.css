@@ -842,6 +842,7 @@ input[type="text"] {
   padding: 5px;
   border: 1px solid #fdfeff;
   max-width: 100%;
+  z-index: 10;
 }
 
 @media (min-width: 768px) {
@@ -861,6 +862,10 @@ input[type="text"] {
 }
 
 .stork-close-button {
+  display: none;
+}
+
+.stork-attribution {
   display: none;
 }
 
