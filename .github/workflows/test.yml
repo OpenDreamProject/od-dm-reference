@@ -26,4 +26,4 @@ jobs:
           tool: zola@0.18.0
 
       - name: Build project
-        run: npm run build
+        run: ZOLA_ENV=dev zola build
