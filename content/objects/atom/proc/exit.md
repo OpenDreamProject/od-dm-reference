@@ -1,5 +1,6 @@
 +++
 title = "Exit"
+slug = "Exit" # AUTOGEN FIELD
 [extra]
 is_override = false # AUTOGEN FIELD
 [[extra.args]]

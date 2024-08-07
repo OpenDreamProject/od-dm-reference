@@ -1,6 +1,6 @@
 +++
 title = "Read"
-
+slug = "Read" # AUTOGEN FIELD
 [extra]
 is_override = false # AUTOGEN FIELD
 [[extra.args]]

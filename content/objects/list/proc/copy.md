@@ -1,5 +1,6 @@
 +++
 title = "Copy"
+slug = "Copy" # AUTOGEN FIELD
 [extra]
 is_override = false # AUTOGEN FIELD
 [[extra.args]]

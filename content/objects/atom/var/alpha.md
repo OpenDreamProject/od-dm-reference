@@ -1,6 +1,5 @@
 +++
 title = "alpha"
-
 [extra]
 type = "int"
 default_value = "255" # AUTOGEN FIELD
