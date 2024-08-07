@@ -1,9 +1,9 @@
 +++
 title = "flick"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Icon"
+name = "Icon" # AUTOGEN STATIC
 [[extra.args]]
-name = "Object"
+name = "Object" # AUTOGEN STATIC
 +++

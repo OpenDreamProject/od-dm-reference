@@ -1,6 +1,6 @@
 +++
 title = "name"
 [extra]
-default_value = "image"
-is_override = false
+default_value = "image" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 +++

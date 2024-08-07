@@ -1,17 +1,17 @@
 +++
 title = "Insert"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "new_icon"
+name = "new_icon" # AUTOGEN STATIC
 [[extra.args]]
-name = "icon_state"
+name = "icon_state" # AUTOGEN STATIC
 [[extra.args]]
-name = "dir"
+name = "dir" # AUTOGEN STATIC
 [[extra.args]]
-name = "frame"
+name = "frame" # AUTOGEN STATIC
 [[extra.args]]
-name = "moving"
+name = "moving" # AUTOGEN STATIC
 [[extra.args]]
-name = "delay"
+name = "delay" # AUTOGEN STATIC
 +++

@@ -1,14 +1,14 @@
 +++
 title = "IsBanned"
 [extra]
-od_unimplemented = true
-is_override = false
+od_unimplemented = true # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "key"
+name = "key" # AUTOGEN STATIC
 [[extra.args]]
-name = "address"
+name = "address" # AUTOGEN STATIC
 [[extra.args]]
-name = "computer_id"
+name = "computer_id" # AUTOGEN STATIC
 [[extra.args]]
-name = "type"
+name = "type" # AUTOGEN STATIC
 +++

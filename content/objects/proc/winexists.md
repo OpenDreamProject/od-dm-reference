@@ -1,10 +1,10 @@
 +++
 title = "winexists"
 [extra]
-return_type = "text"
-is_override = false
+return_type = "text" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "player"
+name = "player" # AUTOGEN STATIC
 [[extra.args]]
-name = "control_id"
+name = "control_id" # AUTOGEN STATIC
 +++

@@ -1,19 +1,19 @@
 +++
 title = "image"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "icon"
+name = "icon" # AUTOGEN STATIC
 [[extra.args]]
-name = "loc"
+name = "loc" # AUTOGEN STATIC
 [[extra.args]]
-name = "icon_state"
+name = "icon_state" # AUTOGEN STATIC
 [[extra.args]]
-name = "layer"
+name = "layer" # AUTOGEN STATIC
 [[extra.args]]
-name = "dir"
+name = "dir" # AUTOGEN STATIC
 [[extra.args]]
-name = "pixel_x"
+name = "pixel_x" # AUTOGEN STATIC
 [[extra.args]]
-name = "pixel_y"
+name = "pixel_y" # AUTOGEN STATIC
 +++

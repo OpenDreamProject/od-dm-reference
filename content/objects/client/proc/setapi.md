@@ -1,11 +1,11 @@
 +++
 title = "SetAPI"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Api"
+name = "Api" # AUTOGEN STATIC
 [[extra.args]]
-name = "Key"
+name = "Key" # AUTOGEN STATIC
 [[extra.args]]
-name = "Value"
+name = "Value" # AUTOGEN STATIC
 +++

@@ -1,7 +1,7 @@
 +++
 title = "New"
 [extra]
-is_override = true
+is_override = true # AUTOGEN FIELD
 [[extra.args]]
-name = "text"
+name = "text" # AUTOGEN STATIC
 +++

@@ -1,10 +1,10 @@
 +++
 title = "splittext"
 [extra]
-return_type = "path, /list"
-is_override = false
+return_type = "path, /list" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Text"
+name = "Text" # AUTOGEN STATIC
 [[extra.args]]
-name = "Delimiter"
+name = "Delimiter" # AUTOGEN STATIC
 +++

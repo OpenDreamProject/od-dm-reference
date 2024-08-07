@@ -1,11 +1,11 @@
 +++
 title = "SetIntensity"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "r"
+name = "r" # AUTOGEN STATIC
 [[extra.args]]
-name = "g"
+name = "g" # AUTOGEN STATIC
 [[extra.args]]
-name = "b"
+name = "b" # AUTOGEN STATIC
 +++

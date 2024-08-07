@@ -2,10 +2,10 @@
 title = "Read"
 
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "F"
-type = "/savefile"
+name = "F" # AUTOGEN STATIC
+type = "/savefile" # AUTOGEN FIELD
 +++
 
 This is called when a  [/datum](@/objects/datum/_index.md) is read from a  [/savefile](@/objects/savefile/_index.md). The [/savefile](@/objects/savefile/_index.md) being read from is passed as the first argument. The return value is ignored.

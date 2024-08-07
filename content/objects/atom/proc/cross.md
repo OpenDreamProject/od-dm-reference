@@ -7,10 +7,10 @@ return_type_desc = """1 to allow movement
 0 to prevent movement
 """
 
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "O"
-type = "/atom/movable"
+name = "O" # AUTOGEN STATIC
+type = "/atom/movable" # AUTOGEN FIELD
 description = "The object attempting to overlap."
 +++
 

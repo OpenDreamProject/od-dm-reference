@@ -1,10 +1,10 @@
 +++
 title = "rand"
 [extra]
-return_type = "num"
-is_override = false
+return_type = "num" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "L"
+name = "L" # AUTOGEN STATIC
 [[extra.args]]
-name = "H"
+name = "H" # AUTOGEN STATIC
 +++

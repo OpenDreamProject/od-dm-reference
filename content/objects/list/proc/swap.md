@@ -1,9 +1,9 @@
 +++
 title = "Swap"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Index1"
+name = "Index1" # AUTOGEN STATIC
 [[extra.args]]
-name = "Index2"
+name = "Index2" # AUTOGEN STATIC
 +++

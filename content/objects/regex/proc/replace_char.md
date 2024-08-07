@@ -1,14 +1,14 @@
 +++
 title = "Replace_char"
 [extra]
-od_unimplemented = true
-is_override = false
+od_unimplemented = true # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "haystack"
+name = "haystack" # AUTOGEN STATIC
 [[extra.args]]
-name = "replacement"
+name = "replacement" # AUTOGEN STATIC
 [[extra.args]]
-name = "start"
+name = "start" # AUTOGEN STATIC
 [[extra.args]]
-name = "end"
+name = "end" # AUTOGEN STATIC
 +++

@@ -2,15 +2,15 @@
 title = "Click"
 
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "location"
+name = "location" # AUTOGEN STATIC
 description = "Where this object was clicked."
 [[extra.args]]
-name = "control"
+name = "control" # AUTOGEN STATIC
 description = "The name of the skin control."
 [[extra.args]]
-name = "params"
+name = "params" # AUTOGEN STATIC
 description = "TODO: not sure!"
 +++
 

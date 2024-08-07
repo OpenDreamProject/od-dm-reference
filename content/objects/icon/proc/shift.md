@@ -1,11 +1,11 @@
 +++
 title = "Shift"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "dir"
+name = "dir" # AUTOGEN STATIC
 [[extra.args]]
-name = "offset"
+name = "offset" # AUTOGEN STATIC
 [[extra.args]]
-name = "wrap"
+name = "wrap" # AUTOGEN STATIC
 +++

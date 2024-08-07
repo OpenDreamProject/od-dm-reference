@@ -1,11 +1,11 @@
 +++
 title = "winshow"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "player"
+name = "player" # AUTOGEN STATIC
 [[extra.args]]
-name = "window"
+name = "window" # AUTOGEN STATIC
 [[extra.args]]
-name = "show"
+name = "show" # AUTOGEN STATIC
 +++

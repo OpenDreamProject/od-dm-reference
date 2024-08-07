@@ -1,9 +1,9 @@
 +++
 title = "Interpolate"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Matrix2"
+name = "Matrix2" # AUTOGEN STATIC
 [[extra.args]]
-name = "t"
+name = "t" # AUTOGEN STATIC
 +++

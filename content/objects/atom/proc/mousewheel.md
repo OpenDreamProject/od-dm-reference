@@ -1,15 +1,15 @@
 +++
 title = "MouseWheel"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "delta_x"
+name = "delta_x" # AUTOGEN STATIC
 [[extra.args]]
-name = "delta_y"
+name = "delta_y" # AUTOGEN STATIC
 [[extra.args]]
-name = "location"
+name = "location" # AUTOGEN STATIC
 [[extra.args]]
-name = "control"
+name = "control" # AUTOGEN STATIC
 [[extra.args]]
-name = "params"
+name = "params" # AUTOGEN STATIC
 +++

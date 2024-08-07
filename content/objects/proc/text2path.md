@@ -1,7 +1,7 @@
 +++
 title = "text2path"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "T"
+name = "T" # AUTOGEN STATIC
 +++

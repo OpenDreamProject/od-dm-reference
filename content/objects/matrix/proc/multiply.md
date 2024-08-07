@@ -1,7 +1,7 @@
 +++
 title = "Multiply"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "m"
+name = "m" # AUTOGEN STATIC
 +++

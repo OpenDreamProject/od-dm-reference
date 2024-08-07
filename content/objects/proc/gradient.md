@@ -1,9 +1,9 @@
 +++
 title = "gradient"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "A"
+name = "A" # AUTOGEN STATIC
 [[extra.args]]
-name = "index"
+name = "index" # AUTOGEN STATIC
 +++

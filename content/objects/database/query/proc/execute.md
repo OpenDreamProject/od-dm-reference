@@ -1,7 +1,7 @@
 +++
 title = "Execute"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "database"
+name = "database" # AUTOGEN STATIC
 +++

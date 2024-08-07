@@ -1,8 +1,8 @@
 +++
 title = "rand_seed"
 [extra]
-return_type = "null"
-is_override = false
+return_type = "null" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Seed"
+name = "Seed" # AUTOGEN STATIC
 +++

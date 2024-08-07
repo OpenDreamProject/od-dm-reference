@@ -1,9 +1,9 @@
 +++
 title = "Scale"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "x"
+name = "x" # AUTOGEN STATIC
 [[extra.args]]
-name = "y"
+name = "y" # AUTOGEN STATIC
 +++

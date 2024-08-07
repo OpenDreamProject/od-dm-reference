@@ -1,12 +1,12 @@
 +++
 title = "num2text"
 [extra]
-return_type = "text"
-is_override = false
+return_type = "text" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "N"
+name = "N" # AUTOGEN STATIC
 [[extra.args]]
-name = "A"
+name = "A" # AUTOGEN STATIC
 [[extra.args]]
-name = "B"
+name = "B" # AUTOGEN STATIC
 +++

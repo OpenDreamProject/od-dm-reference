@@ -1,9 +1,9 @@
 +++
 title = "GetConfig"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "config_set"
+name = "config_set" # AUTOGEN STATIC
 [[extra.args]]
-name = "param"
+name = "param" # AUTOGEN STATIC
 +++

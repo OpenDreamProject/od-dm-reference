@@ -1,12 +1,12 @@
 +++
 title = "clamp"
 [extra]
-return_type = "null, num, path, /list"
-is_override = false
+return_type = "null, num, path, /list" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Value"
+name = "Value" # AUTOGEN STATIC
 [[extra.args]]
-name = "Low"
+name = "Low" # AUTOGEN STATIC
 [[extra.args]]
-name = "High"
+name = "High" # AUTOGEN STATIC
 +++

@@ -1,12 +1,12 @@
 +++
 title = "AddCredits"
 [extra]
-od_unimplemented = true
-is_override = false
+od_unimplemented = true # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "player"
+name = "player" # AUTOGEN STATIC
 [[extra.args]]
-name = "credits"
+name = "credits" # AUTOGEN STATIC
 [[extra.args]]
-name = "note"
+name = "note" # AUTOGEN STATIC
 +++

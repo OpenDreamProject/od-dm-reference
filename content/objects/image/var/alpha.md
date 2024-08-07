@@ -1,6 +1,6 @@
 +++
 title = "alpha"
 [extra]
-default_value = "255"
-is_override = false
+default_value = "255" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 +++

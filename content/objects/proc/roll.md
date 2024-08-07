@@ -1,10 +1,10 @@
 +++
 title = "roll"
 [extra]
-return_type = "num"
-is_override = false
+return_type = "num" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "ndice"
+name = "ndice" # AUTOGEN STATIC
 [[extra.args]]
-name = "sides"
+name = "sides" # AUTOGEN STATIC
 +++

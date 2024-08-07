@@ -1,11 +1,11 @@
 +++
 title = "Find"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Elem"
+name = "Elem" # AUTOGEN STATIC
 [[extra.args]]
-name = "Start"
+name = "Start" # AUTOGEN STATIC
 [[extra.args]]
-name = "End"
+name = "End" # AUTOGEN STATIC
 +++

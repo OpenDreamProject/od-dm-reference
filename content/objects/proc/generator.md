@@ -1,13 +1,13 @@
 +++
 title = "generator"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "type"
+name = "type" # AUTOGEN STATIC
 [[extra.args]]
-name = "A"
+name = "A" # AUTOGEN STATIC
 [[extra.args]]
-name = "B"
+name = "B" # AUTOGEN STATIC
 [[extra.args]]
-name = "rand"
+name = "rand" # AUTOGEN STATIC
 +++

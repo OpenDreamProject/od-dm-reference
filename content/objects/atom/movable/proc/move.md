@@ -7,13 +7,13 @@ return_type_desc = """1 on success
 Number of pixels moved for a successful slide.
 """
 
-return_type = "num"
-is_override = false
+return_type = "num" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "NewLoc"
-type = "/atom"
+name = "NewLoc" # AUTOGEN STATIC
+type = "/atom" # AUTOGEN FIELD
 [[extra.args]]
-name = "Dir"
+name = "Dir" # AUTOGEN STATIC
 +++
 
 TODO `TODO` TODO

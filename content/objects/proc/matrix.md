@@ -1,17 +1,17 @@
 +++
 title = "matrix"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "a"
+name = "a" # AUTOGEN STATIC
 [[extra.args]]
-name = "b"
+name = "b" # AUTOGEN STATIC
 [[extra.args]]
-name = "c"
+name = "c" # AUTOGEN STATIC
 [[extra.args]]
-name = "d"
+name = "d" # AUTOGEN STATIC
 [[extra.args]]
-name = "e"
+name = "e" # AUTOGEN STATIC
 [[extra.args]]
-name = "f"
+name = "f" # AUTOGEN STATIC
 +++

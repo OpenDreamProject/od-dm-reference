@@ -1,8 +1,8 @@
 +++
 title = "params2list"
 [extra]
-return_type = "path, /list"
-is_override = false
+return_type = "path, /list" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Params"
+name = "Params" # AUTOGEN STATIC
 +++

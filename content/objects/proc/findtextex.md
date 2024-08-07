@@ -1,14 +1,14 @@
 +++
 title = "findtextEx"
 [extra]
-return_type = "num"
-is_override = false
+return_type = "num" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Haystack"
+name = "Haystack" # AUTOGEN STATIC
 [[extra.args]]
-name = "Needle"
+name = "Needle" # AUTOGEN STATIC
 [[extra.args]]
-name = "Start"
+name = "Start" # AUTOGEN STATIC
 [[extra.args]]
-name = "End"
+name = "End" # AUTOGEN STATIC
 +++

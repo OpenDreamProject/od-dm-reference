@@ -1,15 +1,15 @@
 +++
 title = "DrawBox"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "rgb"
+name = "rgb" # AUTOGEN STATIC
 [[extra.args]]
-name = "x1"
+name = "x1" # AUTOGEN STATIC
 [[extra.args]]
-name = "y1"
+name = "y1" # AUTOGEN STATIC
 [[extra.args]]
-name = "x2"
+name = "x2" # AUTOGEN STATIC
 [[extra.args]]
-name = "y2"
+name = "y2" # AUTOGEN STATIC
 +++
