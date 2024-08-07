@@ -37,7 +37,7 @@ Most of the global procs, and objects procs and vars are automatically documente
 - Object vars
 - Object procs
 
-And these frontmatter fields are automatically populated, and should not be changed manually:
+And these frontmatter fields are automatically populated, and can be changed manually by adding `# AUTOGEN SKIP` after your field:
 
 - Procs
   - Name (`title`)
@@ -69,7 +69,6 @@ Zola allows us to put arbitrary TOML under the [extra] section, which we do for 
   - `[[args.od_unimplemented]]` - If this argument is implemented or not in the OpenDream implementation of BYOND.
 - Vars:
   - `default_value_desc` - This allows us to add extra information about the default value that this variable is set to.
-
 
 ## Available markdown formatting
 
