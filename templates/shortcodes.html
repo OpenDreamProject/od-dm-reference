@@ -8,3 +8,20 @@
     {%- endif -%}
 </div>
 {% endmacro render_callout %}
+
+{%- macro render_link(type, destination, proc=false, var=false) -%}
+{%- set path = get_url(path=destination) -%}
+{%- if proc -%}
+    {%- set parent = destination | replace(from="_index.md", to="proc/") -%}
+    {%- set lowerName = proc | lower -%}
+    {%- set additionalPath = get_url(path=parent ~ lowerName ~ ".md" ) -%}
+    {%- set additionalText = "/proc/" ~ proc ~ "()" -%}
+{%- endif -%}
+{%- if var -%}
+    {%- set parent = destination | replace(from="_index.md", to="var/") -%}
+    {%- set lowerName = var | lower -%}
+    {%- set additionalPath = get_url(path=parent ~ lowerName ~ ".md" ) -%}
+    {%- set additionalText = "/var/" ~ var -%}
+{%- endif -%}
+<a href="{{path}}" class="code-nav type">{{type}}</a>{%- if additionalPath -%}<a href="{{additionalPath}}" class="code-nav">{{additionalText}}</a>{%- endif -%}
+{%- endmacro render_link -%}
