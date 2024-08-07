@@ -7,7 +7,7 @@ weight = 4
 parent_type = "/datum"
 +++
 
-The `/database` datum allows for interfacing with an SQLite database, running SQL queries with [`/database/query`](@/objects/database/query/_index.md). We currently support writing and reading DreamMaker floats and strings.
+The `/database` datum allows for interfacing with an SQLite database, running SQL queries with {{ database_query() }}. We currently support writing and reading DreamMaker floats and strings.
 
 ```dm
 var/database/database = new("test-database.db")

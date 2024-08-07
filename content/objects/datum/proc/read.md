@@ -8,7 +8,7 @@ name = "F" # AUTOGEN STATIC
 type = "/savefile" # AUTOGEN FIELD
 +++
 
-This is called when a  [/datum](@/objects/datum/_index.md) is read from a  [/savefile](@/objects/savefile/_index.md). The [/savefile](@/objects/savefile/_index.md) being read from is passed as the first argument. The return value is ignored.
+This is called when a {{ datum() }} is read from a {{ savefile() }}. The {{ savefile() }} being read from is passed as the first argument. The return value is ignored.
 
 Example:
 ```dm

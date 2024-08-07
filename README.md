@@ -27,6 +27,18 @@ Currently, we have 4 callout shortcodes, which all take a `description` argument
 - parity
 - unimplemented
 
+To link to specific types, we can use the type shortcodes, such as:
+
+```md
+{{ mob() }}
+```
+
+This also allows us to link to specific procs/vars on objects, using this syntax:
+
+```md
+{{ client(proc="Export")} }
+```
+
 To read up on how to make shortcodes, the Zola documentation is [here](https://www.getzola.org/documentation/content/shortcodes/). All of our shortcodes live in [templates/shortcode](templates/shortcodes/).
 
 ## Autodocumentation

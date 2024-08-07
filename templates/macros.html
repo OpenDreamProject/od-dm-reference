@@ -60,7 +60,12 @@
         </span>
         {%- if subsection.subsections -%}
         <ul>
-            {%- for lowerSubPath in subsection.subsections -%}
+            {%- if subsection.extra.sort_weight -%}
+                {%- set list = subsection.subsections -%}
+            {%- else -%}
+                {%- set list = subsection.subsections | sort -%}
+            {%- endif -%}
+            {%- for lowerSubPath in list -%}
                 {% set prod = get_env(name="ZOLA_ENV", default="dev") != "prod" %}
                 {% set lowerSubsection = get_section(path=lowerSubPath, metadata_only=prod) %}{# TODO: this is the most expensive call to get_section() we have, need to optimize to save 20s #}
                 {{- self::render_subsection(currentPage = currentPage, subsection=lowerSubsection, depth=depth+1) -}}
