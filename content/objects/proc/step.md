@@ -16,4 +16,4 @@ name = "Speed" # AUTOGEN STATIC
 description = "The speed to move, in pixels."
 od_unimplemented = true
 +++
-Moves Ref in direction Dir, respecting collision defined by {{ atom(var="density" )}} and {{ atom(proc="Cross) }}.
+Moves Ref in direction Dir, respecting collision defined by {{ atom(var="density" )}} and {{ atom(proc="Cross") }}.
