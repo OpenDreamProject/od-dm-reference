@@ -1,6 +1,6 @@
 +++
 title = "frequency"
 [extra]
-default_value = "0"
-is_override = false
+default_value = "0" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 +++

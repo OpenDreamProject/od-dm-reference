@@ -1,7 +1,7 @@
 +++
 title = "turf"
 [extra]
-default_value = "/turf"
-is_override = false
-type = "path, /turf"
+default_value = "/turf" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
+type = "path, /turf" # AUTOGEN FIELD
 +++

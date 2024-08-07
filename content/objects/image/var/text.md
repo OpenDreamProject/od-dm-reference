@@ -1,7 +1,7 @@
 +++
 title = "text"
 [extra]
-default_value = "i"
-is_override = false
-od_unimplemented = true
+default_value = "i" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
+od_unimplemented = true # AUTOGEN FIELD
 +++

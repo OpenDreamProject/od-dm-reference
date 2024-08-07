@@ -1,6 +1,6 @@
 +++
 title = "fps"
 [extra]
-default_value = "10"
-is_override = false
+default_value = "10" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 +++

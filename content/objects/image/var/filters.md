@@ -1,7 +1,7 @@
 +++
 title = "filters"
 [extra]
-default_value = "N/A"
-is_override = false
-type = "/list"
+default_value = "N/A" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
+type = "/list" # AUTOGEN FIELD
 +++

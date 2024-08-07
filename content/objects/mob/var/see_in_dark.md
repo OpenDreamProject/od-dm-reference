@@ -1,7 +1,7 @@
 +++
 title = "see_in_dark"
 [extra]
-default_value = "2"
-is_override = false
-od_unimplemented = true
+default_value = "2" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
+od_unimplemented = true # AUTOGEN FIELD
 +++
