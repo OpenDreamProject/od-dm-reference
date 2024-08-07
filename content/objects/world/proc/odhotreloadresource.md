@@ -4,7 +4,7 @@ title = "ODHotReloadResource"
 is_override = false
 [[extra.args]]
 name = "file_name"
-type_override = "text"
+type = "text" # AUTOGEN SKIP
 description = "The absolute or relative path of a resource (DMI or sound file)"
 +++
 
