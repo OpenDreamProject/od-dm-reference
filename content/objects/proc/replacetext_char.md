@@ -1,15 +1,15 @@
 +++
 title = "replacetext_char"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Haystack"
+name = "Haystack" # AUTOGEN STATIC
 [[extra.args]]
-name = "Needle"
+name = "Needle" # AUTOGEN STATIC
 [[extra.args]]
-name = "Replacement"
+name = "Replacement" # AUTOGEN STATIC
 [[extra.args]]
-name = "Start"
+name = "Start" # AUTOGEN STATIC
 [[extra.args]]
-name = "End"
+name = "End" # AUTOGEN STATIC
 +++

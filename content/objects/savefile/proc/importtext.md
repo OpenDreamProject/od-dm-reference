@@ -1,9 +1,9 @@
 +++
 title = "ImportText"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "path"
+name = "path" # AUTOGEN STATIC
 [[extra.args]]
-name = "source"
+name = "source" # AUTOGEN STATIC
 +++

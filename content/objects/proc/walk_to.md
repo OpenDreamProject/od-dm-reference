@@ -1,15 +1,15 @@
 +++
 title = "walk_to"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Ref"
+name = "Ref" # AUTOGEN STATIC
 [[extra.args]]
-name = "Trg"
+name = "Trg" # AUTOGEN STATIC
 [[extra.args]]
-name = "Min"
+name = "Min" # AUTOGEN STATIC
 [[extra.args]]
-name = "Lag"
+name = "Lag" # AUTOGEN STATIC
 [[extra.args]]
-name = "Speed"
+name = "Speed" # AUTOGEN STATIC
 +++

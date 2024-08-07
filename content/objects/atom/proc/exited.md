@@ -1,11 +1,11 @@
 +++
 title = "Exited"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Obj"
-type = "/atom/movable"
+name = "Obj" # AUTOGEN STATIC
+type = "/atom/movable" # AUTOGEN FIELD
 [[extra.args]]
-name = "newloc"
-type = "/atom"
+name = "newloc" # AUTOGEN STATIC
+type = "/atom" # AUTOGEN FIELD
 +++

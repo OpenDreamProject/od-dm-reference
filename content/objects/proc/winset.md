@@ -1,11 +1,11 @@
 +++
 title = "winset"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "player"
+name = "player" # AUTOGEN STATIC
 [[extra.args]]
-name = "control_id"
+name = "control_id" # AUTOGEN STATIC
 [[extra.args]]
-name = "params"
+name = "params" # AUTOGEN STATIC
 +++

@@ -1,13 +1,13 @@
 +++
 title = "Topic"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "T"
+name = "T" # AUTOGEN STATIC
 [[extra.args]]
-name = "Addr"
+name = "Addr" # AUTOGEN STATIC
 [[extra.args]]
-name = "Master"
+name = "Master" # AUTOGEN STATIC
 [[extra.args]]
-name = "Keys"
+name = "Keys" # AUTOGEN STATIC
 +++

@@ -1,13 +1,13 @@
 +++
 title = "splittext_char"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Text"
+name = "Text" # AUTOGEN STATIC
 [[extra.args]]
-name = "Start"
+name = "Start" # AUTOGEN STATIC
 [[extra.args]]
-name = "End"
+name = "End" # AUTOGEN STATIC
 [[extra.args]]
-name = "Insert"
+name = "Insert" # AUTOGEN STATIC
 +++

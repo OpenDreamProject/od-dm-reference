@@ -1,15 +1,15 @@
 +++
 title = "MouseMove"
 [extra]
-od_unimplemented = true
-is_override = false
+od_unimplemented = true # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "object"
-type = "/atom"
+name = "object" # AUTOGEN STATIC
+type = "/atom" # AUTOGEN FIELD
 [[extra.args]]
-name = "location"
+name = "location" # AUTOGEN STATIC
 [[extra.args]]
-name = "control"
+name = "control" # AUTOGEN STATIC
 [[extra.args]]
-name = "params"
+name = "params" # AUTOGEN STATIC
 +++

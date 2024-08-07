@@ -1,20 +1,20 @@
 +++
 title = "block"
 [extra]
-return_type = "path, /list"
-is_override = false
+return_type = "path, /list" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Start"
-type = "/atom"
+name = "Start" # AUTOGEN STATIC
+type = "/atom" # AUTOGEN FIELD
 [[extra.args]]
-name = "End"
-type = "/atom"
+name = "End" # AUTOGEN STATIC
+type = "/atom" # AUTOGEN FIELD
 [[extra.args]]
-name = "StartZ"
+name = "StartZ" # AUTOGEN STATIC
 [[extra.args]]
-name = "EndX"
+name = "EndX" # AUTOGEN STATIC
 [[extra.args]]
-name = "EndY"
+name = "EndY" # AUTOGEN STATIC
 [[extra.args]]
-name = "EndZ"
+name = "EndZ" # AUTOGEN STATIC
 +++

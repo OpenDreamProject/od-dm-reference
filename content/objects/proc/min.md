@@ -1,8 +1,8 @@
 +++
 title = "min"
 [extra]
-return_type = "null, text, num"
-is_override = false
+return_type = "null, text, num" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "A"
+name = "A" # AUTOGEN STATIC
 +++

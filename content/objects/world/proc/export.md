@@ -1,13 +1,13 @@
 +++
 title = "Export"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Addr"
+name = "Addr" # AUTOGEN STATIC
 [[extra.args]]
-name = "File"
+name = "File" # AUTOGEN STATIC
 [[extra.args]]
-name = "Persist"
+name = "Persist" # AUTOGEN STATIC
 [[extra.args]]
-name = "Clients"
+name = "Clients" # AUTOGEN STATIC
 +++

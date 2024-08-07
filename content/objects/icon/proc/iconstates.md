@@ -1,7 +1,7 @@
 +++
 title = "IconStates"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "mode"
+name = "mode" # AUTOGEN STATIC
 +++

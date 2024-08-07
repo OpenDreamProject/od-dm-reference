@@ -1,11 +1,11 @@
 +++
 title = "statpanel"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Panel"
+name = "Panel" # AUTOGEN STATIC
 [[extra.args]]
-name = "Name"
+name = "Name" # AUTOGEN STATIC
 [[extra.args]]
-name = "Value"
+name = "Value" # AUTOGEN STATIC
 +++

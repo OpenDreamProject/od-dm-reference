@@ -1,11 +1,11 @@
 +++
 title = "Profile"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "command"
+name = "command" # AUTOGEN STATIC
 [[extra.args]]
-name = "type"
+name = "type" # AUTOGEN STATIC
 [[extra.args]]
-name = "format"
+name = "format" # AUTOGEN STATIC
 +++

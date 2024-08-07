@@ -1,9 +1,9 @@
 +++
 title = "GetAPI"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Api"
+name = "Api" # AUTOGEN STATIC
 [[extra.args]]
-name = "Name"
+name = "Name" # AUTOGEN STATIC
 +++

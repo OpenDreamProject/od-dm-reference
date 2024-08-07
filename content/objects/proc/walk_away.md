@@ -1,16 +1,16 @@
 +++
 title = "walk_away"
 [extra]
-od_unimplemented = true
-is_override = false
+od_unimplemented = true # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Ref"
+name = "Ref" # AUTOGEN STATIC
 [[extra.args]]
-name = "Trg"
+name = "Trg" # AUTOGEN STATIC
 [[extra.args]]
-name = "Max"
+name = "Max" # AUTOGEN STATIC
 [[extra.args]]
-name = "Lag"
+name = "Lag" # AUTOGEN STATIC
 [[extra.args]]
-name = "Speed"
+name = "Speed" # AUTOGEN STATIC
 +++

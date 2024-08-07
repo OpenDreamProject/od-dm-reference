@@ -1,12 +1,12 @@
 +++
 title = "Join"
 [extra]
-return_type = "text"
-is_override = false
+return_type = "text" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Glue"
+name = "Glue" # AUTOGEN STATIC
 [[extra.args]]
-name = "Start"
+name = "Start" # AUTOGEN STATIC
 [[extra.args]]
-name = "End"
+name = "End" # AUTOGEN STATIC
 +++

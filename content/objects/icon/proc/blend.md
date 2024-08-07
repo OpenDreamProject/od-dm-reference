@@ -1,13 +1,13 @@
 +++
 title = "Blend"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "icon"
+name = "icon" # AUTOGEN STATIC
 [[extra.args]]
-name = "function"
+name = "function" # AUTOGEN STATIC
 [[extra.args]]
-name = "x"
+name = "x" # AUTOGEN STATIC
 [[extra.args]]
-name = "y"
+name = "y" # AUTOGEN STATIC
 +++

@@ -1,8 +1,8 @@
 +++
 title = "Crossed"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "O"
-type = "/atom/movable"
+name = "O" # AUTOGEN STATIC
+type = "/atom/movable" # AUTOGEN FIELD
 +++

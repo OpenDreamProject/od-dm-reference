@@ -1,19 +1,19 @@
 +++
 title = "alert"
 [extra]
-return_type = "text"
-is_override = false
+return_type = "text" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Usr"
+name = "Usr" # AUTOGEN STATIC
 description = "The user"
 [[extra.args]]
-name = "Message"
+name = "Message" # AUTOGEN STATIC
 [[extra.args]]
-name = "Title"
+name = "Title" # AUTOGEN STATIC
 [[extra.args]]
-name = "Button1"
+name = "Button1" # AUTOGEN STATIC
 [[extra.args]]
-name = "Button2"
+name = "Button2" # AUTOGEN STATIC
 [[extra.args]]
-name = "Button3"
+name = "Button3" # AUTOGEN STATIC
 +++

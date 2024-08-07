@@ -1,7 +1,7 @@
 +++
 title = "ODHotReloadInterface"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 +++
 
 This proc causes a reload of the main DMF interface file, and forces all connected clients to refresh their interface. This enables developers to make changes to the interface and see the results without need to recompile every time.

@@ -1,12 +1,12 @@
 +++
 title = "get_step_to"
 [extra]
-od_unimplemented = true
-is_override = false
+od_unimplemented = true # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Ref"
+name = "Ref" # AUTOGEN STATIC
 [[extra.args]]
-name = "Trg"
+name = "Trg" # AUTOGEN STATIC
 [[extra.args]]
-name = "Min"
+name = "Min" # AUTOGEN STATIC
 +++

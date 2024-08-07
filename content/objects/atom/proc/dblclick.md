@@ -1,11 +1,11 @@
 +++
 title = "DblClick"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "location"
+name = "location" # AUTOGEN STATIC
 [[extra.args]]
-name = "control"
+name = "control" # AUTOGEN STATIC
 [[extra.args]]
-name = "params"
+name = "params" # AUTOGEN STATIC
 +++

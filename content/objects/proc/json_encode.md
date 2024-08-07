@@ -1,9 +1,9 @@
 +++
 title = "json_encode"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Value"
+name = "Value" # AUTOGEN STATIC
 [[extra.args]]
-name = "flags"
+name = "flags" # AUTOGEN STATIC
 +++

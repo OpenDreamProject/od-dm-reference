@@ -2,10 +2,10 @@
 title = "Bump"
 
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Obstacle"
-type = "/atom"
+name = "Obstacle" # AUTOGEN STATIC
+type = "/atom" # AUTOGEN FIELD
 +++
 
 TODO

@@ -1,10 +1,10 @@
 +++
 title = "time2text"
 [extra]
-return_type = "text"
-is_override = false
+return_type = "text" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "timestamp"
+name = "timestamp" # AUTOGEN STATIC
 [[extra.args]]
-name = "format"
+name = "format" # AUTOGEN STATIC
 +++

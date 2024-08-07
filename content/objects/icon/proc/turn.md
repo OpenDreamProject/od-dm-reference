@@ -1,7 +1,7 @@
 +++
 title = "Turn"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "angle"
+name = "angle" # AUTOGEN STATIC
 +++

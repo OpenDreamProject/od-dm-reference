@@ -1,7 +1,7 @@
 +++
 title = "link"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "url"
+name = "url" # AUTOGEN STATIC
 +++

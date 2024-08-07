@@ -1,10 +1,10 @@
 +++
 title = "text2ascii_char"
 [extra]
-return_type = "text"
-is_override = false
+return_type = "text" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "T"
+name = "T" # AUTOGEN STATIC
 [[extra.args]]
-name = "pos"
+name = "pos" # AUTOGEN STATIC
 +++

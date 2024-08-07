@@ -1,9 +1,9 @@
 +++
 title = "ExportText"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "path"
+name = "path" # AUTOGEN STATIC
 [[extra.args]]
-name = "file"
+name = "file" # AUTOGEN STATIC
 +++

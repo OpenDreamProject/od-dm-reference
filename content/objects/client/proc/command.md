@@ -1,7 +1,7 @@
 +++
 title = "Command"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "command"
+name = "command" # AUTOGEN STATIC
 +++

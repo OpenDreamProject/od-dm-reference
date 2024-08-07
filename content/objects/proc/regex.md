@@ -1,9 +1,9 @@
 +++
 title = "regex"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "pattern"
+name = "pattern" # AUTOGEN STATIC
 [[extra.args]]
-name = "flags"
+name = "flags" # AUTOGEN STATIC
 +++

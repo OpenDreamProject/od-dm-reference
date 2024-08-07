@@ -1,10 +1,10 @@
 +++
 title = "AllowUpload"
 [extra]
-od_unimplemented = true
-is_override = false
+od_unimplemented = true # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "filename"
+name = "filename" # AUTOGEN STATIC
 [[extra.args]]
-name = "filelength"
+name = "filelength" # AUTOGEN STATIC
 +++

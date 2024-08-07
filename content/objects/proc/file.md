@@ -1,7 +1,7 @@
 +++
 title = "file"
 [extra]
-is_override = false
+is_override = false # AUTOGEN FIELD
 [[extra.args]]
-name = "Path"
+name = "Path" # AUTOGEN STATIC
 +++
