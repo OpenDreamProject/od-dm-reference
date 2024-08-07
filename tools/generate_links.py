@@ -27,7 +27,7 @@ for path in Path("content").rglob('*.md'):
 
     title = parsedToml["title"]
     title = title.replace("/", "", 1)
-    title = title.replace("/", "-")
+    title = title.replace("/", "_")
 
     with open(f"templates/shortcodes/{title}.md", "w") as file:
         file.write('{% import "shortcodes.html" as sc %}\n')
