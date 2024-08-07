@@ -1,6 +1,7 @@
 +++
 title = "/client"
 template = "object.html"
+weight = 3
 
 +++
 

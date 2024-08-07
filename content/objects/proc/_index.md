@@ -1,7 +1,7 @@
 +++
 title = "proc"
 template = "proc_list.html"
-weight = 100
+weight = 0
 
 page_template = "proc.html"
 +++
