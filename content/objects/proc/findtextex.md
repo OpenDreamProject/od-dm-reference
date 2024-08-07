@@ -1,5 +1,6 @@
 +++
 title = "findtextEx"
+slug = "findtextEx" # AUTOGEN FIELD
 [extra]
 return_type = "num" # AUTOGEN FIELD
 is_override = false # AUTOGEN FIELD

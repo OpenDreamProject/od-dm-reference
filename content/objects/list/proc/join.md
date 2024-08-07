@@ -1,5 +1,6 @@
 +++
 title = "Join"
+slug = "Join" # AUTOGEN FIELD
 [extra]
 return_type = "text" # AUTOGEN FIELD
 is_override = false # AUTOGEN FIELD

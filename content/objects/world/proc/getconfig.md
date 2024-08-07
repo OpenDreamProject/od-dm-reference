@@ -1,5 +1,6 @@
 +++
 title = "GetConfig"
+slug = "GetConfig" # AUTOGEN FIELD
 [extra]
 is_override = false # AUTOGEN FIELD
 [[extra.args]]

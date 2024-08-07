@@ -1,5 +1,6 @@
 +++
 title = "findlasttextEx"
+slug = "findlasttextEx" # AUTOGEN FIELD
 [extra]
 return_type = "num" # AUTOGEN FIELD
 is_override = false # AUTOGEN FIELD

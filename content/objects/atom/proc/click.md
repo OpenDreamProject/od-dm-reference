@@ -1,6 +1,6 @@
 +++
 title = "Click"
-
+slug = "Click" # AUTOGEN FIELD
 [extra]
 is_override = false # AUTOGEN FIELD
 [[extra.args]]

@@ -1,5 +1,6 @@
 +++
 title = "MouseDown"
+slug = "MouseDown" # AUTOGEN FIELD
 [extra]
 is_override = false # AUTOGEN FIELD
 [[extra.args]]

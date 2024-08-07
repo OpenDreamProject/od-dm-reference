@@ -1,5 +1,6 @@
 +++
 title = "DrawBox"
+slug = "DrawBox" # AUTOGEN FIELD
 [extra]
 is_override = false # AUTOGEN FIELD
 [[extra.args]]

@@ -1,6 +1,6 @@
 +++
 title = "Move"
-
+slug = "Move" # AUTOGEN FIELD
 [extra]
 return_type_desc = """1 on success
 0 on failure

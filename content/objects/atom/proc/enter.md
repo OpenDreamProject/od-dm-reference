@@ -1,5 +1,6 @@
 +++
 title = "Enter"
+slug = "Enter" # AUTOGEN FIELD
 [extra]
 is_override = false # AUTOGEN FIELD
 [[extra.args]]

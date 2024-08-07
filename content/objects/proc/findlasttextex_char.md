@@ -1,5 +1,6 @@
 +++
 title = "findlasttextEx_char"
+slug = "findlasttextEx_char" # AUTOGEN FIELD
 [extra]
 is_override = false # AUTOGEN FIELD
 [[extra.args]]
