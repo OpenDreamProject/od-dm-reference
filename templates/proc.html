@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% import "macros.html" as macros %}
 
+{% block title %}
+{%- set potentialTitle = macros::render_page_parent_type(page=page, skip_level=1, recursive=false) | striptags | trim | safe -%}
+{%- if potentialTitle == "Objects" -%}
+    {%- set potentialTitle = "/global" -%}
+{%- endif -%}
+<title>{{ potentialTitle }}/{{ page.title }}() - OpenDream DM Reference</title>
+{% endblock title %}
+
 {% block ogtitle %}
 {%- set potentialTitle = macros::render_page_parent_type(page=page, skip_level=1, recursive=false) | striptags | trim | safe -%}
 {%- if potentialTitle == "Objects" -%}
