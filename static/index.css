@@ -963,6 +963,13 @@ h6 {
   font-weight: revert;
 }
 
+.section {
+  ol, ul, menu {
+    list-style: revert;
+    padding: revert;
+  }
+}
+
 .safe-h-screen {
   /* equivalent to 100dvh in major browsers */
   height: calc(100vh - env(safe-area-inset-bottom, 0) - env(safe-area-inset-top, 0));
