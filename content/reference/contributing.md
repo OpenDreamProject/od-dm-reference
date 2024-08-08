@@ -18,20 +18,32 @@ We can use shortcodes to render specific HTML within our Markdown files. They're
 ```
 
 Currently, we have 4 callout shortcodes, which all take a `description` argument:
-- never_implemented
+### never_implemented
 
+```go
+{{/* never_implemented(description="Like this!") */}}
+```
 {{ never_implemented(description="Like this!") }}
 
-- od_only
+### od_only
 
+```go
+{{/* od_only(description="Like this!") */}}
+```
 {{ od_only(description="Like this!") }}
 
-- parity
+### parity
 
+```go
+{{/* od_only(description="Like this!") */}}
+```
 {{ od_only(description="Like this!") }}
 
-- unimplemented
+### unimplemented
 
+```go
+{{/* unimplemented(description="Like this!") */}}
+```
 {{ unimplemented(description="Like this!") }}
 
 {{ mob() }} - To link to specific types, we can use the type shortcodes such as:
