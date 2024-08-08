@@ -53,7 +53,6 @@ jobs:
           cd ref
           git config --local user.email "action@github.com"
           git config --local user.name "Autodoc"
-          git pull origin main
           git add content
           git commit -m "Automatic DMStandard update" -a || true
           git push -f -u origin autodoc-update
