@@ -15,7 +15,9 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>OpenDream DM Reference</title>
+    {% block title %}
+    <title>{{pageOrSubsection.title }}{% if not pageOrSubsection.path == "/" %} - OpenDream DM Reference{% endif %}</title>
+    {% endblock title %}
 
     <script src="{{ get_url(path='index.js') | safe }}"></script>
 
