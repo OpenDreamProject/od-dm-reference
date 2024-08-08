@@ -728,14 +728,6 @@ video {
   padding-top: 1.25rem;
 }
 
-.pl-1{
-  padding-left: 0.25rem;
-}
-
-.pt-1{
-  padding-top: 0.25rem;
-}
-
 .text-3xl{
   font-size: 1.875rem;
   line-height: 2.25rem;
@@ -968,13 +960,16 @@ h4,
 h5,
 h6 {
   font-size: revert;
-  font-weight: revert;
+  font-weight: 500;
 }
 
-.section {
+.page-content {
   ol, ul, menu {
     list-style: revert;
     padding: revert;
+  }
+  h1, h2 {
+    border-bottom: 2px solid #292d32;
   }
 }
 

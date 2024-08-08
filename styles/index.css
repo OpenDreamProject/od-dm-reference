@@ -196,13 +196,19 @@ h4,
 h5,
 h6 {
     font-size: revert;
-    font-weight: revert;
+    font-weight: 500;
 }
 
-.section {
+.page-content {
     ol, ul, menu {
         list-style: revert;
         padding: revert;
+    }
+}
+
+.page-content { 
+    h1, h2 {
+        border-bottom: 2px solid #292d32;
     }
 }
 
