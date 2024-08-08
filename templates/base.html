@@ -29,7 +29,7 @@
     <meta property="og:site_name" content="OpenDream DM Reference" />
     <meta property="og:url" content="{{pageOrSubsection.permalink | safe}}" />
     <meta property="og:image" content="{{ get_url(path='favicon.png') | safe }}">
-    <meta property="og:description" content="{{ pageOrSubsection.content | striptags | truncate(length=38) }}">
+    <meta property="og:description" content="{{ pageOrSubsection.content | striptags | truncate(length=100) }}">
 
 
     <link rel="stylesheet" href="{{ get_url(path='index.css', cachebust = true) | safe }}">
