@@ -26,7 +26,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: "OpenDreamProject/OpenDream"
-          ref: "561b1bc03bbf264cfae1f3fcb85dbba2c31a198d"
+          ref: "b40e36a2f55e2dc5954f76db6f7ec6f36de63f6e"
           path: "oddt"
 
       - name: Build documentation tool
