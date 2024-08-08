@@ -35,9 +35,9 @@ Currently, we have 4 callout shortcodes, which all take a `description` argument
 ### parity
 
 ```go
-{{/* od_only(description="Like this!") */}}
+{{/* parity(description="Like this!") */}}
 ```
-{{ od_only(description="Like this!") }}
+{{ parity(description="Like this!") }}
 
 ### unimplemented
 
