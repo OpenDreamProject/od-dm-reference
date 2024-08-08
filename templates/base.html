@@ -30,7 +30,7 @@
     <meta property="og:description" content="{{ pageOrSubsection.content | striptags | truncate(length=38) }}">
 
 
-    <link rel="stylesheet" href="{{ get_url(path='index.css') | safe }}">
+    <link rel="stylesheet" href="{{ get_url(path='index.css', cachebust = true) | safe }}">
 
     <link rel="icon" href="{{ get_url(path='favicon.svg') | safe }}">
     <link rel="shortcut icon" href="{{ get_url(path='favicon.png') | safe }}">
