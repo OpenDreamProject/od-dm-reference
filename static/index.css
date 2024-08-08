@@ -963,14 +963,11 @@ h6 {
   font-weight: 500;
 }
 
-.section {
+.page-content {
   ol, ul, menu {
     list-style: revert;
     padding: revert;
   }
-}
-
-.page-content {
   h1, h2 {
     border-bottom: 2px solid #292d32;
   }
