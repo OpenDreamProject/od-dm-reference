@@ -47,11 +47,11 @@ jobs:
           dotnet oddt-bin/OpenDreamDocumentationTool.dll --documentation=ref --standard=od-master/DMCompiler/DMStandard
 
       - name: Commit
+        continue-on-error: true
         run: |
           cd ref
           git config --local user.email "action@github.com"
           git config --local user.name "Autodoc"
-          git pull origin main
           git add content
           git commit -m "Automatic DMStandard update" -a || true
           git push -f -u origin autodoc-update
