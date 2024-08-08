@@ -231,3 +231,16 @@ h6 {
     background-color: #fdfeff23;
     border-radius: 2px;
 }
+
+.zola-anchor > svg {
+    display: inline;
+}
+
+.zola-anchor {
+    fill: white;
+    display: none;
+}
+
+*:hover > .zola-anchor {
+    display: inline;
+}
