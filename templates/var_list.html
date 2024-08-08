@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% import "macros.html" as macros %}
 
+{% block title %}
+<title>{{ macros::render_page_parent_type(page=section, skip_level=0, recursive=false) | striptags | trim | safe }} vars - OpenDream DM Reference</title>
+{% endblock title %}
+
+{% block ogtitle %}
+<meta property="og:title" content="{{ macros::render_page_parent_type(page=section, skip_level=0, recursive=false) | striptags | trim | safe }} vars" />
+{% endblock ogtitle %}
+
 {% block header %}
 <h1 class="title text-3xl">{{ macros::render_page_parent_type(page=section, skip_level=0) }} {{ section.title }}</h1>
 {% endblock header %}
