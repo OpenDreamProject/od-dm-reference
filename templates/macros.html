@@ -158,15 +158,16 @@
         {%- if recursive %}
             {{- self::render_parent_type(page=parentSection) }}
         {%- endif %}
+        {%- if not parentSection.extra.skip_parent_rendering -%}
+            {%- set class = "" %}
+            {%- set firstChar = parentSection.title | split(pat="") | nth(n = 1) -%}
+            {%- if firstChar == "/" -%}
+                {%- set class = "code-title type" %}
+            {%- endif %}
 
-        {%- set class = "" %}
-        {%- set firstChar = parentSection.title | split(pat="") | nth(n = 1) -%}
-        {%- if firstChar == "/" -%}
-            {%- set class = "code-title type" %}
-        {%- endif %}
-
-        <a href="{{parentSection.permalink | safe}}" class="{{class}}">{{parentSection.title}}</a>
-        <i class="fa-solid fa-arrow-left"></i>
+            <a href="{{parentSection.permalink | safe}}" class="{{class}}">{{parentSection.title}}</a>
+            <i class="fa-solid fa-arrow-left"></i>
+            {%- endif -%}
         {%- endif -%}
 {%- endmacro render_page_parent_type %}
 

@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 {% import "macros.html" as macros %}
 
+{% block title %}
+<title>{{ macros::render_page_parent_type(page=section, skip_level=0, recursive=false) | striptags | trim | safe }} procs - OpenDream DM Reference</title>
+{% endblock title %}
+
 {% block ogtitle %}
-<meta property="og:title" content="{{ macros::render_page_parent_type(page=section, skip_level=0, recursive=false) | striptags | trim | safe }} {{pageOrSubsection.title}}" />
+<meta property="og:title" content="{{ macros::render_page_parent_type(page=section, skip_level=0, recursive=false) | striptags | trim | safe }} procs" />
 {% endblock ogtitle %}
 
 {% block header %}
