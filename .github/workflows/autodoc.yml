@@ -48,7 +48,7 @@ jobs:
           dotnet oddt-bin/OpenDreamDocumentationTool.dll --documentation=ref --standard=od-master/DMCompiler/DMStandard
 
       - name: Commit
-        continue_on_error: true
+        continue-on-error: true
         run: |
           cd ref
           git config --local user.email "action@github.com"
