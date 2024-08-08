@@ -53,12 +53,14 @@ jobs:
           cd ref
           git config --local user.email "action@github.com"
           git config --local user.name "Autodoc"
+          git checkout -b autodoc-update
           git add content
           git commit -m "Automatic DMStandard update" -a || true
           git push -f -u origin autodoc-update
 
       - name: Create Pull Request
         if: ${{ success() }}
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
