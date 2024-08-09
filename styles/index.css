@@ -250,3 +250,9 @@ h6 {
 *:hover > .zola-anchor {
     display: inline;
 }
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}

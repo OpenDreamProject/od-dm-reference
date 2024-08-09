@@ -4,7 +4,7 @@
 
     {{body}}
     {%- if contents -%}
-    <div class="italic pl-3">{{ contents }}</div>
+    <div class="pl-3">{{ contents | markdown(inline=true) | safe }}</div>
     {%- endif -%}
 </div>
 {% endmacro render_callout %}

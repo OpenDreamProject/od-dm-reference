@@ -743,10 +743,6 @@ video {
   line-height: 1.75rem;
 }
 
-.italic{
-  font-style: italic;
-}
-
 .text-blue-300{
   --tw-text-opacity: 1;
   color: rgb(147 197 253 / var(--tw-text-opacity));
@@ -1010,6 +1006,12 @@ h6 {
 
 *:hover > .zola-anchor {
   display: inline;
+}
+
+.page-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
 @media (min-width: 768px){

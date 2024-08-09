@@ -336,7 +336,9 @@
     }}
     {% endif %}
 
+    <div class="page-content">
     {{ page.content | safe }}
+    </div>
 
     </div>
 {% endmacro %}
@@ -390,7 +392,9 @@
         }}
     {% endif %}
 
+    <div class="page-content">
     {{ page.content | safe }}
+    </div>
 {% endmacro render_var %}
 
 {% macro render_object_vars_and_procs(page) %}
