@@ -1,0 +1,3 @@
+[submodule "tools/OpenDreamDocumentationTool/OpenDream"]
+	path = tools/OpenDreamDocumentationTool/OpenDream
+	url = https://github.com/OpenDreamProject/OpenDream
