@@ -398,7 +398,7 @@
 {% endmacro render_var %}
 
 {% macro render_object_vars_and_procs(page) %}
-{%- for path in page.subsections -%}
+{%- for path in page.subsections | sort -%}
     {%- set pathParts = path | split(pat="/") -%}
     {%- if pathParts is containing("proc") -%}
         {{ self::render_proc_list(path=path) }}
