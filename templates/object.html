@@ -28,10 +28,6 @@
 
 {{ macros::render_backlinks(page=section) }}
 
-{%- if section.content | length or section.backlinks | length -%}
-<hr>
-{%- endif -%}
-
 {{ macros::render_object_vars_and_procs(page=section) }}
 
 </div>
