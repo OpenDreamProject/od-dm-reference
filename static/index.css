@@ -1021,13 +1021,21 @@ h6 {
 }
 
 .nav-link-inactive:hover {
-  background-color: #fdfeff23;
+  background-color: #4444444c;
   border-radius: 2px;
 }
 
-.nav-link-active {
+.dark .nav-link-inactive:hover {
   background-color: #fdfeff23;
+}
+
+.nav-link-active {
+  background-color: #4444444c;
   border-radius: 2px;
+}
+
+.dark .nav-link-active {
+  background-color: #fdfeff23;
 }
 
 .zola-anchor > svg {
