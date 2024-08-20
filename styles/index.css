@@ -9,8 +9,6 @@ This file should be edited in styles/index.css, and *not* static/index.css
 @tailwind utilities;
 
 body {
-    background-color: #1b1b1b;
-    color: #fdfeff;
     font-family: "Nunito", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -19,14 +17,33 @@ body {
     word-break: break-word;
 }
 
-.left-bar {
+body {
+    background-color: #fff;
+    color: #383838;
+}
+
+.dark body {
     background-color: #1b1b1b;
-    border-right: 1px solid #fdfeff;
+    color: #fdfeff;
+}
+
+.left-bar {
+    border-right: 1px solid;
     overflow-y: auto;
     overflow-x: hidden;
     min-width: max-content;
 
     position: absolute;
+}
+
+.left-bar {
+    background-color: #fff;
+    border-right-color: #1b1b1b;
+}
+
+.dark .left-bar {
+    background-color: #1b1b1b;
+    border-right-color: #fdfeff;
 }
 
 @media (min-width: 768px) {
@@ -69,8 +86,12 @@ body {
     display: none;
 }
 
-a {
+.dark a {
     color: #7a698f;
+}
+
+a {
+    color: #6332b3;
 }
 
 a>i {
@@ -78,11 +99,16 @@ a>i {
 }
 
 .type {
-    color: #70c3af;
     text-decoration: dotted;
+    color: #3A8362;
+}
+
+.dark .type {
+    color: #70c3af;
 }
 
 input[type="text"] {
+    border: 1px solid black;
     border-radius: 4px;
 }
 
@@ -183,9 +209,13 @@ pre {
 }
 
 :not(pre)>code {
-    background-color: #343434;
+    background-color: #e4e4e4;
     border-radius: 0.25rem;
     padding: 3px;
+}
+
+.dark :not(pre)>code {
+    background-color: #343434;
 }
 
 /* Override Tailwind being awful and annoying */
@@ -204,9 +234,13 @@ h6 {
         list-style: revert;
         padding: revert;
     }
+
+    h1, h2 {
+        border-bottom: 2px solid #D1D7DD;
+    }
 }
 
-.page-content { 
+.dark .page-content { 
     h1, h2 {
         border-bottom: 2px solid #292d32;
     }
@@ -255,4 +289,16 @@ h6 {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
+}
+
+#theme-switch > .fa-moon {
+    display: none;
+}
+
+.dark #theme-switch > .fa-moon {
+    display: inline;
+}
+
+.dark #theme-switch > .fa-sun {
+    display: none;
 }

@@ -53,7 +53,7 @@
     {%- set depthIndent = 20 * depth -%}
     <li class="{{class}}" data-expand-tag="{{subsection.path}}">
         <span style="padding-left: {{depthIndent}}px" class="flex flex-row{{spanClass}}">
-        <span class="px-1"><i class="fa-solid fa-caret-right text-blue-300 {{iconClass}} nav-toggle cursor-pointer"></i></span>
+        <span class="px-1"><i class="fa-solid fa-caret-right nav-caret {{iconClass}} nav-toggle cursor-pointer"></i></span>
         <a href="{{ subsection.permalink | safe }}" class="{{linkClass}}">
             {{ subsection.title }}
         </a>

@@ -5,10 +5,14 @@ base_url = "https://ref.opendre.am"
 highlight_code = true
 # Includes the DreamMaker syntax highlighting
 extra_syntaxes_and_themes = ["syntaxes"]
+highlight_theme = "css"
+highlight_themes_css = [
+    { theme = "base16-ocean-dark", filename = "syntax-dark.css" },
+    { theme = "base16-ocean-light", filename = "syntax-light.css" }
+]
 
 [slugify]
 paths = "safe"
-
 
 [extra]
 # Used to link to the repository in pages
