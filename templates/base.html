@@ -16,10 +16,11 @@
 <head>
     <meta charset="utf-8" />
     {% block title %}
-    <title>{{pageOrSubsection.title }}{% if not pageOrSubsection.path == "/" %} - OpenDream DM Reference{% endif %}</title>
+    <title>{{pageOrSubsection.title }}{% if not pageOrSubsection.path == "/" %} - OpenDream DM Reference{% endif %}
+    </title>
     {% endblock title %}
 
-    <script src="{{ get_url(path='index.js') | safe }}"></script>
+    <script src="{{ get_url(path='index.js', cachebust=true) | safe }}"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -29,20 +30,96 @@
     <meta property="og:site_name" content="OpenDream DM Reference" />
     <meta property="og:url" content="{{pageOrSubsection.permalink | safe}}" />
     <meta property="og:image" content="{{ get_url(path='favicon.png') | safe }}">
-    <meta property="og:description" content="{{ pageOrSubsection.content | striptags | truncate(length=100) }}">
-
+    <meta property="og:description"
+        content="{{ pageOrSubsection.content | striptags | replace(from="\n", to=" ") | truncate(length=100) }}">
 
     <link rel="stylesheet" href="{{ get_url(path='index.css', cachebust = true) | safe }}">
 
     <link rel="icon" href="{{ get_url(path='favicon.svg') | safe }}">
     <link rel="shortcut icon" href="{{ get_url(path='favicon.png') | safe }}">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css" integrity="sha512-UuQ/zJlbMVAw/UU8vVBhnI4op+/tFOpQZVT+FormmIEhRSCnJWyHiBbEVgM4Uztsht41f3FzVWgLuwzUqOObKw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css" integrity="sha512-DJLNx+VLY4aEiEQFjiawXaiceujj5GA7lIY8CHCIGQCBPfsEG0nGz1edb4Jvw1LR7q031zS5PpPqFuPA8ihlRA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/solid.min.css" integrity="sha512-Hp+WwK4QdKZk9/W0ViDvLunYjFrGJmNDt6sCflZNkjgvNq9mY+0tMbd6tWMiAlcf1OQyqL4gn2rYp7UsfssZPA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css"
+        integrity="sha512-UuQ/zJlbMVAw/UU8vVBhnI4op+/tFOpQZVT+FormmIEhRSCnJWyHiBbEVgM4Uztsht41f3FzVWgLuwzUqOObKw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css"
+        integrity="sha512-DJLNx+VLY4aEiEQFjiawXaiceujj5GA7lIY8CHCIGQCBPfsEG0nGz1edb4Jvw1LR7q031zS5PpPqFuPA8ihlRA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/solid.min.css"
+        integrity="sha512-Hp+WwK4QdKZk9/W0ViDvLunYjFrGJmNDt6sCflZNkjgvNq9mY+0tMbd6tWMiAlcf1OQyqL4gn2rYp7UsfssZPA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body class="safe-h-screen">
+<body id="root" class="safe-h-screen">
+    <script data-cfasync="false" type="text/javascript">
+        const LOCAL_STORAGE_KEY_THEME = "ref-theme"
+
+        const THEME_VALUE_AUTO = "auto"
+        const THEME_VALUE_DARK = "dark"
+        const THEME_VALUE_LIGHT = "light"
+
+        const THEME_CLASS_DARK = "dark"
+        const THEME_CLASS_LIGHT = "light"
+
+        const setTheme = () => {
+            const theme = localStorage.getItem(LOCAL_STORAGE_KEY_THEME) || THEME_VALUE_AUTO
+
+            switch (theme) {
+                case THEME_VALUE_AUTO:
+                    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                        setDocumentTheme(THEME_CLASS_DARK)
+                    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+                        setDocumentTheme(THEME_CLASS_LIGHT)
+                    }
+                    break
+
+                case THEME_VALUE_DARK:
+                    setDocumentTheme(THEME_CLASS_DARK)
+                    break
+
+                case THEME_VALUE_LIGHT:
+                    setDocumentTheme(THEME_CLASS_LIGHT)
+                    break
+            }
+        }
+
+        const setDocumentTheme = (newTheme) => {
+            const root = document.documentElement
+            if (root.classList.contains(THEME_CLASS_DARK)) root.classList.replace(THEME_CLASS_DARK, newTheme)
+            else if (root.classList.contains(THEME_CLASS_LIGHT)) root.classList.replace(THEME_CLASS_LIGHT, newTheme)
+            else root.classList.add(newTheme)
+
+            const existing = document.getElementById("syntax")
+            if(existing) {
+                if(newTheme == THEME_CLASS_DARK) existing.href = "/syntax-dark.css"
+                else existing.href = "/syntax-light.css"
+                return;
+            }
+
+            var newImport = document.createElement("link")
+            newImport.rel = "stylesheet"
+            newImport.id = "syntax"
+
+            if(newTheme == THEME_CLASS_DARK) newImport.href = "/syntax-dark.css"
+            else newImport.href = "/syntax-light.css"
+
+            document.documentElement.appendChild(newImport)
+
+        }
+
+        setTheme()
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            setTheme()
+        })
+
+        window.addEventListener("storage", (e) => {
+            if (e.key == LOCAL_STORAGE_KEY_THEME) {
+                setTheme()
+            }
+        })
+
+    </script>
+
     <div class="flex pl-3 h-[100%]">
         <div class="left-bar hidden md:block h-[100%]" id="left-bar">
             <div class="flex flex-row">
@@ -51,7 +128,7 @@
                         <img src="{{ get_url(path='favicon.svg') | safe }}" width=24px>
                     </a>
                 </div>
-                <input data-stork="ref-search" class="flex-grow m-2 pr-2" type="text" />
+                <input data-stork="ref-search" class="flex-grow m-2 pr-2" type="text" placeholder="Search" />
             </div>
             <div data-stork="ref-search-output" class="results"></div>
             <nav role="navigation" class="pr-2">
@@ -61,7 +138,7 @@
                     {%- for subsectionPath in index.subsections | sort -%}
                         {%- set subsection = get_section(path=subsectionPath) -%}
                         {{ macros::render_subsection(currentPage=pageOrSubsection, subsection=subsection, depth=0) -}}
-                    {%- endfor -%}
+                        {%- endfor -%}
                     {%- endblock menu -%}
                 </ul>
             </nav>
@@ -75,32 +152,40 @@
                         <div class="flex flex-row justify-between md:justify-end">
                             <img src="{{ get_url(path='favicon.svg') | safe }}" width=28px class="md:hidden">
                             <div class="flex flex-row gap-1">
-                            <div class="p-1">
-                                <a href="https://github.com/OpenDreamProject/OpenDream" target="_blank">
-                                <i class="fa-brands fa-github fa-2xl"></i></div>
+                                <div class="p-1 cursor-pointer" id="theme-switch">
+                                    <i class="fa-solid fa-sun fa-2xl"></i>
+                                    <i class="fa-solid fa-moon fa-2xl"></i>
+                                </div>
+                                <div class="p-1">
+                                    <a href="https://github.com/OpenDreamProject/OpenDream" target="_blank">
+                                        <i class="fa-brands fa-github fa-2xl text-black dark:text-white"></i>
+                                </div>
                                 </a>
-                            <div class="p-1 md:hidden">
-                                <i class="fa-solid fa-bars fa-2xl cursor-pointer" id="navigation-button" class="cursor-pointer md:hidden"></i></div>
+                                <div class="p-1 md:hidden">
+                                    <i class="fa-solid fa-bars fa-2xl cursor-pointer" id="navigation-button"
+                                        class="cursor-pointer md:hidden"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div>
-                    {% block content %}{% endblock %}
+                        {% block content %}{% endblock %}
                     </div>
 
                     <div class="pt-5">
-                    <hr>
-                    <div class="flex flex-row justify-center pt-3"><a class="text-gray-500" href="{{macros::get_github_link(page=pageOrSubsection)}}"><i class="fa-brands fa-github text-gray-500"></i> Improve this page</a></div>
+                        <hr>
+                        <div class="flex flex-row justify-center pt-3"><a class="text-gray-500"
+                                href="{{macros::get_github_link(page=pageOrSubsection)}}"><i
+                                    class="fa-brands fa-github text-gray-500"></i> Improve this page</a></div>
                     </div>
 
                 </div>
             </div>
         </section>
     </div>
-
     <script src="https://files.stork-search.net/releases/v1.6.0/stork.js"></script>
     <script>
-        stork.register("ref-search", "{{config.base_url | safe}}/search.st", {showProgress: false});
+        stork.register("ref-search", "{{config.base_url | safe}}/search.st", { showProgress: false });
     </script>
 </body>
 

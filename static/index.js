@@ -24,6 +24,12 @@ const handleNavClick = (event) => {
     }
 }
 
+const handleThemeSwitch = (event) => {
+    const newTheme = document.documentElement.classList.contains(THEME_CLASS_DARK) ? THEME_CLASS_LIGHT : THEME_CLASS_DARK
+    localStorage.setItem(LOCAL_STORAGE_KEY_THEME, newTheme)
+    setTheme()
+}
+
 const main = () => {
     document.getElementById("navigation-button").addEventListener("click", handleClick)
 
@@ -32,6 +38,7 @@ const main = () => {
         item.addEventListener("click", handleNavClick);
     }
 
+    document.getElementById("theme-switch").addEventListener("click", handleThemeSwitch)
 }
 
 window.onload = main;
