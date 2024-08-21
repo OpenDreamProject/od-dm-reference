@@ -2,7 +2,12 @@
 module.exports = {
   content: ["./templates/**/*.html", "./theme/**/*.html"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        darkborder: '#2B2B2B',
+        lightborder: '#E5E5E5'
+      }
+    },
   },
   plugins: [
     require('@tailwindcss/typography'),

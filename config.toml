@@ -4,11 +4,11 @@ base_url = "https://ref.opendre.am"
 [markdown]
 highlight_code = true
 # Includes the DreamMaker syntax highlighting
-extra_syntaxes_and_themes = ["syntaxes"]
+extra_syntaxes_and_themes = ["syntaxes", "themes"]
 highlight_theme = "css"
 highlight_themes_css = [
-    { theme = "base16-ocean-dark", filename = "syntax-dark.css" },
-    { theme = "base16-ocean-light", filename = "syntax-light.css" }
+    { theme = "visual-studio-dark", filename = "syntax-dark.css" },
+    { theme = "visual-studio-light", filename = "syntax-light.css" }
 ]
 
 [slugify]

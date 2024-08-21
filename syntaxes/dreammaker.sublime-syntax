@@ -45,7 +45,7 @@ contexts:
       captures:
         1: storage.type.dm
         2: storage.modifier.dm
-        3: storage.type.dm
+        3: entity.name.type.dm
         5: variable.other.dm
     - match: '\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)\b'
       scope: constant.numeric.dm
@@ -54,7 +54,7 @@ contexts:
     - match: \b(del|new)\b
       scope: keyword.other.dm
     - match: \b(proc|verb|datum|atom(/movable)?|obj|mob|turf|area|savefile|list|client|sound|image|database|matrix|regex|exception|icon)\b
-      scope: storage.type.dm
+      scope: entity.name.type.dm
     - match: \b(as|const|global|set|static|tmp)\b
       scope: storage.modifier.dm
     - match: \b(usr|world|src|args)\b
@@ -250,7 +250,7 @@ contexts:
                 2: keyword.control.import.else.dm
               pop: true
             - include: $top_level_main
-        - match: ''
+        - match: ""
           push:
             - meta_scope: comment.block.preprocessor.if-branch
             - match: (?=^\s*#\s*(else|endif)\b.*$)
@@ -280,7 +280,7 @@ contexts:
                 2: keyword.control.import.else.dm
               pop: true
             - include: block_innards
-        - match: ''
+        - match: ""
           push:
             - meta_scope: comment.block.preprocessor.if-branch.in-block
             - match: (?=^\s*#\s*(else|endif)\b.*$)
@@ -311,7 +311,7 @@ contexts:
                 2: keyword.control.import.else.dm
               pop: true
             - include: disabled
-        - match: ''
+        - match: ""
           push:
             - match: (?=^\s*#\s*(else|endif)\b.*$)
               pop: true
@@ -341,7 +341,7 @@ contexts:
                 2: keyword.control.import.else.dm
               pop: true
             - include: disabled
-        - match: ''
+        - match: ""
           push:
             - match: (?=^\s*#\s*(else|endif)\b.*$)
               pop: true

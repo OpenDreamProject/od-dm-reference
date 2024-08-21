@@ -659,6 +659,10 @@ video {
   white-space: nowrap;
 }
 
+.rounded{
+  border-radius: 0.25rem;
+}
+
 .border-2{
   border-width: 2px;
 }
@@ -667,14 +671,14 @@ video {
   border-left-width: 2px;
 }
 
-.border-black{
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity));
-}
-
 .border-gray-500{
   --tw-border-opacity: 1;
   border-color: rgb(107 114 128 / var(--tw-border-opacity));
+}
+
+.border-lightborder{
+  --tw-border-opacity: 1;
+  border-color: rgb(229 229 229 / var(--tw-border-opacity));
 }
 
 .border-red-400{
@@ -795,12 +799,12 @@ body {
   min-width: max-content;
   position: absolute;
   background-color: #fff;
-  border-right-color: #1b1b1b;
+  border-right-color: #E5E5E5;
 }
 
 .dark .left-bar {
   background-color: #1b1b1b;
-  border-right-color: #fdfeff;
+  border-right-color: #2B2B2B;
 }
 
 @media (min-width: 768px) {
@@ -843,31 +847,42 @@ body {
   display: none;
 }
 
-.dark a {
-  color: #7a698f;
-}
-
 a {
-  color: #6332b3;
+  color: #A020D3;
 }
 
-a>i {
-  color: #fdfeff;
+.dark a {
+  color: #BC89BD;
 }
 
 .type {
   -webkit-text-decoration: dotted;
           text-decoration: dotted;
-  color: #3A8362;
+  color: #417D96;
 }
 
 .dark .type {
-  color: #70c3af;
+  color: #71C6B1;
+}
+
+.light a:hover {
+  color: #2653CE;
+  text-decoration: underline;
+}
+
+.dark a:hover {
+  color: #7594E5;
 }
 
 input[type="text"] {
-  border: 1px solid black;
+  border: 1px solid #E5E5E5;
   border-radius: 4px;
+}
+
+.dark input[type="text"] {
+  border-color: #2B2B2B;
+  background-color: #1E1E1E;
+  color: #fff
 }
 
 .stork-output-visible {
@@ -915,6 +930,8 @@ input[type="text"] {
 pre {
   padding: 10px;
   white-space: pre-wrap;
+  border: solid 1px #2B2B2B;
+  border-radius: 0.25rem;
 }
 
 input {
@@ -1087,9 +1104,9 @@ h6 {
   }
 }
 
-.dark\:border-white:where(.dark, .dark *){
+.dark\:border-darkborder:where(.dark, .dark *){
   --tw-border-opacity: 1;
-  border-color: rgb(255 255 255 / var(--tw-border-opacity));
+  border-color: rgb(43 43 43 / var(--tw-border-opacity));
 }
 
 .dark\:text-white:where(.dark, .dark *){
