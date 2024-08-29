@@ -30,8 +30,8 @@
     <meta property="og:site_name" content="OpenDream DM Reference" />
     <meta property="og:url" content="{{pageOrSubsection.permalink | safe}}" />
     <meta property="og:image" content="{{ get_url(path='favicon.png') | safe }}">
-    <meta property="og:description"
-        content="{{ pageOrSubsection.content | striptags | replace(from="\n", to=" ") | truncate(length=100) }}">
+    <meta property="og:description" content="{{ pageOrSubsection.content | striptags | replace(from=" \n", to=" " ) |
+        truncate(length=100) }}">
 
     <link rel="stylesheet" href="{{ get_url(path='index.css', cachebust = true) | safe }}">
 
@@ -89,8 +89,8 @@
             else root.classList.add(newTheme)
 
             const existing = document.getElementById("syntax")
-            if(existing) {
-                if(newTheme == THEME_CLASS_DARK) existing.href = "/syntax-dark.css"
+            if (existing) {
+                if (newTheme == THEME_CLASS_DARK) existing.href = "/syntax-dark.css"
                 else existing.href = "/syntax-light.css"
                 return;
             }
@@ -99,7 +99,7 @@
             newImport.rel = "stylesheet"
             newImport.id = "syntax"
 
-            if(newTheme == THEME_CLASS_DARK) newImport.href = "/syntax-dark.css"
+            if (newTheme == THEME_CLASS_DARK) newImport.href = "/syntax-dark.css"
             else newImport.href = "/syntax-light.css"
 
             document.documentElement.appendChild(newImport)
@@ -128,7 +128,7 @@
                         <img src="{{ get_url(path='favicon.svg') | safe }}" width=24px>
                     </a>
                 </div>
-                <input data-stork="ref-search" class="flex-grow m-2 pr-2" type="text" placeholder="Search" />
+                <input data-stork="ref-search" class="text-input flex-grow m-2 pr-2" type="text" placeholder="Search" />
             </div>
             <div data-stork="ref-search-output" class="results"></div>
             <nav role="navigation" class="pr-2">
@@ -136,9 +136,9 @@
                     {%- block menu -%}
                     {%- set index = get_section(path="_index.md", metadata_only=true) -%}
                     {%- for subsectionPath in index.subsections | sort -%}
-                        {%- set subsection = get_section(path=subsectionPath) -%}
-                        {{ macros::render_subsection(currentPage=pageOrSubsection, subsection=subsection, depth=0) -}}
-                        {%- endfor -%}
+                    {%- set subsection = get_section(path=subsectionPath) -%}
+                    {{ macros::render_subsection(currentPage=pageOrSubsection, subsection=subsection, depth=0) -}}
+                    {%- endfor -%}
                     {%- endblock menu -%}
                 </ul>
             </nav>
@@ -168,20 +168,21 @@
                             </div>
                         </div>
                     </div>
-                    <div>
-                        {% block content %}{% endblock %}
-                    </div>
-
-                    <div class="pt-5">
-                        <hr>
-                        <div class="flex flex-row justify-center pt-3"><a class="text-gray-500"
-                                href="{{macros::get_github_link(page=pageOrSubsection)}}"><i
-                                    class="fa-brands fa-github text-gray-500"></i> Improve this page</a></div>
-                    </div>
-
                 </div>
+                <div>
+                    {% block content %}{% endblock %}
+                </div>
+
+                <div class="pt-5">
+                    <hr>
+                    <div class="flex flex-row justify-center pt-3"><a class="text-gray-500"
+                            href="{{macros::get_github_link(page=pageOrSubsection)}}"><i
+                                class="fa-brands fa-github text-gray-500"></i> Improve this page</a></div>
+                </div>
+
             </div>
-        </section>
+    </div>
+    </section>
     </div>
     <script src="https://files.stork-search.net/releases/v1.6.0/stork.js"></script>
     <script>
