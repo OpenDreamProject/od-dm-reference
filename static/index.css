@@ -780,6 +780,7 @@ video {
   --light-link-hover: #2653CE;
   --light-type: #417D96;
   --light-code: #e4e4e4;
+  --light-hover: #4444444c;
   --dark-bg: #1b1b1b;
   --dark-text: #fdfeff;
   --dark-accent: #1E1E1E;
@@ -788,6 +789,7 @@ video {
   --dark-link-hover: #7594E5;
   --dark-type: #71C6B1;
   --dark-code: #343434;
+  --dark-hover: #fdfeff23;
 }
 
 body {
@@ -1052,6 +1054,14 @@ h6 {
   font-weight: 500;
 }
 
+hr {
+  border-top: 2px solid var(--light-border)
+}
+
+.dark hr {
+  border-top-color: var(--dark-border);
+}
+
 .page-content {
   ol, ul, menu {
     list-style: revert;
@@ -1085,21 +1095,21 @@ h6 {
 }
 
 .nav-link-inactive:hover {
-  background-color: #4444444c;
+  background-color: var(--light-hover);
   border-radius: 2px;
 }
 
 .dark .nav-link-inactive:hover {
-  background-color: #fdfeff23;
+  background-color: var(--dark-hover);
 }
 
 .nav-link-active {
-  background-color: #4444444c;
+  background-color: var(--light-hover);
   border-radius: 2px;
 }
 
 .dark .nav-link-active {
-  background-color: #fdfeff23;
+  background-color: var(--dark-hover);
 }
 
 .zola-anchor > svg {
