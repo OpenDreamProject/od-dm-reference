@@ -890,12 +890,12 @@ a {
   color: var(--dark-link-hover);
 }
 
-input[type="text"] {
+input.text-input {
   border: 1px solid var(--light-border);
   border-radius: 4px;
 }
 
-.dark input[type="text"] {
+.dark input.text-input {
   border-color: var(--dark-border);
   background-color: var(--dark-accent);
   color: var(--dark-text)

@@ -1,5 +1,6 @@
 # The URL the site will be built for
 base_url = "https://ref.opendre.am"
+minify_html = true
 
 [markdown]
 highlight_code = true
