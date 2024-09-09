@@ -25,8 +25,11 @@ jobs:
 
       - name: Build documentation tool
         run: |
-          cd tools/OpenDreamDocumentationTool
-          git submodule update --init --recursive
+          cd ref/tools/OpenDreamDocumentationTool
+          git submodule update --init
+          cd OpenDream
+          git checkout master && git pull
+          git submodule update --init --recursive && cd ..
           dotnet build -o $GITHUB_WORKSPACE/oddt-bin OpenDreamDocumentationTool
 
       - name: Get DMStandard
@@ -43,6 +46,7 @@ jobs:
         continue-on-error: true
         run: |
           cd ref
+          git submodule update --init
           git config --local user.email "action@github.com"
           git config --local user.name "Autodoc"
           git checkout -b autodoc-update
