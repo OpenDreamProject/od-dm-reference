@@ -138,7 +138,7 @@ input.text-input {
     border-radius: 4px;
 }
 
-.dark.text-input {
+.dark input.text-input {
     border-color: var(--dark-border);
     background-color: var(--dark-accent);
     color: var(--dark-text)
