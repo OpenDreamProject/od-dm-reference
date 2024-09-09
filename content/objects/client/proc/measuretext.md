@@ -10,4 +10,5 @@ name = "text" # AUTOGEN STATIC
 name = "style" # AUTOGEN STATIC
 [[extra.args]]
 name = "width" # AUTOGEN STATIC
+default_value = "0" # AUTOGEN FIELD
 +++

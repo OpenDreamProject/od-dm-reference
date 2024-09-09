@@ -12,6 +12,7 @@ name = "Message" # AUTOGEN STATIC
 name = "Title" # AUTOGEN STATIC
 [[extra.args]]
 name = "Button1" # AUTOGEN STATIC
+default_value = "Ok" # AUTOGEN FIELD
 [[extra.args]]
 name = "Button2" # AUTOGEN STATIC
 [[extra.args]]

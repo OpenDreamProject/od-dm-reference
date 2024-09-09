@@ -10,4 +10,5 @@ name = "dir" # AUTOGEN STATIC
 name = "offset" # AUTOGEN STATIC
 [[extra.args]]
 name = "wrap" # AUTOGEN STATIC
+default_value = "0" # AUTOGEN FIELD
 +++

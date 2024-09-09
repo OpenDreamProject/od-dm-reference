@@ -11,9 +11,10 @@ using Tomlyn.Syntax;
 
 namespace OpenDreamDocumentationTool;
 
-internal class DMDocProcParameter(string name, string? type) {
+internal class DMDocProcParameter(string name, string? type, string? value) {
     public readonly string Name = name;
     public readonly string? Type = type;
+    public readonly string? Value = value;
 }
 
 internal class DMDocProc(string name, List<DMDocProcParameter> parameters, string? returnType, bool isUnimplemented, bool isOverride) {
@@ -288,6 +289,7 @@ public static partial class Program {
                 var tomlParameter = param ?? new TomlTable();
                 SetTomlValue(tomlParameter, "name", parameter.Name, "AUTOGEN STATIC");
                 if (parameter.Type != null) SetTomlValue(tomlParameter, "type", parameter.Type);
+                if (parameter.Value != null) SetTomlValue(tomlParameter, "default_value", parameter.Value);
 
                 tomlArgs.Add(tomlParameter);
             }
@@ -329,7 +331,7 @@ public static partial class Program {
                     List<DMDocProcParameter> parsedParameters = [];
                     foreach (var parameter in procDefinition.Parameters) {
                         parsedParameters.Add(
-                            new DMDocProcParameter(parameter.Name, parameter.ObjectType?.PathString));
+                            new DMDocProcParameter(parameter.Name, parameter.ObjectType?.PathString, GetValueFromDmastExpression(parameter.Value)));
                     }
 
                     var unimplemented = false;
@@ -424,14 +426,14 @@ public static partial class Program {
     /// </summary>
     /// <param name="expression">The constant DMAST expression we want to check.</param>
     /// <returns>string, the value of the expression.</returns>
-    private static string GetValueFromDmastExpression(DMASTExpression expression) {
+    private static string? GetValueFromDmastExpression(DMASTExpression? expression) {
         return expression switch {
             DMASTConstantPath path => path.Value.Path.PathString,
             DMASTConstantFloat constantFloat => constantFloat.Value.ToString(CultureInfo.CurrentCulture),
             DMASTConstantInteger constantInteger => constantInteger.Value.ToString(),
             DMASTConstantNull => "",
             DMASTConstantString constantString => constantString.Value,
-            _ => "N/A"
+            _ => null
         };
     }
 

@@ -6,6 +6,7 @@ is_override = false # AUTOGEN FIELD
 name = "file" # AUTOGEN STATIC
 [[extra.args]]
 name = "repeat" # AUTOGEN STATIC
+default_value = "0" # AUTOGEN FIELD
 [[extra.args]]
 name = "wait" # AUTOGEN STATIC
 [[extra.args]]

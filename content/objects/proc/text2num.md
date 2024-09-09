@@ -7,4 +7,5 @@ is_override = false # AUTOGEN FIELD
 name = "T" # AUTOGEN STATIC
 [[extra.args]]
 name = "radix" # AUTOGEN STATIC
+default_value = "10" # AUTOGEN FIELD
 +++

@@ -5,4 +5,5 @@ slug = "IconStates" # AUTOGEN FIELD
 is_override = false # AUTOGEN FIELD
 [[extra.args]]
 name = "mode" # AUTOGEN STATIC
+default_value = "0" # AUTOGEN FIELD
 +++

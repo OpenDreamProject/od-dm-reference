@@ -15,5 +15,6 @@ description = "The direction to attempt to move it in, must be one of the 8 vali
 name = "Speed" # AUTOGEN STATIC
 description = "The speed to move, in pixels."
 od_unimplemented = true
+default_value = "0" # AUTOGEN FIELD
 +++
 Moves Ref in direction Dir, respecting collision defined by {{ atom(var="density" )}} and {{ atom(proc="Cross") }}.
