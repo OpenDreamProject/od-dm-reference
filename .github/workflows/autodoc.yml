@@ -23,29 +23,21 @@ jobs:
       - name: Setup Dotnet
         uses: actions/setup-dotnet@v4
 
-      - name: Checkout documentation tool
-        uses: actions/checkout@v3
-        with:
-          repository: "OpenDreamProject/OpenDream"
-          ref: "ea42739dfa622682d1ce3abdd55730821310539d "
-          path: "oddt"
-
       - name: Build documentation tool
         run: |
-          cd oddt
+          cd tools/OpenDreamDocumentationTool
           git submodule update --init --recursive
-          dotnet build -o ../oddt-bin OpenDreamDocumentationTool
-          cd ..
+          dotnet build -o $GITHUB_WORKSPACE/oddt-bin OpenDreamDocumentationTool
 
       - name: Get DMStandard
         uses: actions/checkout@v3
         with:
           repository: "OpenDreamProject/OpenDream"
-          path: od-master
+          path: opendream
 
       - name: Run Documentation Tool
         run: |
-          dotnet oddt-bin/OpenDreamDocumentationTool.dll --documentation=ref --standard=od-master/DMCompiler/DMStandard
+          dotnet oddt-bin/OpenDreamDocumentationTool.dll --documentation=ref --standard=opendream/DMCompiler/DMStandard
 
       - name: Commit
         continue-on-error: true
