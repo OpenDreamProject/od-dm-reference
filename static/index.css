@@ -704,6 +704,11 @@ video {
   padding-right: 0.25rem;
 }
 
+.px-2{
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
 .pl-10{
   padding-left: 2.5rem;
 }
@@ -895,7 +900,7 @@ input.text-input {
   border-radius: 4px;
 }
 
-.dark.text-input {
+.dark input.text-input {
   border-color: var(--dark-border);
   background-color: var(--dark-accent);
   color: var(--dark-text)

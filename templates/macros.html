@@ -139,7 +139,7 @@
             {{- self::render_parent_type(page=url) }}
         {%- endif %}
         <a href="{{ url.permalink | safe}}" class="code-title type">{{url.title}}</a>
-        <i class="fa-solid fa-arrow-left"></i>
+        <i class="fa-solid fa-arrow-left px-2"></i>
     {%- endif -%}
 {% endmacro render_parent_type %}
 
@@ -166,7 +166,7 @@
             {%- endif %}
 
             <a href="{{parentSection.permalink | safe}}" class="{{class}}">{{parentSection.title}}</a>
-            <i class="fa-solid fa-arrow-left"></i>
+            <i class="fa-solid fa-arrow-left px-2"></i>
             {%- endif -%}
         {%- endif -%}
 {%- endmacro render_page_parent_type %}
