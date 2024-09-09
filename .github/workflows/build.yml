@@ -38,11 +38,7 @@ jobs:
           version: "1.6.0"
 
       - name: Build project
-        run: npm run build
-
-      - name: Generate Index
-        run: |
-          stork build --input public/toml/index.html --output public/search.st
+        run: npm run build:index
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

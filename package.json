@@ -12,6 +12,7 @@
     "watch-css": "npx tailwindcss -w -i styles/index.css -o static/index.css",
     "watch-zola": "zola serve",
     "build": "NODE_ENV=production npx tailwindcss -i styles/index.css -o static/index.css; ZOLA_ENV=prod zola build",
+    "build:index": "sed -i 's/minify_html = true/minify_html = false/' config.toml && zola build -o index && sed -i 's/minify_html = false/minify_html = true/' config.toml && npm run build && stork build --input index/toml/index.html --output public/search.st",
     "watch": "npx concurrently 'npm:watch-css' 'npm:watch-zola'"
   },
   "author": "",
