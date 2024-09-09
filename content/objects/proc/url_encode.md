@@ -7,4 +7,5 @@ is_override = false # AUTOGEN FIELD
 name = "PlainText" # AUTOGEN STATIC
 [[extra.args]]
 name = "format" # AUTOGEN STATIC
+default_value = "0" # AUTOGEN FIELD
 +++

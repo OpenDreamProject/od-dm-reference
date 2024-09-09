@@ -14,6 +14,7 @@ name = "NewLoc" # AUTOGEN STATIC
 type = "/atom" # AUTOGEN FIELD
 [[extra.args]]
 name = "Dir" # AUTOGEN STATIC
+default_value = "0" # AUTOGEN FIELD
 +++
 
 TODO `TODO` TODO

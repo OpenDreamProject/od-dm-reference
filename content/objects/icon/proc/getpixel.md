@@ -12,8 +12,11 @@ name = "y" # AUTOGEN STATIC
 name = "icon_state" # AUTOGEN STATIC
 [[extra.args]]
 name = "dir" # AUTOGEN STATIC
+default_value = "0" # AUTOGEN FIELD
 [[extra.args]]
 name = "frame" # AUTOGEN STATIC
+default_value = "0" # AUTOGEN FIELD
 [[extra.args]]
 name = "moving" # AUTOGEN STATIC
+default_value = "-1" # AUTOGEN FIELD
 +++

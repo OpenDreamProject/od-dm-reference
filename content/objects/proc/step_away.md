@@ -11,6 +11,8 @@ name = "Trg" # AUTOGEN STATIC
 type = "/atom" # AUTOGEN FIELD
 [[extra.args]]
 name = "Max" # AUTOGEN STATIC
+default_value = "5" # AUTOGEN FIELD
 [[extra.args]]
 name = "Speed" # AUTOGEN STATIC
+default_value = "0" # AUTOGEN FIELD
 +++

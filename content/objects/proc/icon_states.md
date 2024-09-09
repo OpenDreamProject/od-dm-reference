@@ -7,4 +7,5 @@ is_override = false # AUTOGEN FIELD
 name = "Icon" # AUTOGEN STATIC
 [[extra.args]]
 name = "mode" # AUTOGEN STATIC
+default_value = "0" # AUTOGEN FIELD
 +++
