@@ -52,12 +52,10 @@
 
     {%- set depthIndent = 20 * depth -%}
     <li class="{{class}}" data-expand-tag="{{subsection.path}}">
-        <span style="padding-left: {{depthIndent}}px" class="flex flex-row{{spanClass}}">
-        <span class="px-1"><i class="fa-solid fa-caret-right nav-caret {{iconClass}} nav-toggle cursor-pointer"></i></span>
-        <a href="{{ subsection.permalink | safe }}" class="{{linkClass}}">
-            {{ subsection.title }}
+        <a style="padding-left: {{depthIndent}}px" class="flex flex-row{{spanClass}} {{linkClass}}" href="{{ subsection.permalink | safe }}">
+        <span class="px-1"><i class="fa-solid fa-caret-right nav-caret {{iconClass}} nav-toggle cursor-pointer text-gray-700 dark:text-gray-200"></i></span>
+        {{ subsection.title }}
         </a>
-        </span>
         {%- if subsection.subsections -%}
         <ul>
             {%- if subsection.extra.sort_weight -%}
@@ -109,12 +107,10 @@
 
     {%- set depthIndent = 20 * (depth + 1) -%}
     <li class="text-title {{class}}">
-        <span style="padding-left: {{depthIndent}}px" class="flex flex-row{{spanClass}}">
-        <span><i class="fa-solid fa-minus"></i></span>
-        <a href="{{ page.permalink | safe }}">
-            {{ page.title }}
+        <a style="padding-left: {{depthIndent}}px" class="flex flex-row{{spanClass}}" href="{{ page.permalink | safe }}">
+        <span><i class="fa-solid fa-minus mr-1"></i></span>
+        {{ page.title }}
         </a>
-        </span>
     </li>
 {% endmacro %}
 

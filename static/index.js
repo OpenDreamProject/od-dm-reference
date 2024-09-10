@@ -13,6 +13,7 @@ const handleClick = () => {
 }
 
 const handleNavClick = (event) => {
+    event.preventDefault()
     event.target.classList.toggle("fa-rotate-90")
     const items = event.target.parentNode.parentNode.parentNode.children
     for(const item of items) {
