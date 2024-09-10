@@ -1,5 +1,8 @@
 +++
 title = "OpenDream DM Reference"
+
+[extra]
+skip_parent_rendering = true
 +++
 
 Welcome to the OpenDream DM Reference. 
