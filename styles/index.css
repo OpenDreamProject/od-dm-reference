@@ -115,6 +115,10 @@ a {
     color: var(--dark-link);
 }
 
+.dark .subtle-link {
+    color: rgb(107 114 128);
+}
+
 .type {
     text-decoration: dotted;
     color: var(--light-type);
