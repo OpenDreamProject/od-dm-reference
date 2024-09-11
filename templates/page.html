@@ -13,7 +13,7 @@
 
 <div class="page-content">
 {{ page.content | safe }}
-{%- if not section.content | length -%}
+{%- if not page.content | length -%}
 <div class="border-l-2 border-yellow-600 pl-5">
     <div class="text-xl">Work In Progress 👷</div>
     This page doesn't have any content at the moment. You can contribute to this page <a href="{{macros::get_github_link(page=page)}}"><i class="fa-brands fa-github text-black dark:text-white"></i> here</a>.
