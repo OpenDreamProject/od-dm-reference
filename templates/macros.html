@@ -284,7 +284,7 @@
 {%- endmacro render_proc_args_short %}
 
 {% macro render_backlinks(page) %}
-    {% if section.backlinks | length %}
+    {% if page.backlinks | length %}
     <div>
     <h4>See also:</h4>
     <ul>
@@ -443,6 +443,34 @@
         </div></div>
         {%- endif -%}
     {% endfor %}
+{% endmacro %}
+
+{% macro render_operator(page) %}
+{% if page.extra.usage %}
+<div class="border-l-2 border-gray-500 pl-3">
+    <div class="text-xl">Usage:</div> 
+    <div class="pl-5">
+        {{ page.extra.usage | linebreaksbr | markdown | safe }}
+    </div> 
+    </div>
+{% endif %}
+
+{% if page.extra.return %}
+<div class="border-l-2 border-gray-500 pl-3">
+    <div class="text-xl">Returns:</div> 
+    <div class="pl-5">
+        {{ page.extra.return | linebreaksbr | markdown | safe }}
+    </div> 
+    </div>
+{% endif %}
+
+{{ page.content | safe }}
+{%- if not page.content | length and not page.extra.return and not page.extra.usage -%}
+<div class="border-l-2 border-yellow-600 pl-5">
+    <div class="text-xl">Work In Progress 👷</div>
+    This page doesn't have any content at the moment. You can contribute to this page <a href="{{macros::get_github_link(page=page)}}"><i class="fa-brands fa-github text-black dark:text-white"></i> here</a>.
+</div>
+{%- endif -%}
 {% endmacro %}
 
 {% macro get_github_link(page) %}
