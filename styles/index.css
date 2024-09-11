@@ -8,6 +8,12 @@ This file should be edited in styles/index.css, and *not* static/index.css
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    pre {
+        @apply dark:shadow-lg shadow-md
+    }
+}
+
 :root {
     --light-bg: #fafafa;
     --light-text: #383838;
@@ -250,7 +256,9 @@ pre {
 }
 
 code,
-pre, .code-title, .code-nav {
+pre,
+.code-title,
+.code-nav {
     font-family: "JetBrains Mono", monospace;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -309,18 +317,24 @@ hr {
 }
 
 .page-content {
-    ol, ul, menu {
+
+    ol,
+    ul,
+    menu {
         list-style: revert;
         padding: revert;
     }
 
-    h1, h2 {
+    h1,
+    h2 {
         border-bottom: 2px solid var(--light-border);
     }
 }
 
-.dark .page-content { 
-    h1, h2 {
+.dark .page-content {
+
+    h1,
+    h2 {
         border-bottom: 2px solid var(--dark-border);
     }
 }
@@ -359,7 +373,7 @@ hr {
     background-color: var(--dark-hover);
 }
 
-.zola-anchor > svg {
+.zola-anchor>svg {
     display: inline;
 }
 
@@ -368,7 +382,7 @@ hr {
     display: none;
 }
 
-*:hover > .zola-anchor {
+*:hover>.zola-anchor {
     display: inline;
 }
 
@@ -378,14 +392,14 @@ hr {
     gap: 1.25rem;
 }
 
-#theme-switch > .fa-moon {
+#theme-switch>.fa-moon {
     display: none;
 }
 
-.dark #theme-switch > .fa-moon {
+.dark #theme-switch>.fa-moon {
     display: inline;
 }
 
-.dark #theme-switch > .fa-sun {
+.dark #theme-switch>.fa-sun {
     display: none;
 }
