@@ -289,7 +289,7 @@
     <h4>See also:</h4>
     <ul>
     {% for backlink in page.backlinks %}
-        <li><a href="{{backlink.permalink}}">{{backlink.title}}</a></li>
+        <div class="pl-3">- <a href="{{backlink.permalink}}">{{backlink.title}}</a></div>
     {% endfor %}
     </ul>
     </div>
@@ -446,6 +446,7 @@
 {% endmacro %}
 
 {% macro render_operator(page) %}
+<div class="page-content">
 {% if page.extra.usage %}
 <div class="border-l-2 border-gray-500 pl-3">
     <div class="text-xl">Usage:</div> 
@@ -471,6 +472,7 @@
     This page doesn't have any content at the moment. You can contribute to this page <a href="{{macros::get_github_link(page=page)}}"><i class="fa-brands fa-github text-black dark:text-white"></i> here</a>.
 </div>
 {%- endif -%}
+</div>
 {% endmacro %}
 
 {% macro get_github_link(page) %}
