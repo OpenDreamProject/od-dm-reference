@@ -328,27 +328,22 @@ hr {
     border-top-color: var(--dark-border);
 }
 
-.page-content {
-
-    ol,
-    ul,
-    menu {
-        list-style: revert;
-        padding: revert;
-    }
-
-    h1,
-    h2 {
-        border-bottom: 2px solid var(--light-border);
-    }
+.page-content ol,
+.page-content ul,
+.page-content menu {
+    list-style: revert;
+    padding: revert;
 }
 
-.dark .page-content {
+.page-content h1,
+.page-content h2 {
+    border-bottom: 2px solid var(--light-border);
+}
 
-    h1,
-    h2 {
-        border-bottom: 2px solid var(--dark-border);
-    }
+
+.dark .page-content h1,
+.dark .page-content h2 {
+    border-bottom: 2px solid var(--dark-border);
 }
 
 .safe-h-screen {
