@@ -330,7 +330,7 @@
     <div class="border-l-2 border-gray-500 pl-3">
     <div class="text-xl">Returns:</div> 
     <div class="pl-5">
-        {% if page.extra.return_type %}{{ page.extra.return_type }}{% endif %}{% if page.extra.return_type and page.extra.return_type_desc %}: {% endif %}{% if page.extra.return_type_desc %} {{ page.extra.return_type_desc | linebreaksbr | markdown | safe }}{% endif %}
+        {% if page.extra.return_type %}{{ page.extra.return_type }}{% endif %}{% if page.extra.return_type and page.extra.return_type_desc %}: {% endif %}{% if page.extra.return_type_desc %} {{ page.extra.return_type_desc | linebreaksbr | markdown(inline=true) | safe }}{% endif %}
     </div> 
     </div>
     {% endif %}
