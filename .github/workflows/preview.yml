@@ -21,7 +21,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Configure Base Directory
-        run: sed -i 's/base_url = ".*"/base_url = "https://${{ env.DEPLOY_REPO_OWNER }}.github.io/${{ env.DEPLOY_REPO }}/pr-${{ github.event.number }}"/' config.toml
+        run: sed -i 's/base_url = ".*"/base_url = "https:\/\/${{ env.DEPLOY_REPO_OWNER }}.github.io\/${{ env.DEPLOY_REPO }}\/pr-${{ github.event.number }}"/' config.toml
 
       - name: Setup Node
         uses: actions/setup-node@v4
