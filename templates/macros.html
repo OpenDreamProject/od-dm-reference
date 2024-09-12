@@ -288,11 +288,11 @@
     {% if page.backlinks | length %}
     <div>
     <h4>See also:</h4>
-    <ul>
+    <div class="flex flex-col">
     {% for backlink in page.backlinks %}
         <div class="pl-3">- <a href="{{backlink.permalink}}">{{backlink.title}}</a></div>
     {% endfor %}
-    </ul>
+    </div>
     </div>
     {% endif %}
 {% endmacro render_backlinks %}
