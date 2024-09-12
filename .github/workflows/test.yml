@@ -42,5 +42,5 @@ jobs:
       - name: Test Documentation Tool
         run: |
           cd tools/OpenDreamDocumentationTool
-          git submodule update --init
+          git submodule update --init --recursive
           dotnet run --project OpenDreamDocumentationTool/OpenDreamDocumentationTool.csproj -- --documentation=../.. --standard=OpenDream/DMCompiler/DMStandard
