@@ -8,6 +8,12 @@ This file should be edited in styles/index.css, and *not* static/index.css
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    pre {
+        @apply dark:shadow-lg shadow-md
+    }
+}
+
 :root {
     --light-bg: #fafafa;
     --light-text: #383838;
@@ -113,6 +119,10 @@ a {
 
 .dark a {
     color: var(--dark-link);
+}
+
+.dark .subtle-link {
+    color: rgb(107 114 128);
 }
 
 .type {
@@ -245,19 +255,34 @@ pre {
     border-color: var(--dark-border);
 }
 
-code, pre, .code-title, .code-nav {
+code,
+pre,
+.code-title,
+.code-nav {
     font-family: "JetBrains Mono", monospace;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
 }
 
+@media (max-width: 768px) {
+    .left-bar .text-title {
+        font-size: 16px;
+    }
+}
+
 .text-title {
-    font-size: 24px;
+    font-size: 22px;
     font-family: "Nunito", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
+}
+
+@media (max-width: 768px) {
+    .left-bar .text-title {
+        font-size: 18px;
+    }
 }
 
 .text-title a {
@@ -303,13 +328,27 @@ hr {
     border-top-color: var(--dark-border);
 }
 
-.page-content ol, .page-content ul, .page-content menu {
-    list-style: revert;
-    padding: revert;
+.page-content {
+
+    ol,
+    ul,
+    menu {
+        list-style: revert;
+        padding: revert;
+    }
+
+    h1,
+    h2 {
+        border-bottom: 2px solid var(--light-border);
+    }
 }
 
-.dark .page-content h1, .dark .page-content h2 { 
-    border-bottom: 2px solid var(--dark-border);
+.dark .page-content {
+
+    h1,
+    h2 {
+        border-bottom: 2px solid var(--dark-border);
+    }
 }
 
 .safe-h-screen {
@@ -346,7 +385,7 @@ hr {
     background-color: var(--dark-hover);
 }
 
-.zola-anchor > svg {
+.zola-anchor>svg {
     display: inline;
 }
 
@@ -355,7 +394,7 @@ hr {
     display: none;
 }
 
-*:hover > .zola-anchor {
+*:hover>.zola-anchor {
     display: inline;
 }
 
@@ -365,14 +404,14 @@ hr {
     gap: 1.25rem;
 }
 
-#theme-switch > .fa-moon {
+#theme-switch>.fa-moon {
     display: none;
 }
 
-.dark #theme-switch > .fa-moon {
+.dark #theme-switch>.fa-moon {
     display: inline;
 }
 
-.dark #theme-switch > .fa-sun {
+.dark #theme-switch>.fa-sun {
     display: none;
 }

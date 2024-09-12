@@ -98,7 +98,7 @@ public static partial class Program {
 
             var pageTitle = (string)doc["title"];
 
-            if (file.Contains("objects/proc")) {
+            if (file.Contains("language/proc")) {
                 pathToFile["globalProcs"] = file;
                 continue;
             }

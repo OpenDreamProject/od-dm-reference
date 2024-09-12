@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  test:
-    name: Test
+  test-build:
+    name: Test Build
     runs-on: ubuntu-latest
 
     steps:
@@ -27,3 +27,20 @@ jobs:
 
       - name: Build project
         run: ZOLA_ENV=dev zola build
+
+  test-oddt:
+    name: Test Documentation Tool
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Dotnet
+        uses: actions/setup-dotnet@v4
+
+      - name: Test Documentation Tool
+        run: |
+          cd tools/OpenDreamDocumentationTool
+          git submodule update --init --recursive
+          dotnet run --project OpenDreamDocumentationTool/OpenDreamDocumentationTool.csproj -- --documentation=../.. --standard=OpenDream/DMCompiler/DMStandard

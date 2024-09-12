@@ -90,8 +90,8 @@
 
             const existing = document.getElementById("syntax")
             if (existing) {
-                if (newTheme == THEME_CLASS_DARK) existing.href = "/syntax-dark.css"
-                else existing.href = "/syntax-light.css"
+                if (newTheme == THEME_CLASS_DARK) existing.href = "{{ get_url(path='syntax-dark.css') | safe }}"
+                else existing.href = "{{ get_url(path='syntax-light.css') | safe }}"
                 return;
             }
 
@@ -99,8 +99,8 @@
             newImport.rel = "stylesheet"
             newImport.id = "syntax"
 
-            if (newTheme == THEME_CLASS_DARK) newImport.href = "/syntax-dark.css"
-            else newImport.href = "/syntax-light.css"
+            if (newTheme == THEME_CLASS_DARK) newImport.href = "{{ get_url(path='syntax-dark.css') | safe }}"
+            else newImport.href = "{{ get_url(path='syntax-light.css') | safe }}"
 
             document.documentElement.appendChild(newImport)
 
@@ -120,8 +120,8 @@
 
     </script>
 
-    <div class="flex pl-3 h-[100%]">
-        <div class="left-bar hidden md:block h-[100%]" id="left-bar">
+    <div class="flex h-[100%]">
+        <div class="left-bar ml-3 hidden md:block h-[100%] shadow-md dark:shadow-xl" id="left-bar">
             <div class="flex flex-row">
                 <div class="flex flex-col justify-center">
                     <a href="{{ config.base_url | safe }}">
@@ -146,7 +146,7 @@
 
         <section class="section">
             <div class="mt-5 mx-5">
-                <div class="flex flex-col gap-5">
+                <div class="flex flex-col gap-5 border-b-2 border-lightborder dark:border-darkborder pb-2 mb-3">
                     <div class="flex flex-col-reverse gap-5 md:flex-row justify-between">
                         <div>{% block header %}{% endblock %}</div>
                         <div class="flex flex-row justify-between md:justify-end">
@@ -159,11 +159,10 @@
                                 <div class="p-1">
                                     <a href="https://github.com/OpenDreamProject/OpenDream" target="_blank">
                                         <i class="fa-brands fa-github fa-2xl text-black dark:text-white"></i>
+                                    </a>
                                 </div>
-                                </a>
                                 <div class="p-1 md:hidden">
-                                    <i class="fa-solid fa-bars fa-2xl cursor-pointer" id="navigation-button"
-                                        class="cursor-pointer md:hidden"></i>
+                                    <i class="fa-solid fa-bars fa-2xl cursor-pointer" id="navigation-button"></i>
                                 </div>
                             </div>
                         </div>
@@ -175,9 +174,8 @@
 
                 <div class="pt-5">
                     <hr>
-                    <div class="flex flex-row justify-center pt-3"><a class="text-gray-500"
-                            href="{{macros::get_github_link(page=pageOrSubsection)}}"><i
-                                class="fa-brands fa-github text-gray-500"></i> Improve this page</a></div>
+                    <div class="flex flex-row justify-center pt-3"><a class="subtle-link" href="{{macros::get_github_link(page=pageOrSubsection)}}">
+                        <i class="fa-brands fa-github subtle-link"></i> Improve this page</a></div>
                 </div>
 
             </div>
