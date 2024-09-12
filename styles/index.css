@@ -265,12 +265,24 @@ pre,
     font-style: normal;
 }
 
+@media (max-width: 768px) {
+    .left-bar .text-title {
+        font-size: 16px;
+    }
+}
+
 .text-title {
-    font-size: 24px;
+    font-size: 22px;
     font-family: "Nunito", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
+}
+
+@media (max-width: 768px) {
+    .left-bar .text-title {
+        font-size: 18px;
+    }
 }
 
 .text-title a {
