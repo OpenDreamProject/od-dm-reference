@@ -1,0 +1,42 @@
+name: Deploy PR previews
+
+on:
+  pull_request_target:
+    branches:
+      - main
+
+concurrency: preview-${{ github.ref }}
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+
+      - name: Install Zora
+        uses: taiki-e/install-action@v2
+        with:
+          tool: zola@0.18.0
+
+      - name: Install Stork
+        uses: baptiste0928/cargo-install@v3.1.0
+        with:
+          crate: stork-search
+          version: "1.6.0"
+
+      - name: Build project
+        run: npm run build:index
+
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./public/
+          deploy-repository: harryob/od-ref-preview
+          token: ${{ secrets.PREVIEW_TOKEN }}
