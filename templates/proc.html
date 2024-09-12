@@ -3,12 +3,12 @@
 
 {% block title %}
 {%- set potentialTitle = macros::render_page_parent_type(page=page, skip_level=1, recursive=false) | striptags | trim | safe -%}
-<title>{{ potentialTitle }}/{{ page.title }}() - OpenDream DM Reference</title>
+<title>{{ potentialTitle }}{% if potentialTitle %}/{% endif %}{{ page.title }}() - OpenDream DM Reference</title>
 {% endblock title %}
 
 {% block ogtitle %}
 {%- set potentialTitle = macros::render_page_parent_type(page=page, skip_level=1, recursive=false) | striptags | trim | safe -%}
-{%- if potentialTitle == "" -%}
+{%- if not potentialTitle -%}
     {%- set potentialTitle = "global" -%}
 {%- endif -%}
 <meta property="og:title" content="{{page.title}} ({{ potentialTitle }} proc)" />
