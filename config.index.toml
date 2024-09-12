@@ -1,0 +1,9 @@
+base_url = "https://ref.opendre.am"
+minify_html = false
+
+[slugify]
+paths = "safe"
+
+[extra]
+repo = "https://github.com/OpenDreamProject/od-dm-reference"
+branch = "main"

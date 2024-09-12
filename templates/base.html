@@ -90,8 +90,8 @@
 
             const existing = document.getElementById("syntax")
             if (existing) {
-                if (newTheme == THEME_CLASS_DARK) existing.href = "/syntax-dark.css"
-                else existing.href = "/syntax-light.css"
+                if (newTheme == THEME_CLASS_DARK) existing.href = "{{ get_url(path='syntax-dark.css') | safe }}"
+                else existing.href = "{{ get_url(path='syntax-light.css') | safe }}"
                 return;
             }
 
@@ -99,8 +99,8 @@
             newImport.rel = "stylesheet"
             newImport.id = "syntax"
 
-            if (newTheme == THEME_CLASS_DARK) newImport.href = "/syntax-dark.css"
-            else newImport.href = "/syntax-light.css"
+            if (newTheme == THEME_CLASS_DARK) newImport.href = "{{ get_url(path='syntax-dark.css') | safe }}"
+            else newImport.href = "{{ get_url(path='syntax-light.css') | safe }}"
 
             document.documentElement.appendChild(newImport)
 
