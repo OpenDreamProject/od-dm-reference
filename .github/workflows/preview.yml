@@ -20,9 +20,6 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Configure Base Directory
-        run: sed -i 's/base_url = ".*"/base_url = "https:\/\/${{ env.DEPLOY_REPO_OWNER }}.github.io\/${{ env.DEPLOY_REPO }}\/pr-${{ github.event.number }}"/' config.toml
-
       - name: Setup Node
         uses: actions/setup-node@v4
 
@@ -41,7 +38,12 @@ jobs:
           version: "1.6.0"
 
       - name: Build project
-        run: npm run build:index
+        run: npm run build -- -u "https://${{ env.DEPLOY_REPO_OWNER }}.github.io/${{ env.DEPLOY_REPO }}/pr-${{ github.event.number }}"
+
+      - name: Build index
+        run: |
+          npm run build:search-config -- -u "https://${{ env.DEPLOY_REPO_OWNER }}.github.io/${{ env.DEPLOY_REPO }}/pr-${{ github.event.number }}"
+          npm run build:search-index
 
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1
