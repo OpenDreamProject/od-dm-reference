@@ -1,9 +1,10 @@
 +++
 title = "ckey"
 [extra]
-return_type = "null, text" # AUTOGEN FIELD
-return_type_desc = "The canonical form of the provided string"
 is_override = false # AUTOGEN FIELD
+[extra.return]
+type = "null, text" # AUTOGEN FIELD
+description = "The canonical form of the provided string"
 [[extra.args]]
 name = "Key" # AUTOGEN STATIC
 description = "The string to canonicalize"

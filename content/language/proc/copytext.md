@@ -1,9 +1,8 @@
 +++
 title = "copytext"
-[extra]
-return_type = "null, text" # AUTOGEN FIELD
-return_type_desc = "A new string copied from the provided points"
-is_override = false # AUTOGEN FIELD
+[extra.return]
+type = "null, text" # AUTOGEN FIELD
+description = "A new string copied from the provided points"
 [[extra.args]]
 name = "T" # AUTOGEN STATIC
 description = "The text string to copy from"

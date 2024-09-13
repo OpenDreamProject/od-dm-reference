@@ -1,9 +1,10 @@
 +++
 title = "ceil"
 [extra]
-return_type = "num" # AUTOGEN FIELD
-return_type_desc = "The ceiling of the provided number."
 is_override = false # AUTOGEN FIELD
+[extra.return]
+type = "num" # AUTOGEN FIELD
+description = "The ceiling of the provided number."
 [[extra.args]]
 name = "A" # AUTOGEN STATIC
 description = "Number"

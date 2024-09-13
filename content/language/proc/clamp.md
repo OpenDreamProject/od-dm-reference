@@ -1,15 +1,16 @@
 +++
 title = "clamp"
 [extra]
-return_type = "null, num, path, /list" # AUTOGEN FIELD
+is_override = false # AUTOGEN FIELD
+[extra.return]
+type = "null, num, path, /list" # AUTOGEN FIELD
 
-return_type_desc = '''
+description = '''
 
 The provided number, kept between the Low and High values.
 The original list, with the numeric contents kept between the Low and High values.
 '''
 
-is_override = false # AUTOGEN FIELD
 
 format = [
     [

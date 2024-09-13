@@ -1,9 +1,11 @@
 +++
 title = "block"
 [extra]
-return_type = "path, /list" # AUTOGEN FIELD
-return_type_desc = "A list of turfs in a 3D block"
 is_override = false # AUTOGEN FIELD
+
+[extra.return]
+type = "path, /list" # AUTOGEN FIELD
+description = "A list of turfs in a 3D block"
 
 format = [
     [

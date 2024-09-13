@@ -297,8 +297,11 @@ public static partial class Program {
             extras["args"] = tomlArgs;
         }
 
-        if (proc.ReturnType != null) {
-            SetTomlValue(extras, "return_type", proc.ReturnType);
+        if (proc.ReturnType != null)
+        {
+            extras.TryGetValue("return", out var potentialReturns);
+            var returns = (TomlTable?)potentialReturns ?? new TomlTable();
+            SetTomlValue(returns, "type", proc.ReturnType);
         }
 
         SetTomlValue(extras, "is_override", proc.IsOverride);
