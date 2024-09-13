@@ -1,5 +1,7 @@
 +++
 title = "copytext_char"
+render = false
+
 [extra]
 return_type = "null, text" # AUTOGEN FIELD
 is_override = false # AUTOGEN FIELD

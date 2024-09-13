@@ -101,6 +101,7 @@ Zola allows us to put arbitrary TOML under the [extra] section, which we do for 
   - `parent_type` - This allows us to construct the parent types for any object - such as /mob going to /atom/movable, then /atom, then /datum.
 - Procs:
   - `return_type_desc` - This allows us to add extra information about the return type - for example, what specific return types mean. It can also be used to document the return type if not pulled from DMStandard.
+  - `format` - Allows us to override the argument structure pulled from DMStandard - see `block()` for an example of this.
   - `[[args.description]]` - We can document individual arguments to procs with the `description` field.
   - `[[args.od_unimplemented]]` - If this argument is implemented or not in the OpenDream implementation of BYOND.
 - Vars:
