@@ -188,6 +188,26 @@
     {% endif %}
 {% endmacro render_proc_args_long %}
 
+{% macro render_proc_usage(page) %}
+    <div class="border-l-2 border-gray-500 pl-3">
+        <div class="text-xl">Usage:</div>
+        <div class="flex flex-col">
+        {% for form in page.extra.format %}
+            <div class="pl-5">{{ page.title }}(
+            {%- for arg in form -%}
+            {% if arg.type %}{{ self::render_single_type(type=arg.type)}}/{% endif %}{{arg.name}}{%- if arg.default_value %} = {{ self::render_proc_default_value(value=arg.default_value) }}{% endif %}{% if not loop.last %},{% endif %}{%- if arg.od_unimplemented -%}<div class="text-sm text-red-400 border-l-2 border-red-400 pl-2 inline ml-2">Unimplemented 🏗️</div>{%- endif -%}{% if not loop.last %} {% endif -%}
+            {% endfor -%}
+            ){% for arg in form %}
+            {%- if arg.description -%}
+            <div class="pl-3">{{ arg.name }}: {{ arg.description }}</div>
+            {%- endif -%}
+            {%- endfor -%}
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endmacro render_proc_args_long %}
+
 {%- macro render_proc_default_value(value) -%}
 {%- set potentialNumber = value | int -%}
 {%- if potentialNumber is defined -%}
@@ -324,7 +344,11 @@
 {% macro render_proc(page, list=false) %}
     <div class="flex flex-col gap-5">
 
+    {%- if not page.extra.format -%}
     {{ macros::render_proc_args_long(page=page) }}
+    {%- else -%}
+    {{ macros::render_proc_usage(page=page) }}
+    {%- endif -%}
 
     {% if page.extra.return_type or page.extra.return_type_desc %}
     <div class="border-l-2 border-gray-500 pl-3">
