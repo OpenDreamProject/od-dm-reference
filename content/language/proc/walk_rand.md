@@ -1,7 +1,5 @@
 +++
 title = "walk_rand"
-[extra]
-is_override = false # AUTOGEN FIELD
 [[extra.args]]
 name = "Ref" # AUTOGEN STATIC
 [[extra.args]]

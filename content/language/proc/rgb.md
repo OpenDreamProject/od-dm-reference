@@ -1,8 +1,5 @@
 +++
 title = "rgb"
-[extra]
-return_type = "null, text" # AUTOGEN FIELD
-is_override = false # AUTOGEN FIELD
 [[extra.args]]
 name = "R" # AUTOGEN STATIC
 [[extra.args]]
@@ -13,4 +10,6 @@ name = "B" # AUTOGEN STATIC
 name = "A" # AUTOGEN STATIC
 [[extra.args]]
 name = "space" # AUTOGEN STATIC
+[extra.return]
+type = "null, text" # AUTOGEN FIELD
 +++

@@ -3,7 +3,6 @@ title = "Replace_char"
 slug = "Replace_char" # AUTOGEN FIELD
 [extra]
 od_unimplemented = true # AUTOGEN FIELD
-is_override = false # AUTOGEN FIELD
 [[extra.args]]
 name = "haystack" # AUTOGEN STATIC
 [[extra.args]]

@@ -1,8 +1,6 @@
 +++
 title = "Copy"
 slug = "Copy" # AUTOGEN FIELD
-[extra]
-is_override = false # AUTOGEN FIELD
 [[extra.args]]
 name = "Start" # AUTOGEN STATIC
 default_value = "1" # AUTOGEN FIELD

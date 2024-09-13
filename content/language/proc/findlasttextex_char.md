@@ -2,7 +2,6 @@
 title = "findlasttextEx_char"
 slug = "findlasttextEx_char" # AUTOGEN FIELD
 [extra]
-is_override = false # AUTOGEN FIELD
 od_unimplemented = true # AUTOGEN FIELD
 [[extra.args]]
 name = "Haystack" # AUTOGEN STATIC

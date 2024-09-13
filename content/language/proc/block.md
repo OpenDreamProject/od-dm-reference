@@ -1,25 +1,9 @@
 +++
 title = "block"
-[extra]
-return_type = "path, /list" # AUTOGEN FIELD
-return_type_desc = "A list of turfs in a 3D block"
-is_override = false # AUTOGEN FIELD
-
-format = [
-    [
-        { name = "Start", type = "/atom", description = "The lower left corner of the block." }, 
-        { name = "End", type = "/atom", description = "The upper right corner of the block." }
-    ],
-    [
-        { name = "StartX" },
-        { name = "StartY" },
-        { name = "StartZ" },
-        { name = "EndX" },
-        { name = "EndY" },
-        { name = "EndZ" },
-    ]
-]
-
+[extra.return]
+type = "path, /list" # AUTOGEN FIELD
+description = "A list of turfs in a 3D block"
+format = [[{name = "Start", type = "/atom", description = "The lower left corner of the block."}, {name = "End", type = "/atom", description = "The upper right corner of the block."}], [{name = "StartX"}, {name = "StartY"}, {name = "StartZ"}, {name = "EndX"}, {name = "EndY"}, {name = "EndZ"}]]
 [[extra.args]]
 name = "Start" # AUTOGEN STATIC
 type = "/atom" # AUTOGEN FIELD

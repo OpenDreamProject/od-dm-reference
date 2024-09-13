@@ -1,12 +1,8 @@
 +++
 title = "cmptext"
 [extra]
-return_type = "num" # AUTOGEN FIELD
-return_type_desc = "1 if all the provided arguments are the same, 0 otherwise"
-
-format = [[{ name = "string1" }, { name = "string2" }, { name = "..." }]]
-
-is_override = false # AUTOGEN FIELD
+format = [[{name = "string1"}, {name = "string2"}, {name = "..."}]]
+return = {type = "num", description = "1 if all the provided arguments are the same, 0 otherwise"}
 [[extra.args]]
 name = "T1" # AUTOGEN STATIC
 description = "A text string to compare against."
