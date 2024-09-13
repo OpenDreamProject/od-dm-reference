@@ -1,8 +1,6 @@
 +++
 title = "Click"
 slug = "Click" # AUTOGEN FIELD
-[extra]
-is_override = false # AUTOGEN FIELD
 [[extra.args]]
 name = "location" # AUTOGEN STATIC
 description = "Where this object was clicked."

@@ -1,8 +1,6 @@
 +++
 title = "MouseDrop"
 slug = "MouseDrop" # AUTOGEN FIELD
-[extra]
-is_override = false # AUTOGEN FIELD
 [[extra.args]]
 name = "over_object" # AUTOGEN STATIC
 [[extra.args]]

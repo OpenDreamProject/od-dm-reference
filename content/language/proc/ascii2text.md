@@ -1,12 +1,8 @@
 +++
 title = "ascii2text"
-[extra]
-is_override = false # AUTOGEN FIELD
-
 [extra.return]
 type = "text" # AUTOGEN FIELD
 description = "The converted character"
-
 [[extra.args]]
 name = "N" # AUTOGEN STATIC
 description = "number, character code"

@@ -3,7 +3,6 @@ title = "MouseDrag"
 slug = "MouseDrag" # AUTOGEN FIELD
 [extra]
 od_unimplemented = true # AUTOGEN FIELD
-is_override = false # AUTOGEN FIELD
 [[extra.args]]
 name = "src_object" # AUTOGEN STATIC
 type = "/atom" # AUTOGEN FIELD

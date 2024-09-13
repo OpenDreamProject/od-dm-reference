@@ -1,7 +1,5 @@
 +++
 title = "ceil"
-[extra]
-is_override = false # AUTOGEN FIELD
 [extra.return]
 type = "num" # AUTOGEN FIELD
 description = "The ceiling of the provided number."

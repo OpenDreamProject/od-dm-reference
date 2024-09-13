@@ -1,7 +1,5 @@
 +++
 title = "icon"
-[extra]
-is_override = false # AUTOGEN FIELD
 [[extra.args]]
 name = "icon" # AUTOGEN STATIC
 [[extra.args]]

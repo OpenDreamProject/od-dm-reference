@@ -1,8 +1,5 @@
 +++
 title = "splicetext"
-[extra]
-return_type = "null, text" # AUTOGEN FIELD
-is_override = false # AUTOGEN FIELD
 [[extra.args]]
 name = "Text" # AUTOGEN STATIC
 [[extra.args]]
@@ -14,4 +11,6 @@ default_value = "0" # AUTOGEN FIELD
 [[extra.args]]
 name = "Insert" # AUTOGEN STATIC
 default_value = "" # AUTOGEN FIELD
+[extra.return]
+type = "null, text" # AUTOGEN FIELD
 +++

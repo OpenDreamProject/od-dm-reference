@@ -2,8 +2,6 @@
 title = "replacetextEx_char"
 slug = "replacetextEx_char" # AUTOGEN FIELD
 [extra]
-return_type = "text" # AUTOGEN FIELD
-is_override = false # AUTOGEN FIELD
 od_unimplemented = true # AUTOGEN FIELD
 [[extra.args]]
 name = "Haystack" # AUTOGEN STATIC
@@ -17,4 +15,6 @@ default_value = "1" # AUTOGEN FIELD
 [[extra.args]]
 name = "End" # AUTOGEN STATIC
 default_value = "0" # AUTOGEN FIELD
+[extra.return]
+type = "text" # AUTOGEN FIELD
 +++

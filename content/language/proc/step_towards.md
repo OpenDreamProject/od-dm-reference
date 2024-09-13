@@ -1,8 +1,5 @@
 +++
 title = "step_towards"
-[extra]
-return_type = "num" # AUTOGEN FIELD
-is_override = false # AUTOGEN FIELD
 [[extra.args]]
 name = "Ref" # AUTOGEN STATIC
 type = "/atom/movable" # AUTOGEN FIELD
@@ -11,4 +8,6 @@ name = "Trg" # AUTOGEN STATIC
 type = "/atom" # AUTOGEN FIELD
 [[extra.args]]
 name = "Speed" # AUTOGEN STATIC
+[extra.return]
+type = "num" # AUTOGEN FIELD
 +++

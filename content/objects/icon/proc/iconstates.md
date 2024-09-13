@@ -1,8 +1,6 @@
 +++
 title = "IconStates"
 slug = "IconStates" # AUTOGEN FIELD
-[extra]
-is_override = false # AUTOGEN FIELD
 [[extra.args]]
 name = "mode" # AUTOGEN STATIC
 default_value = "0" # AUTOGEN FIELD

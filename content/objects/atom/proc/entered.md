@@ -1,8 +1,6 @@
 +++
 title = "Entered"
 slug = "Entered" # AUTOGEN FIELD
-[extra]
-is_override = false # AUTOGEN FIELD
 [[extra.args]]
 name = "Obj" # AUTOGEN STATIC
 type = "/atom/movable" # AUTOGEN FIELD

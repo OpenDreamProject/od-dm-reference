@@ -1,7 +1,5 @@
 +++
 title = "ckey"
-[extra]
-is_override = false # AUTOGEN FIELD
 [extra.return]
 type = "null, text" # AUTOGEN FIELD
 description = "The canonical form of the provided string"

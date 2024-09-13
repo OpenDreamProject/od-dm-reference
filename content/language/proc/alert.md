@@ -1,8 +1,5 @@
 +++
 title = "alert"
-[extra]
-return_type = "text" # AUTOGEN FIELD
-is_override = false # AUTOGEN FIELD
 [[extra.args]]
 name = "Usr" # AUTOGEN STATIC
 description = "The user"
@@ -17,6 +14,8 @@ default_value = "Ok" # AUTOGEN FIELD
 name = "Button2" # AUTOGEN STATIC
 [[extra.args]]
 name = "Button3" # AUTOGEN STATIC
+[extra.return]
+type = "text" # AUTOGEN FIELD
 +++
 
 Displays a customizable alert message to a user (either a {{ mob() }} or {{ client() }}). It accepts a title, message, and up to three buttons as text. If no buttons are specified, the first defaults to "Ok".

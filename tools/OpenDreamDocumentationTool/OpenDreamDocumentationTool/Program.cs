@@ -234,9 +234,22 @@ public static partial class Program {
             SetTomlValue(existingContents, "slug", var.Name);
         }
 
-        existingContents.TryGetValue("extra", out var existingExtras);
-        var extras = (TomlTable?)existingExtras ?? new TomlTable();
+        var extras = new TomlTable();
+
+        if (existingContents.TryGetValue("extra", out var existingExtras))
+        {
+            var extraTable = (TomlTable)existingExtras;
+            foreach (var extra in extraTable)
+            {
+                extras[extra.Key] = extra.Value;
+            }
+
+            extras.PropertiesMetadata = extraTable.PropertiesMetadata;
+        }
+        
         if (var.Value != null) SetTomlValue(extras, "default_value", var.Value);
+        else extras.Remove("default_value");
+        
         if (var.Type != null && var.Type != "anything") SetTomlValue(extras, "type", var.Type);
         if (var.IsUnimplemented != null) SetTomlValue(extras, "od_unimplemented", var.IsUnimplemented);
 
@@ -254,6 +267,10 @@ public static partial class Program {
                 break;
         }
 
+        existingContents.Remove("extras");
+
+        existingContents["extra"] = extras;
+
         return Toml.FromModel(existingContents);
     }
 
@@ -270,6 +287,23 @@ public static partial class Program {
 
         existingContents.TryGetValue("extra", out var potentialExtras);
         var extras = (TomlTable?)potentialExtras ?? new TomlTable();
+        
+        if (proc.ReturnType != null)
+        {
+            var newReturns = new TomlTable(false);
+            if(extras.TryGetValue("return", out var potentialReturns))
+            {
+                var existingReturns = (TomlTable)potentialReturns;
+                foreach(var entry in existingReturns)
+                {
+                    newReturns[entry.Key] = entry.Value;
+                }
+
+                newReturns.PropertiesMetadata = existingReturns.PropertiesMetadata;
+            }
+            SetTomlValue(newReturns, "type", proc.ReturnType);
+            extras["return"] = newReturns;
+        }
 
         if (proc.Parameters.Count > 0) {
             extras.TryGetValue("args", out var potentialArgs);
@@ -284,9 +318,18 @@ public static partial class Program {
                 }
 
             foreach (var parameter in proc.Parameters) {
-                nameToArg.TryGetValue(parameter.Name, out TomlTable? param);
+                var tomlParameter = new TomlTable(false);
 
-                var tomlParameter = param ?? new TomlTable();
+                if (nameToArg.TryGetValue(parameter.Name, out var param))
+                {
+                    foreach (var existing in param!)
+                    {
+                        tomlParameter[existing.Key] = existing.Value;
+                    }
+
+                    tomlParameter.PropertiesMetadata = param.PropertiesMetadata;
+                }
+
                 SetTomlValue(tomlParameter, "name", parameter.Name, "AUTOGEN STATIC");
                 if (parameter.Type != null) SetTomlValue(tomlParameter, "type", parameter.Type);
                 if (parameter.Value != null) SetTomlValue(tomlParameter, "default_value", parameter.Value);
@@ -297,14 +340,15 @@ public static partial class Program {
             extras["args"] = tomlArgs;
         }
 
-        if (proc.ReturnType != null)
+        switch (proc.IsOverride)
         {
-            extras.TryGetValue("return", out var potentialReturns);
-            var returns = (TomlTable?)potentialReturns ?? new TomlTable();
-            SetTomlValue(returns, "type", proc.ReturnType);
+            case true:
+                SetTomlValue(extras, "is_override", proc.IsOverride);
+                break;
+            default:
+                extras.Remove("is_override");
+                break;
         }
-
-        SetTomlValue(extras, "is_override", proc.IsOverride);
 
         switch (proc.IsUnimplemented)
         {
@@ -392,7 +436,8 @@ public static partial class Program {
         }
 
         toml[key] = value!;
-        toml.PropertiesMetadata?.SetProperty(key,
+        toml.PropertiesMetadata ??= new TomlPropertiesMetadata();
+        toml.PropertiesMetadata.SetProperty(key,
             new TomlPropertyMetadata {
                 TrailingTrivia = [
                     new TomlSyntaxTriviaMetadata(TokenKind.Whitespaces, " "),
