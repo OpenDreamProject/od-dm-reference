@@ -444,30 +444,40 @@
 
 {% macro render_proc_list(path) %}
 {%- set section = get_section(path=path) -%}
-    {%- for page in section.pages | sort(attribute="title") | filter(attribute="extra.is_override", value=false) -%}
+{%- set override_page_length = section.pages | filter(attribute="extra.is_override", value=true) | length -%}
+{%- set pages = section.pages | sort(attribute="title") -%}
+{%- if pages | length > override_page_length -%}
+    {%- for page in pages -%}
         {%- if loop.first -%}
         <div><a href="{{section.permalink | safe}}"><h4 class="code-title">/proc</h4></a>
         <div class="pl-10 flex flex-col">
         {%- endif -%}
+        {%- if page.extra.is_override -%} {%- continue -%} {%- endif -%}
         <div class="code-title text-sm"><a href="{{page.permalink | safe}}">/{{ page.title }}</a>({{ self::render_proc_args_short(page=page) }})</div>
         {%- if loop.last -%}
         </div></div>
         {%- endif -%}
     {%- endfor -%}
+{%- endif -%}
 {% endmacro %}
 
 {% macro render_var_list(path) %}
 {%- set section = get_section(path=path) -%}
-    {% for page in section.pages | sort(attribute="title") | filter(attribute="extra.is_override", value=false) %}
+{%- set override_page_length = section.pages | filter(attribute="extra.is_override", value=true) | length -%}
+{%- set pages = section.pages | sort(attribute="title") -%}
+{%- if pages | length > override_page_length -%}
+    {% for page in pages %}
         {%- if loop.first -%}
         <div><a href="{{section.permalink | safe}}"><h4 class="code-title">/var</h4></a>
         <div class="pl-10 flex flex-col">
         {%- endif -%}
+        {%- if page.extra.is_override -%} {%- continue -%} {%- endif -%}
         <div class="code-title text-sm"><a href="{{page.permalink | safe}}">/{{ page.title }}</a></div>
         {%- if loop.last -%}
         </div></div>
         {%- endif -%}
     {% endfor %}
+{% endif %}
 {% endmacro %}
 
 {% macro render_operator(page) %}

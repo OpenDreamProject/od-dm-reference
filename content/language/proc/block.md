@@ -3,6 +3,7 @@ title = "block"
 [extra.return]
 type = "path, /list" # AUTOGEN FIELD
 description = "A list of turfs in a 3D block"
+[extra]
 format = [[{name = "Start", type = "/atom", description = "The lower left corner of the block."}, {name = "End", type = "/atom", description = "The upper right corner of the block."}], [{name = "StartX"}, {name = "StartY"}, {name = "StartZ"}, {name = "EndX"}, {name = "EndY"}, {name = "EndZ"}]]
 [[extra.args]]
 name = "Start" # AUTOGEN STATIC
