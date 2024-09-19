@@ -42,6 +42,15 @@ jobs:
         run: |
           dotnet oddt-bin/OpenDreamDocumentationTool.dll --documentation=ref --standard=opendream/DMCompiler/DMStandard
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+
+      - name: Auto-Format
+        run: npm run format
+
       - name: Commit
         continue-on-error: true
         run: |
