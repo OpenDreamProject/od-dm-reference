@@ -352,7 +352,7 @@ public static partial class Program {
 
         switch (proc.IsUnimplemented)
         {
-            case false when extras.ContainsKey("od_unimplemented"):
+            case false when extras.ContainsKey("od_unimplemented") && !IsTomlSkip(extras, "od_unimplemented"):
                 extras.Remove("od_unimplemented");
                 break;
             case true:
