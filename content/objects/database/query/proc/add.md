@@ -2,7 +2,14 @@
 title = "Add"
 slug = "Add" # AUTOGEN FIELD
 [extra]
-format = [[{name = "text", description = "The command text to use for the query."}, {name = "item1", description = "Parameters to substitute into the command text."}, {name = "item2"}, {name = "..."}]]
+format = [
+  [
+    { name = "text", description = "The command text to use for the query." },
+    { name = "item1", description = "Parameters to substitute into the command text." },
+    { name = "item2" },
+    { name = "..." },
+  ],
+]
 [[extra.args]]
 name = "text" # AUTOGEN STATIC
 +++

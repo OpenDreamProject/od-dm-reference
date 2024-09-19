@@ -2,7 +2,6 @@
 title = "/client"
 template = "object.html"
 weight = 3
-
 +++
 
 Every player has a client object representing their connection to the game. In turn, every client has a {{ mob() }}, representing the player physically on the map - this is on the {{ client(var="mob") }}. If this, the {{ mob(var="client") }} or the {{ mob(var="key" )}} is reassigned, the client will be switched to the new mob.
