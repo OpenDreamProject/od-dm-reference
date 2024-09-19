@@ -7,6 +7,6 @@
     </PropertyGroup>
     <ItemGroup>
         <ProjectReference Include="..\OpenDream\DMCompiler\DMCompiler.csproj" />
-        <PackageReference Include="Tomlyn" Version="0.17.0" />
+        <ProjectReference Include="..\Tomlyn\src\Tomlyn\Tomlyn.csproj" />
     </ItemGroup>
 </Project>

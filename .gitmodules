@@ -1,3 +1,6 @@
 [submodule "tools/OpenDreamDocumentationTool/OpenDream"]
 	path = tools/OpenDreamDocumentationTool/OpenDream
 	url = https://github.com/OpenDreamProject/OpenDream
+[submodule "tools/OpenDreamDocumentationTool/Tomlyn"]
+	path = tools/OpenDreamDocumentationTool/Tomlyn
+	url = https://github.com/harryob/Tomlyn
