@@ -1,7 +1,7 @@
 +++
 title = "block"
 [extra.return]
-type = "path, /list" # AUTOGEN FIELD
+type = "/list" # AUTOGEN FIELD
 description = "A list of turfs in a 3D block"
 [extra]
 format = [
