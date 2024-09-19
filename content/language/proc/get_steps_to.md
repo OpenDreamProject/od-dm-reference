@@ -10,5 +10,5 @@ name = "Trg" # AUTOGEN STATIC
 name = "Min" # AUTOGEN STATIC
 default_value = "0" # AUTOGEN FIELD
 [extra.return]
-type = "path, /list" # AUTOGEN FIELD
+type = "/list" # AUTOGEN FIELD
 +++

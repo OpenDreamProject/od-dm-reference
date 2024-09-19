@@ -391,7 +391,7 @@ public static partial class Program {
 
                     DMDocProc newProc = new(procDefinition.Name,
                         parsedParameters,
-                        procDefinition.ReturnTypes?.ToString().Trim('"') ?? procDefinition.ReturnTypes?.TypePath?.PathString,
+                        CleanReturnTypes(procDefinition.ReturnTypes?.ToString().Trim('"')) ?? procDefinition.ReturnTypes?.TypePath?.PathString,
                         unimplemented,
                         procDefinition.IsOverride
                         );
@@ -458,6 +458,13 @@ public static partial class Program {
         }
 
         return false;
+    }
+
+    private static string? CleanReturnTypes(string? types)
+    {
+        if (types == null) return null;
+        var clean = types.Split(", ").Where(part => !part.Contains("path")).ToList();
+        return string.Join(", ", clean);
     }
 
     /// <summary>

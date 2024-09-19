@@ -1,7 +1,7 @@
 +++
 title = "clamp"
 [extra.return]
-type = "null, num, path, /list" # AUTOGEN FIELD
+type = "null, num, /list" # AUTOGEN FIELD
 description = '''The provided number, kept between the Low and High values.
 The original list, with the numeric contents kept between the Low and High values.
 '''

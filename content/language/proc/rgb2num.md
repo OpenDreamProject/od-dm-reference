@@ -5,5 +5,5 @@ name = "color" # AUTOGEN STATIC
 [[extra.args]]
 name = "space" # AUTOGEN STATIC
 [extra.return]
-type = "path, /list" # AUTOGEN FIELD
+type = "/list" # AUTOGEN FIELD
 +++

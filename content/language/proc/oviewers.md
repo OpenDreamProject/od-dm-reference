@@ -6,5 +6,5 @@ default_value = "5" # AUTOGEN FIELD
 [[extra.args]]
 name = "Center" # AUTOGEN STATIC
 [extra.return]
-type = "path, /list" # AUTOGEN FIELD
+type = "/list" # AUTOGEN FIELD
 +++
