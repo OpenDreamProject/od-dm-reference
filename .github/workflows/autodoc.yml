@@ -41,7 +41,6 @@ jobs:
       - name: Run Documentation Tool
         run: |
           dotnet oddt-bin/OpenDreamDocumentationTool.dll --documentation=ref --standard=opendream/DMCompiler/DMStandard
-          npm run format
 
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
