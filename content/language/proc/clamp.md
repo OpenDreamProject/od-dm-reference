@@ -1,10 +1,23 @@
 +++
 title = "clamp"
-[extra]
-return = {type = "null, num, path, /list", description = '''The provided number, kept between the Low and High values.
+[extra.return]
+type = "null, num, path, /list" # AUTOGEN FIELD
+description = '''The provided number, kept between the Low and High values.
 The original list, with the numeric contents kept between the Low and High values.
-'''}
-format = [[{name = "Number", description = "A number."}, {name = "Low", description = "The lowest number that can be returned."}, {name = "High", description = "The highest number that can be returned."}], [{name = "List", type = "/list", description = "A list of numbers."}, {name = "Low"}, {name = "High"}]]
+'''
+[extra]
+format = [
+  [
+    { name = "Number", description = "A number." },
+    { name = "Low", description = "The lowest number that can be returned." },
+    { name = "High", description = "The highest number that can be returned." },
+  ],
+  [
+    { name = "List", type = "/list", description = "A list of numbers." },
+    { name = "Low" },
+    { name = "High" },
+  ],
+]
 [[extra.args]]
 name = "Value" # AUTOGEN STATIC
 [[extra.args]]

@@ -2,8 +2,7 @@
 title = "Columns"
 slug = "Columns" # AUTOGEN FIELD
 [extra.return]
-description = """
-A /list of column names for the current query
+description = """A /list of column names for the current query
 The column name of the provided numbered column
 """
 [[extra.args]]

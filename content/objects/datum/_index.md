@@ -2,7 +2,6 @@
 title = "/datum"
 template = "object.html"
 weight = 5
-
 +++
 
 Datum is the parent of most types in DreamMaker - and as such, the variables and procedures defined on it are inherited by most objects. It is wise to be careful when defining new variables on datum, and when defining procedures directly on datum - as this code will be run extremely frequently in more complex games.
