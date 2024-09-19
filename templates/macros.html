@@ -175,10 +175,10 @@
     {%- endif %}
 {%- endmacro render_single_type %}
 
-{% macro render_proc_args_long(page) %}
+{% macro render_proc_args_long(page, list) %}
     {% if page.extra.args %}
         <div class="border-l-2 border-gray-500 pl-3">
-            <div class="text-xl">Arguments:</div>
+            <div class="{% if not list %}text-xl{% endif %}">Arguments:</div>
             <div class="flex flex-col">
             {% for arg in page.extra.args %}
                 <div class="pl-5">{{arg.name}}{% if arg.type %} ({{ self::render_single_type(type=arg.type)}}){% endif %}{%- if arg.default_value %} = {{ self::render_proc_default_value(value=arg.default_value) }}{% endif %}{% if arg.description %}: {{arg.description}}{% endif %}{% if not loop.last %},{% endif %}{%- if arg.od_unimplemented -%}<div class="text-sm text-red-400 border-l-2 border-red-400 pl-2 inline ml-2">Unimplemented 🏗️</div>{%- endif -%}</div>
@@ -188,9 +188,9 @@
     {% endif %}
 {% endmacro render_proc_args_long %}
 
-{% macro render_proc_usage(page) %}
+{% macro render_proc_usage(page, list) %}
     <div class="border-l-2 border-gray-500 pl-3">
-        <div class="text-xl">Usage:</div>
+        <div class="{% if not list %}text-xl{% endif %}">Usage:</div>
         <div class="flex flex-col">
         {% for form in page.extra.format %}
             <div class="pl-5">{{ page.title }}(
@@ -206,7 +206,7 @@
         {% endfor %}
         </div>
     </div>
-{% endmacro render_proc_args_long %}
+{% endmacro render_proc_usage %}
 
 {%- macro render_proc_default_value(value) -%}
 {%- set potentialNumber = value | int -%}
@@ -318,7 +318,11 @@
 {% endmacro render_backlinks %}
 
 {% macro render_proc_title(page, list=false) %}
-<h1 class="title text-3xl">
+{%- set sizeClass = "text-lg" -%}
+{%- if not list -%}
+    {%- set sizeClass = "text-3xl" -%}
+{%- endif -%}
+<div class="title {{sizeClass}}">
     <div class="code-title">
     {% if page.extra.override %}
         {% set overrideText = "" %}
@@ -338,21 +342,21 @@
     ({{ macros::render_proc_args_short(page=page) }})
     {% if page.extra.is_override %} <div class="text-sm text-red-500 border-l-2 border-red-400 pl-2 mt-1">Override</div>{% endif %}
     </div>
-</h1>
+</div>
 {% endmacro render_proc_title %}
 
 {% macro render_proc(page, list=false) %}
     <div class="flex flex-col gap-5">
 
     {%- if not page.extra.format -%}
-    {{ macros::render_proc_args_long(page=page) }}
+    {{ macros::render_proc_args_long(page=page, list=list) }}
     {%- else -%}
-    {{ macros::render_proc_usage(page=page) }}
+    {{ macros::render_proc_usage(page=page, list=list) }}
     {%- endif -%}
 
     {% if page.extra.return.type or page.extra.return.description %}
     <div class="border-l-2 border-gray-500 pl-3">
-    <div class="text-xl">Returns:</div> 
+    <div class="{% if not list %}text-xl{% endif %}">Returns:</div> 
     <div class="pl-5">
         {% if page.extra.return.type %}{{ page.extra.return.type }}{% endif %}{% if page.extra.return.type and page.extra.return.description %}: {% endif %}{% if page.extra.return.description %} {{ page.extra.return.description | linebreaksbr | markdown(inline=true) | safe }}{% endif %}
     </div> 
@@ -374,7 +378,11 @@
 {% endmacro %}
 
 {% macro render_var_title(page, list=false) %}
-<h1 class="title text-3xl code-title">
+{%- set sizeClass = "text-lg" -%}
+{%- if not list -%}
+    {%- set sizeClass = "text-3xl" -%}
+{%- endif -%}
+<div class="title {{sizeClass}}">
     {%- if page.extra.is_override -%}
     {%- set overrideText = "" -%}
     {%- else -%}
@@ -390,27 +398,27 @@
     {%- if list -%}
     </a>
     {%- endif -%}
-</h1>
+</div>
 {% endmacro %}
 
 {% macro render_var(page, list=false) %}
     {% if page.extra.default_value %}
     <div class="border-l-2 border-gray-500 pl-3">
-    <div class="text-xl">Default Value:</div>
+    <div class="{% if not list %}text-xl{% endif %}">Default Value:</div>
     <div class="pl-5">{{ macros::render_single_type(type=page.extra.default_value) }}{% if page.extra.default_value_desc %} | {{ page.extra.default_value_desc }}{% endif %}</div>
     </div>
     {% endif %}
     
     {% if page.extra.permitted_values %}
     <div class="border-l-2 border-gray-500 pl-3">
-    <div class="text-xl">Permitted Values:</div>
+    <div class="{% if not list %}text-xl{% endif %}">Permitted Values:</div>
     <div class="pl-5">{{ page.extra.permitted_values }}</div>
     </div>
     {% endif %}
     
     {% if page.extra.type %}
     <div class="border-l-2 border-gray-500 pl-3">
-    <div class="text-xl">Type:</div> 
+    <div class="{% if not list %}text-xl{% endif %}">Type:</div> 
     <div class="pl-5">{{ macros::render_single_type(type=page.extra.type) }}</div>
     </div>
     {% endif %}
@@ -480,11 +488,11 @@
 {% endif %}
 {% endmacro %}
 
-{% macro render_operator(page) %}
+{% macro render_operator(page, list) %}
 <div class="page-content">
 {% if page.extra.usage %}
 <div class="border-l-2 border-gray-500 pl-3">
-    <div class="text-xl">Usage:</div> 
+    <div class="{% if not list %}text-xl{% endif %}">Usage:</div> 
     <div class="pl-5">
         {{ page.extra.usage | linebreaksbr | markdown | safe }}
     </div> 
@@ -493,7 +501,7 @@
 
 {% if page.extra.return %}
 <div class="border-l-2 border-gray-500 pl-3">
-    <div class="text-xl">Returns:</div> 
+    <div class="{% if not list %}text-xl{% endif %}">Returns:</div> 
     <div class="pl-5">
         {{ page.extra.return | linebreaksbr | markdown | safe }}
     </div> 
