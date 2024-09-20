@@ -11,5 +11,3 @@ name = "O" # AUTOGEN STATIC
 type = "/atom/movable" # AUTOGEN FIELD
 description = "The object attempting to overlap."
 +++
-
-TODO

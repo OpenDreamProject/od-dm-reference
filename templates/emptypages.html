@@ -1,0 +1,48 @@
+{% extends "page.html" %}
+
+{% macro visit_section(section, type) %}
+{% for subsectionPath in section.subsections | sort %}
+    {% set subsection = get_section(path=subsectionPath) %}
+    {{ self::visit_section(section=subsection, type=type) }}
+{% endfor %}
+{% for page in section.pages | sort(attribute="title") %}
+    {% if page.components is not containing(type) %}{% continue %}{% endif %}
+    {% if page.content | length > 0 %}{% continue %}{% endif %}
+    {% if page.extra.is_override %}{% continue %}{% endif %}
+    <div class="flex flex-row">{{ macros::render_page_parent_type(page=page, skip_level=1, recursive=false, icon=false) }}<a href="{{ page.permalink | safe }}" class="code-title">/{{ page.title }}</a></div>
+{% endfor %}
+{% endmacro %}
+
+{% macro visit_for_section(section) %}
+{% for subsectionPath in section.subsections | sort %}
+    {% set subsection = get_section(path=subsectionPath) %}
+    {{ self::visit_for_section(section=subsection) }}
+    {% if subsection.title is not starting_with("/") %}{% continue %}{% endif %}
+    {% if subsection.content | length > 0 %}{% continue %}{% endif %}
+    <a href="{{ subsection.permalink | safe }}" class="code-title type">{{ subsection.title }}</a>
+{% endfor %}
+{% endmacro %}
+
+{% block content %}
+
+{%- set index = get_section(path="_index.md", metadata_only=true) -%}
+
+{{ page.content | safe }}
+
+<br>
+
+<div class="flex flex-col md:flex-row gap-5">
+    <div class="flex flex-col gap-1">
+        <div class="text-xl">Vars:</div>
+        {{ self::visit_section(section=index, type="var") }}
+    </div>
+    <div class="flex flex-col gap-1">
+        <div class="text-xl">Procs:</div>
+        {{ self::visit_section(section=index, type="proc") }}
+    </div>
+    <div class="flex flex-col gap-1">
+        <div class="text-xl">Objects:</div>
+        {{ self::visit_for_section(section=index) }}
+    </div>
+</div>
+{% endblock content %}

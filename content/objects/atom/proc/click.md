@@ -9,7 +9,4 @@ name = "control" # AUTOGEN STATIC
 description = "The name of the skin control."
 [[extra.args]]
 name = "params" # AUTOGEN STATIC
-description = "TODO: not sure!"
 +++
-
-TODO
