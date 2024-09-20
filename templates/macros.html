@@ -341,7 +341,7 @@
     {%- endif -%}
     ({{ macros::render_proc_args_short(page=page) }})
     </div>
-    {% if page.extra.is_override %} <div class="text-sm text-red-500 border-l-2 border-red-400 pl-2 mt-1">Override - {{ macros::render_parent_subpage(page=page, subpage="proc") }}</div>{% endif %}
+    {% if page.extra.is_override %} <div class="text-sm text-red-500 border-l-2 border-red-400 pl-2 mt-1">Override - {{ macros::render_parent_subpage(page=page, originalPage=page, subpage="proc") }}</div>{% endif %}
 
 </div>
 {% endmacro render_proc_title %}
@@ -378,20 +378,40 @@
     </div>
 {% endmacro %}
 
-{% macro render_parent_subpage(page, subpage) %}
-{%- set num = page.ancestors | length %}
-{%- set object = page.ancestors | nth(n=num - 2) %}
-{%- set objectSection = get_section(path=object, metadata_only=true) -%}
+{% macro render_parent_subpage(page=false, originalPage, subpage, object=false) %}
 
-{%- set parent = "objects" ~ objectSection.extra.parent_type ~ "/" ~ subpage ~ "/_index.md" %}
-{%- set parentSection = get_section(path=parent) %}
+{% if page %}
+    {%- set num = page.ancestors | length %}
+    {%- set object = page.ancestors | nth(n=num - 2) %}
+    {%- set objectSection = get_section(path=object, metadata_only=true) -%}
+{% elif object %}
+    {%- set objectSection = object -%}
+{% endif %}
 
-{%- for procPage in parentSection.pages -%}
-    {%- if procPage.title == page.title -%}
-        <span class="code-title"><a href="{{procPage.permalink | safe}}">{{objectSection.extra.parent_type}}/{{procPage.title}}</a></span>
-    {%- break -%}
-    {%- endif -%}
-{%- endfor -%}
+{% if objectSection.extra.parent_type %}
+
+    {%- set parent = "objects" ~ objectSection.extra.parent_type ~ "/" ~ subpage ~ "/_index.md" %}
+    {%- set parentSection = get_section(path=parent) %}
+
+    {%- set found = false -%}
+
+    {%- for procPage in parentSection.pages -%}
+        {%- if procPage.title == originalPage.title -%}
+            <span class="code-title"><a href="{{procPage.permalink | safe}}">{{objectSection.extra.parent_type}}/{{procPage.title}}</a></span>
+        {%- set_global found = true -%}
+        {%- break -%}
+        {%- endif -%}
+    {%- endfor -%}
+
+    {% if not found %}
+
+    {%- set objectParent = "objects" ~ objectSection.extra.parent_type ~ "/_index.md" %}
+    {%- set objectParentSection = get_section(path=objectParent) %}
+
+    {{ self::render_parent_subpage(page=false, originalPage=originalPage, subpage=subpage, object=objectParentSection) }}
+    {% endif %}
+
+{% endif %}
 
 {% endmacro render_parent_subpage %}
 
@@ -416,7 +436,7 @@
     {%- if list -%}
     </a>
     {%- endif -%}
-    {%- if page.extra.is_override -%} <div class="text-sm text-red-500 border-l-2 border-red-400 pl-2 mt-1">Override - {{ macros::render_parent_subpage(page=page, subpage="var") }}</div>{%- endif -%}
+    {%- if page.extra.is_override -%} <div class="text-sm text-red-500 border-l-2 border-red-400 pl-2 mt-1">Override - {{ macros::render_parent_subpage(page=page, originalPage=page, subpage="var") }}</div>{%- endif -%}
 </div>
 {% endmacro %}
 
