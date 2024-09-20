@@ -5,5 +5,3 @@ slug = "Bump" # AUTOGEN FIELD
 name = "Obstacle" # AUTOGEN STATIC
 type = "/atom" # AUTOGEN FIELD
 +++
-
-TODO

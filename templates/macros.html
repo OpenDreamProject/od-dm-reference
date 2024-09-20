@@ -132,15 +132,15 @@
         {%- set lookup = "objects" ~ page.extra.parent_type ~ "/_index.md" %}
         {%- set url = get_section(path=lookup, metadata_only=true) %}
         {%- if recursive %}
-            {{- self::render_parent_type(page=url) }}
+            {{- macros::render_parent_type(page=url) }}
         {%- endif -%}
         <a href="{{ url.permalink | safe}}" class="code-title type">{{url.title}}</a><i class="fa-solid fa-arrow-left px-2"></i>
     {%- endif -%}
 {% endmacro render_parent_type %}
 
-{% macro render_page_parent_type(page, skip_level, recursive=true) %}
+{% macro render_page_parent_type(page, skip_level, recursive=true, icon=true) %}
     {%- if page.extra.parent_type -%}
-        {{- self::render_parent_type(page=page, recursive=recursive) }}
+        {{- macros::render_parent_type(page=page, recursive=recursive) }}
     {%- else %}
         {%- if skip_level %}
             {%- set num = page.ancestors | length %}
@@ -151,7 +151,7 @@
         {%- endif %}
         {%- set parentSection = get_section(path=parent, metadata_only=true) %}
         {%- if recursive %}
-            {{- self::render_parent_type(page=parentSection) }}
+            {{- macros::render_parent_type(page=parentSection) }}
         {%- endif %}
         {%- if not parentSection.extra.skip_parent_rendering -%}
             {%- set class = "" %}
@@ -159,7 +159,7 @@
             {%- if firstChar == "/" -%}
                 {%- set class = "code-title type" %}
             {%- endif -%}
-            <a href="{{parentSection.permalink | safe}}" class="{{class}}">{{parentSection.title}}</a><i class="fa-solid fa-arrow-left px-2"></i>
+            <a href="{{parentSection.permalink | safe}}" class="{{class}}">{{parentSection.title}}</a>{% if icon %}<i class="fa-solid fa-arrow-left px-2"></i>{% endif %}
             {%- endif -%}
         {%- endif -%}
 {%- endmacro render_page_parent_type %}
