@@ -33,6 +33,8 @@ This file should be edited in styles/index.css, and *not* static/index.css
     --dark-type: #71C6B1;
     --dark-code: #343434;
     --dark-hover: #fdfeff23;
+
+    --search-width: 15rem;
 }
 
 body {
@@ -162,6 +164,8 @@ input.text-input {
     border-radius: 0.25rem;
     max-width: 100%;
     z-index: 10;
+    width: var(--search-width);
+    @apply dark:shadow-lg shadow-md;
 }
 
 .dark .stork-output-visible {
@@ -188,12 +192,12 @@ input.text-input {
     display: none;
     position: fixed;
     padding: 0.25rem;
-    margin-left: 15%;
-    margin-bottom: 15%;
+    margin-left: calc(var(--search-width) - 1rem);
     width: 25%;
     border: 1px solid var(--light-border);
     border-radius: 0.25rem;
     background-color: var(--light-accent);
+    @apply dark:shadow-lg shadow-md;
 }
 
 .selected>a>.stork-excerpt-container {
