@@ -21,7 +21,7 @@
     "format": "node tools/format.js"
   },
   "author": "",
-  "license": "MIT",
+  "license": "CC0-1.0",
   "description": "",
   "type": "commonjs"
 }
