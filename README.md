@@ -1,5 +1,7 @@
 # OpenDream DreamMaker Reference
 
+[![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)[^0]
+
 This project serves the DreamMaker reference, as implemented by [OpenDream](https://github.com/OpenDreamProject/OpenDream). We use [Zola](https://www.getzola.org/) to build our website.
 
 ## Contributing to the Reference
@@ -104,3 +106,5 @@ var/my_variable
 `````
 
 This is based on our [.sublime-syntax](syntaxes/dreammaker.sublime-syntax) file. This can be updated as necessary to keep up with the language.
+
+[^0]: The OpenDream DreamMaker Reference by OpenDream Contributors is marked with [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0)
