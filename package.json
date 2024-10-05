@@ -1,20 +1,23 @@
 {
   "dependencies": {
-    "@tailwindcss/typography": "^0.5.13",
+    "@tailwindcss/typography": "^0.5.15",
     "@taplo/lib": "^0.5.0",
-    "tailwindcss": "^3.4.3"
+    "tailwindcss": "^3.4.13"
   },
   "name": "od-dm-reference",
   "version": "1.0.0",
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^9.0.1",
+    "cross-env": "^7.0.3"
   },
   "scripts": {
-    "watch:css": "tailwindcss -m -w -i styles/index.css -o static/index.css",
-    "watch:zola": "zola serve",
-    "build": "NODE_ENV=production tailwindcss -m -i styles/index.css -o static/index.css; ZOLA_ENV=prod zola build",
+    "build": "npm run build:css && npm run build:zola",
+    "build:css": "cross-env NODE_ENV=production tailwindcss -m -i styles/index.css -o static/index.css",
+    "build:zola": "cross-env ZOLA_ENV=prod zola build",
     "build:index": "zola --config config.index.toml build -o index && stork build --input index/toml/index.html --output public/search.st",
     "watch": "concurrently 'npm:watch:css' 'npm:watch:zola'",
+    "watch:css": "tailwindcss -m -w -i styles/index.css -o static/index.css",
+    "watch:zola": "zola serve",
     "format": "node tools/format.js"
   },
   "author": "",
