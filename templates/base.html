@@ -106,12 +106,15 @@
 
                 <div class="pt-5">
                     <hr>
-                    <div class="flex flex-row justify-center pt-3 gap-3"><a class="subtle-link" href="{{macros::get_github_link(page=pageOrSubsection)}}">
-                        <i class="fa-brands fa-github subtle-link"></i> Improve this page</a>
-                    </div> 
-                    <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/" class="flex flex-row justify-center text-xs">
-                        <span><span property="dct:title">OpenDream DreamMaker Reference</span> is marked with <a href="https://creativecommons.org/publicdomain/zero/1.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" class="subtle-link">CC0 1.0<img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;display:inline" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;display:inline" src="https://mirrors.creativecommons.org/presskit/icons/zero.svg?ref=chooser-v1" alt=""></a></span>
-                    </p>
+                    <div class="flex flex-col gap-3">
+                        <div class="flex flex-row justify-center pt-3 gap-3"><a class="subtle-link" href="{{macros::get_github_link(page=pageOrSubsection)}}">
+                            <i class="fa-brands fa-github subtle-link"></i> Improve this page</a>
+                        </div> 
+                        <a href="https://creativecommons.org/publicdomain/zero/1.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" class="flex flex-row justify-center">
+                            <img class="hidden dark:block" src="{{ get_url(path='cc0-license-dark.svg') | safe }}" width="96"></img>
+                            <img class="dark:hidden" src="{{ get_url(path='cc0-license-light.svg') | safe }}" width="96"></img>
+                        </a>
+                    </div>
                 </div>
 
             </div>
