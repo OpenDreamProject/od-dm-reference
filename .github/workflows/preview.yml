@@ -1,0 +1,56 @@
+name: Deploy PR previews
+
+on:
+  pull_request_target:
+    branches:
+      - main
+
+    paths:
+      - "!package.json"
+      - "!.github/workflows"
+
+env:
+  DEPLOY_REPO_OWNER: OpenDreamProject
+  DEPLOY_REPO: od-dm-reference
+
+concurrency: preview-${{ github.ref }}
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+
+      - name: Install Zora
+        uses: taiki-e/install-action@v2
+        with:
+          tool: zola@0.18.0
+
+      - name: Install Stork
+        uses: baptiste0928/cargo-install@v3.1.0
+        with:
+          crate: stork-search
+          version: "1.6.0"
+
+      - name: Build project
+        run: npm run build -- -u "https://ref.opendrea.am/pr-preview/pr-${{ github.event.number }}"
+
+      - name: Build index
+        run: |
+          npm run build:search-config -- -u "https://ref.opendre.am/pr-preview/pr-${{ github.event.number }}"
+          npm run build:search-index
+
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./public/
+          umbrella-dir: ./pr-preview/
+          deploy-repository: ${{ env.DEPLOY_REPO_OWNER }}/${{ env.DEPLOY_REPO }}
+          token: ${{ secrets.PREVIEW_TOKEN }}
