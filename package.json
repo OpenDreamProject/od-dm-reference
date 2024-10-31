@@ -11,13 +11,13 @@
     "cross-env": "^7.0.3"
   },
   "scripts": {
-    "build": "npm run build:css && npm run build:zola",
-    "build:css": "cross-env NODE_ENV=production tailwindcss -m -i styles/index.css -o static/index.css",
-    "build:zola": "cross-env ZOLA_ENV=prod zola build",
-    "build:index": "zola --config config.index.toml build -o index && stork build --input index/toml/index.html --output public/search.st",
     "watch": "concurrently 'npm:watch:css' 'npm:watch:zola'",
     "watch:css": "tailwindcss -m -w -i styles/index.css -o static/index.css",
     "watch:zola": "zola serve",
+    "build": "NODE_ENV=production tailwindcss -m -i styles/index.css -o static/index.css; ZOLA_ENV=prod zola build",
+    "build:search-config": "zola --config config.index.toml build -o index",
+    "build:search-index": "stork build --input index/toml/index.html --output public/search.st",
+    "build:index": "npm run build:search-config; npm run build:search-index",
     "format": "node tools/format.js"
   },
   "author": "",
