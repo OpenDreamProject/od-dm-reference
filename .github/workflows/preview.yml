@@ -1,14 +1,15 @@
 name: Deploy PR previews
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  pull-requests: write
+
 on:
-  pull_request_target:
+  pull_request:
     branches:
       - main
-
-    paths:
-      - "**/*.*"
-      - "!package.json"
-      - "!.github/workflows"
 
 env:
   DEPLOY_REPO_OWNER: OpenDreamProject
@@ -53,5 +54,4 @@ jobs:
         with:
           source-dir: ./public/
           umbrella-dir: ./pr-preview/
-          deploy-repository: ${{ env.DEPLOY_REPO_OWNER }}/${{ env.DEPLOY_REPO }}
-          token: ${{ secrets.PREVIEW_TOKEN }}
+          custom-url: https://ref.opendre.am
