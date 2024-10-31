@@ -1,14 +1,15 @@
 name: Deploy PR previews
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  pull-requests: write
+
 on:
-  pull_request_target:
+  pull_request:
     branches:
       - main
-
-    paths:
-      - "**/*.*"
-      - "!package.json"
-      - "!.github/workflows"
 
 env:
   DEPLOY_REPO_OWNER: OpenDreamProject
