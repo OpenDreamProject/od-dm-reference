@@ -18,7 +18,6 @@
     "build:search-config": "zola --config config.index.toml build -o index",
     "build:search-index": "stork build --input index/toml/index.html --output public/search.st",
     "build:index": "npm run build:search-config; npm run build:search-index",
-    "watch": "concurrently 'npm:watch:css' 'npm:watch:zola'"
     "format": "node tools/format.js"
   },
   "author": "",
