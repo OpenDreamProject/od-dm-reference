@@ -1,9 +1,13 @@
 name: Deploy PR previews
 
 on:
-  pull_request:
+  pull_request_target:
     branches:
       - main
+
+    paths:
+      - "!package.json"
+      - "!.github/workflows"
 
 env:
   DEPLOY_REPO_OWNER: OpenDreamProject
