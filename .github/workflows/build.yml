@@ -43,14 +43,9 @@ jobs:
       - name: Build index
         run: npm run build:index
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy project
+        uses: JamesIves/github-pages-deploy-action@v4.6.8
         with:
-          path: "./public"
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          folder: ./public
+          clean-exclude: pr-preview/
+          force: false

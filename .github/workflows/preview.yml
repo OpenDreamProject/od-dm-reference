@@ -1,13 +1,13 @@
 name: Deploy PR previews
 
 on:
-  pull_request_target:
+  pull_request:
     branches:
       - main
 
 env:
-  DEPLOY_REPO_OWNER: harryob
-  DEPLOY_REPO: od-ref-preview
+  DEPLOY_REPO_OWNER: OpenDreamProject
+  DEPLOY_REPO: od-dm-reference
 
 concurrency: preview-${{ github.ref }}
 
@@ -17,8 +17,6 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -38,17 +36,17 @@ jobs:
           version: "1.6.0"
 
       - name: Build project
-        run: npm run build -- -u "https://${{ env.DEPLOY_REPO_OWNER }}.github.io/${{ env.DEPLOY_REPO }}/pr-${{ github.event.number }}"
+        run: npm run build -- -u "https://ref.opendrea.am/pr-preview/pr-${{ github.event.number }}"
 
       - name: Build index
         run: |
-          npm run build:search-config -- -u "https://${{ env.DEPLOY_REPO_OWNER }}.github.io/${{ env.DEPLOY_REPO }}/pr-${{ github.event.number }}"
+          npm run build:search-config -- -u "https://ref.opendre.am/pr-preview/pr-${{ github.event.number }}"
           npm run build:search-index
 
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1
         with:
           source-dir: ./public/
-          umbrella-dir: .
+          umbrella-dir: ./pr-preview/
           deploy-repository: ${{ env.DEPLOY_REPO_OWNER }}/${{ env.DEPLOY_REPO }}
           token: ${{ secrets.PREVIEW_TOKEN }}
