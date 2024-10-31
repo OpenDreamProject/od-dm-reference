@@ -16,13 +16,13 @@ url = "{{subsection.permalink | safe}}"
 {%- set parent = page.ancestors | nth(n=sub - 1) %}
 {%- set parentSection = get_section(path=parent, metadata_only=true) %}
 {%- set directParent = get_section(path=page.ancestors | last, metadata_only=true) -%}
-{%- if directParent.title == "proc" or directParent.title == "var" -%}
+{%- if directParent.title == "proc" or directParent.title == "var" or directParent.title == "Global Procs" -%}
     {%- set parentTitle = parentSection.title -%}
-    {%- if parentTitle == "Objects" -%}
+    {%- if parentTitle == "DreamMaker" -%}
         {%- set parentTitle = "Global" -%}
     {%- endif -%}
 {%- endif -%}
-{%- if directParent.title == "proc" -%}
+{%- if directParent.title == "proc" or directParent.title == "Global Procs" -%}
     {%- set title = page.title ~ " (" ~ parentTitle ~ " Proc)" -%}
 {%- elif directParent.title == "var" -%}
     {%- set title = page.title ~ " (" ~ parentTitle ~ " Proc)" -%}

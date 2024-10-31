@@ -2,7 +2,6 @@
 title = "DrawBox"
 slug = "DrawBox" # AUTOGEN FIELD
 [extra]
-is_override = false # AUTOGEN FIELD
 od_unimplemented = true # AUTOGEN FIELD
 [[extra.args]]
 name = "rgb" # AUTOGEN STATIC

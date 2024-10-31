@@ -2,5 +2,6 @@
 title = "ErrorMsg"
 slug = "ErrorMsg" # AUTOGEN FIELD
 [extra]
-is_override = false # AUTOGEN FIELD
 +++
+
+This provides the last error message encountered by this database when processing a {{ database_query() }}.

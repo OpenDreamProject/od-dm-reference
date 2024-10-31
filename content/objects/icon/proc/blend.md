@@ -1,8 +1,6 @@
 +++
 title = "Blend"
 slug = "Blend" # AUTOGEN FIELD
-[extra]
-is_override = false # AUTOGEN FIELD
 [[extra.args]]
 name = "icon" # AUTOGEN STATIC
 [[extra.args]]

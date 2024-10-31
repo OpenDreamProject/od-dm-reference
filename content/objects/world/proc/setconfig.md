@@ -1,8 +1,6 @@
 +++
 title = "SetConfig"
 slug = "SetConfig" # AUTOGEN FIELD
-[extra]
-is_override = false # AUTOGEN FIELD
 [[extra.args]]
 name = "config_set" # AUTOGEN STATIC
 [[extra.args]]

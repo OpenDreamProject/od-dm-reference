@@ -2,7 +2,6 @@
 title = "MouseDown"
 slug = "MouseDown" # AUTOGEN FIELD
 [extra]
-is_override = false # AUTOGEN FIELD
 od_unimplemented = true # AUTOGEN FIELD
 [[extra.args]]
 name = "location" # AUTOGEN STATIC

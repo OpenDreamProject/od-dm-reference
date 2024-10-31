@@ -50,78 +50,10 @@
 </head>
 
 <body id="root" class="safe-h-screen">
-    <script data-cfasync="false" type="text/javascript">
-        const LOCAL_STORAGE_KEY_THEME = "ref-theme"
-
-        const THEME_VALUE_AUTO = "auto"
-        const THEME_VALUE_DARK = "dark"
-        const THEME_VALUE_LIGHT = "light"
-
-        const THEME_CLASS_DARK = "dark"
-        const THEME_CLASS_LIGHT = "light"
-
-        const setTheme = () => {
-            const theme = localStorage.getItem(LOCAL_STORAGE_KEY_THEME) || THEME_VALUE_AUTO
-
-            switch (theme) {
-                case THEME_VALUE_AUTO:
-                    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                        setDocumentTheme(THEME_CLASS_DARK)
-                    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-                        setDocumentTheme(THEME_CLASS_LIGHT)
-                    }
-                    break
-
-                case THEME_VALUE_DARK:
-                    setDocumentTheme(THEME_CLASS_DARK)
-                    break
-
-                case THEME_VALUE_LIGHT:
-                    setDocumentTheme(THEME_CLASS_LIGHT)
-                    break
-            }
-        }
-
-        const setDocumentTheme = (newTheme) => {
-            const root = document.documentElement
-            if (root.classList.contains(THEME_CLASS_DARK)) root.classList.replace(THEME_CLASS_DARK, newTheme)
-            else if (root.classList.contains(THEME_CLASS_LIGHT)) root.classList.replace(THEME_CLASS_LIGHT, newTheme)
-            else root.classList.add(newTheme)
-
-            const existing = document.getElementById("syntax")
-            if (existing) {
-                if (newTheme == THEME_CLASS_DARK) existing.href = "{{ get_url(path='syntax-dark.css') | safe }}"
-                else existing.href = "{{ get_url(path='syntax-light.css') | safe }}"
-                return;
-            }
-
-            var newImport = document.createElement("link")
-            newImport.rel = "stylesheet"
-            newImport.id = "syntax"
-
-            if (newTheme == THEME_CLASS_DARK) newImport.href = "{{ get_url(path='syntax-dark.css') | safe }}"
-            else newImport.href = "{{ get_url(path='syntax-light.css') | safe }}"
-
-            document.documentElement.appendChild(newImport)
-
-        }
-
-        setTheme()
-
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-            setTheme()
-        })
-
-        window.addEventListener("storage", (e) => {
-            if (e.key == LOCAL_STORAGE_KEY_THEME) {
-                setTheme()
-            }
-        })
-
-    </script>
+    {% include "theme-switch.html" %}
 
     <div class="flex h-[100%]">
-        <div class="left-bar ml-3 hidden md:block h-[100%] shadow-md dark:shadow-xl" id="left-bar">
+        <div class="left-bar pl-3 hidden md:block h-[100%] shadow-md dark:shadow-xl" id="left-bar">
             <div class="flex flex-row">
                 <div class="flex flex-col justify-center">
                     <a href="{{ config.base_url | safe }}">
@@ -174,8 +106,15 @@
 
                 <div class="pt-5">
                     <hr>
-                    <div class="flex flex-row justify-center pt-3"><a class="subtle-link" href="{{macros::get_github_link(page=pageOrSubsection)}}">
-                        <i class="fa-brands fa-github subtle-link"></i> Improve this page</a></div>
+                    <div class="flex flex-col gap-3">
+                        <div class="flex flex-row justify-center pt-3 gap-3"><a class="subtle-link" href="{{macros::get_github_link(page=pageOrSubsection)}}">
+                            <i class="fa-brands fa-github subtle-link"></i> Improve this page</a>
+                        </div> 
+                        <a href="https://creativecommons.org/publicdomain/zero/1.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" class="flex flex-row justify-center">
+                            <img class="hidden dark:block" src="{{ get_url(path='cc0-license-dark.svg') | safe }}" width="96"></img>
+                            <img class="dark:hidden" src="{{ get_url(path='cc0-license-light.svg') | safe }}" width="96"></img>
+                        </a>
+                    </div>
                 </div>
 
             </div>

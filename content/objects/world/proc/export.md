@@ -1,8 +1,6 @@
 +++
 title = "Export"
 slug = "Export" # AUTOGEN FIELD
-[extra]
-is_override = false # AUTOGEN FIELD
 [[extra.args]]
 name = "Addr" # AUTOGEN STATIC
 [[extra.args]]

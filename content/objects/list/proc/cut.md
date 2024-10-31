@@ -1,8 +1,6 @@
 +++
 title = "Cut"
 slug = "Cut" # AUTOGEN FIELD
-[extra]
-is_override = false # AUTOGEN FIELD
 [[extra.args]]
 name = "Start" # AUTOGEN STATIC
 default_value = "1" # AUTOGEN FIELD

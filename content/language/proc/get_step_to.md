@@ -2,7 +2,6 @@
 title = "get_step_to"
 [extra]
 od_unimplemented = true # AUTOGEN FIELD
-is_override = false # AUTOGEN FIELD
 [[extra.args]]
 name = "Ref" # AUTOGEN STATIC
 [[extra.args]]

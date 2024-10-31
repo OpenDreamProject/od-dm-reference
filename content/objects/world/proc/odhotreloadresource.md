@@ -1,8 +1,6 @@
 +++
 title = "ODHotReloadResource"
 slug = "ODHotReloadResource" # AUTOGEN FIELD
-[extra]
-is_override = false # AUTOGEN FIELD
 [[extra.args]]
 name = "file_name" # AUTOGEN STATIC
 type = "text" # AUTOGEN SKIP

@@ -132,15 +132,15 @@
         {%- set lookup = "objects" ~ page.extra.parent_type ~ "/_index.md" %}
         {%- set url = get_section(path=lookup, metadata_only=true) %}
         {%- if recursive %}
-            {{- self::render_parent_type(page=url) }}
+            {{- macros::render_parent_type(page=url) }}
         {%- endif -%}
         <a href="{{ url.permalink | safe}}" class="code-title type">{{url.title}}</a><i class="fa-solid fa-arrow-left px-2"></i>
     {%- endif -%}
 {% endmacro render_parent_type %}
 
-{% macro render_page_parent_type(page, skip_level, recursive=true) %}
+{% macro render_page_parent_type(page, skip_level, recursive=true, icon=true) %}
     {%- if page.extra.parent_type -%}
-        {{- self::render_parent_type(page=page, recursive=recursive) }}
+        {{- macros::render_parent_type(page=page, recursive=recursive) }}
     {%- else %}
         {%- if skip_level %}
             {%- set num = page.ancestors | length %}
@@ -151,7 +151,7 @@
         {%- endif %}
         {%- set parentSection = get_section(path=parent, metadata_only=true) %}
         {%- if recursive %}
-            {{- self::render_parent_type(page=parentSection) }}
+            {{- macros::render_parent_type(page=parentSection) }}
         {%- endif %}
         {%- if not parentSection.extra.skip_parent_rendering -%}
             {%- set class = "" %}
@@ -159,7 +159,7 @@
             {%- if firstChar == "/" -%}
                 {%- set class = "code-title type" %}
             {%- endif -%}
-            <a href="{{parentSection.permalink | safe}}" class="{{class}}">{{parentSection.title}}</a><i class="fa-solid fa-arrow-left px-2"></i>
+            <a href="{{parentSection.permalink | safe}}" class="{{class}}">{{parentSection.title}}</a>{% if icon %}<i class="fa-solid fa-arrow-left px-2"></i>{% endif %}
             {%- endif -%}
         {%- endif -%}
 {%- endmacro render_page_parent_type %}
@@ -175,10 +175,10 @@
     {%- endif %}
 {%- endmacro render_single_type %}
 
-{% macro render_proc_args_long(page) %}
+{% macro render_proc_args_long(page, list) %}
     {% if page.extra.args %}
         <div class="border-l-2 border-gray-500 pl-3">
-            <div class="text-xl">Arguments:</div>
+            <div class="{% if not list %}text-xl{% endif %}">Arguments:</div>
             <div class="flex flex-col">
             {% for arg in page.extra.args %}
                 <div class="pl-5">{{arg.name}}{% if arg.type %} ({{ self::render_single_type(type=arg.type)}}){% endif %}{%- if arg.default_value %} = {{ self::render_proc_default_value(value=arg.default_value) }}{% endif %}{% if arg.description %}: {{arg.description}}{% endif %}{% if not loop.last %},{% endif %}{%- if arg.od_unimplemented -%}<div class="text-sm text-red-400 border-l-2 border-red-400 pl-2 inline ml-2">Unimplemented 🏗️</div>{%- endif -%}</div>
@@ -187,6 +187,26 @@
         </div>
     {% endif %}
 {% endmacro render_proc_args_long %}
+
+{% macro render_proc_usage(page, list) %}
+    <div class="border-l-2 border-gray-500 pl-3">
+        <div class="{% if not list %}text-xl{% endif %}">Usage:</div>
+        <div class="flex flex-col">
+        {% for form in page.extra.format %}
+            <div class="pl-5">{{ page.title }}(
+            {%- for arg in form -%}
+            {% if arg.type %}{{ self::render_single_type(type=arg.type)}}/{% endif %}{{arg.name}}{%- if arg.default_value %} = {{ self::render_proc_default_value(value=arg.default_value) }}{% endif %}{% if not loop.last %},{% endif %}{%- if arg.od_unimplemented -%}<div class="text-sm text-red-400 border-l-2 border-red-400 pl-2 inline ml-2">Unimplemented 🏗️</div>{%- endif -%}{% if not loop.last %} {% endif -%}
+            {% endfor -%}
+            ){% for arg in form %}
+            {%- if arg.description -%}
+            <div class="pl-3">{{ arg.name }}: {{ arg.description }}</div>
+            {%- endif -%}
+            {%- endfor -%}
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endmacro render_proc_usage %}
 
 {%- macro render_proc_default_value(value) -%}
 {%- set potentialNumber = value | int -%}
@@ -298,7 +318,11 @@
 {% endmacro render_backlinks %}
 
 {% macro render_proc_title(page, list=false) %}
-<h1 class="title text-3xl">
+{%- set sizeClass = "text-lg" -%}
+{%- if not list -%}
+    {%- set sizeClass = "text-3xl" -%}
+{%- endif -%}
+<div class="title {{sizeClass}}">
     <div class="code-title">
     {% if page.extra.override %}
         {% set overrideText = "" %}
@@ -316,21 +340,26 @@
         </a>
     {%- endif -%}
     ({{ macros::render_proc_args_short(page=page) }})
-    {% if page.extra.is_override %} <div class="text-sm text-red-500 border-l-2 border-red-400 pl-2 mt-1">Override</div>{% endif %}
     </div>
-</h1>
+    {% if page.extra.is_override %} <div class="text-sm text-red-500 border-l-2 border-red-400 pl-2 mt-1">Override - {{ macros::render_parent_subpage(page=page, originalPage=page, subpage="proc") }}</div>{% endif %}
+
+</div>
 {% endmacro render_proc_title %}
 
 {% macro render_proc(page, list=false) %}
     <div class="flex flex-col gap-5">
 
-    {{ macros::render_proc_args_long(page=page) }}
+    {%- if not page.extra.format -%}
+    {{ macros::render_proc_args_long(page=page, list=list) }}
+    {%- else -%}
+    {{ macros::render_proc_usage(page=page, list=list) }}
+    {%- endif -%}
 
-    {% if page.extra.return_type or page.extra.return_type_desc %}
+    {% if page.extra.return.type or page.extra.return.description %}
     <div class="border-l-2 border-gray-500 pl-3">
-    <div class="text-xl">Returns:</div> 
+    <div class="{% if not list %}text-xl{% endif %}">Returns:</div> 
     <div class="pl-5">
-        {% if page.extra.return_type %}{{ page.extra.return_type }}{% endif %}{% if page.extra.return_type and page.extra.return_type_desc %}: {% endif %}{% if page.extra.return_type_desc %} {{ page.extra.return_type_desc | linebreaksbr | markdown(inline=true) | safe }}{% endif %}
+        {% if page.extra.return.type %}{{ page.extra.return.type }}{% endif %}{% if page.extra.return.type and page.extra.return.description %}: {% endif %}{% if page.extra.return.description %} {{ page.extra.return.description | linebreaksbr | markdown(inline=true) | safe }}{% endif %}
     </div> 
     </div>
     {% endif %}
@@ -338,7 +367,8 @@
     {% if page.extra.od_unimplemented %}
     {{ sc::render_callout(color="#f87171", 
         title="Unimplemented 🏗️", 
-        body="In the OpenDream implementation of DreamMaker, this proc is marked as unimplemented.") 
+        body="In the OpenDream implementation of DreamMaker, this proc is marked as unimplemented.",
+        smalltext=list)
     }}
     {% endif %}
 
@@ -349,8 +379,49 @@
     </div>
 {% endmacro %}
 
+{% macro render_parent_subpage(page=false, originalPage, subpage, object=false) %}
+
+{% if page %}
+    {%- set num = page.ancestors | length %}
+    {%- set object = page.ancestors | nth(n=num - 2) %}
+    {%- set objectSection = get_section(path=object, metadata_only=true) -%}
+{% elif object %}
+    {%- set objectSection = object -%}
+{% endif %}
+
+{% if objectSection.extra.parent_type %}
+
+    {%- set parent = "objects" ~ objectSection.extra.parent_type ~ "/" ~ subpage ~ "/_index.md" %}
+    {%- set parentSection = get_section(path=parent) %}
+
+    {%- set found = false -%}
+
+    {%- for procPage in parentSection.pages -%}
+        {%- if procPage.title == originalPage.title -%}
+            <span class="code-title"><a href="{{procPage.permalink | safe}}">{{objectSection.extra.parent_type}}/{{procPage.title}}</a></span>
+        {%- set_global found = true -%}
+        {%- break -%}
+        {%- endif -%}
+    {%- endfor -%}
+
+    {% if not found %}
+
+    {%- set objectParent = "objects" ~ objectSection.extra.parent_type ~ "/_index.md" %}
+    {%- set objectParentSection = get_section(path=objectParent) %}
+
+    {{ self::render_parent_subpage(page=false, originalPage=originalPage, subpage=subpage, object=objectParentSection) }}
+    {% endif %}
+
+{% endif %}
+
+{% endmacro render_parent_subpage %}
+
 {% macro render_var_title(page, list=false) %}
-<h1 class="title text-3xl code-title">
+{%- set sizeClass = "text-lg" -%}
+{%- if not list -%}
+    {%- set sizeClass = "text-3xl" -%}
+{%- endif -%}
+<div class="code-title {{sizeClass}}">
     {%- if page.extra.is_override -%}
     {%- set overrideText = "" -%}
     {%- else -%}
@@ -362,40 +433,42 @@
     {% if list -%}
     <a href="{{ page.permalink | safe}}">
     {%- endif -%}
-    {{overrideText}}{{ page.title }}{%- if page.extra.is_override -%} <div class="text-sm text-red-500 border-l-2 border-red-400 pl-2 mt-1">Override</div>{%- endif -%}
+    {{overrideText}}{{ page.title }}
     {%- if list -%}
     </a>
     {%- endif -%}
-</h1>
+    {%- if page.extra.is_override -%} <div class="text-sm text-red-500 border-l-2 border-red-400 pl-2 mt-1">Override - {{ macros::render_parent_subpage(page=page, originalPage=page, subpage="var") }}</div>{%- endif -%}
+</div>
 {% endmacro %}
 
 {% macro render_var(page, list=false) %}
     {% if page.extra.default_value %}
     <div class="border-l-2 border-gray-500 pl-3">
-    <div class="text-xl">Default Value:</div>
+    <div class="{% if not list %}text-xl{% endif %}">Default Value:</div>
     <div class="pl-5">{{ macros::render_single_type(type=page.extra.default_value) }}{% if page.extra.default_value_desc %} | {{ page.extra.default_value_desc }}{% endif %}</div>
     </div>
     {% endif %}
     
     {% if page.extra.permitted_values %}
     <div class="border-l-2 border-gray-500 pl-3">
-    <div class="text-xl">Permitted Values:</div>
+    <div class="{% if not list %}text-xl{% endif %}">Permitted Values:</div>
     <div class="pl-5">{{ page.extra.permitted_values }}</div>
     </div>
     {% endif %}
     
     {% if page.extra.type %}
     <div class="border-l-2 border-gray-500 pl-3">
-    <div class="text-xl">Type:</div> 
+    <div class="{% if not list %}text-xl{% endif %}">Type:</div> 
     <div class="pl-5">{{ macros::render_single_type(type=page.extra.type) }}</div>
     </div>
     {% endif %}
 
     {% if page.extra.od_unimplemented %}
-        {{ sc::render_callout(color="#f87171", 
-            title="Unimplemented 🏗️", 
-            body="In the OpenDream implementation of DreamMaker, this variable is marked as unimplemented.") 
-        }}
+    {{ sc::render_callout(color="#f87171", 
+        title="Unimplemented 🏗️", 
+        body="In the OpenDream implementation of DreamMaker, this variable is marked as unimplemented.",
+        smalltext=list)
+    }}
     {% endif %}
 
     <div class="page-content">
@@ -420,37 +493,47 @@
 
 {% macro render_proc_list(path) %}
 {%- set section = get_section(path=path) -%}
-    {%- for page in section.pages | sort(attribute="title") | filter(attribute="extra.is_override", value=false) -%}
+{%- set override_page_length = section.pages | filter(attribute="extra.is_override", value=true) | length -%}
+{%- set pages = section.pages | sort(attribute="title") -%}
+{%- if pages | length > override_page_length -%}
+    {%- for page in pages -%}
         {%- if loop.first -%}
         <div><a href="{{section.permalink | safe}}"><h4 class="code-title">/proc</h4></a>
         <div class="pl-10 flex flex-col">
         {%- endif -%}
+        {%- if page.extra.is_override -%} {%- continue -%} {%- endif -%}
         <div class="code-title text-sm"><a href="{{page.permalink | safe}}">/{{ page.title }}</a>({{ self::render_proc_args_short(page=page) }})</div>
         {%- if loop.last -%}
         </div></div>
         {%- endif -%}
     {%- endfor -%}
+{%- endif -%}
 {% endmacro %}
 
 {% macro render_var_list(path) %}
 {%- set section = get_section(path=path) -%}
-    {% for page in section.pages | sort(attribute="title") | filter(attribute="extra.is_override", value=false) %}
+{%- set override_page_length = section.pages | filter(attribute="extra.is_override", value=true) | length -%}
+{%- set pages = section.pages | sort(attribute="title") -%}
+{%- if pages | length > override_page_length -%}
+    {% for page in pages %}
         {%- if loop.first -%}
         <div><a href="{{section.permalink | safe}}"><h4 class="code-title">/var</h4></a>
         <div class="pl-10 flex flex-col">
         {%- endif -%}
+        {%- if page.extra.is_override -%} {%- continue -%} {%- endif -%}
         <div class="code-title text-sm"><a href="{{page.permalink | safe}}">/{{ page.title }}</a></div>
         {%- if loop.last -%}
         </div></div>
         {%- endif -%}
     {% endfor %}
+{% endif %}
 {% endmacro %}
 
-{% macro render_operator(page) %}
+{% macro render_operator(page, list) %}
 <div class="page-content">
 {% if page.extra.usage %}
 <div class="border-l-2 border-gray-500 pl-3">
-    <div class="text-xl">Usage:</div> 
+    <div class="{% if not list %}text-xl{% endif %}">Usage:</div> 
     <div class="pl-5">
         {{ page.extra.usage | linebreaksbr | markdown | safe }}
     </div> 
@@ -459,7 +542,7 @@
 
 {% if page.extra.return %}
 <div class="border-l-2 border-gray-500 pl-3">
-    <div class="text-xl">Returns:</div> 
+    <div class="{% if not list %}text-xl{% endif %}">Returns:</div> 
     <div class="pl-5">
         {{ page.extra.return | linebreaksbr | markdown | safe }}
     </div> 

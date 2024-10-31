@@ -1,0 +1,18 @@
+{%- set home = get_section(path='_index.md') -%}
+
+<head>
+    <title>Not Found - OpenDream DreamMaker Reference</title>
+    <link rel="stylesheet" href="{{ get_url(path='index.css', cachebust = true) | safe }}">
+    <link rel="icon" href="{{ get_url(path='favicon.svg') | safe }}">
+</head>
+
+<body class="flex flex-col justify-center h-[100%]">
+    {% include "theme-switch.html" %}
+
+    <div class="flex flex-row justify-center">
+        <div class="p-5 shadow-lg dark:bg-darkborder bg-[#fff] rounded flex flex-col gap-3">
+            <div class="flex flex-row gap-3"><img src="{{ get_url(path='favicon.svg') | safe }}" width=24px>Page Not Found</div>
+            <div class="flex flex-row justify-center"><a class="rounded" href="{{ home.permalink | safe }}">Return Home</a></div>
+        </div>
+    </div>
+</body>

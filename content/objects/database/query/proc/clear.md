@@ -2,5 +2,6 @@
 title = "Clear"
 slug = "Clear" # AUTOGEN FIELD
 [extra]
-is_override = false # AUTOGEN FIELD
 +++
+
+Removes the current command text. This is invoked when you call {{ database_query(proc="Add") }}, so does not typically need to be called manually.

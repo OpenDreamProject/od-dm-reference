@@ -1,9 +1,8 @@
 +++
 title = "step"
-[extra]
-return_type = "num" # AUTOGEN FIELD
-return_type_desc = "Returns 1 on success (successfully moved) and 0 on failure (was blocked by something)."
-is_override = false # AUTOGEN FIELD
+[extra.return]
+type = "num" # AUTOGEN FIELD
+description = "Returns 1 on success (successfully moved) and 0 on failure (was blocked by something)."
 [[extra.args]]
 name = "Ref" # AUTOGEN STATIC
 type = "/atom/movable" # AUTOGEN FIELD

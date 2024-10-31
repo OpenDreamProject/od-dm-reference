@@ -1,8 +1,5 @@
 +++
 title = "animate"
-[extra]
-return_type = "null" # AUTOGEN FIELD
-is_override = false # AUTOGEN FIELD
 [[extra.args]]
 name = "Object" # AUTOGEN STATIC
 [[extra.args]]
@@ -55,4 +52,6 @@ name = "icon_state" # AUTOGEN STATIC
 name = "invisibility" # AUTOGEN STATIC
 [[extra.args]]
 name = "suffix" # AUTOGEN STATIC
+[extra.return]
+type = "null" # AUTOGEN FIELD
 +++

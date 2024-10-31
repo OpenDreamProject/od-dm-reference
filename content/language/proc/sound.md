@@ -1,7 +1,5 @@
 +++
 title = "sound"
-[extra]
-is_override = false # AUTOGEN FIELD
 [[extra.args]]
 name = "file" # AUTOGEN STATIC
 [[extra.args]]
