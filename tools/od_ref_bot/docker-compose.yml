@@ -1,0 +1,9 @@
+services:
+  od_ref_bot:
+    image: od_ref_bot
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+      environment:
+        GITHUB_TOKEN: "some_token"
