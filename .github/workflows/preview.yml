@@ -1,10 +1,5 @@
 name: Deploy PR previews
 
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
 on:
   pull_request_target:
     branches:
