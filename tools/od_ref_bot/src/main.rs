@@ -38,10 +38,15 @@ async fn odref(
     Ok(())
 }
 
+/// Prepare the query to be checked against the pages
 fn clean_query(query: String) -> String {
     query.trim().to_lowercase().to_string()
 }
 
+/// Retrieves the path of a valid page from a query.
+///
+/// Searches for exact path names, then page titles (from the frontmatter TOML)
+/// then searching through all path names for matches
 fn get_page(query: String, data: &Data) -> Option<&str> {
     let mut path_find = query.replace(" ", "/");
 
@@ -51,7 +56,10 @@ fn get_page(query: String, data: &Data) -> Option<&str> {
 
     if let Some(string) = data
         .path_to_text
-        .get_key_value(format!("objects/{}/_index.md", path_find).as_str()) { return Some(*string.0) }
+        .get_key_value(format!("objects/{}/_index.md", path_find).as_str())
+    {
+        return Some(*string.0);
+    }
 
     if path_find.contains("/") {
         let components: Vec<&str> = path_find.split("/").collect();
@@ -61,13 +69,25 @@ fn get_page(query: String, data: &Data) -> Option<&str> {
 
         let var_string = var.join("/");
 
-        if let Some(string) = data.path_to_text.get_key_value(format!("objects/{}.md", var_string).as_str()) { return Some(*string.0) }
+        if let Some(string) = data
+            .path_to_text
+            .get_key_value(format!("objects/{}.md", var_string).as_str())
+        {
+            return Some(*string.0);
+        }
 
         let proc_string = var_string.replace("var", "proc");
-        if let Some(string) = data.path_to_text.get_key_value(format!("objects/{}.md", proc_string).as_str()) { return Some(*string.0) }
+        if let Some(string) = data
+            .path_to_text
+            .get_key_value(format!("objects/{}.md", proc_string).as_str())
+        {
+            return Some(*string.0);
+        }
     }
 
-    if let Some(string) = data.titles_to_path.get(&query) { return Some(*string) }
+    if let Some(string) = data.titles_to_path.get(&query) {
+        return Some(*string);
+    }
 
     for thing in data.path_to_text.iter() {
         if thing.0.contains(&path_find) {
@@ -78,6 +98,11 @@ fn get_page(query: String, data: &Data) -> Option<&str> {
     None
 }
 
+/// Returns a formatted embed based on the available information in the page.
+///
+/// Retains most Markdown, as this (mostly) renders fine in Discord embeds.
+/// Scrubs all Tera shortcodes, apart from the ones we can render into direct links here.
+/// Pulls some extra information from the frontmatter, and puts it in fields.
 fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
     let body_regex = Regex::new(r"(?s)\+\+\+(.*)\+\+\+(.*)").unwrap();
 
@@ -99,7 +124,12 @@ fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
 
         let parent_parsed = data.path_to_parsed.get(&components.join("/"))?;
 
-        title = format!("{} ({} {})", title, parent_parsed.get("title")?.as_str()?, if proc { "proc" } else { "var" })
+        title = format!(
+            "{} ({} {})",
+            title,
+            parent_parsed.get("title")?.as_str()?,
+            if proc { "proc" } else { "var" }
+        )
     };
 
     let embed = serenity::CreateEmbed::default()
@@ -167,6 +197,7 @@ fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
     Some(embed)
 }
 
+/// Converts the Tera-formatted markdown into more Discord compatible markdown.
 fn format_body(body: &str) -> String {
     let mut replaced_body = body.to_string();
 
@@ -207,6 +238,8 @@ fn format_body(body: &str) -> String {
     replaced_body.replace("```dm", "```js")
 }
 
+/// Converts the internal Zola page structure into something we can link to.
+/// Respects the slug set in the frontmatter.
 fn get_url(path: &str, data: &Table) -> String {
     let mut path = path.replace(".md", "");
     path = path.replace("_index", "");
@@ -253,6 +286,9 @@ async fn main() {
     client.unwrap().start().await.unwrap();
 }
 
+/// Parses the frontmatter of our pages, creating a HashMap for the title -> path
+/// (but this is not correctly implemented - same name titles clobber
+/// eachother non-deterministically), and path -> frontmatter.
 fn generate_titles_to_page(
     records: &HashMap<&'static str, &'static str>,
     path_to_parsed: &mut HashMap<String, Table>,
