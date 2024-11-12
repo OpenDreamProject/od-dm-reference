@@ -57,7 +57,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: refs/pull/${{ github.event.number }}/merge
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -91,3 +91,4 @@ jobs:
           umbrella-dir: ./pr-preview/
           deploy-repository: ${{ env.DEPLOY_REPO_OWNER }}/${{ env.DEPLOY_REPO }}
           custom-url: "ref.opendre.am"
+          action: deploy
