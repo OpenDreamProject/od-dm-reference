@@ -59,4 +59,3 @@ jobs:
           source-dir: ./public/
           umbrella-dir: ./pr-preview/
           deploy-repository: ${{ env.DEPLOY_REPO_OWNER }}/${{ env.DEPLOY_REPO }}
-          token: ${{ secrets.PREVIEW_TOKEN }}
