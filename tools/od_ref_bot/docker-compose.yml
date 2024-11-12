@@ -5,5 +5,5 @@ services:
       context: .
       dockerfile: Dockerfile
 
-      environment:
-        GITHUB_TOKEN: "some_token"
+    environment:
+      GITHUB_TOKEN: "some_token"
