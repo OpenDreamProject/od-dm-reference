@@ -132,7 +132,7 @@ fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
         )
     };
 
-    let embed = serenity::CreateEmbed::default()
+    let mut embed = serenity::CreateEmbed::default()
         .title(title)
         .url(get_url(page, parsed))
         .color(Colour::from_rgb(246, 114, 128))
@@ -143,56 +143,45 @@ fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
         None => return Some(embed),
     };
 
-    let embed = match extra.get("usage") {
-        Some(val) => embed.field("Usage", val.as_str()?, false),
-        None => embed,
-    };
+    if let Some(val) = extra.get("usage") { embed = embed.field("Usage", val.as_str()?, false) };
 
-    let embed = match extra.get("return") {
-        Some(val) => {
-            if val.is_str() {
-                embed.field("Return", val.as_str()?, false)
-            } else {
-                let table = val.as_table()?;
+    if let Some(val) = extra.get("return") {
+        if val.is_str() {
+            embed = embed.field("Return", val.as_str()?, false)
+        } else {
+            let table = val.as_table()?;
 
-                let embed = match table.get("type") {
-                    Some(val) => embed.field("Return Type", val.as_str()?, false),
-                    None => embed,
-                };
+            let mut return_string = String::new();
 
-                let embed = match table.get("description") {
-                    Some(val) => embed.field("Return Description", val.as_str()?, false),
-                    None => embed,
-                };
+            if let Some(val) = table.get("type") { return_string.push_str(val.as_str()?) };
 
-                embed
+            if let Some(val) = table.get("description") {
+                return_string = if !return_string.is_empty() {
+                    format!("{}: {}", return_string, val.as_str()?)
+                } else {
+                    val.as_str()?.to_string()
+                }
+            };
+
+            if !return_string.is_empty() {
+                embed = embed.field("Return", return_string, false);
             }
         }
-        None => embed,
     };
 
-    let embed = match extra.get("default_value") {
-        Some(val) => {
-            let mut string_val = val.as_str()?;
+    if let Some(val) = extra.get("default_value") {
+        let mut string_val = val.as_str()?;
 
-            if string_val.is_empty() {
-                string_val = "\"\"";
-            }
-
-            embed.field("Default Value", string_val, true)
+        if string_val.is_empty() {
+            string_val = "\"\"";
         }
-        None => embed,
+
+        embed = embed.field("Default Value", string_val, true)
     };
 
-    let embed = match extra.get("permitted_values") {
-        Some(val) => embed.field("Permitted Values", val.as_str()?, true),
-        None => embed,
-    };
+    if let Some(val) = extra.get("permitted_values") { embed = embed.field("Permitted Values", val.as_str()?, true) };
 
-    let embed = match extra.get("type") {
-        Some(val) => embed.field("Type", val.as_str()?, true),
-        None => embed,
-    };
+    if let Some(val) = extra.get("type") { embed = embed.field("Type", val.as_str()?, true) };
 
     Some(embed)
 }
