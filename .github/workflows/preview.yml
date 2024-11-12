@@ -41,7 +41,7 @@ jobs:
           version: "1.6.0"
 
       - name: Build project
-        run: npm run build -- -u "https://ref.opendrea.am/pr-preview/pr-${{ github.event.number }}"
+        run: npm run build -- -u "https://ref.opendre.am/pr-preview/pr-${{ github.event.number }}"
 
       - name: Build index
         run: |
