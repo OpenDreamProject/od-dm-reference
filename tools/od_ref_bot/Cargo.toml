@@ -2,6 +2,8 @@
 name = "od_ref_bot"
 version = "0.1.0"
 edition = "2021"
+repository = "https://github.com/OpenDreamProject/od-dm-reference/"
+license = "MIT"
 
 [dependencies]
 poise = "0.6.1"

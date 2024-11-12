@@ -45,17 +45,13 @@ fn clean_query(query: String) -> String {
 fn get_page(query: String, data: &Data) -> Option<&str> {
     let mut path_find = query.replace(" ", "/");
 
-    if path_find.chars().nth(0) == Some('/') {
+    if path_find.starts_with('/') {
         path_find = path_find[1..].to_string();
     }
 
-    match data
+    if let Some(string) = data
         .path_to_text
-        .get_key_value(format!("objects/{}/_index.md", path_find).as_str())
-    {
-        Some(string) => return Some(*string.0),
-        None => (),
-    }
+        .get_key_value(format!("objects/{}/_index.md", path_find).as_str()) { return Some(*string.0) }
 
     if path_find.contains("/") {
         let components: Vec<&str> = path_find.split("/").collect();
@@ -65,22 +61,13 @@ fn get_page(query: String, data: &Data) -> Option<&str> {
 
         let var_string = var.join("/");
 
-        match data.path_to_text.get_key_value(format!("objects/{}.md", var_string).as_str()) {
-            Some(string) => return Some(*string.0),
-            None => (),
-        }
+        if let Some(string) = data.path_to_text.get_key_value(format!("objects/{}.md", var_string).as_str()) { return Some(*string.0) }
 
         let proc_string = var_string.replace("var", "proc");
-        match data.path_to_text.get_key_value(format!("objects/{}.md", proc_string).as_str()) {
-            Some(string) => return Some(*string.0),
-            None => (),
-        }
+        if let Some(string) = data.path_to_text.get_key_value(format!("objects/{}.md", proc_string).as_str()) { return Some(*string.0) }
     }
 
-    match data.titles_to_path.get(&query) {
-        Some(string) => return Some(*string),
-        None => (),
-    }
+    if let Some(string) = data.titles_to_path.get(&query) { return Some(*string) }
 
     for thing in data.path_to_text.iter() {
         if thing.0.contains(&path_find) {
@@ -158,7 +145,7 @@ fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
         Some(val) => {
             let mut string_val = val.as_str()?;
 
-            if string_val.len() == 0 {
+            if string_val.is_empty() {
                 string_val = "\"\"";
             }
 
@@ -192,20 +179,14 @@ fn format_body(body: &str) -> String {
 
         let mut formatted = type_string.to_string();
 
-        match capture.get(3) {
-            Some(val) => {
-                formatted.push_str("/");
-                formatted.push_str(val.as_str())
-            }
-            None => (),
+        if let Some(val) = capture.get(3) {
+            formatted.push('/');
+            formatted.push_str(val.as_str())
         }
 
-        match capture.get(4) {
-            Some(val) => {
-                formatted.push_str("/");
-                formatted.push_str(val.as_str())
-            }
-            None => (),
+        if let Some(val) = capture.get(4) {
+            formatted.push('/');
+            formatted.push_str(val.as_str())
         }
 
         replaced_body = replaced_body.replace(
@@ -230,15 +211,12 @@ fn get_url(path: &str, data: &Table) -> String {
     let mut path = path.replace(".md", "");
     path = path.replace("_index", "");
 
-    match data.get("slug") {
-        Some(slug) => {
-            let mut components: Vec<&str> = path.split("/").collect();
-            components.pop();
-            components.push(slug.as_str().unwrap());
+    if let Some(slug) = data.get("slug") {
+        let mut components: Vec<&str> = path.split("/").collect();
+        components.pop();
+        components.push(slug.as_str().unwrap());
 
-            path = components.join("/");
-        }
-        None => (),
+        path = components.join("/");
     };
 
     format!("https://ref.opendre.am/{path}")

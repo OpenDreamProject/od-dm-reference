@@ -9,7 +9,7 @@ const SOURCE_DIR: &str = "../../content";
 
 fn main() -> Result<(), Box<dyn Error>> {
     let dest_path = Path::new("./src/content.rs");
-    let mut out_files = File::create(&dest_path)?;
+    let mut out_files = File::create(dest_path)?;
 
     writeln!(
         &mut out_files,
