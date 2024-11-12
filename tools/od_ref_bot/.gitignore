@@ -1,0 +1,5 @@
+target/
+.env
+
+# build artifact
+src/content.rs
