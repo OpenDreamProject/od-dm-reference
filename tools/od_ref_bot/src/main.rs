@@ -209,10 +209,8 @@ fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
             PageReturnOrString::PageReturn(page) => {
                 let mut return_string = String::new();
 
-                if let Some(val) = &page._type {
-                    if let ReturnTypeOrBool::String(string) = val {
-                        return_string.push_str(string.as_str());
-                    }
+                if let Some(ReturnTypeOrBool::String(string)) = &page._type {
+                    return_string.push_str(string.as_str());
                 };
 
                 if let Some(val) = &page.description {
