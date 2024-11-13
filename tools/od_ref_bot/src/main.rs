@@ -2,6 +2,7 @@ use std::collections::HashMap;
 
 use poise::serenity_prelude::{self as serenity, Colour, CreateEmbed};
 use regex::Regex;
+use serde::Deserialize;
 use tantivy::{
     collector::TopDocs,
     doc,
@@ -10,13 +11,12 @@ use tantivy::{
     Document, Index, IndexReader, IndexWriter, TantivyDocument,
 };
 use tempfile::TempDir;
-use toml::Table;
 
 mod content;
 
 struct Data {
     titles_to_path: HashMap<String, &'static str>,
-    path_to_parsed: HashMap<String, Table>,
+    path_to_parsed: HashMap<String, PageFrontmatter>,
     path_to_text: HashMap<&'static str, &'static str>,
     reader: IndexReader,
     index: Index,
@@ -106,18 +106,19 @@ fn get_page<'a>(query: &'a String, data: &'a Data) -> Option<&'a str> {
     let searcher = data.reader.searcher();
     let query_parser = QueryParser::for_index(&data.index, data.default_fields.clone());
 
-    if let Ok(query) = query_parser.parse_query(query) { if let Ok(res) = searcher.search(&query, &TopDocs::with_limit(1)) {
-        if let Some(doc_tuple) = res.first() {
-            let doc: TantivyDocument = searcher.doc(doc_tuple.1).unwrap();
+    if let Ok(query) = query_parser.parse_query(query) {
+        if let Ok(res) = searcher.search(&query, &TopDocs::with_limit(1)) {
+            if let Some(doc_tuple) = res.first() {
+                let doc: TantivyDocument = searcher.doc(doc_tuple.1).unwrap();
 
-            for field in doc.iter_fields_and_values() {
-                if let Some(path) = data.path_to_text.get_key_value(field.1.as_str().unwrap()) {
-                    return Some(*path.0);
+                for field in doc.iter_fields_and_values() {
+                    if let Some(path) = data.path_to_text.get_key_value(field.1.as_str().unwrap()) {
+                        return Some(*path.0);
+                    }
                 }
             }
         }
-
-    } };
+    };
 
     for thing in data.path_to_text.iter() {
         if thing.0.contains(&path_find) {
@@ -143,7 +144,7 @@ fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
         .get(2)?
         .as_str();
 
-    let mut title = parsed.get("title")?.as_str()?.to_string();
+    let mut title = parsed.title.clone()?;
 
     let mut components: Vec<&str> = page.split("/").collect();
 
@@ -156,55 +157,83 @@ fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
 
         title = format!(
             "{} ({} {})",
-            title,
-            parent_parsed.get("title")?.as_str()?,
+            &title,
+            parent_parsed.title.clone()?,
             if proc { "proc" } else { "var" }
         )
     };
 
     let mut embed = serenity::CreateEmbed::default()
-        .title(title)
+        .title(&title)
         .url(get_url(page, parsed))
         .color(Colour::from_rgb(246, 114, 128))
         .description(format_body(body));
 
-    let extra = match parsed.get("extra") {
-        Some(table) => table.as_table()?,
-        None => return Some(embed),
+    let extra = parsed.extra.as_ref().unwrap();
+
+    if let Some(formats) = &extra.format {
+        for format in formats.iter().enumerate() {
+            let val = format.1;
+            let mut format_string = format!("```js\n{}(\n", &parsed.title.clone()?);
+
+            for array_value in val.iter() {
+                format_string = format!("{}{}\n", format_string, &array_value.get_arg_as_string());
+            }
+
+            format_string.push_str(")```");
+
+            embed = embed.field(
+                format!("Format {}", format.0 + 1).as_str(),
+                format_string,
+                false,
+            );
+        }
+    } else if let Some(val) = &extra.args {
+        let mut args_string = format!("```js\n{}(\n", &parsed.title.clone()?);
+
+        for array_value in val.iter() {
+            args_string = format!("{}{}\n", args_string, &array_value.get_arg_as_string());
+        }
+
+        args_string.push_str(")```");
+
+        embed = embed.field("Arguments", args_string, false);
+    }
+
+    if let Some(val) = &extra.usage {
+        embed = embed.field("Usage", val.as_str(), false)
     };
 
-    if let Some(val) = extra.get("usage") {
-        embed = embed.field("Usage", val.as_str()?, false)
-    };
+    if let Some(val) = &extra._return {
+        match val {
+            PageReturnOrString::PageReturn(page) => {
+                let mut return_string = String::new();
 
-    if let Some(val) = extra.get("return") {
-        if val.is_str() {
-            embed = embed.field("Return", val.as_str()?, false)
-        } else {
-            let table = val.as_table()?;
+                if let Some(ReturnTypeOrBool::String(string)) = &page._type {
+                    return_string.push_str(string.as_str());
+                };
 
-            let mut return_string = String::new();
+                if let Some(val) = &page.description {
+                    return_string = if !return_string.is_empty() {
+                        format!("{}: {}", return_string, val.as_str())
+                    } else {
+                        val.as_str().to_string()
+                    }
+                };
 
-            if let Some(val) = table.get("type") {
-                return_string.push_str(val.as_str()?)
-            };
-
-            if let Some(val) = table.get("description") {
-                return_string = if !return_string.is_empty() {
-                    format!("{}: {}", return_string, val.as_str()?)
-                } else {
-                    val.as_str()?.to_string()
+                if !return_string.is_empty() {
+                    embed = embed.field("Return", return_string, false);
                 }
-            };
+            }
 
-            if !return_string.is_empty() {
-                embed = embed.field("Return", return_string, false);
+            PageReturnOrString::String(string) => {
+                embed = embed.field("Return", string.as_str(), false)
             }
         }
     };
 
-    if let Some(val) = extra.get("default_value") {
-        let mut string_val = val.as_str()?;
+    if let Some(val) = &extra.default_value {
+        let mut string_val = val.as_str();
 
         if string_val.is_empty() {
             string_val = "\"\"";
@@ -213,12 +242,12 @@ fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
         embed = embed.field("Default Value", string_val, true)
     };
 
-    if let Some(val) = extra.get("permitted_values") {
-        embed = embed.field("Permitted Values", val.as_str()?, true)
+    if let Some(val) = &extra.permitted_values {
+        embed = embed.field("Permitted Values", val.as_str(), true)
     };
 
-    if let Some(val) = extra.get("type") {
-        embed = embed.field("Type", val.as_str()?, true)
+    if let Some(val) = &extra._type {
+        embed = embed.field("Type", val.as_str(), true)
     };
 
     Some(embed)
@@ -267,14 +296,14 @@ fn format_body(body: &str) -> String {
 
 /// Converts the internal Zola page structure into something we can link to.
 /// Respects the slug set in the frontmatter.
-fn get_url(path: &str, data: &Table) -> String {
+fn get_url(path: &str, data: &PageFrontmatter) -> String {
     let mut path = path.replace(".md", "");
     path = path.replace("_index", "");
 
-    if let Some(slug) = data.get("slug") {
+    if let Some(slug) = &data.slug {
         let mut components: Vec<&str> = path.split("/").collect();
         components.pop();
-        components.push(slug.as_str().unwrap());
+        components.push(slug.as_str());
 
         path = components.join("/");
     };
@@ -349,7 +378,7 @@ async fn main() {
 /// eachother non-deterministically), and path -> frontmatter.
 fn generate_titles_to_page(
     records: &HashMap<&'static str, &'static str>,
-    path_to_parsed: &mut HashMap<String, Table>,
+    path_to_parsed: &mut HashMap<String, PageFrontmatter>,
     schema: &Schema,
     index_writer: &mut IndexWriter,
 ) -> Result<HashMap<String, &'static str>, Box<dyn std::error::Error>> {
@@ -370,17 +399,9 @@ fn generate_titles_to_page(
             None => continue,
         };
 
-        let parsed = toml::from_str::<Table>(frontmatter)?;
+        let parsed = toml::from_str::<PageFrontmatter>(frontmatter)?;
 
-        let title = match parsed.get("title") {
-            Some(title) => match title.as_str() {
-                Some(title) => title,
-                None => continue,
-            },
-            None => continue,
-        };
-
-        let title = title.to_string();
+        let title = parsed.title.clone().unwrap_or("Empty Title".to_string());
         let path = record.0.to_string();
 
         index_writer
@@ -398,4 +419,82 @@ fn generate_titles_to_page(
     index_writer.commit().unwrap();
 
     Ok(title_map)
+}
+
+#[derive(Deserialize)]
+struct PageFrontmatter {
+    title: Option<String>,
+    slug: Option<String>,
+    extra: Option<PageExtra>,
+}
+
+#[derive(Deserialize, Clone, Debug)]
+struct PageExtra {
+    /// For operator pages
+    usage: Option<String>,
+
+    /// For proc/ pages
+    #[serde(rename = "return")]
+    _return: Option<PageReturnOrString>, // and operator pages
+    format: Option<Vec<Vec<PageArgs>>>,
+    args: Option<Vec<PageArgs>>,
+
+    /// For var/ pages
+    default_value: Option<String>,
+    permitted_values: Option<String>,
+    #[serde(rename = "type")]
+    _type: Option<String>,
+}
+
+#[derive(Deserialize, Clone, Debug)]
+#[serde(untagged)]
+enum PageReturnOrString {
+    String(String),
+    PageReturn(PageReturn),
+}
+
+#[derive(Deserialize, Clone, Debug)]
+
+struct PageReturn {
+    #[serde(rename = "type")]
+    _type: Option<ReturnTypeOrBool>,
+    description: Option<String>,
+}
+
+#[derive(Deserialize, Clone, Debug)]
+#[serde(untagged)]
+enum ReturnTypeOrBool {
+    String(String),
+
+    #[allow(dead_code)]
+    Bool(bool),
+}
+
+#[derive(Deserialize, Clone, Debug)]
+struct PageArgs {
+    name: String,
+    description: Option<String>,
+    #[serde(rename = "type")]
+    _type: Option<String>,
+    default_value: Option<String>,
+}
+
+impl PageArgs {
+    fn get_arg_as_string(&self) -> String {
+        let mut string = format!("\t{}", &self.name);
+
+        if let Some(val) = &self._type {
+            string = format!("{} as {}", string, val)
+        }
+
+        if let Some(val) = &self.default_value {
+            string = format!("{} = {}", string, val);
+        }
+
+        if let Some(val) = &self.description {
+            string = format!("{} // {}", string, val);
+        }
+
+        string
+    }
 }
