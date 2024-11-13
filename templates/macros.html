@@ -181,7 +181,7 @@
             <div class="{% if not list %}text-xl{% endif %}">Arguments:</div>
             <div class="flex flex-col">
             {% for arg in page.extra.args %}
-                <div class="pl-5">{{arg.name}}{% if arg.type %} ({{ self::render_single_type(type=arg.type)}}){% endif %}{%- if arg.default_value %} = {{ self::render_proc_default_value(value=arg.default_value) }}{% endif %}{% if arg.description %}: {{arg.description}}{% endif %}{% if not loop.last %},{% endif %}{%- if arg.od_unimplemented -%}<div class="text-sm text-red-400 border-l-2 border-red-400 pl-2 inline ml-2">Unimplemented 🏗️</div>{%- endif -%}</div>
+                <div class="pl-5">{{arg.name}}{% if arg.type %} ({{ self::render_single_type(type=arg.type)}}){% endif %}{%- if arg.default_value %} = {{ self::render_proc_default_value(value=arg.default_value) }}{% endif %}{% if arg.description %}: {{arg.description}}{% endif %}{%- if arg.od_unimplemented -%}<div class="text-sm text-red-400 border-l-2 border-red-400 pl-2 inline ml-2">Unimplemented 🏗️</div>{%- endif -%}</div>
             {% endfor %}
             </div>
         </div>
@@ -307,7 +307,7 @@
 {% macro render_backlinks(page) %}
     {% if page.backlinks | length %}
     <div>
-    <h4>See also:</h4>
+    <h4 class="pt-3">See also:</h4>
     <div class="flex flex-col">
     {% for backlink in page.backlinks %}
         <div class="pl-3">- <a href="{{backlink.permalink}}">{{backlink.title}}</a></div>

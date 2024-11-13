@@ -257,7 +257,7 @@ fn format_body(body: &str) -> String {
         )
     }
 
-    let tag_cleaner_regex = Regex::new(r"\{\{.*?}}").unwrap();
+    let tag_cleaner_regex = Regex::new(r"\{\{.*?}}|\{%.*?%}").unwrap();
 
     replaced_body = tag_cleaner_regex
         .replace_all(&replaced_body, "")

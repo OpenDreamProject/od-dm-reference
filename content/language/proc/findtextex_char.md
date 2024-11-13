@@ -1,6 +1,8 @@
 +++
 title = "findtextEx_char"
 slug = "findtextEx_char" # AUTOGEN FIELD
+render = false
+
 [extra]
 od_unimplemented = true # AUTOGEN FIELD
 [[extra.args]]

@@ -1,5 +1,7 @@
 +++
 title = "splicetext_char"
+render = false
+
 [[extra.args]]
 name = "Text" # AUTOGEN STATIC
 [[extra.args]]

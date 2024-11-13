@@ -1,8 +1,15 @@
 {% import "shortcodes.html" as sc %}
+{%- set contents = "Empty" -%}
+{%- if body -%}
+    {%- set contents = body -%}
+{%- endif -%}
+{%- if description -%}
+    {%- set contents = description -%}
+{%- endif -%}
 {{ sc::render_callout(color="#f9a8d4",
     title="OpenDream Only", 
     body="This feature only exists in the OpenDream implementation of DreamMaker:", 
-    contents=description,
+    contents=contents,
     icon=get_url(path='favicon.svg') | safe
     ) 
 }}

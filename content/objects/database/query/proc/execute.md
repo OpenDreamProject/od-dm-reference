@@ -18,4 +18,6 @@ while(query.NextRow())
     top_scorers += query.GetColumn(0)
 ```
 
-{{ parity(description="We do not currently support running Execute() without a database datum provided. The BYOND implementation of DreamMaker supports passing a filename.") }}
+{% parity() %}
+We do not currently support running Execute() without a database datum provided. The BYOND implementation of DreamMaker supports passing a filename.
+{% end %}

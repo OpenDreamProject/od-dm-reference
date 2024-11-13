@@ -17,34 +17,52 @@ We can use shortcodes to render specific HTML within our Markdown files. They're
 {{/* some_shortcode(some_keyword_argument="some value!") */}}
 ```
 
-Currently, we have 4 callout shortcodes, which all take a `description` argument:
+Currently, we have 4 callout shortcodes, which all take a `description` argument. However, the preferred way of invoking them is:
 ### never_implemented
 
 ```go
-{{/* never_implemented(description="Like this!") */}}
+{%/* never_implemented() */%}
+Like this!
+{%/* end */%}
 ```
-{{ never_implemented(description="Like this!") }}
+{% never_implemented() %}
+Like this!
+{% end %}
 
 ### od_only
 
 ```go
-{{/* od_only(description="Like this!") */}}
+{%/* od_only() */%}
+Like this!
+{%/* end */%}
 ```
-{{ od_only(description="Like this!") }}
+{% od_only() %}
+Like this!
+{% end %}
 
 ### parity
 
 ```go
-{{/* parity(description="Like this!") */}}
+{%/* parity() */%}
+Like this!
+{%/* end */%}
 ```
-{{ parity(description="Like this!") }}
+{% parity() %}
+Like this!
+{% end %}
 
 ### unimplemented
 
 ```go
-{{/* unimplemented(description="Like this!") */}}
+{%/* unimplemented() */%}
+Like this!
+{%/* end */%}
 ```
-{{ unimplemented(description="Like this!") }}
+{% unimplemented() %}
+Like this!
+{% end %}
+
+### Internal Links
 
 {{ mob() }} - To link to specific types, we can use the type shortcodes such as:
 ```go
@@ -106,6 +124,7 @@ Zola allows us to put arbitrary TOML under the [extra] section, which we do for 
   - `[[args.od_unimplemented]]` - If this argument is implemented or not in the OpenDream implementation of BYOND.
 - Vars:
   - `default_value_desc` - This allows us to add extra information about the default value that this variable is set to.
+  - `permitted_values` - This allows us to set what range of values this variable can be.
 
 ## Available Markdown formatting
 

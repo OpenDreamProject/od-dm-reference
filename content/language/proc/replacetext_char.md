@@ -1,5 +1,7 @@
 +++
 title = "replacetext_char"
+render = false
+
 [extra]
 od_unimplemented = true # AUTOGEN FIELD
 [[extra.args]]

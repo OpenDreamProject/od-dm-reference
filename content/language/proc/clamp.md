@@ -42,4 +42,6 @@ for(var/num in clamp(my_list, 1, 5))
     world.log << num // 1, 2, 3, 4, 5, 5, 5, 5, 5
 ```
 
-{{ parity(description="A new list will always be returned from the `clamp()` proc, it does not operate in place.") }}
+{% parity() %}
+A new list will always be returned from the `clamp()` proc, it does not operate in place
+{% end %}
