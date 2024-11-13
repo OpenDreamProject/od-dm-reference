@@ -11,6 +11,7 @@ struct Data {
     path_to_parsed: HashMap<String, Table>,
     path_to_text: HashMap<&'static str, &'static str>,
 } // User data, which is stored and accessible in all command invocations
+
 type Error = Box<dyn std::error::Error + Send + Sync>;
 type Context<'a> = poise::Context<'a, Data, Error>;
 
@@ -22,14 +23,16 @@ async fn odref(
 ) -> Result<(), Error> {
     let search_for = clean_query(search_for);
 
-    let page = get_page(search_for, ctx.data()).unwrap_or("Not found.");
+    let page = get_page(&search_for, ctx.data()).unwrap_or("Not found.");
 
     match format_embed(page, ctx.data()) {
         Some(embed) => ctx.send(poise::CreateReply::default().embed(embed)).await?,
         None => {
+            log::debug!("Unable to locate a page for {}.", &search_for);
+
             ctx.send(
                 poise::CreateReply::default()
-                    .embed(CreateEmbed::default().description("An error occured.")),
+                    .embed(CreateEmbed::default().description("Could not locate a page.")),
             )
             .await?
         }
@@ -47,7 +50,7 @@ fn clean_query(query: String) -> String {
 ///
 /// Searches for exact path names, then page titles (from the frontmatter TOML)
 /// then searching through all path names for matches
-fn get_page(query: String, data: &Data) -> Option<&str> {
+fn get_page<'a>(query: &'a String, data: &'a Data) -> Option<&'a str> {
     let mut path_find = query.replace(" ", "/");
 
     if path_find.starts_with('/') {
@@ -85,7 +88,7 @@ fn get_page(query: String, data: &Data) -> Option<&str> {
         }
     }
 
-    if let Some(string) = data.titles_to_path.get(&query) {
+    if let Some(string) = data.titles_to_path.get(query) {
         return Some(*string);
     }
 
@@ -143,7 +146,9 @@ fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
         None => return Some(embed),
     };
 
-    if let Some(val) = extra.get("usage") { embed = embed.field("Usage", val.as_str()?, false) };
+    if let Some(val) = extra.get("usage") {
+        embed = embed.field("Usage", val.as_str()?, false)
+    };
 
     if let Some(val) = extra.get("return") {
         if val.is_str() {
@@ -153,7 +158,9 @@ fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
 
             let mut return_string = String::new();
 
-            if let Some(val) = table.get("type") { return_string.push_str(val.as_str()?) };
+            if let Some(val) = table.get("type") {
+                return_string.push_str(val.as_str()?)
+            };
 
             if let Some(val) = table.get("description") {
                 return_string = if !return_string.is_empty() {
@@ -179,9 +186,13 @@ fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
         embed = embed.field("Default Value", string_val, true)
     };
 
-    if let Some(val) = extra.get("permitted_values") { embed = embed.field("Permitted Values", val.as_str()?, true) };
+    if let Some(val) = extra.get("permitted_values") {
+        embed = embed.field("Permitted Values", val.as_str()?, true)
+    };
 
-    if let Some(val) = extra.get("type") { embed = embed.field("Type", val.as_str()?, true) };
+    if let Some(val) = extra.get("type") {
+        embed = embed.field("Type", val.as_str()?, true)
+    };
 
     Some(embed)
 }

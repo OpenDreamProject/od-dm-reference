@@ -977,6 +977,7 @@ dependencies = [
 name = "od_ref_bot"
 version = "0.1.0"
 dependencies = [
+ "log",
  "poise",
  "regex",
  "tokio",
