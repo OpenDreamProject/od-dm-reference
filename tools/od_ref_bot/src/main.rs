@@ -2,6 +2,14 @@ use std::collections::HashMap;
 
 use poise::serenity_prelude::{self as serenity, Colour, CreateEmbed};
 use regex::Regex;
+use tantivy::{
+    collector::TopDocs,
+    doc,
+    query::QueryParser,
+    schema::{Field, Schema, Value, STORED, TEXT},
+    Document, Index, IndexReader, IndexWriter, TantivyDocument,
+};
+use tempfile::TempDir;
 use toml::Table;
 
 mod content;
@@ -10,6 +18,9 @@ struct Data {
     titles_to_path: HashMap<String, &'static str>,
     path_to_parsed: HashMap<String, Table>,
     path_to_text: HashMap<&'static str, &'static str>,
+    reader: IndexReader,
+    index: Index,
+    default_fields: Vec<Field>,
 } // User data, which is stored and accessible in all command invocations
 
 type Error = Box<dyn std::error::Error + Send + Sync>;
@@ -91,6 +102,25 @@ fn get_page<'a>(query: &'a String, data: &'a Data) -> Option<&'a str> {
     if let Some(string) = data.titles_to_path.get(query) {
         return Some(*string);
     }
+
+    let searcher = data.reader.searcher();
+    let query_parser = QueryParser::for_index(&data.index, data.default_fields.clone());
+
+    match query_parser.parse_query(&query) {
+        Ok(query) => match searcher.search(&query, &TopDocs::with_limit(1)) {
+            Ok(res) => {
+                let doc: TantivyDocument = searcher.doc(res.first().unwrap().1).unwrap();
+
+                for field in doc.iter_fields_and_values() {
+                    if let Some(path) = data.path_to_text.get_key_value(field.1.as_str().unwrap()) {
+                        return Some(*path.0);
+                    }
+                }
+            }
+            Err(_) => (),
+        },
+        Err(_) => (),
+    };
 
     for thing in data.path_to_text.iter() {
         if thing.0.contains(&path_find) {
@@ -263,6 +293,34 @@ async fn main() {
     let records = content::get_all();
     let mut path_to_parsed = HashMap::new();
 
+    let search_index_path = TempDir::new().unwrap();
+
+    let mut schema_builder = Schema::builder();
+    schema_builder.add_text_field("title", TEXT);
+    schema_builder.add_text_field("path", TEXT | STORED);
+    schema_builder.add_text_field("body", TEXT);
+
+    let schema = schema_builder.build();
+
+    let index = Index::create_in_dir(&search_index_path, schema.clone()).unwrap();
+
+    let mut index_writer: IndexWriter = index.writer(15_000_000).unwrap();
+
+    let titles =
+        generate_titles_to_page(&records, &mut path_to_parsed, &schema, &mut index_writer).unwrap();
+
+    let reader = index
+        .reader_builder()
+        .reload_policy(tantivy::ReloadPolicy::OnCommitWithDelay)
+        .try_into()
+        .unwrap();
+
+    let default_fields = vec![
+        schema.get_field("title").unwrap(),
+        schema.get_field("path").unwrap(),
+        schema.get_field("body").unwrap(),
+    ];
+
     let framework = poise::Framework::builder()
         .options(poise::FrameworkOptions {
             commands: vec![odref()],
@@ -272,9 +330,12 @@ async fn main() {
             Box::pin(async move {
                 poise::builtins::register_globally(ctx, &framework.options().commands).await?;
                 Ok(Data {
-                    titles_to_path: generate_titles_to_page(&records, &mut path_to_parsed).unwrap(),
+                    titles_to_path: titles,
                     path_to_parsed,
                     path_to_text: records,
+                    index,
+                    reader,
+                    default_fields,
                 })
             })
         })
@@ -292,10 +353,16 @@ async fn main() {
 fn generate_titles_to_page(
     records: &HashMap<&'static str, &'static str>,
     path_to_parsed: &mut HashMap<String, Table>,
+    schema: &Schema,
+    index_writer: &mut IndexWriter,
 ) -> Result<HashMap<String, &'static str>, Box<dyn std::error::Error>> {
     let mut title_map = HashMap::new();
 
     let frontmatter_regex = Regex::new(r"(?s)\+\+\+(.*)\+\+\+")?;
+
+    let title_field = schema.get_field("title").unwrap();
+    let path_field = schema.get_field("path").unwrap();
+    let body_field = schema.get_field("body").unwrap();
 
     for record in records.iter() {
         let frontmatter = match frontmatter_regex.captures(record.1) {
@@ -308,20 +375,30 @@ fn generate_titles_to_page(
 
         let parsed = toml::from_str::<Table>(frontmatter)?;
 
-        {
-            let title = match parsed.get("title") {
-                Some(title) => match title.as_str() {
-                    Some(title) => title,
-                    None => continue,
-                },
+        let title = match parsed.get("title") {
+            Some(title) => match title.as_str() {
+                Some(title) => title,
                 None => continue,
-            };
+            },
+            None => continue,
+        };
 
-            title_map.insert(title.to_string(), *record.0);
-        }
+        let title = title.to_string();
+        let path = record.0.to_string();
 
-        path_to_parsed.insert(record.0.to_string(), parsed);
+        index_writer
+            .add_document(doc!(
+                title_field => title.clone(),
+                path_field => path.clone(),
+                body_field => record.1.to_string(),
+            ))
+            .unwrap();
+
+        title_map.insert(title, *record.0);
+        path_to_parsed.insert(path, parsed);
     }
+
+    index_writer.commit().unwrap();
 
     Ok(title_map)
 }

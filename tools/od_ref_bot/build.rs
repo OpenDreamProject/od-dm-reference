@@ -54,4 +54,3 @@ fn visit_dir(file: &mut File, dir: &str, from_dir: &String) -> Result<(), Box<dy
 
     Ok(())
 }
-    
