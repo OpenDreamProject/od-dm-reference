@@ -184,6 +184,9 @@
         <loc>https://ref.opendre.am/language/proc/bounds_dist/</loc>
     </url>
     <url>
+        <loc>https://ref.opendre.am/language/proc/browse/</loc>
+    </url>
+    <url>
         <loc>https://ref.opendre.am/language/proc/ceil/</loc>
     </url>
     <url>
@@ -235,22 +238,10 @@
         <loc>https://ref.opendre.am/language/proc/findlasttextEx/</loc>
     </url>
     <url>
-        <loc>https://ref.opendre.am/language/proc/findlasttextEx_char/</loc>
-    </url>
-    <url>
-        <loc>https://ref.opendre.am/language/proc/findlasttext_char/</loc>
-    </url>
-    <url>
         <loc>https://ref.opendre.am/language/proc/findtext/</loc>
     </url>
     <url>
         <loc>https://ref.opendre.am/language/proc/findtextEx/</loc>
-    </url>
-    <url>
-        <loc>https://ref.opendre.am/language/proc/findtextEx_char/</loc>
-    </url>
-    <url>
-        <loc>https://ref.opendre.am/language/proc/findtext_char/</loc>
     </url>
     <url>
         <loc>https://ref.opendre.am/language/proc/flick/</loc>
@@ -457,12 +448,6 @@
         <loc>https://ref.opendre.am/language/proc/replacetextEx/</loc>
     </url>
     <url>
-        <loc>https://ref.opendre.am/language/proc/replacetextEx_char/</loc>
-    </url>
-    <url>
-        <loc>https://ref.opendre.am/language/proc/replacetext_char/</loc>
-    </url>
-    <url>
         <loc>https://ref.opendre.am/language/proc/rgb/</loc>
     </url>
     <url>
@@ -502,19 +487,10 @@
         <loc>https://ref.opendre.am/language/proc/spantext/</loc>
     </url>
     <url>
-        <loc>https://ref.opendre.am/language/proc/spantext_char/</loc>
-    </url>
-    <url>
         <loc>https://ref.opendre.am/language/proc/splicetext/</loc>
     </url>
     <url>
-        <loc>https://ref.opendre.am/language/proc/splicetext_char/</loc>
-    </url>
-    <url>
         <loc>https://ref.opendre.am/language/proc/splittext/</loc>
-    </url>
-    <url>
-        <loc>https://ref.opendre.am/language/proc/splittext_char/</loc>
     </url>
     <url>
         <loc>https://ref.opendre.am/language/proc/stat/</loc>
@@ -539,9 +515,6 @@
     </url>
     <url>
         <loc>https://ref.opendre.am/language/proc/text2ascii/</loc>
-    </url>
-    <url>
-        <loc>https://ref.opendre.am/language/proc/text2ascii_char/</loc>
     </url>
     <url>
         <loc>https://ref.opendre.am/language/proc/text2file/</loc>
