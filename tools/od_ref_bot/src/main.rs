@@ -167,7 +167,7 @@ fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
         .title(&title)
         .url(get_url(page, parsed))
         .color(Colour::from_rgb(246, 114, 128))
-        .description(format_body(body));
+        .description(format_body(body, data));
 
     let extra = parsed.extra.as_ref().unwrap();
 
@@ -254,7 +254,7 @@ fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
 }
 
 /// Converts the Tera-formatted markdown into more Discord compatible markdown.
-fn format_body(body: &str) -> String {
+fn format_body(body: &str, data: &Data) -> String {
     let mut replaced_body = body.to_string();
 
     let link_finder_regex =
@@ -286,12 +286,24 @@ fn format_body(body: &str) -> String {
         )
     }
 
+    let mut new_body = replaced_body.clone();
+
+    let internal_link_regex = Regex::new(r"\[(.*?)]\(@/(.*?)\)").unwrap();
+    for capture in internal_link_regex.captures_iter(&replaced_body) {
+        let original = capture.get(0).unwrap().as_str();
+
+        let display = capture.get(1).unwrap().as_str();
+        let path = capture.get(2).unwrap().as_str();
+
+        let url = get_url(path, data.path_to_parsed.get(path).unwrap());
+
+        new_body = new_body.replace(original, format!("[{}]({})", display, url).as_str());
+    }
+
     let tag_cleaner_regex = Regex::new(r"\{\{.*?}}|\{%.*?%}").unwrap();
 
-    replaced_body = tag_cleaner_regex
-        .replace_all(&replaced_body, "")
-        .to_string();
-    replaced_body.replace("```dm", "```js")
+    new_body = tag_cleaner_regex.replace_all(&new_body, "").to_string();
+    new_body.replace("```dm", "```js")
 }
 
 /// Converts the internal Zola page structure into something we can link to.
