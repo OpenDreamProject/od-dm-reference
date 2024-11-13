@@ -1,6 +1,13 @@
 {% import "shortcodes.html" as sc %}
+{%- set contents = "Empty" -%}
+{%- if body -%}
+    {%- set contents = body -%}
+{%- endif -%}
+{%- if description -%}
+    {%- set contents = description -%}
+{%- endif -%}
 {{ sc::render_callout(color="#b91c1c", 
     title="Never Implemented ⛔", 
     body="In the OpenDream implementation of DreamMaker, this feature will not be implemented:", 
-    contents=description) 
+    contents=contents) 
 }}

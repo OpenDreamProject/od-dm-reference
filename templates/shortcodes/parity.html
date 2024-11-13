@@ -1,6 +1,13 @@
 {% import "shortcodes.html" as sc %}
+{%- set contents = "Empty" -%}
+{%- if body -%}
+    {%- set contents = body -%}
+{%- endif -%}
+{%- if description -%}
+    {%- set contents = description -%}
+{%- endif -%}
 {{ sc::render_callout(color="#facc15", 
     title="Parity Issue ⚠️", 
     body="In the OpenDream implementation of DreamMaker, this feature differs in implementation:", 
-    contents=description) 
+    contents=contents) 
 }}

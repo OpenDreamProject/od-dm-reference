@@ -1,5 +1,7 @@
 +++
 title = "text2ascii_char"
+render = false
+
 [[extra.args]]
 name = "T" # AUTOGEN STATIC
 [[extra.args]]

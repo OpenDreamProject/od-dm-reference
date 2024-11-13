@@ -1,6 +1,8 @@
 +++
 title = "replacetextEx_char"
 slug = "replacetextEx_char" # AUTOGEN FIELD
+render = false
+
 [extra]
 od_unimplemented = true # AUTOGEN FIELD
 [[extra.args]]
