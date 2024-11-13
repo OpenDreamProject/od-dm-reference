@@ -7,9 +7,9 @@ COPY src/ src/
 COPY build.rs build.rs
 COPY Cargo.toml Cargo.toml
 
-ADD https://github.com/OpenDreamProject/od-dm-reference.git#main:content /usr/content
+ADD https://github.com/OpenDreamProject/od-dm-reference.git#main /usr/ref
 
-RUN SOURCE_DIR=/usr/content cargo install --path .
+RUN SOURCE_DIR=/usr/ref/content cargo install --path .
 
 FROM debian:bookworm-slim
 COPY --from=builder /usr/local/cargo/bin/od_ref_bot /usr/local/bin/od_ref_bot
