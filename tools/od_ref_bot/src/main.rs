@@ -106,21 +106,18 @@ fn get_page<'a>(query: &'a String, data: &'a Data) -> Option<&'a str> {
     let searcher = data.reader.searcher();
     let query_parser = QueryParser::for_index(&data.index, data.default_fields.clone());
 
-    match query_parser.parse_query(&query) {
-        Ok(query) => match searcher.search(&query, &TopDocs::with_limit(1)) {
-            Ok(res) => {
-                let doc: TantivyDocument = searcher.doc(res.first().unwrap().1).unwrap();
+    if let Ok(query) = query_parser.parse_query(query) { if let Ok(res) = searcher.search(&query, &TopDocs::with_limit(1)) {
+        if let Some(doc_tuple) = res.first() {
+            let doc: TantivyDocument = searcher.doc(doc_tuple.1).unwrap();
 
-                for field in doc.iter_fields_and_values() {
-                    if let Some(path) = data.path_to_text.get_key_value(field.1.as_str().unwrap()) {
-                        return Some(*path.0);
-                    }
+            for field in doc.iter_fields_and_values() {
+                if let Some(path) = data.path_to_text.get_key_value(field.1.as_str().unwrap()) {
+                    return Some(*path.0);
                 }
             }
-            Err(_) => (),
-        },
-        Err(_) => (),
-    };
+        }
+
+    } };
 
     for thing in data.path_to_text.iter() {
         if thing.0.contains(&path_find) {
