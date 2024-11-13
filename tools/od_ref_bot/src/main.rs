@@ -264,7 +264,7 @@ fn format_body(body: &str, data: &Data) -> String {
     let mut replaced_body = body.to_string();
 
     let link_finder_regex =
-        Regex::new(r##"\{\{ *?([a-zA-Z]*)\(((var|proc)="([a-zA-Z]*?)")? ?\).*?\}\}"##).unwrap();
+        Regex::new(r##"\{\{ *?([a-zA-Z_]*)\(((var|proc)="([a-zA-Z]*?)")? ?\).*?\}\}"##).unwrap();
 
     for capture in link_finder_regex.captures_iter(body) {
         let original = capture.get(0).unwrap().as_str();
@@ -310,7 +310,7 @@ fn format_body(body: &str, data: &Data) -> String {
 
     new_body = tag_cleaner_regex.replace_all(&new_body, "").to_string();
     new_body = new_body.replace("```dm", "```js");
-    new_body.replace("\n\n", "")
+    new_body.replace("\n\n\n", "\n")
 }
 
 /// Converts the internal Zola page structure into something we can link to.
