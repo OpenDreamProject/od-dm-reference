@@ -310,7 +310,24 @@ fn format_body(body: &str, data: &Data) -> String {
 
     new_body = tag_cleaner_regex.replace_all(&new_body, "").to_string();
     new_body = new_body.replace("```dm", "```js");
-    new_body.replace("\n\n\n", "\n")
+
+    let mut whitespaced_body = new_body.clone();
+
+    let whitespace_cleaner = Regex::new(r"(\n{3,}```)|(```\n{2,})").unwrap();
+    for capture in whitespace_cleaner.captures_iter(&new_body) {
+        let original = capture.get(0).unwrap().as_str();
+
+        if let Some(_) = capture.get(1) {
+            whitespaced_body = whitespaced_body.replace(original, "\n\n```");
+            break;
+        }
+
+        if let Some(_) = capture.get(2) {
+            whitespaced_body = whitespaced_body.replace(original, "```\n")
+        }
+    }
+
+    whitespaced_body
 }
 
 /// Converts the internal Zola page structure into something we can link to.
