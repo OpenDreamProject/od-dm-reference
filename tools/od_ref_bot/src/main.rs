@@ -62,7 +62,7 @@ fn clean_query(query: String) -> String {
 /// Searches for exact path names, then page titles (from the frontmatter TOML)
 /// then searching through all path names for matches
 fn get_page<'a>(query: &'a String, data: &'a Data) -> Option<&'a str> {
-    let mut path_find = query.replace(" ", "/");
+    let mut path_find = query.replace(' ', "/");
 
     if path_find.starts_with('/') {
         path_find = path_find[1..].to_string();
@@ -75,8 +75,8 @@ fn get_page<'a>(query: &'a String, data: &'a Data) -> Option<&'a str> {
         return Some(*string.0);
     }
 
-    if path_find.contains("/") {
-        let components: Vec<&str> = path_find.split("/").collect();
+    if path_find.contains('/') {
+        let components: Vec<&str> = path_find.split('/').collect();
 
         let mut var = components.clone();
         var.insert(components.len() - 1, "var");
@@ -146,7 +146,7 @@ fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
 
     let mut title = parsed.title.clone()?;
 
-    let mut components: Vec<&str> = page.split("/").collect();
+    let mut components: Vec<&str> = page.split('/').collect();
 
     let proc = components.contains(&"proc");
     if proc || components.contains(&"var") {
@@ -169,7 +169,13 @@ fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
         .color(Colour::from_rgb(246, 114, 128))
         .description(format_body(body, data));
 
-    let extra = parsed.extra.as_ref().unwrap();
+    let extra = parsed.extra.as_ref();
+
+    if extra.is_none() {
+        return Some(embed);
+    }
+
+    let extra = extra.unwrap();
 
     if let Some(formats) = &extra.format {
         for format in formats.iter().enumerate() {
@@ -262,7 +268,7 @@ fn format_body(body: &str, data: &Data) -> String {
 
     for capture in link_finder_regex.captures_iter(body) {
         let original = capture.get(0).unwrap().as_str();
-        let type_string = capture.get(1).unwrap().as_str().replace("_", "/");
+        let type_string = capture.get(1).unwrap().as_str().replace('_', "/");
 
         let mut formatted = type_string.to_string();
 
@@ -303,7 +309,8 @@ fn format_body(body: &str, data: &Data) -> String {
     let tag_cleaner_regex = Regex::new(r"\{\{.*?}}|\{%.*?%}").unwrap();
 
     new_body = tag_cleaner_regex.replace_all(&new_body, "").to_string();
-    new_body.replace("```dm", "```js")
+    new_body = new_body.replace("```dm", "```js");
+    new_body.replace("\n\n", "")
 }
 
 /// Converts the internal Zola page structure into something we can link to.
@@ -313,7 +320,7 @@ fn get_url(path: &str, data: &PageFrontmatter) -> String {
     path = path.replace("_index", "");
 
     if let Some(slug) = &data.slug {
-        let mut components: Vec<&str> = path.split("/").collect();
+        let mut components: Vec<&str> = path.split('/').collect();
         components.pop();
         components.push(slug.as_str());
 

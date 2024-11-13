@@ -47,7 +47,7 @@ fn visit_dir(file: &mut File, dir: &str, from_dir: &String) -> Result<(), Box<dy
                 .strip_prefix(from_dir)
                 .unwrap()
                 .to_string_lossy()
-                .replace("\\", "/"),
+                .replace('\\', "/"),
             path = inner_file.path().canonicalize().unwrap().display(),
         )?;
     }
