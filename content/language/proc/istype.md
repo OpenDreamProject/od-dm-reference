@@ -11,7 +11,7 @@ description = "1 if Val is the same as, or a child type of, Type"
 +++
 
 ```dm
-var/atom/my_atom = new /obj(loc) // the variable is declared as an /atom, but we create an /obj
+var/mob/my_atom = new /obj(loc) // the variable is declared as a /mob, but we create an /obj
 if(istype(my_atom))
     // this will not pass, as the inferred type is different from the actual type
 
