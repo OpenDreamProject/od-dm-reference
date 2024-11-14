@@ -1,7 +1,18 @@
 +++
 title = "isloc"
+[extra]
+format = [
+  [
+    { name = "Loc1", description = "Any number of objects to test." },
+    { name = "Loc2" },
+    { name = "..." },
+  ],
+]
 [[extra.args]]
 name = "Loc1" # AUTOGEN STATIC
 [extra.return]
 type = "num" # AUTOGEN FIELD
+description = "1 if all provided arguments are valid locs; 0 if any are not."
 +++
+
+A valid loc is defined as being an {{ area() }}, {{ turf() }}, {{ obj() }} or {{ mob() }}. It can be thought of as being `ifatom()`, and works for any descendent of {{ atom() }}, including user defined objects.

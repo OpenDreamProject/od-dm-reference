@@ -221,7 +221,7 @@ fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
 
                 if let Some(val) = &page.description {
                     return_string = if !return_string.is_empty() {
-                        format!("{}: {}", return_string, val.as_str())
+                        format!("{}: {}", return_string, format_body(val, data).as_str())
                     } else {
                         val.as_str().to_string()
                     }
