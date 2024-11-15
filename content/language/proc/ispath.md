@@ -2,8 +2,13 @@
 title = "ispath"
 [extra]
 format = [
-    [{name = "Val"}],
-    [{name = "Val", description = "A type path."}, {name = "Type", description = "A type path or instance."}]
+  [
+    { name = "Val" },
+  ],
+  [
+    { name = "Val", description = "A type path." },
+    { name = "Type", description = "A type path or instance." },
+  ],
 ]
 [[extra.args]]
 name = "Val" # AUTOGEN STATIC
@@ -12,7 +17,6 @@ name = "Type" # AUTOGEN STATIC
 [extra.return]
 type = "num" # AUTOGEN FIELD
 description = """
-
 If Type is provided: 1 if Val is a typepath derived from Type; 0 if it is not.
 If Type is not provided, 1 if Val is a typepath; 0 if is not.
 """
