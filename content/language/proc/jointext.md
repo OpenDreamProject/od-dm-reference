@@ -29,5 +29,3 @@ All items in the list are stringified - similar to running `"[element]"` over ea
 Negative amounts for the Start or End value count from the end of the list.
 
 This functions similarly to {{ list(proc="Join") }}.
-
-{{ mutable_appearance() }}
