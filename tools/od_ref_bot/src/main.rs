@@ -272,7 +272,7 @@ fn format_body(body: &str, data: &Data) -> String {
     let mut replaced_body = body.to_string();
 
     let link_finder_regex =
-        Regex::new(r##"\{\{ *?([a-zA-Z_]*)\(((var|proc)="([a-zA-Z]*?)")? ?\).*?\}\}"##).unwrap();
+        Regex::new(r##"\{\{ *?([a-zA-Z_]*)\(((var|proc)="([a-zA-Z_]*?)")? ?\).*?\}\}"##).unwrap();
 
     for capture in link_finder_regex.captures_iter(body) {
         let original = capture.get(0).unwrap().as_str();
