@@ -199,7 +199,7 @@ fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
             }
 
             format_string.push_str("```\n");
-            total_formats.push_str(&format_string.as_str());
+            total_formats.push_str(format_string.as_str());
         }
         embed = embed.field("Argument Formats", total_formats, false);
     } else if let Some(val) = &extra.args {
@@ -532,7 +532,7 @@ struct PageArgs {
 
 impl PageArgs {
     fn get_arg_as_string(&self) -> String {
-        let mut string = format!("{}", &self.name);
+        let mut string = (self.name).to_string();
 
         if let Some(val) = &self._type {
             string = format!("{} as {}", string, val)
