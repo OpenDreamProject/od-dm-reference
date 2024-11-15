@@ -9,6 +9,7 @@ type = "/savefile" # AUTOGEN FIELD
 This is called when a {{ datum() }} is read from a {{ savefile() }}. The {{ savefile() }} being read from is passed as the first argument. The return value is ignored.
 
 Example:
+
 ```dm
 //create a demonstrator datum type
 /datum/test
