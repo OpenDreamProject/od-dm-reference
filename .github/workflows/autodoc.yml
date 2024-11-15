@@ -26,10 +26,7 @@ jobs:
       - name: Build documentation tool
         run: |
           cd ref/tools/OpenDreamDocumentationTool
-          git submodule update --init
-          cd OpenDream
-          git checkout master && git pull
-          git submodule update --init --recursive && cd ..
+          git submodule update --init --recursive
           dotnet build -o $GITHUB_WORKSPACE/oddt-bin OpenDreamDocumentationTool
 
       - name: Get DMStandard
