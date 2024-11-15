@@ -293,7 +293,15 @@ fn format_body(body: &str, data: &Data) -> String {
 
     for capture in link_finder_regex.captures_iter(body) {
         let original = capture.get(0).unwrap().as_str();
-        let type_string = capture.get(1).unwrap().as_str().replace('_', "/");
+        let mut type_string = capture.get(1).unwrap().as_str().to_string();
+
+        if data
+            .path_to_text
+            .get(format!("objects/{}/_index.md", &type_string).as_str())
+            .is_none()
+        {
+            type_string = type_string.replace("_", "/")
+        }
 
         let mut formatted = type_string.to_string();
 
