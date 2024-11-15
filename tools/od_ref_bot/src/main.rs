@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use poise::serenity_prelude::{self as serenity, Colour, CreateEmbed};
+use poise::serenity_prelude::{self as serenity, Colour, CreateEmbed, CreateEmbedFooter};
 use regex::Regex;
 use serde::Deserialize;
 use tantivy::{
@@ -145,6 +145,7 @@ fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
         .as_str();
 
     let mut title = parsed.title.clone()?;
+    let mut footer = "".to_string();
 
     let mut components: Vec<&str> = page.split('/').collect();
 
@@ -155,19 +156,28 @@ fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
 
         let parent_parsed = data.path_to_parsed.get(&components.join("/"))?;
 
-        title = format!(
-            "{} ({} {})",
-            &title,
-            parent_parsed.title.clone()?,
-            if proc { "proc" } else { "var" }
-        )
+        let parent_title = parent_parsed.title.clone()?;
+
+        if proc {
+            if parent_title == "DreamMaker" {
+                title = format!("/proc/{}()", &title);
+                footer = "global proc".to_string();
+            } else {
+                title = format!("{}/proc/{}()", &parent_title, &title);
+                footer = format!("{} proc", &parent_title);
+            }
+        } else {
+            title = format!("{}/var/{}", &parent_title, &title);
+            footer = format!("{} var", &parent_title);
+        }
     };
 
     let mut embed = serenity::CreateEmbed::default()
         .title(&title)
         .url(get_url(page, parsed))
         .color(Colour::from_rgb(246, 114, 128))
-        .description(format_body(body, data));
+        .description(format_body(body, data))
+        .footer(CreateEmbedFooter::new(footer));
 
     let extra = parsed.extra.as_ref();
 
@@ -178,30 +188,28 @@ fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
     let extra = extra.unwrap();
 
     if let Some(formats) = &extra.format {
+        let mut total_formats = "".to_string();
+
         for format in formats.iter().enumerate() {
             let val = format.1;
-            let mut format_string = format!("```js\n{}(\n", &parsed.title.clone()?);
+            let mut format_string = "```js\n".to_string();
 
             for array_value in val.iter() {
                 format_string = format!("{}{}\n", format_string, &array_value.get_arg_as_string());
             }
 
-            format_string.push_str(")```");
-
-            embed = embed.field(
-                format!("Format {}", format.0 + 1).as_str(),
-                format_string,
-                false,
-            );
+            format_string.push_str("```\n");
+            total_formats.push_str(format_string.as_str());
         }
+        embed = embed.field("Argument Formats", total_formats, false);
     } else if let Some(val) = &extra.args {
-        let mut args_string = format!("```js\n{}(\n", &parsed.title.clone()?);
+        let mut args_string = "```js\n".to_string();
 
         for array_value in val.iter() {
             args_string = format!("{}{}\n", args_string, &array_value.get_arg_as_string());
         }
 
-        args_string.push_str(")```");
+        args_string.push_str("```");
 
         embed = embed.field("Arguments", args_string, false);
     }
@@ -221,7 +229,7 @@ fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
 
                 if let Some(val) = &page.description {
                     return_string = if !return_string.is_empty() {
-                        format!("{}: {}", return_string, format_body(val, data).as_str())
+                        format!("`{}`: {}", return_string, format_body(val, data).as_str())
                     } else {
                         val.as_str().to_string()
                     }
@@ -270,12 +278,11 @@ fn format_body(body: &str, data: &Data) -> String {
         let original = capture.get(0).unwrap().as_str();
         let mut type_string = capture.get(1).unwrap().as_str().to_string();
 
-        if data
+        if !data
             .path_to_text
-            .get(format!("objects/{}/_index.md", &type_string).as_str())
-            .is_none()
+            .contains_key(format!("objects/{}/_index.md", &type_string).as_str())
         {
-            type_string = type_string.replace("_", "/")
+            type_string = type_string.replace('_', "/")
         }
 
         let mut formatted = type_string.to_string();
@@ -325,12 +332,12 @@ fn format_body(body: &str, data: &Data) -> String {
     for capture in whitespace_cleaner.captures_iter(&new_body) {
         let original = capture.get(0).unwrap().as_str();
 
-        if let Some(_) = capture.get(1) {
+        if capture.get(1).is_some() {
             whitespaced_body = whitespaced_body.replace(original, "\n\n```");
             break;
         }
 
-        if let Some(_) = capture.get(2) {
+        if capture.get(2).is_some() {
             whitespaced_body = whitespaced_body.replace(original, "```\n")
         }
     }
@@ -525,7 +532,7 @@ struct PageArgs {
 
 impl PageArgs {
     fn get_arg_as_string(&self) -> String {
-        let mut string = format!("\t{}", &self.name);
+        let mut string = (self.name).to_string();
 
         if let Some(val) = &self._type {
             string = format!("{} as {}", string, val)
