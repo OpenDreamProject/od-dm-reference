@@ -9,11 +9,11 @@ name = "Needle" # AUTOGEN STATIC
 description = "The text to search for."
 [[extra.args]]
 name = "Start" # AUTOGEN STATIC
-default_value = "1" # AUTOGEN FIELD
+default_value = "0" # AUTOGEN FIELD
 description = "The byte position in the string to start searching at. As this is searching backwards, this defaults to the end of the string."
 [[extra.args]]
 name = "End" # AUTOGEN STATIC
-default_value = "0" # AUTOGEN FIELD
+default_value = "1" # AUTOGEN FIELD
 description = "The byte position immediately before the last character that should be searched."
 [extra.return]
 type = "num" # AUTOGEN FIELD

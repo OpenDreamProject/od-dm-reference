@@ -2,8 +2,13 @@
 title = "istype"
 [extra]
 format = [
-    [{name = "Val"}],
-    [{name = "Val", description = "An instantiated object"}, {name = "Type", description = "A type or object. If this argument is not specified, it will use the inferred type of the first argument."}]
+  [
+    { name = "Val" },
+  ],
+  [
+    { name = "Val", description = "An instantiated object" },
+    { name = "Type", description = "A type or object. If this argument is not specified, it will use the inferred type of the first argument." },
+  ],
 ]
 [extra.return]
 type = "num"

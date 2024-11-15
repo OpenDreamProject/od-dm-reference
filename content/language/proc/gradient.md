@@ -13,7 +13,9 @@ format = [
     { name = "index", description = "The index on the gradient to perform the interpolation on." },
   ],
 ]
-return = { type = "text", description = "A color, either in #rrggbb or #rrggbbaa format." }
+[extra.return]
+type = "text"
+description = "A color, either in #rrggbb or #rrggbbaa format."
 [[extra.args]]
 name = "A" # AUTOGEN STATIC
 [[extra.args]]
