@@ -37,13 +37,7 @@ async fn odref(
     let page = get_page(&search_for, ctx.data()).unwrap_or("Not found.");
 
     match format_embed(page, ctx.data()) {
-        Some(embeds) => {
-            let mut reply = poise::CreateReply::default();
-            for embed in embeds.into_iter() {
-                reply = reply.embed(embed)
-            }
-            ctx.send(reply).await?
-        }
+        Some(embed) => ctx.send(poise::CreateReply::default().embed(embed)).await?,
         None => {
             log::debug!("Unable to locate a page for {}.", &search_for);
 
@@ -140,7 +134,7 @@ fn get_page<'a>(query: &'a String, data: &'a Data) -> Option<&'a str> {
 /// Retains most Markdown, as this (mostly) renders fine in Discord embeds.
 /// Scrubs all Tera shortcodes, apart from the ones we can render into direct links here.
 /// Pulls some extra information from the frontmatter, and puts it in fields.
-fn format_embed(page: &str, data: &Data) -> Option<Vec<serenity::CreateEmbed>> {
+fn format_embed(page: &str, data: &Data) -> Option<serenity::CreateEmbed> {
     let body_regex = Regex::new(r"(?s)\+\+\+(.*)\+\+\+(.*)").unwrap();
 
     let parsed = data.path_to_parsed.get(page)?;
@@ -169,32 +163,17 @@ fn format_embed(page: &str, data: &Data) -> Option<Vec<serenity::CreateEmbed>> {
         )
     };
 
-    let url = get_url(page, parsed);
-
-    let body = format_body(body, data).trim().to_string();
-
     let mut embed = serenity::CreateEmbed::default()
         .title(&title)
-        .url(&url)
+        .url(get_url(page, parsed))
         .color(Colour::from_rgb(246, 114, 128))
-        .description(&body);
+        .description(format_body(body, data));
 
     let extra = parsed.extra.as_ref();
 
     if extra.is_none() {
-        if body.len() <= 0 {
-            return None;
-        }
-
-        return Some(vec![embed]);
+        return Some(embed);
     }
-
-    let mut extra_embed = serenity::CreateEmbed::default()
-        .title(&title)
-        .color(Colour::from_rgb(246, 114, 128))
-        .url(&url);
-
-    embed = embed.title("").url("");
 
     let extra = extra.unwrap();
 
@@ -209,7 +188,7 @@ fn format_embed(page: &str, data: &Data) -> Option<Vec<serenity::CreateEmbed>> {
 
             format_string.push_str(")```");
 
-            extra_embed = extra_embed.field(
+            embed = embed.field(
                 format!("Format {}", format.0 + 1).as_str(),
                 format_string,
                 false,
@@ -224,11 +203,11 @@ fn format_embed(page: &str, data: &Data) -> Option<Vec<serenity::CreateEmbed>> {
 
         args_string.push_str(")```");
 
-        extra_embed = extra_embed.field("Arguments", args_string, false);
+        embed = embed.field("Arguments", args_string, false);
     }
 
     if let Some(val) = &extra.usage {
-        extra_embed = extra_embed.field("Usage", val.as_str(), false)
+        embed = embed.field("Usage", val.as_str(), false)
     };
 
     if let Some(val) = &extra._return {
@@ -249,12 +228,12 @@ fn format_embed(page: &str, data: &Data) -> Option<Vec<serenity::CreateEmbed>> {
                 };
 
                 if !return_string.is_empty() {
-                    extra_embed = extra_embed.field("Return", return_string, false);
+                    embed = embed.field("Return", return_string, false);
                 }
             }
 
             PageReturnOrString::String(string) => {
-                extra_embed = extra_embed.field("Return", string.as_str(), false)
+                embed = embed.field("Return", string.as_str(), false)
             }
         }
     };
@@ -266,22 +245,18 @@ fn format_embed(page: &str, data: &Data) -> Option<Vec<serenity::CreateEmbed>> {
             string_val = "\"\"";
         }
 
-        extra_embed = extra_embed.field("Default Value", string_val, true)
+        embed = embed.field("Default Value", string_val, true)
     };
 
     if let Some(val) = &extra.permitted_values {
-        extra_embed = extra_embed.field("Permitted Values", val.as_str(), true)
+        embed = embed.field("Permitted Values", val.as_str(), true)
     };
 
     if let Some(val) = &extra._type {
-        extra_embed = extra_embed.field("Type", val.as_str(), true)
+        embed = embed.field("Type", val.as_str(), true)
     };
 
-    if body.len() <= 0 {
-        return Some(vec![extra_embed]);
-    };
-
-    Some(vec![extra_embed, embed])
+    Some(embed)
 }
 
 /// Converts the Tera-formatted markdown into more Discord compatible markdown.
