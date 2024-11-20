@@ -364,7 +364,7 @@
         <loc>https://ref.opendre.am/language/proc/json_encode/</loc>
     </url>
     <url>
-        <loc>https://ref.opendre.am/language/proc/length_char/</loc>
+        <loc>https://ref.opendre.am/language/proc/length/</loc>
     </url>
     <url>
         <loc>https://ref.opendre.am/language/proc/lentext/</loc>
@@ -373,10 +373,16 @@
         <loc>https://ref.opendre.am/language/proc/link/</loc>
     </url>
     <url>
+        <loc>https://ref.opendre.am/language/proc/list/</loc>
+    </url>
+    <url>
         <loc>https://ref.opendre.am/language/proc/list2params/</loc>
     </url>
     <url>
         <loc>https://ref.opendre.am/language/proc/load_resource/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/language/proc/locate/</loc>
     </url>
     <url>
         <loc>https://ref.opendre.am/language/proc/lowertext/</loc>
@@ -1331,9 +1337,6 @@
     </url>
     <url>
         <loc>https://ref.opendre.am/objects/generator/var/</loc>
-    </url>
-    <url>
-        <loc>https://ref.opendre.am/objects/generator/var/_binobj/</loc>
     </url>
     <url>
         <loc>https://ref.opendre.am/objects/generator/var/parent_type/</loc>
