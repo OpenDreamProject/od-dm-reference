@@ -1,8 +1,10 @@
-{% macro render_callout(color, title, body, contents=false, icon=false, smalltext=false) %}
+{% macro render_callout(color, title, body=false, contents=false, icon=false, smalltext=false) %}
 <div class="border-l-2 pl-5" style="border-left-color:{{color}}">
     <div class="flex flex-row"><div class="{% if not smalltext %}text-xl{% endif %}">{{title}}</div>{% if icon %}<img src="{{icon | safe}}" class="ml-1" width=20px>{% endif %}</div>
 
+    {%- if body -%}
     {{body}}
+    {%- endif -%}
     {%- if contents -%}
     <div class="pl-3">{{ contents | markdown(inline=true) | safe }}</div>
     {%- endif -%}

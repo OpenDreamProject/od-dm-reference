@@ -321,15 +321,29 @@ fn format_body(body: &str, data: &Data) -> String {
         new_body = new_body.replace(original, format!("[{}]({})", display, url).as_str());
     }
 
+    let table_cleaner_regex =
+        Regex::new(r"(?m)^(\|[^\n]+\|\r?\n)((?:\| *:?[-]+:? *)+\|)(\n(?:\|[^\n]+\|\r?\n?)*)?$")
+            .unwrap();
+
+    let mut pre_clean_table = new_body.clone();
+    for capture in table_cleaner_regex.captures_iter(&new_body) {
+        let original = capture.get(0).unwrap().as_str();
+
+        pre_clean_table =
+            pre_clean_table.replace(original, format!("```\n{}\n```", original).as_str());
+    }
+
     let tag_cleaner_regex = Regex::new(r"\{\{.*?}}|\{%.*?%}").unwrap();
 
-    new_body = tag_cleaner_regex.replace_all(&new_body, "").to_string();
-    new_body = new_body.replace("```dm", "```js");
+    pre_clean_table = tag_cleaner_regex
+        .replace_all(&pre_clean_table, "")
+        .to_string();
+    pre_clean_table = pre_clean_table.replace("```dm", "```js");
 
-    let mut whitespaced_body = new_body.clone();
+    let mut whitespaced_body = pre_clean_table.clone();
 
     let whitespace_cleaner = Regex::new(r"(\n{3,}```)|(```\n{2,})").unwrap();
-    for capture in whitespace_cleaner.captures_iter(&new_body) {
+    for capture in whitespace_cleaner.captures_iter(&pre_clean_table) {
         let original = capture.get(0).unwrap().as_str();
 
         if capture.get(1).is_some() {

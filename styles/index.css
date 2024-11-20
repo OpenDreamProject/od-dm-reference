@@ -414,3 +414,20 @@ hr {
 .dark #theme-switch>.fa-sun {
     display: none;
 }
+
+table {
+    width: fit-content;
+}
+
+td,
+th {
+    padding-left: 10px;
+}
+
+thead {
+    border-bottom: 1px solid var(--dark-bg);
+}
+
+.dark thead {
+    border-bottom: 1px solid var(--light-bg);
+}
