@@ -12,6 +12,10 @@ This file should be edited in styles/index.css, and *not* static/index.css
     pre {
         @apply dark:shadow-lg shadow-md
     }
+
+    table {
+        @apply dark:shadow-lg shadow-md
+    }
 }
 
 :root {
@@ -416,7 +420,14 @@ hr {
 }
 
 table {
-    width: fit-content;
+    padding: 10px;
+    margin: 10px;
+    border: solid 1px var(--light-border);
+    border-radius: 0.25rem;
+}
+
+.dark table {
+    border-color: var(--dark-border);
 }
 
 td,
@@ -425,9 +436,9 @@ th {
 }
 
 thead {
-    border-bottom: 1px solid var(--dark-bg);
+    border-bottom: 1px solid var(--light-border);
 }
 
 .dark thead {
-    border-bottom: 1px solid var(--light-bg);
+    border-bottom: 1px solid var(--dark-border);
 }
