@@ -22,6 +22,8 @@ jobs:
 
       - name: Setup Dotnet
         uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.100
 
       - name: Build documentation tool
         run: |
