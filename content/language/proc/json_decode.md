@@ -3,10 +3,6 @@ title = "json_decode"
 [[extra.args]]
 name = "JSON" # AUTOGEN STATIC
 description = "The JSON string to convert."
-[[extra.args]]
-name = "flags"
-description = "Optional, additional flags to change how the JSON is decoded."
-od_unimplemented = true
 +++
 
 An array, like `["foo", 1, "bar", 2]` will be decoded into a {{ list() }}, e.g. `list("foo", 1, "bar"), 2`. Objects, like `{"foo": "bar", "do": "re"}`, will be decoded into an [associated list](@/objects/list/association.md), e.g. `list("foo" = "bar", "do" = "re")`. Additional arrays can be embedded into arrays or objects, and an array can hold multiple objects.

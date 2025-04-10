@@ -65,23 +65,26 @@ public static partial class Program {
 
             docPath = arg.Split("=").Last();
         }
+        
+        DMCompiler.DMCompiler compiler = new()
+        {
+            Settings = new DMCompilerSettings()
+        };
 
-        DMPreprocessor preprocessor = new(true);
-
-        DMCompiler.DMCompiler.Settings = new DMCompilerSettings();
+        DMPreprocessor preprocessor = new(compiler, true);
 
         if (dmStandardDirectory == null) {
             var compilerDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
             dmStandardDirectory = Path.Join(compilerDirectory, "DMStandard");
         }
 
-        preprocessor.IncludeFile(dmStandardDirectory, "_Standard.dm");
-        preprocessor.IncludeFile(dmStandardDirectory, "DefaultPragmaConfig.dm");
+        preprocessor.IncludeFile(dmStandardDirectory, "_Standard.dm", true);
+        preprocessor.IncludeFile(dmStandardDirectory, "DefaultPragmaConfig.dm", false);
 
-        DMLexer dmLexer = new DMLexer(null!, preprocessor);
-        DMParser dmParser = new DMParser(dmLexer);
+        var dmLexer = new DMLexer(null!, preprocessor);
+        var dmParser = new DMParser(compiler, dmLexer);
 
-        DMASTFile astFile = dmParser.File();
+        var astFile = dmParser.File();
 
         // Finds existing pages, to allow for nested pages (eg, /atom -> /atom/movable)
         Dictionary<string, string> pathToFile = new Dictionary<string, string>();
@@ -123,9 +126,9 @@ public static partial class Program {
         foreach (var pair in Objects) {
             var obj = pair.Value;
             if (!pathToFile.TryGetValue(pair.Key, out var indexPage)) {
-                var parent = Path.Combine(docPath, $"content/objects/${pair.Key.Replace("/", "").ToLower()}");
+                var parent = Path.Combine(docPath, $"content/objects/{pair.Key.Replace("/", "").ToLower()}");
                 Directory.CreateDirectory(parent);
-                indexPage = $"{parent}/index.md";
+                indexPage = $"{parent}/_index.md";
                 using var file = new StreamWriter(indexPage);
                 file.Write($"""
                            +++
@@ -408,10 +411,16 @@ public static partial class Program {
                     if (varDefinition.ObjectPath.PathString == "/") break;
                     var varDefinitionObj = Objects[varDefinition.ObjectPath.PathString];
 
+                    var type = varDefinition.ValType.ToString().Trim('"');
+                    if (type == "noconstfold")
+                    {
+                        type = null;
+                    }
+                    
                     varDefinitionObj.Vars.Add(new DMDocVar(varDefinition.Name,
                         GetValueFromDmastExpression(varDefinition.Value),
                         false,
-                        varDefinition.Type?.PathString ?? varDefinition.ValType.ToString().Trim('"'),
+                        varDefinition.Type?.PathString ?? type,
                         varDefinition.ValType.IsUnimplemented
                         ));
                     break;

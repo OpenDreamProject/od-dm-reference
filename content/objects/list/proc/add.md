@@ -2,8 +2,7 @@
 title = "Add"
 slug = "Add" # AUTOGEN FIELD
 [[extra.args]]
-name = "Item1, Item2, ..."
-description = "One or more values to add"
+name = "Item1" # AUTOGEN STATIC
 +++
 
 Adds a value, or multiple values, to the list.
