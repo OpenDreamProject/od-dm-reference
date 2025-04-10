@@ -370,6 +370,9 @@
         <loc>https://ref.opendre.am/language/proc/lentext/</loc>
     </url>
     <url>
+        <loc>https://ref.opendre.am/language/proc/lerp/</loc>
+    </url>
+    <url>
         <loc>https://ref.opendre.am/language/proc/link/</loc>
     </url>
     <url>
@@ -481,6 +484,9 @@
         <loc>https://ref.opendre.am/language/proc/shutdown/</loc>
     </url>
     <url>
+        <loc>https://ref.opendre.am/language/proc/sign/</loc>
+    </url>
+    <url>
         <loc>https://ref.opendre.am/language/proc/sleep/</loc>
     </url>
     <url>
@@ -557,6 +563,24 @@
     </url>
     <url>
         <loc>https://ref.opendre.am/language/proc/url_encode/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/language/proc/values_cut_over/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/language/proc/values_cut_under/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/language/proc/values_dot/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/language/proc/values_product/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/language/proc/values_sum/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/language/proc/vector/</loc>
     </url>
     <url>
         <loc>https://ref.opendre.am/language/proc/view/</loc>
@@ -773,6 +797,12 @@
     </url>
     <url>
         <loc>https://ref.opendre.am/objects/atom/var/icon_state/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/atom/var/icon_w/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/atom/var/icon_z/</loc>
     </url>
     <url>
         <loc>https://ref.opendre.am/objects/atom/var/infra_luminosity/</loc>
@@ -1954,6 +1984,9 @@
         <loc>https://ref.opendre.am/objects/sound/var/</loc>
     </url>
     <url>
+        <loc>https://ref.opendre.am/objects/sound/var/atom/</loc>
+    </url>
+    <url>
         <loc>https://ref.opendre.am/objects/sound/var/channel/</loc>
     </url>
     <url>
@@ -1999,6 +2032,9 @@
         <loc>https://ref.opendre.am/objects/sound/var/status/</loc>
     </url>
     <url>
+        <loc>https://ref.opendre.am/objects/sound/var/transform/</loc>
+    </url>
+    <url>
         <loc>https://ref.opendre.am/objects/sound/var/volume/</loc>
     </url>
     <url>
@@ -2039,6 +2075,48 @@
     </url>
     <url>
         <loc>https://ref.opendre.am/objects/turf/var/parent_type/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/vector/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/vector/proc/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/vector/proc/Cross/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/vector/proc/Dot/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/vector/proc/Interpolate/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/vector/proc/New/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/vector/proc/Normalize/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/vector/proc/Turn/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/vector/var/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/vector/var/len/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/vector/var/size/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/vector/var/x/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/vector/var/y/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/vector/var/z/</loc>
     </url>
     <url>
         <loc>https://ref.opendre.am/objects/world/</loc>
@@ -2114,6 +2192,9 @@
     </url>
     <url>
         <loc>https://ref.opendre.am/objects/world/proc/SetScores/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/world/proc/Tick/</loc>
     </url>
     <url>
         <loc>https://ref.opendre.am/objects/world/proc/Topic/</loc>
