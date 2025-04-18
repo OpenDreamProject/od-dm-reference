@@ -1,8 +1,6 @@
 +++
 title = "DblClick"
 slug = "DblClick" # AUTOGEN FIELD
-[extra]
-od_unimplemented = true # AUTOGEN FIELD
 [[extra.args]]
 name = "location" # AUTOGEN STATIC
 [[extra.args]]
