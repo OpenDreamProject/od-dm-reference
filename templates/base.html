@@ -77,7 +77,7 @@
         </div>
 
         <section class="section">
-            <div class="mt-5 mx-5">
+            <div class="mt-5 mx-5" id="portal">
                 <div class="flex flex-col gap-5 border-b-2 border-lightborder dark:border-darkborder pb-2 mb-3">
                     <div class="flex flex-col-reverse gap-5 md:flex-row justify-between">
                         <div>{% block header %}{% endblock %}</div>
@@ -124,6 +124,67 @@
     <script src="https://files.stork-search.net/releases/v1.6.0/stork.js"></script>
     <script>
         stork.register("ref-search", "{{config.base_url | safe}}/search.st", { showProgress: false });
+    </script>
+    <script>
+        const preFetched = {};
+        const parser = new DOMParser();
+
+        const fetchLink = async (link, pre) => {
+            if(preFetched[link]) return;
+
+            const fetched = await fetch(link);
+
+            const doc = parser.parseFromString(await fetched.text(), "text/html");
+
+            const content = doc.getElementById("root");
+
+            if(pre) preFetched[link] = content;
+            return content;
+        }
+
+        const buttonInterceptor = async (ev) => {
+            ev.preventDefault();
+
+            const portal = document.getElementById("root");
+            const potentialFetch = preFetched[ev.target.href];
+
+            if(potentialFetch) {
+                portal.replaceChildren(...potentialFetch.children);
+            } else {
+                const newContents = await fetchLink(ev.target.href);
+
+                if(!newContents) {
+                    return;
+                }
+
+                portal.replaceChildren(...newContents.children);
+            }
+
+            delete preFetched[ev.target.href];
+
+            history.pushState(null, "", ev.target.href);
+
+            prefetchLinks();
+        }
+
+        const hoverInterceptor = (ev) => {
+            if(!ev.target.href) return;
+
+            fetchLink(ev.target.href, true);
+        }
+
+        const prefetchLinks = () => {
+            for(const link of document.getElementsByTagName("a")) {
+                if(!link.href || !link.href.includes(location.host)) {
+                    continue;
+                }
+
+                link.addEventListener("click", buttonInterceptor);
+                link.addEventListener("mouseover", hoverInterceptor);
+            }
+        }
+
+        prefetchLinks();
     </script>
 </body>
 
