@@ -143,6 +143,8 @@
         }
 
         const buttonInterceptor = async (ev) => {
+            if(!ev.target.href) return;
+
             ev.preventDefault();
 
             const portal = document.getElementById("portal");
