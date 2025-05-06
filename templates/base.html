@@ -52,7 +52,7 @@
 <body id="root" class="safe-h-screen">
     {% include "theme-switch.html" %}
 
-    <div class="flex h-[100%]">
+    <div class="flex h-[100%]" id="portal">
         <div class="left-bar pl-3 hidden md:block h-[100%] shadow-md dark:shadow-xl" id="left-bar">
             <div class="flex flex-row">
                 <div class="flex flex-col justify-center">
@@ -77,7 +77,7 @@
         </div>
 
         <section class="section">
-            <div class="mt-5 mx-5" id="portal">
+            <div class="mt-5 mx-5">
                 <div class="flex flex-col gap-5 border-b-2 border-lightborder dark:border-darkborder pb-2 mb-3">
                     <div class="flex flex-col-reverse gap-5 md:flex-row justify-between">
                         <div>{% block header %}{% endblock %}</div>
@@ -136,7 +136,7 @@
 
             const doc = parser.parseFromString(await fetched.text(), "text/html");
 
-            const content = doc.getElementById("root");
+            const content = doc.getElementById("portal");
 
             if(pre) preFetched[link] = content;
             return content;
@@ -145,7 +145,7 @@
         const buttonInterceptor = async (ev) => {
             ev.preventDefault();
 
-            const portal = document.getElementById("root");
+            const portal = document.getElementById("portal");
             const potentialFetch = preFetched[ev.target.href];
 
             if(potentialFetch) {
