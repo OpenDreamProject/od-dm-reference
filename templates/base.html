@@ -52,7 +52,7 @@
 <body id="root" class="safe-h-screen">
     {% include "theme-switch.html" %}
 
-    <div class="flex h-[100%]" id="portal">
+    <div class="flex h-[100%]">
         <div class="left-bar pl-3 hidden md:block h-[100%] shadow-md dark:shadow-xl" id="left-bar">
             <div class="flex flex-row">
                 <div class="flex flex-col justify-center">
@@ -63,7 +63,7 @@
                 <input data-stork="ref-search" class="text-input flex-grow m-2 pr-2" type="text" placeholder="Search" />
             </div>
             <div data-stork="ref-search-output" class="results"></div>
-            <nav role="navigation" class="pr-2">
+            <nav role="navigation" id="navbar" class="pr-2">
                 <ul>
                     {%- block menu -%}
                     {%- set index = get_section(path="_index.md", metadata_only=true) -%}
@@ -76,7 +76,7 @@
             </nav>
         </div>
 
-        <section class="section">
+        <section class="section" id="portal">
             <div class="mt-5 mx-5">
                 <div class="flex flex-col gap-5 border-b-2 border-lightborder dark:border-darkborder pb-2 mb-3">
                     <div class="flex flex-col-reverse gap-5 md:flex-row justify-between">
@@ -137,9 +137,37 @@
             const doc = parser.parseFromString(await fetched.text(), "text/html");
 
             const content = doc.getElementById("portal");
+            const navbar = doc.getElementById("navbar");
 
-            if(pre) preFetched[link] = content;
-            return content;
+            if(pre) preFetched[link] = {content: content, navbar: navbar};
+            return {content: content, navbar: navbar};
+        }
+
+        const navTo = async(link) => {
+            const portal = document.getElementById("portal");
+            const navbar = document.getElementById("navbar");
+
+            const potentialFetch = preFetched[link];
+
+            if(potentialFetch) {
+                portal.replaceChildren(...potentialFetch.content.children);
+                navbar.replaceChildren(...potentialFetch.navbar.children)
+            } else {
+                const newContents = await fetchLink(link);
+
+                if(!newContents) {
+                    return;
+                }
+
+                portal.replaceChildren(...newContents.content.children);
+                navbar.replaceChildren(...newContents.navbar.children)
+            }
+
+            delete preFetched[link];
+
+            history.pushState(true, "", link);
+
+            prefetchLinks();
         }
 
         const buttonInterceptor = async (ev) => {
@@ -147,26 +175,7 @@
 
             ev.preventDefault();
 
-            const portal = document.getElementById("portal");
-            const potentialFetch = preFetched[ev.target.href];
-
-            if(potentialFetch) {
-                portal.replaceChildren(...potentialFetch.children);
-            } else {
-                const newContents = await fetchLink(ev.target.href);
-
-                if(!newContents) {
-                    return;
-                }
-
-                portal.replaceChildren(...newContents.children);
-            }
-
-            delete preFetched[ev.target.href];
-
-            history.pushState(null, "", ev.target.href);
-
-            prefetchLinks();
+            navTo(ev.target.href);
         }
 
         const hoverInterceptor = (ev) => {
@@ -185,6 +194,10 @@
                 link.addEventListener("mouseover", hoverInterceptor);
             }
         }
+
+        window.addEventListener("popstate", (pop) => {
+            navTo(location.href);
+        })
 
         prefetchLinks();
     </script>
