@@ -15,10 +15,12 @@
 
 <head>
     <meta charset="utf-8" />
-    {% block title %}
-    <title>{{pageOrSubsection.title }}{% if not pageOrSubsection.path == "/" %} - OpenDream DM Reference{% endif %}
+    
+    <title id="pagetitle">
+        {% block title %}
+        {{pageOrSubsection.title }}{% if not pageOrSubsection.path == "/" %} - OpenDream DM Reference{% endif %}
+        {% endblock title %}
     </title>
-    {% endblock title %}
 
     <script src="{{ get_url(path='index.js', cachebust=true) | safe }}"></script>
 
@@ -138,20 +140,23 @@
 
             const content = doc.getElementById("portal");
             const navbar = doc.getElementById("navbar");
+            const title = doc.getElementById("pagetitle");
 
-            if(pre) preFetched[link] = {content: content, navbar: navbar};
-            return {content: content, navbar: navbar};
+            if(pre) preFetched[link] = {content: content, navbar: navbar, title: title};
+            return {content: content, navbar: navbar, title: title};
         }
 
         const navTo = async(link) => {
             const portal = document.getElementById("portal");
             const navbar = document.getElementById("navbar");
+            const title = document.getElementById("pagetitle");
 
             const potentialFetch = preFetched[link];
 
             if(potentialFetch) {
                 portal.replaceChildren(...potentialFetch.content.children);
-                navbar.replaceChildren(...potentialFetch.navbar.children)
+                navbar.replaceChildren(...potentialFetch.navbar.children);
+                title.replaceWith(potentialFetch.title);
             } else {
                 const newContents = await fetchLink(link);
 
@@ -160,7 +165,8 @@
                 }
 
                 portal.replaceChildren(...newContents.content.children);
-                navbar.replaceChildren(...newContents.navbar.children)
+                navbar.replaceChildren(...newContents.navbar.children);
+                title.replaceWith(newContents.title);
             }
 
             delete preFetched[link];

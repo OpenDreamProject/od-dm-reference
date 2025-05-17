@@ -3,7 +3,7 @@
 
 {% block title %}
 {%- set potentialTitle = macros::render_page_parent_type(page=page, skip_level=1, recursive=false) | striptags | trim | safe -%}
-<title>{{ potentialTitle }}{% if potentialTitle %}/{% endif %}{{ page.title }}() - OpenDream DM Reference</title>
+{{ potentialTitle }}{% if potentialTitle %}/{% endif %}{{ page.title }}() - OpenDream DM Reference
 {% endblock title %}
 
 {% block ogtitle %}

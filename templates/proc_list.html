@@ -2,7 +2,7 @@
 {% import "macros.html" as macros %}
 
 {% block title %}
-<title>{{ macros::render_page_parent_type(page=section, skip_level=0, recursive=false) | striptags | trim | safe }} procs - OpenDream DM Reference</title>
+{{ macros::render_page_parent_type(page=section, skip_level=0, recursive=false) | striptags | trim | safe }} procs - OpenDream DM Reference
 {% endblock title %}
 
 {% block ogtitle %}
