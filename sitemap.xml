@@ -622,6 +622,54 @@
         <loc>https://ref.opendre.am/objects/</loc>
     </url>
     <url>
+        <loc>https://ref.opendre.am/objects/alist/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/alist/proc/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/alist/proc/Add/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/alist/proc/Copy/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/alist/proc/Cut/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/alist/proc/Find/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/alist/proc/Insert/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/alist/proc/Join/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/alist/proc/New/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/alist/proc/Remove/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/alist/proc/RemoveAll/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/alist/proc/Splice/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/alist/proc/Swap/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/alist/var/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/alist/var/len/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/alist/var/type/</loc>
+    </url>
+    <url>
         <loc>https://ref.opendre.am/objects/area/</loc>
     </url>
     <url>
