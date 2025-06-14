@@ -1,7 +1,7 @@
 +++
 title = "size" # AUTOGEN FIELD
 [extra]
-default_value = "0" # AUTOGEN FIELD
-type = "num" # AUTOGEN FIELD
+default_value = "" # AUTOGEN FIELD
+type = "null, num" # AUTOGEN FIELD
 is_override = false # AUTOGEN FIELD
 +++
