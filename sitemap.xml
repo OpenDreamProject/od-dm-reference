@@ -967,6 +967,42 @@
         <loc>https://ref.opendre.am/objects/atom/var/z/</loc>
     </url>
     <url>
+        <loc>https://ref.opendre.am/objects/callee/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/callee/var/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/callee/var/args/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/callee/var/caller/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/callee/var/category/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/callee/var/desc/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/callee/var/file/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/callee/var/line/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/callee/var/name/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/callee/var/proc/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/callee/var/src/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/callee/var/usr/</loc>
+    </url>
+    <url>
         <loc>https://ref.opendre.am/objects/client/</loc>
     </url>
     <url>
@@ -1112,6 +1148,9 @@
     </url>
     <url>
         <loc>https://ref.opendre.am/objects/client/var/dir/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/client/var/edge_limit/</loc>
     </url>
     <url>
         <loc>https://ref.opendre.am/objects/client/var/eye/</loc>
