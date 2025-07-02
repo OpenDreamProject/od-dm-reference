@@ -17,12 +17,13 @@ internal class DMDocProcParameter(string name, string? type, string? value) {
     public readonly string? Value = value;
 }
 
-internal class DMDocProc(string name, List<DMDocProcParameter> parameters, string? returnType, bool isUnimplemented, bool isOverride) {
+internal class DMDocProc(string name, List<DMDocProcParameter> parameters, string? returnType, bool isUnimplemented, bool isOverride, bool isUnsupported) {
     public readonly string Name = name;
     public readonly List<DMDocProcParameter> Parameters = parameters;
     public readonly string? ReturnType = returnType;
     public readonly bool IsUnimplemented = isUnimplemented;
     public readonly bool IsOverride = isOverride;
+    public readonly bool IsUnsupported = isUnsupported;
 }
 
 internal class DMDocObject {
@@ -34,12 +35,13 @@ internal class DMDocObject {
     }
 }
 
-internal class DMDocVar(string name, string? value, bool isOverride, string? type, bool? isUnimplemented) {
+internal class DMDocVar(string name, string? value, bool isOverride, string? type, bool? isUnimplemented, bool? isUnsupported) {
     public readonly string Name = name;
     public readonly string? Value = value;
     public readonly string? Type = type;
     public readonly bool IsOverride = isOverride;
     public readonly bool? IsUnimplemented = isUnimplemented;
+    public readonly bool? IsUnsupported = isUnsupported;
 }
 
 public static partial class Program {
@@ -68,7 +70,10 @@ public static partial class Program {
         
         DMCompiler.DMCompiler compiler = new()
         {
-            Settings = new DMCompilerSettings()
+            Settings = new DMCompilerSettings
+            {
+                Files = []
+            }
         };
 
         DMPreprocessor preprocessor = new(compiler, true);
@@ -79,7 +84,6 @@ public static partial class Program {
         }
 
         preprocessor.IncludeFile(dmStandardDirectory, "_Standard.dm", true);
-        preprocessor.IncludeFile(dmStandardDirectory, "DefaultPragmaConfig.dm", false);
 
         var dmLexer = new DMLexer(null!, preprocessor);
         var dmParser = new DMParser(compiler, dmLexer);
@@ -255,6 +259,7 @@ public static partial class Program {
         
         if (var.Type != null && var.Type != "anything") SetTomlValue(extras, "type", var.Type);
         if (var.IsUnimplemented != null) SetTomlValue(extras, "od_unimplemented", var.IsUnimplemented);
+        if (var.IsUnsupported != null) SetTomlValue(extras, "od_unsupported", var.IsUnsupported);
 
         extras["is_override"] = var.IsOverride;
 
@@ -266,7 +271,17 @@ public static partial class Program {
                 extras.Remove("od_unimplemented");
                 break;
             case true:
-                extras["od_unimplemented"] = var.IsUnimplemented;
+                SetTomlValue(extras, "od_unimplemented", var.IsUnimplemented);
+                break;
+        }
+
+        switch (var.IsUnsupported)
+        {
+            case false when extras.ContainsKey("od_unsupported"):
+                extras.Remove("od_unsupported");
+                break;
+            case true:
+                SetTomlValue(extras, "od_unsupported", var.IsUnsupported);
                 break;
         }
 
@@ -363,6 +378,16 @@ public static partial class Program {
                 break;
         }
 
+        switch (proc.IsUnsupported)
+        {
+            case false when extras.ContainsKey("od_unsupported") && !IsTomlSkip(extras, "od_unsupported"):
+                extras.Remove("od_unsupported");
+                break;
+            case true:
+                SetTomlValue(extras, "od_unsupported", proc.IsUnsupported);
+                break;
+        }
+
         existingContents["extra"] = extras;
 
         return Toml.FromModel(existingContents);
@@ -385,10 +410,16 @@ public static partial class Program {
                     }
 
                     var unimplemented = false;
+                    var unsupported = false;
                     if (procDefinition.Body?.SetStatements != null)
                         foreach (var potentialStatement in procDefinition.Body?.SetStatements!) {
                             if (potentialStatement is DMASTProcStatementSet { Attribute: "opendream_unimplemented" }) {
                                 unimplemented = true;
+                            }
+
+                            if (potentialStatement is DMASTProcStatementSet { Attribute: "opendream_unsupported" })
+                            {
+                                unsupported = true;
                             }
                         }
 
@@ -396,7 +427,8 @@ public static partial class Program {
                         parsedParameters,
                         CleanReturnTypes(procDefinition.ReturnTypes?.ToString().Trim('"')) ?? procDefinition.ReturnTypes?.TypePath?.PathString,
                         unimplemented,
-                        procDefinition.IsOverride
+                        procDefinition.IsOverride,
+                        unsupported
                         );
 
                     if (procDefinition.ObjectPath.PathString != "/") {
@@ -421,16 +453,19 @@ public static partial class Program {
                         GetValueFromDmastExpression(varDefinition.Value),
                         false,
                         varDefinition.Type?.PathString ?? type,
-                        varDefinition.ValType.IsUnimplemented
+                        varDefinition.ValType.IsUnimplemented,
+                        varDefinition.ValType.IsUnsupported
                         ));
                     break;
 
                 case DMASTObjectVarOverride varOverride:
                     var varOverrideObj = Objects[varOverride.ObjectPath.PathString];
 
-                    varOverrideObj.Vars.Add(new DMDocVar(varOverride.VarName,
+                    varOverrideObj.Vars.Add(new DMDocVar(
+                        varOverride.VarName,
                         GetValueFromDmastExpression(varOverride.Value),
                         true,
+                        null,
                         null,
                         null
                         ));
