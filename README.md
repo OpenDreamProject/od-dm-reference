@@ -24,7 +24,7 @@ We can use shortcodes to render specific HTML within our Markdown files. They're
 ```
 
 Currently, we have 4 callout shortcodes, which all take a `description` argument:
-- never_implemented
+- unsupported
 - od_only
 - parity
 - unimplemented

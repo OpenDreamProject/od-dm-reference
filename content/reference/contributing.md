@@ -18,14 +18,14 @@ We can use shortcodes to render specific HTML within our Markdown files. They're
 ```
 
 Currently, we have 4 callout shortcodes, which all take a `description` argument. However, the preferred way of invoking them is:
-### never_implemented
+### unsupported
 
 ```go
-{%/* never_implemented() */%}
+{%/* unsupported() */%}
 Like this!
 {%/* end */%}
 ```
-{% never_implemented() %}
+{% unsupported() %}
 Like this!
 {% end %}
 

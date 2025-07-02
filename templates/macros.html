@@ -181,7 +181,7 @@
             <div class="{% if not list %}text-xl{% endif %}">Arguments:</div>
             <div class="flex flex-col">
             {% for arg in page.extra.args %}
-                <div class="pl-5">{{arg.name}}{% if arg.type %} ({{ self::render_single_type(type=arg.type)}}){% endif %}{%- if arg.default_value %} = {{arg.default_value}}{% endif %}{% if arg.description %}: {{arg.description}}{% endif %}{%- if arg.od_unimplemented -%}<div class="text-sm text-red-400 border-l-2 border-red-400 pl-2 inline ml-2">Unimplemented 🏗️</div>{%- endif -%}</div>
+                <div class="pl-5">{{arg.name}}{% if arg.type %} ({{ self::render_single_type(type=arg.type)}}){% endif %}{%- if arg.default_value %} = {{arg.default_value}}{% endif %}{% if arg.description %}: {{arg.description}}{% endif %}{%- if arg.od_unimplemented -%}<div class="text-sm text-red-400 border-l-2 border-red-400 pl-2 inline ml-2">Unimplemented 🏗️</div>{%- endif -%}{%- if arg.od_unsupported -%}<div class="text-sm text-[#b91c1c] border-l-2 border-[#b91c1c] pl-2 inline ml-2">Unsupported ⛔</div>{%- endif -%}</div>
             {% endfor %}
             </div>
         </div>
@@ -195,7 +195,7 @@
         {% for form in page.extra.format %}
             <div class="pl-5">{{ page.title }}(
             {%- for arg in form -%}
-            {% if arg.type %}{{ self::render_single_type(type=arg.type)}}/{% endif %}{{arg.name}}{%- if arg.default_value %} = {{ arg.default_value }}{% endif %}{% if not loop.last %},{% endif %}{%- if arg.od_unimplemented -%}<div class="text-sm text-red-400 border-l-2 border-red-400 pl-2 inline ml-2">Unimplemented 🏗️</div>{%- endif -%}{% if not loop.last %} {% endif -%}
+            {% if arg.type %}{{ self::render_single_type(type=arg.type)}}/{% endif %}{{arg.name}}{%- if arg.default_value %} = {{ arg.default_value }}{% endif %}{% if not loop.last %},{% endif %}{%- if arg.od_unimplemented -%}<div class="text-sm text-red-400 border-l-2 border-red-400 pl-2 inline ml-2">Unimplemented 🏗️</div>{%- endif -%}{%- if arg.od_unsupported -%}<div class="text-sm text-[#b91c1c] border-l-2 border-[#b91c1c] pl-2 inline ml-2">Unsupported ⛔</div>{%- endif -%}{% if not loop.last %} {% endif -%}
             {% endfor -%}
             ){% for arg in form %}
             {%- if arg.description -%}
@@ -362,6 +362,16 @@
         smalltext=list)
     }}
     {% endif %}
+    {%- if arg.od_unsupported -%}<div class="text-sm text-[#b91c1c] border-l-2 border-[#b91c1c] pl-2 inline ml-2">Unsupported ⛔</div>{%- endif -%}
+
+    {% if page.extra.od_unsupported %}
+    {{ sc::render_callout(color="#b91c1c", 
+        title="Unsupported ⛔", 
+        body="In the OpenDream implementation of DreamMaker, this proc will not be supported.", 
+        smalltext=list) 
+    }}
+    {%endif %}
+
 
     <div class="page-content">
     {{ page.content | safe }}
@@ -461,6 +471,12 @@
         smalltext=list)
     }}
     {% endif %}
+
+    {{ sc::render_callout(color="#b91c1c", 
+        title="Unsupported ⛔", 
+        body="In the OpenDream implementation of DreamMaker, this variable will not be supported.", 
+        smalltext=list) 
+    }}
 
     <div class="page-content">
     {{ page.content | safe }}
