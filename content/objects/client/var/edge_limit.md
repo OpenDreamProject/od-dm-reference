@@ -1,7 +1,7 @@
 +++
-title = "len" # AUTOGEN FIELD
+title = "edge_limit" # AUTOGEN FIELD
 [extra]
 default_value = "" # AUTOGEN FIELD
-type = "null, num" # AUTOGEN FIELD
+od_unimplemented = true # AUTOGEN FIELD
 is_override = false # AUTOGEN FIELD
 +++
