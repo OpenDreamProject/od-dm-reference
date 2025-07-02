@@ -2,55 +2,26 @@ name: Deploy PR previews
 
 on:
   pull_request_target:
-    types:
-      - opened
-      - reopened
-      - labeled
-      - synchronize
     branches:
       - main
 
-    paths:
-      - "content/**"
-      - "static/**"
-      - "styles/**"
-      - "syntaxes/**"
-      - "templates/**"
-      - "themes/**"
-
 env:
-  DEPLOY_REPO_OWNER: OpenDreamProject
-  DEPLOY_REPO: od-dm-reference
+  DEPLOY_REPO_OWNER: harryob
+  DEPLOY_REPO: od-ref-preview
 
-concurrency:
-  group: "ci-security-${{ github.head_ref || github.run_id }}-${{ github.event_name }}"
-  cancel-in-progress: true
+concurrency: preview-${{ github.ref }}
 
 jobs:
-  security-checkpoint:
-    name: Check CI Clearance
-    if: github.event_name == 'pull_request_target' && (github.event.pull_request.head.repo.id != github.event.pull_request.base.repo.id || github.event.pull_request.user.id == 55142896) && github.event.pull_request.state == 'open'
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Add 'CI Approval Required' Label"
-        if: (github.event.action == 'synchronize' || github.event.action == 'reopened') || ((github.event.action == 'opened' || github.event.action == 'labeled') && !contains(github.event.pull_request.labels.*.name, 'CI Cleared'))
-        uses: actions-ecosystem/action-add-labels@18f1af5e3544586314bbe15c0273249c770b2daf
-        with:
-          labels: CI Approval Required
-
-      - name: Fail if PR has Unlabeled new Commits from User
-        if: (github.event.action == 'synchronize' || github.event.action == 'reopened') || ((github.event.action == 'opened' || github.event.action == 'labeled') && !contains(github.event.pull_request.labels.*.name, 'CI Cleared'))
-        run: exit 1
-
   deploy-preview:
-    needs: security-checkpoint
-    if: (!(cancelled() || failure()) && (needs.security-checkpoint.result == 'success' || (github.event_name != 'pull_request_target' && github.event.pull_request.head.repo.id == github.event.pull_request.base.repo.id && github.event.pull_request.user.id != 55142896)))
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          ref: refs/pull/${{ github.event.number }}/merge
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Configure Base Directory
+        run: sed -i 's/base_url = ".*"/base_url = "https:\/\/${{ env.DEPLOY_REPO_OWNER }}.github.io\/${{ env.DEPLOY_REPO }}\/pr-${{ github.event.number }}"/' config.toml
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -70,18 +41,12 @@ jobs:
           version: "1.6.0"
 
       - name: Build project
-        run: npm run build -- -u "https://ref.opendre.am/pr-preview/pr-${{ github.event.number }}"
-
-      - name: Build index
-        run: |
-          npm run build:search-config -- -u "https://ref.opendre.am/pr-preview/pr-${{ github.event.number }}"
-          npm run build:search-index
+        run: npm run build:index
 
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1
         with:
           source-dir: ./public/
-          umbrella-dir: ./pr-preview/
+          umbrella-dir: .
           deploy-repository: ${{ env.DEPLOY_REPO_OWNER }}/${{ env.DEPLOY_REPO }}
-          custom-url: "ref.opendre.am"
-          action: deploy
+          token: ${{ secrets.PREVIEW_TOKEN }}
