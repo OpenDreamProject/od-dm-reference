@@ -178,6 +178,9 @@
         <loc>https://ref.opendre.am/language/proc/block/</loc>
     </url>
     <url>
+        <loc>https://ref.opendre.am/language/proc/bound_pixloc/</loc>
+    </url>
+    <url>
         <loc>https://ref.opendre.am/language/proc/bounds/</loc>
     </url>
     <url>
@@ -1123,6 +1126,21 @@
         <loc>https://ref.opendre.am/objects/client/var/address/</loc>
     </url>
     <url>
+        <loc>https://ref.opendre.am/objects/client/var/bound_height/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/client/var/bound_width/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/client/var/bound_x/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/client/var/bound_y/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/client/var/bounds/</loc>
+    </url>
+    <url>
         <loc>https://ref.opendre.am/objects/client/var/byond_build/</loc>
     </url>
     <url>
@@ -1970,6 +1988,30 @@
     </url>
     <url>
         <loc>https://ref.opendre.am/objects/particles/var/width/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/pixloc/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/pixloc/var/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/pixloc/var/loc/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/pixloc/var/step_x/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/pixloc/var/step_y/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/pixloc/var/x/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/pixloc/var/y/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/pixloc/var/z/</loc>
     </url>
     <url>
         <loc>https://ref.opendre.am/objects/regex/</loc>
