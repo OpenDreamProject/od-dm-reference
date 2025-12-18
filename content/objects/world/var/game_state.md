@@ -1,7 +1,8 @@
 +++
 title = "game_state"
 [extra]
-default_value = "" # AUTOGEN FIELD
+default_value = "0" # AUTOGEN FIELD
 is_override = false # AUTOGEN FIELD
-od_unimplemented = true # AUTOGEN FIELD
+type = "num, unsupported" # AUTOGEN FIELD
+od_unsupported = true # AUTOGEN FIELD
 +++
