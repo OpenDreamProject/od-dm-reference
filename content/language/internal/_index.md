@@ -1,6 +1,7 @@
 +++
 title = "Internal Procs"
 weight = 0
+page_template = "proc.html"
 +++
 {% parity() %}
 Because these are meant for internal use and undocumented,<br>
