@@ -11,4 +11,4 @@ description = "The error given by the database object"
 od_unimplemented = true # AUTOGEN FIELD
 +++
 
-If the provided object did not create an error during its previous action, the error message will be an empty string. \(`""`\)
+If the provided object did not create an error during its previous action, the error message will be empty text. \(`""`\)
