@@ -14,7 +14,7 @@ description = "An associative list of text keys to instance values"
 od_unimplemented = true # AUTOGEN FIELD
 +++
 
-Once a query is executed, the `db_query` can be used to create a list of names along with their column data, which is useful for iterating over a set of rows.
+Once a query is [executed](./_dm_db_execute.md), the `db_query` can be used to create a list of names along with their column data, which is useful for iterating over a set of rows.
 
 Each entry will have the name of the column as the key and an instance of the provided path as the value.
 For example, the query:
@@ -30,7 +30,8 @@ list(
 )
 ```
 
-The arguments provided to each instance will differ based on the database driver.
+Each database instance is created with **index-based** arguments.
+The arguments that are provided will differ based on the database driver.
 
 ## MySql
 ```dm

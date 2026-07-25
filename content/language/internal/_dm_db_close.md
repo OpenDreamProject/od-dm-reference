@@ -13,5 +13,5 @@ od_unimplemented = true # AUTOGEN FIELD
 
 "Closes" the [`db_conn`](./_dm_db_new_con.md) or [`db_query`](./_dm_db_new_query.md), resetting the object to its initial state.
 
-It's important to ensure that `db_conn` instances always closes its connection at the end of its lifetime,<br>
+It's important to ensure that `db_conn` instances always close their connection at the end of their lifetime,<br>
 as failing to do so can cause hanging connections that are impossible to close.

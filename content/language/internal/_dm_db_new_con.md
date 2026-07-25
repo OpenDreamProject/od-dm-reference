@@ -9,7 +9,7 @@ od_unimplemented = true # AUTOGEN FIELD
 +++
 Creates and returns an internal object we call a `db_conn`.
 
-`db_conn` is a special data type, different from a {{ datum() }} but still counted as an object.
+`db_conn` is a special data type, different from a {{ datum() }} but still treated as an object.<br>
 It is used to perform database operations.
 
 {{ database() }} also internally creates a `db_conn`.
