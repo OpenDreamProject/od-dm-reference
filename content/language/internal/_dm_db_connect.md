@@ -16,8 +16,8 @@ description = "Password for login credentials"
 name = "cursor_type"
 description = "Cursor type that the query will use"
 [[extra.args]]
-name = "?"
-description = "The purpose of this argument is unknown"
+name = "arg_6"
+od_unimplemented = true
 [extra.return]
 type = "num" # AUTOGEN SKIP
 description = "`TRUE` if a connection was established successfully, otherwise `FALSE`"
@@ -36,7 +36,6 @@ dbi:mysql:my_database:192.168.0.1:3306
 
 Database drivers currently supported by BYOND:
 - MySQL (`mysql`)
-- SQLite (`unknown identifier`)
 
 {% parity() %}
 It is currently unknown if the database changes the values for `cursor_type`.

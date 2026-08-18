@@ -45,8 +45,3 @@ The arguments that are provided will differ based on the database driver.
 	max_length // appears to always be a huge number
 )
 ```
-
-## SQLite
-```dm
-// TODO
-```
