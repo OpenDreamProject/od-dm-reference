@@ -1,8 +1,6 @@
 +++
 title = "Shift"
 slug = "Shift" # AUTOGEN FIELD
-[extra]
-od_unimplemented = true # AUTOGEN FIELD
 [[extra.args]]
 name = "dir" # AUTOGEN STATIC
 [[extra.args]]
