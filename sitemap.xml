@@ -346,6 +346,9 @@
         <loc>https://ref.opendre.am/language/proc/ispath/</loc>
     </url>
     <url>
+        <loc>https://ref.opendre.am/language/proc/ispointer/</loc>
+    </url>
+    <url>
         <loc>https://ref.opendre.am/language/proc/issaved/</loc>
     </url>
     <url>
@@ -437,6 +440,9 @@
     </url>
     <url>
         <loc>https://ref.opendre.am/language/proc/params2list/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/language/proc/pixloc/</loc>
     </url>
     <url>
         <loc>https://ref.opendre.am/language/proc/rand/</loc>
@@ -677,6 +683,18 @@
     </url>
     <url>
         <loc>https://ref.opendre.am/objects/area/proc/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/area/proc/Enter/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/area/proc/Entered/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/area/proc/Exit/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/area/proc/Exited/</loc>
     </url>
     <url>
         <loc>https://ref.opendre.am/objects/area/var/</loc>
@@ -925,6 +943,9 @@
         <loc>https://ref.opendre.am/objects/atom/var/pixel_z/</loc>
     </url>
     <url>
+        <loc>https://ref.opendre.am/objects/atom/var/pixloc/</loc>
+    </url>
+    <url>
         <loc>https://ref.opendre.am/objects/atom/var/plane/</loc>
     </url>
     <url>
@@ -1127,6 +1148,9 @@
     </url>
     <url>
         <loc>https://ref.opendre.am/objects/client/var/address/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/client/var/authenticate/</loc>
     </url>
     <url>
         <loc>https://ref.opendre.am/objects/client/var/bound_height/</loc>
@@ -1994,6 +2018,12 @@
     </url>
     <url>
         <loc>https://ref.opendre.am/objects/pixloc/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/pixloc/proc/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/objects/pixloc/proc/New/</loc>
     </url>
     <url>
         <loc>https://ref.opendre.am/objects/pixloc/var/</loc>
