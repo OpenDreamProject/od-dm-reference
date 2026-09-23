@@ -110,6 +110,11 @@ public static partial class Program {
                 continue;
             }
 
+            if (file.Contains("language/internal")) {
+                pathToFile["internalProcs"] = file;
+                continue;
+            }
+
             if (!pageTitle.StartsWith('/')) {
                 continue;
             }
@@ -120,10 +125,13 @@ public static partial class Program {
         ParseAstStatements(astFile.BlockInner.Statements);
 
         var globalProcs = pathToFile["globalProcs"];
+        var internalProcs = pathToFile["internalProcs"];
+        
         foreach (var pair in Procs) {
             var proc = pair.Value;
+            var usedPath = !proc.Name.StartsWith("_dm_") ? globalProcs : internalProcs;
 
-            var newProcPage = globalProcs.Replace("_index.md", $"{proc.Name.ToLower()}.md");
+            var newProcPage = usedPath.Replace("_index.md", $"{proc.Name.ToLower()}.md");
             ProcessPage(newProcPage, proc, ProcessProc);
         }
 
