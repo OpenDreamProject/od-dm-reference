@@ -10,6 +10,45 @@
         <loc>https://ref.opendre.am/language/comments/</loc>
     </url>
     <url>
+        <loc>https://ref.opendre.am/language/internal/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/language/internal/_dm_db_close/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/language/internal/_dm_db_columns/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/language/internal/_dm_db_connect/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/language/internal/_dm_db_error_msg/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/language/internal/_dm_db_execute/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/language/internal/_dm_db_is_connected/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/language/internal/_dm_db_new_con/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/language/internal/_dm_db_new_query/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/language/internal/_dm_db_next_row/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/language/internal/_dm_db_quote/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/language/internal/_dm_db_row_count/</loc>
+    </url>
+    <url>
+        <loc>https://ref.opendre.am/language/internal/_dm_db_rows_affected/</loc>
+    </url>
+    <url>
         <loc>https://ref.opendre.am/language/operators/</loc>
     </url>
     <url>
