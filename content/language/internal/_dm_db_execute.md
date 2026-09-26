@@ -1,5 +1,7 @@
 +++
 title = "_dm_db_execute"
+[extra]
+od_unimplemented = true # AUTOGEN FIELD
 [[extra.args]]
 name = "db_query"
 description = "A database query"
@@ -18,9 +20,6 @@ od_unimplemented = true
 [extra.return]
 type = "num" # AUTOGEN SKIP
 description = "`TRUE` if the query executed successfully, otherwise `FALSE`"
-
-[extra]
-od_unimplemented = true # AUTOGEN FIELD
 +++
 
 Performs a query on a [`db_conn`](./_dm_db_new_con.md) and stores the result in a [`db_query`](./_dm_db_new_query.md).<br>

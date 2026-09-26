@@ -1,11 +1,10 @@
 +++
 title = "_dm_db_new_query"
+[extra]
+od_unimplemented = true # AUTOGEN FIELD
 [extra.return]
 type = "db_query" # AUTOGEN SKIP
 description = "A new query object"
-
-[extra]
-od_unimplemented = true # AUTOGEN FIELD
 +++
 Creates and returns an internal object we call a `db_query`.
 

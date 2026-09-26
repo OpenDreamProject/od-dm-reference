@@ -1,5 +1,7 @@
 +++
 title = "_dm_db_columns"
+[extra]
+od_unimplemented = true # AUTOGEN FIELD
 [[extra.args]]
 name = "db_query"
 description = "A database query"
@@ -9,9 +11,6 @@ description = "Path that represents column data"
 [extra.return]
 type = "list" # AUTOGEN SKIP
 description = "An associative list of text keys to instance values"
-
-[extra]
-od_unimplemented = true # AUTOGEN FIELD
 +++
 
 Once a query is [executed](./_dm_db_execute.md), the `db_query` can be used to create a list of names along with their column data, which is useful for iterating over a set of rows.
