@@ -1,5 +1,7 @@
 +++
 title = "_dm_db_next_row"
+[extra]
+od_unimplemented = true # AUTOGEN FIELD
 [[extra.args]]
 name = "db_query"
 description = "A database query"
@@ -12,9 +14,6 @@ description = "A list"
 [extra.return]
 type = "num" # AUTOGEN SKIP
 description = "`TRUE` if another row was selected, otherwise `FALSE`"
-
-[extra]
-od_unimplemented = true # AUTOGEN FIELD
 +++
 
 {% parity() %}

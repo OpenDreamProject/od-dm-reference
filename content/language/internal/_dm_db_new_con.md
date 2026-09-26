@@ -1,11 +1,10 @@
 +++
 title = "_dm_db_new_con"
+[extra]
+od_unimplemented = true # AUTOGEN FIELD
 [extra.return]
 type = "db_conn" # AUTOGEN SKIP
 description = "A new connection object"
-
-[extra]
-od_unimplemented = true # AUTOGEN FIELD
 +++
 Creates and returns an internal object we call a `db_conn`.
 
