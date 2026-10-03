@@ -1,14 +1,13 @@
 +++
 title = "_dm_db_close"
+[extra]
+od_unimplemented = true # AUTOGEN FIELD
 [[extra.args]]
 name = "db_obj"
 description = "An internal database object, db_conn or db_query"
 [extra.return]
 type = "num" # AUTOGEN SKIP
 description = "`TRUE` if the object was closed, otherwise `FALSE`"
-
-[extra]
-od_unimplemented = true # AUTOGEN FIELD
 +++
 
 "Closes" the [`db_conn`](./_dm_db_new_con.md) or [`db_query`](./_dm_db_new_query.md), resetting the object to its initial state.
