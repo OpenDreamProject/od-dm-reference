@@ -1,5 +1,7 @@
 +++
 title = "_dm_db_connect"
+[extra]
+od_unimplemented = true # AUTOGEN FIELD
 [[extra.args]]
 name = "db_conn"
 description = "A database connection"
@@ -21,9 +23,6 @@ od_unimplemented = true
 [extra.return]
 type = "num" # AUTOGEN SKIP
 description = "`TRUE` if a connection was established successfully, otherwise `FALSE`"
-
-[extra]
-od_unimplemented = true # AUTOGEN FIELD
 +++
 
 Establishes a remote connection to a database.

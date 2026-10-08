@@ -1,14 +1,13 @@
 +++
 title = "_dm_db_quote"
+[extra]
+od_unimplemented = true # AUTOGEN FIELD
 [[extra.args]]
 name = "db_conn"
 description = "A database connection"
 [extra.return]
 type = "text" # AUTOGEN SKIP
 description = "Sanitized form of the input text"
-
-[extra]
-od_unimplemented = true # AUTOGEN FIELD
 +++
 
 Asks the connection to escape the provided text (Ex: `this 'dangerous' text` to `this \\'dangerous\\' text`).<br>
