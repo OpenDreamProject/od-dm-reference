@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:labs
 
-FROM rust:1.82 AS builder
+FROM rust:1-bookworm AS builder
 
 WORKDIR /usr/src/app
 COPY src/ src/
